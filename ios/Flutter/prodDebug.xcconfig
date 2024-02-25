@@ -1,0 +1,6 @@
+#include "Generated.xcconfig"
+
+FLUTTER_TARGET=lib/main_prod.dart
+ASSET_PREFIX=prod
+BUNDLE_NAME=육아
+BUNDLE_DISPLAY_NAME=육아
