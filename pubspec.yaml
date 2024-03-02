@@ -49,6 +49,9 @@ dependencies:
   json_annotation: ^4.8.1
   intl: ^0.18.1
   font_awesome_flutter: ^10.7.0
+  google_sign_in: ^6.2.1
+  kakao_flutter_sdk_user: ^1.8.0
+  flutter_naver_login: ^1.8.0
 
 dev_dependencies:
   flutter_test:
@@ -115,13 +118,13 @@ flavorizr:
       android:
         applicationId: "dev.io.github.u3C1S.child_goods_store_flutter"
         # icon: "assets/app_icon.png"
-        # firebase:
-        #   config: "./firebase/dev/google-services.json"
+        firebase:
+          config: "android/firebase/dev/google-services.json"
       ios:
-        bundleId: "dev.io.github.u3C1S.child_goods_store_flutter"
+        bundleId: "dev.io.github.u3C1S.childGoodsStoreFlutter"
         # icon: "assets/app_icon.png"
-        # firebase:
-        #    config: "./firebase/dev/GoogleService-Info.plist"
+        firebase:
+          config: "ios/firebase/dev/GoogleService-Info.plist"
 
     prod:
       app:
@@ -129,10 +132,10 @@ flavorizr:
       android:
         applicationId: "io.github.u3C1S.child_goods_store_flutter"
         # icon: "assets/app_icon.png"
-        # firebase:
-        #   config: "./firebase/prod/google-services.json"
+        firebase:
+          config: "android/firebase/prod/google-services.json"
       ios:
-        bundleId: "io.github.u3C1S.child_goods_store_flutter"
+        bundleId: "io.github.u3C1S.childGoodsStoreFlutter"
         # icon: "assets/app_icon.png"
-        # firebase:
-        #   config: "./firebase/prod/GoogleService-Info.plist"
+        firebase:
+          config: "ios/firebase/prod/GoogleService-Info.plist"
