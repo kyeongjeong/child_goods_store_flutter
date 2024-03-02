@@ -2,8 +2,10 @@ import 'package:child_goods_store_flutter/constants/networks.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 
 class Config {
+  // Add configs here
   final String baseUrl;
 
+  // Initialize configs here
   Config._dev() : baseUrl = Networks.devBaseUrl;
 
   Config._prod() : baseUrl = Networks.baseUrl;

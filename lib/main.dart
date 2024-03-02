@@ -18,8 +18,8 @@
 /// 3. open dev tools and type commends (r - Hot reload)
 
 import 'dart:async';
+import 'package:child_goods_store_flutter/app.dart';
 import 'package:flutter/material.dart';
-import 'app.dart';
 
 FutureOr<void> main() async {
   runApp(const App());
