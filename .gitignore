@@ -50,10 +50,13 @@ lib/configs/firebase_options_dev.dart
 android/firebase
 android/app/src/prod/google-services.json
 android/app/src/dev/google-services.json
+android/key.properties
+android/app/upload-keystore.jks
 # Secret - iOS
 ios/firebase
 ios/firebase_app_id_file.json
 ios/Runner/prod/GoogleService-Info.plist
 ios/Runner/dev/GoogleService-Info.plist
+ios/Runner.xcodeproj/project.pbxproj
 # Secret - iOS auto generated
 ios/Runner/GoogleService-Info.plist
