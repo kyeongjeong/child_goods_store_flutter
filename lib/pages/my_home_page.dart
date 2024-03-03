@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/configs/configs.dart';
 import 'package:flutter/material.dart';
 import '../flavors.dart';
 
@@ -12,7 +13,7 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Hello ${F.title}',
+          'Hello ${Config.instance.baseUrl}',
           style: const TextStyle(color: Colors.green),
         ),
       ),
