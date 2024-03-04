@@ -153,4 +153,30 @@ class AuthRepository {
 
     return res;
   }
+
+  Future<ResModel<void>> postSignup({
+    required String email,
+    required String password,
+    required String phoneNum,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/signup',
+    //   data: {
+    //     'email': email,
+    //     'password': password,
+    //     'phoneNum': phoneNum,
+    //   }
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
 }

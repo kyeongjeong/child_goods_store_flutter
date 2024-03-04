@@ -1,13 +1,13 @@
 abstract class PhoneVerifyEvent {}
 
 class PhoneVerifyChangeNum extends PhoneVerifyEvent {
-  String phoneNum;
+  final String phoneNum;
 
   PhoneVerifyChangeNum(this.phoneNum);
 }
 
 class PhoneVerifyChangeCode extends PhoneVerifyEvent {
-  String code;
+  final String code;
 
   PhoneVerifyChangeCode(this.code);
 }
