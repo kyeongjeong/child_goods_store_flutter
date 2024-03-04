@@ -50,7 +50,7 @@ class _AppRouterState extends State<AppRouter> {
       debugShowCheckedModeBanner: false,
       title: F.title,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
       localizationsDelegates: const [

@@ -7,10 +7,14 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
+import 'package:child_goods_store_flutter/pages/signin/widgets/login_form.dart';
 import 'package:child_goods_store_flutter/pages/signin/widgets/oauth_button.dart';
+import 'package:child_goods_store_flutter/widgets/app_font.dart';
+import 'package:child_goods_store_flutter/widgets/app_h_spliter.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
 
 class SigninPage extends StatelessWidget {
   const SigninPage({super.key});
@@ -49,20 +53,54 @@ class SigninPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Gaps.v32,
-              OauthButton(
-                method: EAuthMethod.google,
-                onTap: _onTapGoogle,
+              Expanded(
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey.shade400,
+                  radius: Sizes.size32,
+                ),
               ),
-              Gaps.v5,
-              OauthButton(
-                method: EAuthMethod.naver,
-                onTap: _onTapNaver,
-              ),
-              Gaps.v5,
-              OauthButton(
-                method: EAuthMethod.kakao,
-                onTap: _onTapKakao,
+              const LoginForm(),
+              Gaps.v20,
+              SizedBox(
+                height:
+                    math.max(0, 320 - MediaQuery.of(context).viewInsets.bottom),
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const AppFont('또는'),
+                          Gaps.h5,
+                          AppFont(
+                            '회원가입',
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                        ],
+                      ),
+                      const AppHSpliter(
+                        margin: EdgeInsets.all(Sizes.size20),
+                      ),
+                      const AppFont('간편 로그인'),
+                      Gaps.v20,
+                      OauthButton(
+                        method: EAuthMethod.google,
+                        onTap: _onTapGoogle,
+                      ),
+                      Gaps.v10,
+                      OauthButton(
+                        method: EAuthMethod.naver,
+                        onTap: _onTapNaver,
+                      ),
+                      Gaps.v10,
+                      OauthButton(
+                        method: EAuthMethod.kakao,
+                        onTap: _onTapKakao,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
