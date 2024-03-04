@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
+import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -56,44 +57,25 @@ class OauthButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return AppInkButton(
       onTap: onTap,
-      highlightColor: Colors.transparent,
-      splashColor: Theme.of(context).primaryColor.withOpacity(0.1),
-      borderRadius: BorderRadius.circular(Sizes.size10),
-      child: Ink(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size10,
-          horizontal: Sizes.size20,
-        ),
-        decoration: BoxDecoration(
-          color: _bgColor(),
-          borderRadius: BorderRadius.circular(Sizes.size10),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).shadowColor.withOpacity(0.1),
-              blurRadius: Sizes.size3,
-              spreadRadius: Sizes.size1,
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            SvgPicture.asset(
-              'assets/svgs/${method.key.toLowerCase()}.svg',
-              width: Sizes.size20,
-              height: Sizes.size20,
-              colorFilter: _colorFilter(),
-              clipBehavior: Clip.hardEdge,
-            ),
-            Gaps.h10,
-            AppFont(
-              'Sign in with ${method.key}',
-              color: _fontColor(),
-              fontWeight: FontWeight.w700,
-            ),
-          ],
-        ),
+      color: _bgColor(),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            'assets/svgs/${method.key.toLowerCase()}.svg',
+            width: Sizes.size20,
+            height: Sizes.size20,
+            colorFilter: _colorFilter(),
+            clipBehavior: Clip.hardEdge,
+          ),
+          Gaps.h10,
+          AppFont(
+            '${method.ko} 계정으로 로그인',
+            color: _fontColor(),
+            fontWeight: FontWeight.w700,
+          ),
+        ],
       ),
     );
   }

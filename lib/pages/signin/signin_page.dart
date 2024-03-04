@@ -6,11 +6,17 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
-import 'package:child_goods_store_flutter/enums/auth_status.dart';
+import 'package:child_goods_store_flutter/enums/loading_status.dart';
+import 'package:child_goods_store_flutter/pages/signin/widgets/login_form.dart';
 import 'package:child_goods_store_flutter/pages/signin/widgets/oauth_button.dart';
+import 'package:child_goods_store_flutter/widgets/app_font.dart';
+import 'package:child_goods_store_flutter/widgets/app_h_spliter.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
+
+import 'package:go_router/go_router.dart';
 
 class SigninPage extends StatelessWidget {
   const SigninPage({super.key});
@@ -27,12 +33,16 @@ class SigninPage extends StatelessWidget {
     AuthBlocSingleton.bloc.add(AuthKakaoSignin());
   }
 
+  void _onTapSignup(BuildContext context) {
+    context.push('/signup');
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       bloc: AuthBlocSingleton.bloc,
       listener: (context, state) {
-        if (state.status == EAuthStatus.error) {
+        if (state.status == ELoadingStatus.error) {
           AppSnackbar.show(
             context,
             message: state.message ?? Strings.unknownFail,
@@ -49,20 +59,61 @@ class SigninPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Gaps.v32,
-              OauthButton(
-                method: EAuthMethod.google,
-                onTap: _onTapGoogle,
+              Expanded(
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey.shade400,
+                  radius: Sizes.size32,
+                ),
               ),
-              Gaps.v5,
-              OauthButton(
-                method: EAuthMethod.naver,
-                onTap: _onTapNaver,
-              ),
-              Gaps.v5,
-              OauthButton(
-                method: EAuthMethod.kakao,
-                onTap: _onTapKakao,
+              const LoginForm(),
+              Gaps.v20,
+              SizedBox(
+                height:
+                    math.max(0, 320 - MediaQuery.of(context).viewInsets.bottom),
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Gaps.h5,
+                          const AppFont('또는'),
+                          GestureDetector(
+                            onTap: () => _onTapSignup(context),
+                            child: Padding(
+                              padding: const EdgeInsets.all(Sizes.size5),
+                              child: AppFont(
+                                '회원가입',
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const AppHSpliter(
+                        margin: EdgeInsets.all(Sizes.size20),
+                      ),
+                      const AppFont('간편 로그인'),
+                      Gaps.v10,
+                      OauthButton(
+                        method: EAuthMethod.google,
+                        onTap: _onTapGoogle,
+                      ),
+                      Gaps.v10,
+                      OauthButton(
+                        method: EAuthMethod.naver,
+                        onTap: _onTapNaver,
+                      ),
+                      Gaps.v10,
+                      OauthButton(
+                        method: EAuthMethod.kakao,
+                        onTap: _onTapKakao,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

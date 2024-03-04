@@ -1,3 +1,9 @@
+import 'package:child_goods_store_flutter/enums/auth_method.dart';
+import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
+import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
+import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -76,33 +82,133 @@ class AuthRepository {
     return;
   }
 
-  // Future<ResModel<String>> dudeSignin({
-  //   required EAuthMethod method,
-  //   required String accessToken,
-  // }) async {
-  //   // Dio dio = Dio();
-  //   // dio.interceptors.add(UnAuthInterceptor());
-  //   // var res = await dio.post(
-  //   //   '/signin',
-  //   //   data: {
-  //   //     'method': method.key.toLowerCase(),
-  //   //     'token': accessToken,
-  //   //   },
-  //   // );
+  Future<ResModel<String>> signinWithOauth2({
+    required EAuthMethod method,
+    required String accessToken,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // var res = await dio.post(
+    //   '/oauth',
+    //   data: {
+    //     'method': method.key.toLowerCase(),
+    //     'accessToken': accessToken,
+    //   },
+    // );
 
-  //   // TODO: connect api
-  //   await Future.delayed(const Duration(seconds: 1));
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
 
-  //   var resTmp = ResModel<String>(
-  //     code: 1000,
-  //     data: 'test_jwt_token',
-  //   ).toJson((token) => token.toString());
+    var resTmp = ResModel<String>(
+      code: 1000,
+      data: 'test_jwt_token',
+    ).toJson((token) => token.toString());
 
-  //   var res = ResModel<String>.fromJson(
-  //     resTmp,
-  //     (json) => json.toString(),
-  //   );
+    var res = ResModel<String>.fromJson(
+      resTmp,
+      (json) => json.toString(),
+    );
 
-  //   return res;
-  // }
+    return res;
+  }
+
+  Future<ResModel<String>> signinWith3C1S({
+    required String email,
+    required String password,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // var res = await dio.post(
+    //   '/auth',
+    //   data: {
+    //     'email': email,
+    //     'password': password,
+    //   },
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<String>(
+      code: 1000,
+      data: 'test_jwt_token',
+    ).toJson((token) => token.toString());
+
+    var res = ResModel<String>.fromJson(
+      resTmp,
+      (json) => json.toString(),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<void>> postPhoneSend({
+    required String phoneNum,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/phone/send',
+    //   data: {
+    //     'phoneNum': phoneNum,
+    //   },
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
+
+  Future<ResModel<void>> postPhoneVerify({
+    required String code,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/phone/verify',
+    //   data: {
+    //     'code': code,
+    //   },
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
+
+  Future<ResModel<void>> postSignup({
+    required String email,
+    required String password,
+    required String phoneNum,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/signup',
+    //   data: {
+    //     'email': email,
+    //     'password': password,
+    //     'phoneNum': phoneNum,
+    //   }
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
 }

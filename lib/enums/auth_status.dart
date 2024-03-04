@@ -1,10 +1,8 @@
 enum EAuthStatus {
   init,
-  loading,
   unknown,
   unAuthenticated,
-  authenticated,
-  error;
+  authenticated;
 
   const EAuthStatus();
 }
