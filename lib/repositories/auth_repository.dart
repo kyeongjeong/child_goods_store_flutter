@@ -80,35 +80,35 @@ class AuthRepository {
     return;
   }
 
-  // Future<ResModel<String>> dudeSignin({
-  //   required EAuthMethod method,
-  //   required String accessToken,
-  // }) async {
-  //   // Dio dio = Dio();
-  //   // dio.interceptors.add(UnAuthInterceptor());
-  //   // var res = await dio.post(
-  //   //   '/signin',
-  //   //   data: {
-  //   //     'method': method.key.toLowerCase(),
-  //   //     'token': accessToken,
-  //   //   },
-  //   // );
+  Future<ResModel<String>> signinWith3C1S({
+    required String email,
+    required String password,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // var res = await dio.post(
+    //   '/auth',
+    //   data: {
+    //     'email': email,
+    //     'password': password,
+    //   },
+    // );
 
-  //   // TODO: connect api
-  //   await Future.delayed(const Duration(seconds: 1));
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
 
-  //   var resTmp = ResModel<String>(
-  //     code: 1000,
-  //     data: 'test_jwt_token',
-  //   ).toJson((token) => token.toString());
+    var resTmp = ResModel<String>(
+      code: 1000,
+      data: 'test_jwt_token',
+    ).toJson((token) => token.toString());
 
-  //   var res = ResModel<String>.fromJson(
-  //     resTmp,
-  //     (json) => json.toString(),
-  //   );
+    var res = ResModel<String>.fromJson(
+      resTmp,
+      (json) => json.toString(),
+    );
 
-  //   return res;
-  // }
+    return res;
+  }
 
   Future<ResModel<void>> postPhoneSend({
     required String phoneNum,

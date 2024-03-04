@@ -20,11 +20,13 @@ mixin DioExceptionHandlerMixin {
         status: ELoadingStatus.error,
         message: '[${error.code}] ${error.message ?? Strings.unknownFail}',
       ));
+      emit(state.copyWith(status: ELoadingStatus.init));
     } catch (e) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
         message: '[5001] ${e.toString().replaceAll('Exception: ', '')}',
       ));
+      emit(state.copyWith(status: ELoadingStatus.init));
     } finally {
       await finallyCall?.call();
     }

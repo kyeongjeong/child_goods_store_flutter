@@ -5,12 +5,13 @@ import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
+import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
+class AuthBloc extends Bloc<AuthEvent, AuthState>
+    with ChangeNotifier, DioExceptionHandlerMixin {
   final AuthRepository authRepository;
 
   AuthBloc({
@@ -20,10 +21,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     on<AuthNaverSignin>(_authNaverSigninHandler);
     on<AuthKakaoSignin>(_authKakaoSigninHandler);
     on<AuthSignout>(_authSignoutHandler);
+    on<Auth3C1SSignin>(_auth3C1SSigninHandler);
   }
 
   Future<void> _authGoogleSigninHandler(
-    AuthGoogleSignin evnet,
+    AuthGoogleSignin event,
     Emitter<AuthState> emit,
   ) async {
     try {
@@ -52,7 +54,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
   }
 
   Future<void> _authNaverSigninHandler(
-    AuthNaverSignin evnet,
+    AuthNaverSignin event,
     Emitter<AuthState> emit,
   ) async {
     try {
@@ -81,7 +83,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
   }
 
   Future<void> _authKakaoSigninHandler(
-    AuthKakaoSignin evnet,
+    AuthKakaoSignin event,
     Emitter<AuthState> emit,
   ) async {
     try {
@@ -146,7 +148,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
   }
 
   Future<void> _authSignoutHandler(
-    AuthSignout evnet,
+    AuthSignout event,
     Emitter<AuthState> emit,
   ) async {
     try {
@@ -170,5 +172,62 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     } finally {
       notifyListeners();
     }
+  }
+
+  Future<void> _auth3C1SSigninHandler(
+    Auth3C1SSignin event,
+    Emitter<AuthState> emit,
+  ) async {
+    if (state.status == ELoadingStatus.loading) return;
+
+    // Validate
+    if (event.email == null || event.email == Strings.nullStr) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '이메일을 입력해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+    if (event.password == null || event.password == Strings.nullStr) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '비밀번호를 입력해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+
+    await handleApiRequest(
+      () async {
+        emit(state.copyWith(status: ELoadingStatus.loading));
+        var res = await authRepository.signinWith3C1S(
+          email: event.email!,
+          password: event.password!,
+        );
+
+        var jwt = res.data;
+        if (jwt == null) {
+          throw Exception('로그인에 실패했습니다.');
+        }
+        // Save jwt at secure_storage
+        _saveJwt(jwt);
+        // Return to splash screen
+        emit(const AuthState(
+          status: ELoadingStatus.loaded,
+          authStatus: EAuthStatus.init,
+        ));
+      },
+      state: state,
+      emit: emit,
+    );
+  }
+
+  Future<void> _saveJwt(String jwt) async {
+    FlutterSecureStorage storage = const FlutterSecureStorage();
+    await storage.write(
+      key: Strings.jwtToken,
+      value: jwt,
+    );
   }
 }
