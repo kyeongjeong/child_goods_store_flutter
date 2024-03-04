@@ -44,9 +44,16 @@ class _AppRouterState extends State<AppRouter> {
       redirect: (context, state) {
         final authState = AuthBlocSingleton.bloc.state;
         final blockPageInAuthAuthState = ['/', '/signin'];
+        final allowPageInUnknownState = ['/signup', '/phone_verify'];
 
-        if (authState.authStatus == EAuthStatus.init) return '/';
-        if (authState.authStatus == EAuthStatus.unknown) return '/signin';
+        if (authState.authStatus == EAuthStatus.init) {
+          return '/';
+        }
+        if (authState.authStatus == EAuthStatus.unknown) {
+          return allowPageInUnknownState.contains(state.matchedLocation)
+              ? state.matchedLocation
+              : '/signin';
+        }
         if (authState.authStatus == EAuthStatus.unAuthenticated) {
           return '/edit/profile';
         }

@@ -32,83 +32,73 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
     AuthGoogleSignin event,
     Emitter<AuthState> emit,
   ) async {
-    if (state.status == ELoadingStatus.loading) return;
-
-    await handleApiRequest(
-      () async {
-        emit(state.copyWith(status: ELoadingStatus.loading));
-        // oauth2 with google
-        var res = await authRepository.signinWithGoogle();
-
-        await _authSignin(
-          emit,
-          method: EAuthMethod.google,
-          accessToken: res,
-        );
-      },
-      state: state,
-      emit: emit,
-      finallyCall: () async {
-        if (state.status == ELoadingStatus.error) {
-          emit(const AuthState(
-            authStatus: EAuthStatus.unknown,
-            status: ELoadingStatus.init,
-          ));
-        }
-        notifyListeners();
-      },
-    );
+    await _authSignin(emit, method: EAuthMethod.google);
   }
 
   Future<void> _authNaverSigninHandler(
     AuthNaverSignin event,
     Emitter<AuthState> emit,
   ) async {
-    if (state.status == ELoadingStatus.loading) return;
-
-    await handleApiRequest(
-      () async {
-        emit(state.copyWith(status: ELoadingStatus.loading));
-        // oauth2 with naver
-        var res = await authRepository.signinWithNaver();
-
-        await _authSignin(
-          emit,
-          method: EAuthMethod.google,
-          accessToken: res,
-        );
-      },
-      state: state,
-      emit: emit,
-      finallyCall: () async {
-        if (state.status == ELoadingStatus.error) {
-          emit(const AuthState(
-            authStatus: EAuthStatus.unknown,
-            status: ELoadingStatus.init,
-          ));
-        }
-        notifyListeners();
-      },
-    );
+    await _authSignin(emit, method: EAuthMethod.naver);
   }
 
   Future<void> _authKakaoSigninHandler(
     AuthKakaoSignin event,
     Emitter<AuthState> emit,
   ) async {
+    await _authSignin(emit, method: EAuthMethod.kakao);
+  }
+
+  Future<void> _authSignin(
+    Emitter<AuthState> emit, {
+    required EAuthMethod method,
+  }) async {
     if (state.status == ELoadingStatus.loading) return;
 
     await handleApiRequest(
       () async {
         emit(state.copyWith(status: ELoadingStatus.loading));
-        // oauth2 with kakao
-        var res = await authRepository.signinWithKakao();
 
-        await _authSignin(
-          emit,
-          method: EAuthMethod.google,
-          accessToken: res,
+        String? accessToken;
+        switch (method) {
+          // oauth2 with google
+          case EAuthMethod.google:
+            accessToken = await authRepository.signinWithGoogle();
+            break;
+          // oauth2 with naver
+          case EAuthMethod.naver:
+            accessToken = await authRepository.signinWithNaver();
+            break;
+          // oauth2 with kakao
+          case EAuthMethod.kakao:
+            accessToken = await authRepository.signinWithKakao();
+            break;
+          default:
+            break;
+        }
+
+        if (accessToken == null) {
+          throw Exception('소셜 로그인에 실패했습니다.');
+        }
+
+        print(accessToken);
+
+        var res = await authRepository.signinWithOauth2(
+          method: method,
+          accessToken: accessToken,
         );
+
+        var jwt = res.data;
+        if (jwt == null) {
+          throw Exception('로그인에 실패했습니다.');
+        }
+        // Save jwt at secure_storage
+        _saveJwt(jwt);
+        // Return to splash screen
+        emit(const AuthState(
+          status: ELoadingStatus.loaded,
+          authStatus: EAuthStatus.init,
+        ));
       },
       state: state,
       emit: emit,
@@ -122,30 +112,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         notifyListeners();
       },
     );
-  }
-
-  Future<void> _authSignin(
-    Emitter<AuthState> emit, {
-    required EAuthMethod method,
-    required String accessToken,
-  }) async {
-    print(accessToken);
-    var res = await authRepository.signinWithOauth2(
-      method: method,
-      accessToken: accessToken,
-    );
-
-    var jwt = res.data;
-    if (jwt == null) {
-      throw Exception('로그인에 실패했습니다.');
-    }
-    // Save jwt at secure_storage
-    _saveJwt(jwt);
-    // Return to splash screen
-    emit(const AuthState(
-      status: ELoadingStatus.loaded,
-      authStatus: EAuthStatus.init,
-    ));
   }
 
   Future<void> _authSignoutHandler(
@@ -271,7 +237,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
           return;
         }
         // Signin success
-        print('success');
         emit(AuthState(
           status: ELoadingStatus.loaded,
           authStatus: EAuthStatus.authenticated,
