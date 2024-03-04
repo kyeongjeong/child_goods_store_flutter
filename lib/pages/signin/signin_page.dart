@@ -6,7 +6,7 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
-import 'package:child_goods_store_flutter/enums/auth_status.dart';
+import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/pages/signin/widgets/login_form.dart';
 import 'package:child_goods_store_flutter/pages/signin/widgets/oauth_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
@@ -42,7 +42,7 @@ class SigninPage extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       bloc: AuthBlocSingleton.bloc,
       listener: (context, state) {
-        if (state.status == EAuthStatus.error) {
+        if (state.status == ELoadingStatus.error) {
           AppSnackbar.show(
             context,
             message: state.message ?? Strings.unknownFail,

@@ -13,7 +13,7 @@ class MyHomePage extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Hello ${Config.instance.baseUrl}',
+          'Hello ${Configs.instance.baseUrl}',
           style: const TextStyle(color: Colors.green),
         ),
       ),

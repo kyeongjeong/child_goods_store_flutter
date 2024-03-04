@@ -1,30 +1,31 @@
 import 'package:child_goods_store_flutter/constants/networks.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 
-class Config {
+class Configs {
   // Add configs here
   final String baseUrl;
 
   // Initialize configs here
-  Config._dev() : baseUrl = Networks.devBaseUrl;
+  Configs._dev() : baseUrl = Networks.devBaseUrl;
 
-  Config._prod() : baseUrl = Networks.baseUrl;
+  Configs._prod() : baseUrl = Networks.baseUrl;
 
-  factory Config(Flavor? flavor) {
+  factory Configs(Flavor? flavor) {
     switch (flavor) {
       case Flavor.dev:
-        _instance = Config._dev();
+        _instance = Configs._dev();
         break;
       case Flavor.prod:
-        _instance = Config._prod();
+        _instance = Configs._prod();
         break;
       default:
-        _instance = Config._dev();
+        _instance = Configs._dev();
         break;
     }
     return instance;
   }
 
-  static Config? _instance;
-  static Config get instance => _instance ?? Config(F.appFlavor ?? Flavor.dev);
+  static Configs? _instance;
+  static Configs get instance =>
+      _instance ?? Configs(F.appFlavor ?? Flavor.dev);
 }

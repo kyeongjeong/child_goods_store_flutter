@@ -4,6 +4,7 @@ import 'package:child_goods_store_flutter/blocs/auth/auth_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
+import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     Emitter<AuthState> emit,
   ) async {
     try {
-      emit(const AuthState(status: EAuthStatus.loading));
+      emit(const AuthState(
+        status: ELoadingStatus.loading,
+        authStatus: EAuthStatus.init,
+      ));
       // oauth2 with google
       var res = await authRepository.signinWithGoogle();
 
@@ -38,7 +42,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     } catch (e) {
       debugPrint(e.toString());
       emit(AuthState(
-        status: EAuthStatus.error,
+        status: ELoadingStatus.error,
+        authStatus: EAuthStatus.init,
         message: e.toString(),
       ));
     } finally {
@@ -51,7 +56,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     Emitter<AuthState> emit,
   ) async {
     try {
-      emit(const AuthState(status: EAuthStatus.loading));
+      emit(const AuthState(
+        status: ELoadingStatus.loading,
+        authStatus: EAuthStatus.init,
+      ));
       // oauth2 with naver
       var res = await authRepository.signinWithNaver();
 
@@ -63,7 +71,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     } catch (e) {
       debugPrint(e.toString());
       emit(AuthState(
-        status: EAuthStatus.error,
+        status: ELoadingStatus.error,
+        authStatus: EAuthStatus.init,
         message: e.toString(),
       ));
     } finally {
@@ -76,7 +85,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     Emitter<AuthState> emit,
   ) async {
     try {
-      emit(const AuthState(status: EAuthStatus.loading));
+      emit(const AuthState(
+        status: ELoadingStatus.loading,
+        authStatus: EAuthStatus.init,
+      ));
       // oauth2 with kakao
       var res = await authRepository.signinWithKakao();
 
@@ -88,7 +100,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
     } catch (e) {
       debugPrint(e.toString());
       emit(AuthState(
-        status: EAuthStatus.error,
+        status: ELoadingStatus.error,
+        authStatus: EAuthStatus.init,
         message: e.toString(),
       ));
     } finally {
@@ -144,10 +157,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with ChangeNotifier {
       await authRepository.signoutWithGoogle();
       await authRepository.signoutWithNaver();
 
-      emit(const AuthState(status: EAuthStatus.unknown));
+      emit(const AuthState(
+        status: ELoadingStatus.loaded,
+        authStatus: EAuthStatus.unknown,
+      ));
     } catch (e) {
       emit(AuthState(
-        status: EAuthStatus.error,
+        status: ELoadingStatus.error,
+        authStatus: EAuthStatus.init,
         message: e.toString(),
       ));
     } finally {
