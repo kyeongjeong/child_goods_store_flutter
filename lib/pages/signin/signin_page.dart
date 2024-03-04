@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
 
+import 'package:go_router/go_router.dart';
+
 class SigninPage extends StatelessWidget {
   const SigninPage({super.key});
 
@@ -29,6 +31,10 @@ class SigninPage extends StatelessWidget {
 
   void _onTapKakao() {
     AuthBlocSingleton.bloc.add(AuthKakaoSignin());
+  }
+
+  void _onTapSignup(BuildContext context) {
+    context.push('/signup');
   }
 
   @override
@@ -71,11 +77,18 @@ class SigninPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const AppFont('또는'),
                           Gaps.h5,
-                          AppFont(
-                            '회원가입',
-                            color: Theme.of(context).primaryColorDark,
+                          const AppFont('또는'),
+                          GestureDetector(
+                            onTap: () => _onTapSignup(context),
+                            child: Padding(
+                              padding: const EdgeInsets.all(Sizes.size5),
+                              child: AppFont(
+                                '회원가입',
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -83,7 +96,7 @@ class SigninPage extends StatelessWidget {
                         margin: EdgeInsets.all(Sizes.size20),
                       ),
                       const AppFont('간편 로그인'),
-                      Gaps.v20,
+                      Gaps.v10,
                       OauthButton(
                         method: EAuthMethod.google,
                         onTap: _onTapGoogle,

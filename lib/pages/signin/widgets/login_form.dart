@@ -40,21 +40,20 @@ class _LoginFormState extends State<LoginForm> {
       children: [
         AppTextFormField(
           controller: _emailController,
-          hintText: 'Email',
+          hintText: '이메일',
           keyboardType: TextInputType.emailAddress,
           hasNext: true,
         ),
         Gaps.v20,
         AppTextFormField(
           controller: _pwController,
-          hintText: 'Password',
+          hintText: '비밀번호',
           obscureText: true,
           onFieldSubmitted: (_) => _onTapLogin(),
         ),
         Gaps.v20,
         AppInkButton(
           onTap: _onTapLogin,
-          color: Theme.of(context).primaryColorDark,
           child: const SizedBox(
             width: double.infinity,
             child: Center(

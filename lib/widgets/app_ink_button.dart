@@ -20,7 +20,7 @@ class AppInkButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       highlightColor: Colors.transparent,
-      splashColor: Theme.of(context).primaryColor.withOpacity(0.1),
+      splashColor: Theme.of(context).splashColor,
       borderRadius: BorderRadius.circular(borderRadSize),
       child: Ink(
         padding: const EdgeInsets.symmetric(
@@ -28,7 +28,7 @@ class AppInkButton extends StatelessWidget {
           horizontal: Sizes.size20,
         ),
         decoration: BoxDecoration(
-          color: color,
+          color: color ?? Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(borderRadSize),
           boxShadow: [
             BoxShadow(

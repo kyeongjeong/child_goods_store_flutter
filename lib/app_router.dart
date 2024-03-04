@@ -1,7 +1,10 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
+import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/pages/my_home_page.dart';
+import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
 import 'package:child_goods_store_flutter/pages/signin/signin_page.dart';
+import 'package:child_goods_store_flutter/pages/signup/signup_page.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +39,14 @@ class _AppRouterState extends State<AppRouter> {
           builder: (context, state) => const SigninPage(),
         ),
         GoRoute(
+          path: '/signup',
+          builder: (context, state) => const SignupPage(),
+        ),
+        GoRoute(
+          path: '/phone_verify',
+          builder: (context, state) => const PhoneVerifyPage(),
+        ),
+        GoRoute(
           path: '/home',
           builder: (context, state) => const MyHomePage(),
         ),
@@ -51,6 +62,15 @@ class _AppRouterState extends State<AppRouter> {
       title: F.title,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        primaryColor: Colors.cyan.shade600,
+        splashColor: Colors.cyan.shade700,
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontSize: Sizes.size16,
+            fontWeight: FontWeight.w700,
+            color: Colors.black87,
+          ),
+        ),
         useMaterial3: true,
       ),
       localizationsDelegates: const [

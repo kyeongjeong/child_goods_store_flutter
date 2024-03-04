@@ -67,7 +67,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).primaryColorDark,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         contentPadding: const EdgeInsets.symmetric(
