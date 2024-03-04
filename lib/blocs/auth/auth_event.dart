@@ -17,3 +17,5 @@ class Auth3C1SSignin extends AuthEvent {
     this.password,
   });
 }
+
+class AuthGetUser extends AuthEvent {}

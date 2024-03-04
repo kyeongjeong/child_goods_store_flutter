@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 
 class AuthBlocSingleton {
   AuthBlocSingleton._constructor();
@@ -11,9 +12,11 @@ class AuthBlocSingleton {
 
   static initializer({
     required AuthRepository authRepository,
+    required UserRepository userRepository,
   }) {
     _bloc = AuthBloc(
       authRepository: authRepository,
+      userRepository: userRepository,
     );
   }
 }

@@ -1,13 +1,17 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
+import 'package:child_goods_store_flutter/enums/auth_status.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/pages/my_home_page.dart';
 import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
 import 'package:child_goods_store_flutter/pages/signin/signin_page.dart';
 import 'package:child_goods_store_flutter/pages/signup/signup_page.dart';
+import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,12 +34,37 @@ class _AppRouterState extends State<AppRouter> {
     // Initialize AuthBlocSingleton
     AuthBlocSingleton.initializer(
       authRepository: context.read<AuthRepository>(),
+      userRepository: context.read<UserRepository>(),
     );
 
     // Setting router configs
     _routerConfig = GoRouter(
-      initialLocation: '/signin',
+      initialLocation: '/',
+      refreshListenable: AuthBlocSingleton.bloc,
+      redirect: (context, state) {
+        final authState = AuthBlocSingleton.bloc.state;
+        final blockPageInAuthAuthState = ['/', '/signin'];
+
+        if (authState.authStatus == EAuthStatus.init) return '/';
+        if (authState.authStatus == EAuthStatus.unknown) return '/signin';
+        if (authState.authStatus == EAuthStatus.unAuthenticated) {
+          return '/edit/profile';
+        }
+        if (authState.authStatus == EAuthStatus.authenticated) {
+          return blockPageInAuthAuthState.contains(state.matchedLocation)
+              ? '/home'
+              : state.matchedLocation;
+        }
+        return state.matchedLocation;
+      },
       routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => BlocProvider(
+            create: (context) => SplashCubit(),
+            child: const SplashPage(),
+          ),
+        ),
         GoRoute(
           path: '/signin',
           builder: (context, state) => const SigninPage(),

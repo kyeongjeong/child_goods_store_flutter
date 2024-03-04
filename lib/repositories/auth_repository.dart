@@ -1,3 +1,5 @@
+import 'package:child_goods_store_flutter/enums/auth_method.dart';
+import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
@@ -78,6 +80,36 @@ class AuthRepository {
   Future<void> signoutWithNaver() async {
     await FlutterNaverLogin.logOut();
     return;
+  }
+
+  Future<ResModel<String>> signinWithOauth2({
+    required EAuthMethod method,
+    required String accessToken,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // var res = await dio.post(
+    //   '/oauth',
+    //   data: {
+    //     'method': method.key.toLowerCase(),
+    //     'accessToken': accessToken,
+    //   },
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<String>(
+      code: 1000,
+      data: 'test_jwt_token',
+    ).toJson((token) => token.toString());
+
+    var res = ResModel<String>.fromJson(
+      resTmp,
+      (json) => json.toString(),
+    );
+
+    return res;
   }
 
   Future<ResModel<String>> signinWith3C1S({

@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/app_router.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +13,9 @@ class App extends StatelessWidget {
       providers: [
         RepositoryProvider(
           create: (context) => AuthRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => UserRepository(),
         ),
       ],
       child: const AppRouter(),
