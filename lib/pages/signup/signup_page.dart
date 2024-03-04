@@ -114,10 +114,13 @@ class _SignupPageState extends State<SignupPage> {
       bottomNavigationBar: AppInkButton(
         onTap: _onTapSignup,
         borderRadSize: 0,
-        child: const SizedBox(
+        child: Container(
           width: double.infinity,
           height: Sizes.size32,
-          child: Center(
+          margin: EdgeInsets.only(
+            bottom: MediaQuery.paddingOf(context).bottom,
+          ),
+          child: const Center(
             child: AppFont(
               '회원가입',
               color: Colors.white,

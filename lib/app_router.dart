@@ -1,4 +1,5 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
+import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/pages/my_home_page.dart';
@@ -44,7 +45,12 @@ class _AppRouterState extends State<AppRouter> {
         ),
         GoRoute(
           path: '/phone_verify',
-          builder: (context, state) => const PhoneVerifyPage(),
+          builder: (context, state) => BlocProvider(
+            create: (context) => PhoneVerifyBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+            child: const PhoneVerifyPage(),
+          ),
         ),
         GoRoute(
           path: '/home',

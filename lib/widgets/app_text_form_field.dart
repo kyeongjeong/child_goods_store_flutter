@@ -12,6 +12,7 @@ class AppTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool hasNext;
   final bool obscureText;
+  final bool? enabled;
 
   const AppTextFormField({
     super.key,
@@ -25,6 +26,7 @@ class AppTextFormField extends StatefulWidget {
     this.keyboardType,
     this.hasNext = false,
     this.obscureText = false,
+    this.enabled,
   });
 
   @override
@@ -82,6 +84,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           (widget.singleLine ? null : TextInputType.multiline),
       maxLines: widget.singleLine ? 1 : null,
       expands: widget.expanded,
+      enabled: widget.enabled,
     );
   }
 }

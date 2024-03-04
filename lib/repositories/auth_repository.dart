@@ -1,3 +1,7 @@
+import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
+import 'package:child_goods_store_flutter/models/res/res_model.dart';
+import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -105,4 +109,48 @@ class AuthRepository {
 
   //   return res;
   // }
+
+  Future<ResModel<void>> postPhoneSend({
+    required String phoneNum,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/phone/send',
+    //   data: {
+    //     'phoneNum': phoneNum,
+    //   },
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
+
+  Future<ResModel<void>> postPhoneVerify({
+    required String code,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/phone/verify',
+    //   data: {
+    //     'code': code,
+    //   },
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
 }
