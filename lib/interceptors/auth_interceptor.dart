@@ -9,8 +9,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthInterceptor extends Interceptor {
   late final FlutterSecureStorage _storage;
+  final String contentType;
 
-  AuthInterceptor() {
+  AuthInterceptor({
+    this.contentType = 'application/json',
+  }) {
     _storage = const FlutterSecureStorage();
   }
 
@@ -23,7 +26,7 @@ class AuthInterceptor extends Interceptor {
     final jwt = await _storage.read(key: Strings.jwtToken);
 
     // 기타 헤더 작성
-    options.headers['Content-Type'] = 'application/json';
+    options.headers['Content-Type'] = contentType;
 
     // time-out 설정
     options.receiveTimeout = const Duration(seconds: 5);

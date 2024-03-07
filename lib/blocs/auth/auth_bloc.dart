@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
     on<AuthSignout>(_authSignoutHandler);
     on<Auth3C1SSignin>(_auth3C1SSigninHandler);
     on<AuthGetUser>(_authGetUserHandler);
+    on<AuthSetUser>(_authSetUserHandler);
   }
 
   Future<void> _authGoogleSigninHandler(
@@ -255,5 +256,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         notifyListeners();
       },
     );
+  }
+
+  Future<void> _authSetUserHandler(
+    AuthSetUser event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.copyWith(
+      user: event.user,
+      authStatus: event.user.nickName?.isNotEmpty == true
+          ? EAuthStatus.authenticated
+          : EAuthStatus.unAuthenticated,
+    ));
   }
 }

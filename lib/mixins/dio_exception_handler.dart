@@ -22,12 +22,14 @@ mixin DioExceptionHandlerMixin {
         message: '[${error.code}] ${error.message ?? Strings.unknownFail}',
       ));
       debugPrint('[DioExceptionHandlerMixin/DioException] ${error.message}');
+      emit(state.copyWith(status: ELoadingStatus.init));
     } catch (e) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
         message: '[5001] ${e.toString().replaceAll('Exception: ', '')}',
       ));
       debugPrint('[DioExceptionHandlerMixin/Exception] ${e.toString()}');
+      emit(state.copyWith(status: ELoadingStatus.init));
     } finally {
       await finallyCall?.call();
     }

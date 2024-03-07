@@ -16,7 +16,7 @@ class UserRepository {
       code: 1000,
       data: UserModel(
         userIdx: 1,
-        nickName: 'Woong test',
+        // nickName: 'Woong test',
         introduce: 'Hello world',
         phoneNum: '01012345678',
         profileImg: '',
@@ -24,6 +24,58 @@ class UserRepository {
         town: '안양시',
         createAt: DateTime.now(),
       ),
+    ).toJson(
+      (user) => user.toJson(),
+    );
+
+    var res = ResModel<UserModel>.fromJson(
+      resTmp,
+      (json) => UserModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<UserModel>> postUser({required UserModel user}) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post(
+    //   '/user',
+    //   data: user.toJson(),
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<UserModel>(
+      code: 1000,
+      data: user,
+    ).toJson(
+      (user) => user.toJson(),
+    );
+
+    var res = ResModel<UserModel>.fromJson(
+      resTmp,
+      (json) => UserModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<UserModel>> patchUser({required UserModel user}) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.patch(
+    //   '/user',
+    //   data: user.toJson(),
+    // );
+
+    // TODO: api connect
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<UserModel>(
+      code: 1000,
+      data: user,
     ).toJson(
       (user) => user.toJson(),
     );

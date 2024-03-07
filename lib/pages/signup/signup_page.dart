@@ -35,8 +35,7 @@ class _SignupPageState extends State<SignupPage> {
 
   void _onTapPhone() async {
     var phoneNum = await context.push<String?>('/phone_verify');
-    if (phoneNum != null) {
-      // ignore: use_build_context_synchronously
+    if (phoneNum != null && mounted) {
       context.read<SignupBloc>().add(SignupChangePhoneNum(phoneNum));
     }
   }

@@ -1,3 +1,6 @@
+import 'package:child_goods_store_flutter/blocs/app_data/app_data_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/app_data/app_data_event.dart';
+import 'package:child_goods_store_flutter/blocs/app_data/app_data_state.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_event.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
@@ -17,45 +20,55 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    context.read<AppDataBloc>().add(AppDataReset());
     WidgetsBinding.instance.addPostFrameCallback((_) => _afterFirstBuild());
   }
 
   void _afterFirstBuild() {
-    context.read<SplashCubit>().setSplash(ESplash.extraData);
+    context.read<SplashCubit>().setSplash(ESplash.adminDistrict);
   }
 
-  Future<void> _getExtraData() async {
-    print('[TEST] Get extra data...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('[TEST] Get extra data done.');
-
-    // ignore: use_build_context_synchronously
-    context.read<SplashCubit>().setSplash(ESplash.getUser);
+  void _getAdminDistrict() {
+    context.read<AppDataBloc>().add(AppDataLoadAdminDistrict());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: BlocConsumer<SplashCubit, ESplash>(
-          listener: (context, state) {
-            if (state == ESplash.extraData) {
-              _getExtraData();
-            }
-            if (state == ESplash.getUser) {
-              AuthBlocSingleton.bloc.add(AuthGetUser());
-            }
-          },
-          builder: (context, state) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const CircularProgressIndicator(),
-                Gaps.v10,
-                AppFont(state.text),
-              ],
-            );
-          },
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<AppDataBloc, AppDataState>(
+              listenWhen: (previous, current) =>
+                  previous.region != current.region,
+              listener: (context, state) {
+                if (state.region != {}) {
+                  context.read<SplashCubit>().setSplash(ESplash.getUser);
+                }
+              },
+            ),
+          ],
+          child: BlocConsumer<SplashCubit, ESplash>(
+            listener: (context, state) {
+              if (state == ESplash.adminDistrict) {
+                print('admin district initlaize');
+                _getAdminDistrict();
+              }
+              if (state == ESplash.getUser) {
+                AuthBlocSingleton.bloc.add(AuthGetUser());
+              }
+            },
+            builder: (context, state) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const CircularProgressIndicator(),
+                  Gaps.v10,
+                  AppFont(state.text),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
