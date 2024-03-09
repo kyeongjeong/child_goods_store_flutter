@@ -82,7 +82,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
           throw Exception('소셜 로그인에 실패했습니다.');
         }
 
-        print(accessToken);
+        debugPrint('[AuthBloc/_authSignin] $accessToken');
 
         var res = await authRepository.signinWithOauth2(
           method: method,

@@ -1,6 +1,7 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
@@ -57,9 +58,6 @@ class _AppRouterState extends State<AppRouter> {
         final allowPageInUnknownState = [Routes.signup, Routes.phoneVerify];
         final allowPageInUnAuthState = [Routes.phoneVerify];
         final blockPageInAuthState = [Routes.root, Routes.signin];
-
-        print(authState.authStatus);
-        print(state.matchedLocation);
 
         if (authState.authStatus == EAuthStatus.init) {
           return Routes.root;
@@ -140,7 +138,6 @@ class _AppRouterState extends State<AppRouter> {
               items: [
                 const BottomNavigationBarItem(
                   label: '중고거래',
-                  activeIcon: Icon(Icons.home),
                   icon: Icon(Icons.home),
                 ),
                 BottomNavigationBarItem(
@@ -204,11 +201,29 @@ class _AppRouterState extends State<AppRouter> {
               routes: [
                 GoRoute(
                   path: Routes.profile,
-                  builder: (context, state) => const ProfilePage(),
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => ProfileBloc(
+                      userRepository: context.read<UserRepository>(),
+                      userIdx: AuthBlocSingleton.bloc.state.user!.userIdx!,
+                    ),
+                    child: const ProfilePage(
+                      popAble: false,
+                    ),
+                  ),
                 ),
               ],
             ),
           ],
+        ),
+        GoRoute(
+          path: '${Routes.profile}/:userIdx',
+          builder: (context, state) => BlocProvider(
+            create: (context) => ProfileBloc(
+              userRepository: context.read<UserRepository>(),
+              userIdx: int.parse(state.pathParameters['userIdx'] as String),
+            ),
+            child: const ProfilePage(popAble: true),
+          ),
         ),
       ],
     );

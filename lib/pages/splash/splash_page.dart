@@ -51,7 +51,6 @@ class _SplashPageState extends State<SplashPage> {
           child: BlocConsumer<SplashCubit, ESplash>(
             listener: (context, state) {
               if (state == ESplash.adminDistrict) {
-                print('admin district initlaize');
                 _getAdminDistrict();
               }
               if (state == ESplash.getUser) {
