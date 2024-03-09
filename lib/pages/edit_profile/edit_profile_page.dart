@@ -4,6 +4,7 @@ import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.d
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_event.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
@@ -67,7 +68,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   void _onTapPhone() async {
-    var phoneNum = await context.push<String?>('/phone_verify');
+    var phoneNum = await context.push<String?>(Routes.phoneVerify);
     if (phoneNum != null && mounted) {
       context.read<EditProfileBloc>().add(EditProfileChangePhoneNum(phoneNum));
     }
@@ -100,7 +101,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         }
         if (state.status == ELoadingStatus.loaded) {
-          context.replace('/home');
+          context.replace(Routes.home);
         }
       },
       child: Scaffold(

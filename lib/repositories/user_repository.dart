@@ -16,7 +16,7 @@ class UserRepository {
       code: 1000,
       data: UserModel(
         userIdx: 1,
-        // nickName: 'Woong test',
+        nickName: 'Woong test',
         introduce: 'Hello world',
         phoneNum: '01012345678',
         profileImg: '',

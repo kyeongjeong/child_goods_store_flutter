@@ -146,7 +146,13 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
               profileImg: res.data,
             ),
           ));
-          print('image uploaded');
+        }
+        if (state.removeImage) {
+          emit(state.copyWith(
+            user: state.user.copyWith(
+              profileImg: Strings.nullStr,
+            ),
+          ));
         }
 
         ResModel<UserModel>? res;
