@@ -9,23 +9,23 @@ class AppProfileImage extends StatelessWidget {
   const AppProfileImage({
     super.key,
     this.profileImg,
-    this.radius = Sizes.size20,
+    this.radius = Sizes.size40,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Sizes.size80,
-      height: Sizes.size80,
+      width: radius * 2,
+      height: radius * 2,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Theme.of(context).primaryColor,
       ),
       clipBehavior: Clip.hardEdge,
       child: profileImg == null || profileImg == Strings.nullStr
-          ? const Icon(
+          ? Icon(
               Icons.person,
-              size: Sizes.size60,
+              size: radius,
               color: Colors.white,
             )
           : Image.network(

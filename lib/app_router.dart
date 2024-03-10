@@ -1,4 +1,5 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
+import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
@@ -21,6 +22,7 @@ import 'package:child_goods_store_flutter/pages/signup/signup_page.dart';
 import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
 import 'package:child_goods_store_flutter/pages/together/together_page.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -185,7 +187,12 @@ class _AppRouterState extends State<AppRouter> {
               routes: [
                 GoRoute(
                   path: Routes.child,
-                  builder: (context, state) => const ChildPage(),
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => ChildBloc(
+                      childRepository: context.read<ChildRepository>(),
+                    ),
+                    child: const ChildPage(),
+                  ),
                 ),
               ],
             ),
@@ -240,6 +247,7 @@ class _AppRouterState extends State<AppRouter> {
         primaryColor: Colors.cyan.shade600,
         splashColor: Colors.black.withOpacity(0.1),
         appBarTheme: const AppBarTheme(
+          centerTitle: false,
           titleTextStyle: TextStyle(
             fontSize: Sizes.size16,
             fontWeight: FontWeight.w700,

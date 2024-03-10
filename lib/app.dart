@@ -1,6 +1,7 @@
 import 'package:child_goods_store_flutter/app_router.dart';
 import 'package:child_goods_store_flutter/blocs/app_data/app_data_bloc.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
+import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => UserRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => ChildRepository(),
         ),
         RepositoryProvider(
           create: (context) => ImageRepository(),
