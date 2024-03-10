@@ -4,6 +4,7 @@ class Routes {
   static const String signup = '/signup';
 
   static const String phoneVerify = '/phone_verify';
+  static const String editTag = '/edit_tag';
   static const String editProfile = '/edit_profile';
   static const String editChild = '/edit_child';
 

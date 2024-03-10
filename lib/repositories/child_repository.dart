@@ -23,7 +23,7 @@ class ChildRepository {
           gender: 'M',
           childImg:
               'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
-          tag: ['파란색', '편한'],
+          tag: ['파란색', '편한', '토이스토리', '로봇', '공룡', '태그 뭐하지', '좀 많으면 어캐될까'],
         ),
         ChildModel(
           childId: 2,

@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
 import 'package:child_goods_store_flutter/pages/profile/profile_page.dart';
@@ -28,6 +30,7 @@ import 'package:child_goods_store_flutter/pages/together/together_page.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
+import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -130,6 +133,16 @@ class _AppRouterState extends State<AppRouter> {
                       : EHttpMethod.patch,
             ),
             child: const EditProfilePage(),
+          ),
+        ),
+        GoRoute(
+          path: Routes.editTag,
+          builder: (context, state) => BlocProvider(
+            create: (context) => EditTagBloc(
+              searchRepository: context.read<SearchRepository>(),
+              tags: (state.extra as GoRouterExtraModel<List<String>>?)?.data,
+            ),
+            child: const EditTagPage(),
           ),
         ),
         StatefulShellRoute.indexedStack(

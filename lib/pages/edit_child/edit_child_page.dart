@@ -4,8 +4,10 @@ import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart'
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_event.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
+import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/widgets/edit_child_age.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/widgets/edit_child_gender.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
@@ -13,6 +15,7 @@ import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditChildPage extends StatefulWidget {
@@ -53,6 +56,18 @@ class _EditChildPageState extends State<EditChildPage> {
 
   void _onNameChange(String name) {
     context.read<EditChildBloc>().add(EditChildChangeName(name));
+  }
+
+  void _onTapEditTag() async {
+    var tags = context.read<EditChildBloc>().state.child.tag;
+    var resTags = await context.push<GoRouterExtraModel<List<String>>>(
+      Routes.editTag,
+      extra: GoRouterExtraModel<List<String>>(
+        data: tags,
+      ),
+    );
+
+    print(resTags?.data);
   }
 
   void _onTapComplete() {
@@ -128,6 +143,10 @@ class _EditChildPageState extends State<EditChildPage> {
               const EditChildGender(),
               Gaps.v20,
               const EditChildAge(),
+              AppInkButton(
+                onTap: _onTapEditTag,
+                child: const AppFont('change tag'),
+              ),
             ],
           ),
         ),
