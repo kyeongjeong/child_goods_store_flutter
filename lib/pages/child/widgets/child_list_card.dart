@@ -1,13 +1,16 @@
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_event.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
+import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/pages/child/widgets/child_icon_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_h_spliter.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ChildListCard extends StatelessWidget {
   final List<ChildModel> children;
@@ -26,9 +29,18 @@ class ChildListCard extends StatelessWidget {
     context.read<ChildBloc>().add(ChildSelect(childId));
   }
 
-  void _onTapAddChild(BuildContext context) {}
+  void _onTapAddChild(BuildContext context) {
+    context.push(Routes.editChild);
+  }
 
-  void _onTapEditChild(BuildContext context) {}
+  void _onTapEditChild(BuildContext context) {
+    context.push(
+      Routes.editChild,
+      extra: GoRouterExtraModel<ChildModel>(
+        data: selectedChild,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +105,7 @@ class ChildListCard extends StatelessWidget {
                         horizontal: Sizes.size10,
                       ),
                       child: const AppFont(
-                        '자녀 정보수정',
+                        '자녀 정보 수정',
                         color: Colors.white,
                       ),
                     ),

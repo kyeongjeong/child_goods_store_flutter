@@ -42,8 +42,80 @@ class ChildRepository {
     var res = ResModel<List<ChildModel>>.fromJson(
       resTmp,
       (json) => (json as List<dynamic>)
-          .map((essay) => ChildModel.fromJson(essay))
+          .map((child) => ChildModel.fromJson(child))
           .toList(),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<ChildModel>> postChild({
+    required ChildModel child,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post(
+    //   '/child',
+    //   data: child.toJson(),
+    // );
+
+    // TODO: app connect
+    print(child.toJson());
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<ChildModel>(
+      code: 1000,
+      data: ChildModel(
+        childId: 999,
+        name: child.name,
+        age: child.age,
+        gender: child.gender,
+        childImg: child.childImg,
+        tag: child.tag,
+      ),
+    ).toJson(
+      (child) => child.toJson(),
+    );
+
+    var res = ResModel<ChildModel>.fromJson(
+      resTmp,
+      (json) => ChildModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<ChildModel>> patchChild({
+    required ChildModel child,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.patch(
+    //   '/child',
+    //   data: child.toJson(),
+    // );
+
+    // TODO: app connect
+    print(child.toJson());
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<ChildModel>(
+      code: 1000,
+      data: ChildModel(
+        childId: child.childId,
+        name: child.name,
+        age: child.age,
+        gender: child.gender,
+        childImg: child.childImg,
+        tag: child.tag,
+      ),
+    ).toJson(
+      (child) => child.toJson(),
+    );
+
+    var res = ResModel<ChildModel>.fromJson(
+      resTmp,
+      (json) => ChildModel.fromJson(json),
     );
 
     return res;

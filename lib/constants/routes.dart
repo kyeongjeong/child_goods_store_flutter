@@ -5,6 +5,7 @@ class Routes {
 
   static const String phoneVerify = '/phone_verify';
   static const String editProfile = '/edit_profile';
+  static const String editChild = '/edit_child';
 
   static const String home = '/home';
   static const String together = '/together';

@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
@@ -11,8 +12,11 @@ import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
+import 'package:child_goods_store_flutter/models/child/child_model.dart';
+import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
@@ -230,6 +234,21 @@ class _AppRouterState extends State<AppRouter> {
               userIdx: int.parse(state.pathParameters['userIdx'] as String),
             ),
             child: const ProfilePage(popAble: true),
+          ),
+        ),
+        GoRoute(
+          path: Routes.editChild,
+          builder: (context, state) => BlocProvider(
+            create: (context) => EditChildBloc(
+              childRepository: context.read<ChildRepository>(),
+              imageRepository: context.read<ImageRepository>(),
+              child: (state.extra as GoRouterExtraModel<ChildModel>?)?.data,
+              httpMethod:
+                  (state.extra as GoRouterExtraModel<ChildModel>?)?.data == null
+                      ? EHttpMethod.post
+                      : EHttpMethod.patch,
+            ),
+            child: const EditChildPage(),
           ),
         ),
       ],
