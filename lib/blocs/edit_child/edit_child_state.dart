@@ -7,11 +7,13 @@ class EditChildState extends BlocState {
   final ChildModel child;
   final XFile? image;
   final bool removeImage;
+  final ChildModel? result;
 
   const EditChildState({
     required this.child,
     required this.image,
     required this.removeImage,
+    this.result,
     required super.status,
     super.message,
   });
@@ -20,6 +22,7 @@ class EditChildState extends BlocState {
       : child = child ?? ChildModel(),
         image = null,
         removeImage = false,
+        result = null,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -30,6 +33,7 @@ class EditChildState extends BlocState {
     ChildModel? child,
     XFile? image,
     bool? removeImage,
+    ChildModel? result,
     ELoadingStatus? status,
     String? message,
   }) =>
@@ -37,6 +41,7 @@ class EditChildState extends BlocState {
         child: child ?? this.child,
         image: image ?? this.image,
         removeImage: removeImage ?? this.removeImage,
+        result: result ?? this.result,
         status: status ?? this.status,
         message: message ?? this.message,
       );
@@ -46,6 +51,7 @@ class EditChildState extends BlocState {
         child,
         image,
         removeImage,
+        result,
         status,
         message,
       ];

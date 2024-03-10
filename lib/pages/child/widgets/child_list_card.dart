@@ -30,16 +30,28 @@ class ChildListCard extends StatelessWidget {
   }
 
   void _onTapAddChild(BuildContext context) {
-    context.push(Routes.editChild);
+    var res = context.push<GoRouterExtraModel<ChildModel>>(Routes.editChild);
+
+    res.then((value) {
+      if (value?.data != null) {
+        context.read<ChildBloc>().add(ChildAdd(value!.data!));
+      }
+    });
   }
 
   void _onTapEditChild(BuildContext context) {
-    context.push(
+    var res = context.push<GoRouterExtraModel<ChildModel>>(
       Routes.editChild,
       extra: GoRouterExtraModel<ChildModel>(
         data: selectedChild,
       ),
     );
+
+    res.then((value) {
+      if (value?.data != null) {
+        context.read<ChildBloc>().add(ChildEdit(value!.data!));
+      }
+    });
   }
 
   @override
@@ -101,7 +113,7 @@ class ChildListCard extends StatelessWidget {
                     AppInkButton(
                       onTap: () => _onTapEditChild(context),
                       padding: const EdgeInsets.symmetric(
-                        vertical: Sizes.size3,
+                        vertical: Sizes.size4,
                         horizontal: Sizes.size10,
                       ),
                       child: const AppFont(

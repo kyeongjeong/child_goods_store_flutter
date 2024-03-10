@@ -58,7 +58,7 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
   ) async {
     if (state.childList.isEmpty) return;
 
-    var selectedChild = state.childList.singleWhere(
+    var selectedChild = state.childList.firstWhere(
       (child) => child.childId == event.childId,
       orElse: () => ChildModel(childId: -1),
     );
@@ -73,10 +73,30 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
   Future<void> _childAddHandler(
     ChildAdd event,
     Emitter<ChildState> emit,
-  ) async {}
+  ) async {
+    List<ChildModel> res = [];
+    res
+      ..addAll(state.childList)
+      ..add(event.child);
+    emit(state.copyWith(childList: res));
+
+    add(ChildSelect(event.child.childId!));
+  }
 
   Future<void> _childEditHandler(
     ChildEdit event,
     Emitter<ChildState> emit,
-  ) async {}
+  ) async {
+    List<ChildModel> res = [];
+    for (var child in state.childList) {
+      if (child.childId == event.child.childId) {
+        res.add(event.child);
+      } else {
+        res.add(child);
+      }
+    }
+    emit(state.copyWith(childList: res));
+
+    add(ChildSelect(event.child.childId!));
+  }
 }

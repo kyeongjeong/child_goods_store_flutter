@@ -161,7 +161,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
             res = await userRepository.postUser(user: state.user);
             break;
           case EHttpMethod.patch:
-            await userRepository.patchUser(user: state.user);
+            res = await userRepository.patchUser(user: state.user);
             break;
           default:
             break;

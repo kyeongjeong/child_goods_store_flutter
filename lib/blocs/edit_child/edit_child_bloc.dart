@@ -1,8 +1,11 @@
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_event.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_state.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
+import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
+import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,6 +92,82 @@ class EditChildBloc extends Bloc<EditChildEvent, EditChildState>
     EditChildSubmit event,
     Emitter<EditChildState> emit,
   ) async {
-    print(state.child);
+    if (state.status == ELoadingStatus.loading) return;
+
+    // Validate
+    if (state.child.name == null || state.child.name == Strings.nullStr) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '자녀 이름을 입력해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+    if (state.child.gender == null || state.child.gender == Strings.nullStr) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '자녀 성별을 선택해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+    if (state.child.age == null) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '자녀 연령을 설정해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+
+    await handleApiRequest(
+      () async {
+        emit(state.copyWith(status: ELoadingStatus.loading));
+
+        if (!state.removeImage && state.image != null) {
+          var res = await imageRepository.postImage(image: state.image!);
+          emit(state.copyWith(
+            child: state.child.copyWith(
+              childImg: res.data,
+            ),
+          ));
+        }
+        if (state.removeImage) {
+          emit(state.copyWith(
+            child: state.child.copyWith(
+              childImg: Strings.nullStr,
+            ),
+          ));
+        }
+
+        ResModel<ChildModel>? res;
+        switch (httpMethod) {
+          case EHttpMethod.post:
+            res = await childRepository.postChild(child: state.child);
+            break;
+          case EHttpMethod.patch:
+            res = await childRepository.patchChild(child: state.child);
+            break;
+          default:
+            break;
+        }
+
+        if (res?.data == null) {
+          emit(state.copyWith(
+            status: ELoadingStatus.error,
+            message: '저장에 실패했습니다.',
+          ));
+          emit(state.copyWith(status: ELoadingStatus.init));
+          return;
+        }
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          result: res!.data,
+        ));
+      },
+      state: state,
+      emit: emit,
+    );
   }
 }

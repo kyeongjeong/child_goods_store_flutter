@@ -55,7 +55,6 @@ class _EditTagPageState extends State<EditTagPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(context.read<EditTagBloc>().state.tags);
     return Scaffold(
       appBar: AppBar(
         title: const AppFont('태그 수정'),

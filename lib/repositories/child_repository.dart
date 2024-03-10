@@ -60,7 +60,6 @@ class ChildRepository {
     // );
 
     // TODO: app connect
-    print(child.toJson());
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(
@@ -96,7 +95,6 @@ class ChildRepository {
     // );
 
     // TODO: app connect
-    print(child.toJson());
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(

@@ -39,7 +39,7 @@ class ChildIconButton extends StatelessWidget {
                     height: Sizes.size64,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Theme.of(context).primaryColor,
+                        color: Colors.black.withOpacity(0.2),
                         width: Sizes.size5,
                       ),
                       borderRadius: BorderRadius.circular(Sizes.size32),
