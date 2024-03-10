@@ -1,3 +1,6 @@
+import 'package:child_goods_store_flutter/blocs/auth/auth_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
+import 'package:child_goods_store_flutter/blocs/auth/auth_state.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_event.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_state.dart';
@@ -27,17 +30,28 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ProfileBloc, ProfileState>(
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: (context, state) {
-        if (state.status == ELoadingStatus.error &&
-            state.profileStatus == ELoadingStatus.loaded) {
-          AppSnackbar.show(
-            context,
-            message: state.message ?? Strings.unknownFail,
-          );
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<ProfileBloc, ProfileState>(
+          listenWhen: (previous, current) => previous.status != current.status,
+          listener: (context, state) {
+            if (state.status == ELoadingStatus.error &&
+                state.profileStatus == ELoadingStatus.loaded) {
+              AppSnackbar.show(
+                context,
+                message: state.message ?? Strings.unknownFail,
+              );
+            }
+          },
+        ),
+        BlocListener<AuthBloc, AuthState>(
+          bloc: AuthBlocSingleton.bloc,
+          listenWhen: (previous, current) => previous.user != current.user,
+          listener: (context, state) {
+            context.read<ProfileBloc>().add(ProfileGet());
+          },
+        )
+      ],
       child: Scaffold(
         appBar: popAble
             ? AppBar(

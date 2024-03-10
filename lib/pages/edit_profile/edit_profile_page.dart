@@ -7,6 +7,7 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
+import 'package:child_goods_store_flutter/enums/http_method.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/widgets/app_dropdown.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
@@ -101,7 +102,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
           );
         }
         if (state.status == ELoadingStatus.loaded) {
-          context.replace(Routes.home);
+          if (context.read<EditProfileBloc>().httpMethod == EHttpMethod.post) {
+            context.replace(Routes.home);
+          } else {
+            context.pop();
+          }
         }
       },
       child: Scaffold(

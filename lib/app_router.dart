@@ -21,8 +21,11 @@ import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart'
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
+import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
 import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
 import 'package:child_goods_store_flutter/pages/profile/profile_page.dart';
+import 'package:child_goods_store_flutter/pages/settings/settings_page.dart';
+import 'package:child_goods_store_flutter/pages/ship/ship_page.dart';
 import 'package:child_goods_store_flutter/pages/signin/signin_page.dart';
 import 'package:child_goods_store_flutter/pages/signup/signup_page.dart';
 import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
@@ -263,6 +266,20 @@ class _AppRouterState extends State<AppRouter> {
             ),
             child: const EditChildPage(),
           ),
+        ),
+        GoRoute(
+          path: Routes.settings,
+          builder: (context, state) => const SettingsPage(),
+          routes: [
+            GoRoute(
+              path: SubRoutes.ship,
+              builder: (context, state) => const ShipPage(),
+            ),
+            GoRoute(
+              path: SubRoutes.notification,
+              builder: (context, state) => const NotificationPage(),
+            ),
+          ],
         ),
       ],
     );

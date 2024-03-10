@@ -1,4 +1,5 @@
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
@@ -6,6 +7,7 @@ import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_profile_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileCard extends StatelessWidget {
   final UserProfileModel userProfile;
@@ -17,7 +19,9 @@ class ProfileCard extends StatelessWidget {
     required this.popAble,
   });
 
-  void _onTapSetting() {}
+  void _onTapSetting(BuildContext context) {
+    context.push(Routes.settings);
+  }
 
   void _onTapFollowButton() {}
 
@@ -52,7 +56,7 @@ class ProfileCard extends StatelessWidget {
               Gaps.h20,
               if (!popAble)
                 AppInkButton(
-                  onTap: _onTapSetting,
+                  onTap: () => _onTapSetting(context),
                   borderRadSize: Sizes.size32,
                   color: Theme.of(context).scaffoldBackgroundColor,
                   shadowColor: Colors.transparent,
