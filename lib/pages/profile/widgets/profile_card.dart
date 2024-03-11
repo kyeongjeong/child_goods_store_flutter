@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
+import 'package:child_goods_store_flutter/enums/follow_mode.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
@@ -25,9 +26,17 @@ class ProfileCard extends StatelessWidget {
 
   void _onTapFollowButton() {}
 
-  void _onTapFollow() {}
+  void _onTapFollow(BuildContext context) {
+    context.push(
+      '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
+    );
+  }
 
-  void _onTapFollowing() {}
+  void _onTapFollowing(BuildContext context) {
+    context.push(
+      '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +90,13 @@ class ProfileCard extends StatelessWidget {
             children: [
               _followButton(
                 context,
-                onTap: _onTapFollow,
+                onTap: () => _onTapFollow(context),
                 text: '팔로워 ${userProfile.followNum ?? 0}',
               ),
               Gaps.h10,
               _followButton(
                 context,
-                onTap: _onTapFollowing,
+                onTap: () => _onTapFollowing(context),
                 text: '팔로잉 ${userProfile.followingNum ?? 0}',
               ),
             ],

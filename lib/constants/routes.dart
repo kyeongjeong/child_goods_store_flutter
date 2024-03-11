@@ -17,6 +17,8 @@ class Routes {
   static const String child = '/child';
   static const String chat = '/chat';
   static const String profile = '/profile';
+
+  static const String follow = '/follow';
 }
 
 class SubRoutes {

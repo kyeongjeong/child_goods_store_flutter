@@ -4,6 +4,7 @@ import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.d
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
+import 'package:child_goods_store_flutter/enums/follow_mode.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/models/address/address_model.dart';
@@ -23,6 +25,7 @@ import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.d
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
+import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
 import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
@@ -79,21 +82,21 @@ class _AppRouterState extends State<AppRouter> {
           return Routes.root;
         }
         if (authState.authStatus == EAuthStatus.unknown) {
-          return allowPageInUnknownState.contains(state.matchedLocation)
-              ? state.matchedLocation
+          return allowPageInUnknownState.contains(state.uri.toString())
+              ? state.uri.toString()
               : Routes.signin;
         }
         if (authState.authStatus == EAuthStatus.unAuthenticated) {
-          return allowPageInUnAuthState.contains(state.matchedLocation)
-              ? state.matchedLocation
+          return allowPageInUnAuthState.contains(state.uri.toString())
+              ? state.uri.toString()
               : Routes.editProfile;
         }
         if (authState.authStatus == EAuthStatus.authenticated) {
-          return blockPageInAuthState.contains(state.matchedLocation)
+          return blockPageInAuthState.contains(state.uri.toString())
               ? Routes.home
-              : state.matchedLocation;
+              : state.uri.toString();
         }
-        return state.matchedLocation;
+        return state.uri.toString();
       },
       routes: [
         GoRoute(
@@ -269,6 +272,19 @@ class _AppRouterState extends State<AppRouter> {
               userIdx: int.parse(state.pathParameters['userIdx'] as String),
             ),
             child: const ProfilePage(popAble: true),
+          ),
+        ),
+        GoRoute(
+          path: '${Routes.follow}/:userIdx',
+          builder: (context, state) => BlocProvider(
+            create: (context) => FollowBloc(
+              userRepository: context.read<UserRepository>(),
+              userIdx: int.parse(state.pathParameters['userIdx'] as String),
+              mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+            ),
+            child: FollowPage(
+              mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+            ),
           ),
         ),
         GoRoute(

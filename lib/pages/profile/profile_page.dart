@@ -5,7 +5,6 @@ import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_event.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
-import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_card.dart';
@@ -14,7 +13,6 @@ import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatelessWidget {
   final bool popAble;
@@ -91,14 +89,6 @@ class ProfilePage extends StatelessWidget {
           child: ProfileCard(
             userProfile: state.userProfile!,
             popAble: popAble,
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: AppInkButton(
-            onTap: () {
-              context.push('${Routes.profile}/10');
-            },
-            child: const AppFont('test open user profile'),
           ),
         ),
       ],

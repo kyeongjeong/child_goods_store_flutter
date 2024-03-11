@@ -141,8 +141,8 @@ class UserRepository {
     var resTmp = ResModel<UserProfileModel>(
       code: 1000,
       data: UserProfileModel(
-        userIdx: 999,
-        nickName: 'extra user',
+        userIdx: userIdx,
+        nickName: 'extra user $userIdx',
         profileImg:
             'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
         introduce: 'hello flutter',
@@ -158,6 +158,92 @@ class UserRepository {
     var res = ResModel<UserProfileModel>.fromJson(
       resTmp,
       (json) => UserProfileModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<List<UserModel>>> getUserFollower({
+    required int userIdx,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.get('/user/follower/$userIdx');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<List<UserModel>>(
+      code: 1000,
+      data: [
+        UserModel(
+          userIdx: 100,
+          profileImg:
+              'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
+          nickName: '팔로워1',
+        ),
+        UserModel(
+          userIdx: 101,
+          profileImg: '',
+          nickName: '팔로워2',
+        ),
+        UserModel(
+          userIdx: 102,
+          nickName: '팔로워3',
+        ),
+      ],
+    ).toJson(
+      (users) => users.map((user) => user.toJson()).toList(),
+    );
+
+    var res = ResModel<List<UserModel>>.fromJson(
+      resTmp,
+      (json) => (json as List<dynamic>)
+          .map((user) => UserModel.fromJson(user))
+          .toList(),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<List<UserModel>>> getUserFollowing({
+    required int userIdx,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.get('/user/following/$userIdx');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<List<UserModel>>(
+      code: 1000,
+      data: [
+        UserModel(
+          userIdx: 100,
+          profileImg:
+              'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
+          nickName: '팔로잉1',
+        ),
+        UserModel(
+          userIdx: 101,
+          profileImg: '',
+          nickName: '팔로잉2',
+        ),
+        UserModel(
+          userIdx: 102,
+          nickName: '팔로잉3',
+        ),
+      ],
+    ).toJson(
+      (users) => users.map((user) => user.toJson()).toList(),
+    );
+
+    var res = ResModel<List<UserModel>>.fromJson(
+      resTmp,
+      (json) => (json as List<dynamic>)
+          .map((user) => UserModel.fromJson(user))
+          .toList(),
     );
 
     return res;
