@@ -30,7 +30,7 @@ class ImageRepository {
     //   data: formData,
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<String>(
@@ -73,7 +73,7 @@ class ImageRepository {
     //   data: formData,
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<String>>(

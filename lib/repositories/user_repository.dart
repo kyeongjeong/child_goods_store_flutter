@@ -13,7 +13,7 @@ class UserRepository {
     // dio.interceptors.add(AuthInterceptor());
     // dio.get('/user');
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<UserModel>(
@@ -50,7 +50,7 @@ class UserRepository {
     //   data: user.toJson(),
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<UserModel>(
@@ -78,7 +78,7 @@ class UserRepository {
     //   data: user.toJson(),
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<UserModel>(
@@ -101,7 +101,7 @@ class UserRepository {
     // dio.interceptors.add(AuthInterceptor());
     // dio.get('/user/profile');
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<UserProfileModel>(
@@ -135,7 +135,7 @@ class UserRepository {
     // dio.interceptors.add(UnAuthInterceptor());
     // dio.get('/user/profile/$userIdx');
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<UserProfileModel>(

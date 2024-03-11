@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
@@ -13,10 +14,12 @@ import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_status.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
+import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
@@ -32,6 +35,7 @@ import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
 import 'package:child_goods_store_flutter/pages/together/together_page.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
+import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
@@ -148,6 +152,21 @@ class _AppRouterState extends State<AppRouter> {
             child: const EditTagPage(),
           ),
         ),
+        GoRoute(
+          path: Routes.editAddress,
+          builder: (context, state) => BlocProvider(
+            create: (context) => EditAddressBloc(
+              dataRepository: context.read<DataRepository>(),
+              httpMethod:
+                  (state.extra as GoRouterExtraModel<AddressModel>?)?.data ==
+                          null
+                      ? EHttpMethod.post
+                      : EHttpMethod.patch,
+              address: (state.extra as GoRouterExtraModel<AddressModel>?)?.data,
+            ),
+            child: const EditAddressPage(),
+          ),
+        ),
         StatefulShellRoute.indexedStack(
           builder: (context, state, navigationShell) => Scaffold(
             body: navigationShell,
@@ -258,11 +277,11 @@ class _AppRouterState extends State<AppRouter> {
             create: (context) => EditChildBloc(
               childRepository: context.read<ChildRepository>(),
               imageRepository: context.read<ImageRepository>(),
-              child: (state.extra as GoRouterExtraModel<ChildModel>?)?.data,
               httpMethod:
                   (state.extra as GoRouterExtraModel<ChildModel>?)?.data == null
                       ? EHttpMethod.post
                       : EHttpMethod.patch,
+              child: (state.extra as GoRouterExtraModel<ChildModel>?)?.data,
             ),
             child: const EditChildPage(),
           ),

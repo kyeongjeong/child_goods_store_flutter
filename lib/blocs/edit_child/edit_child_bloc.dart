@@ -148,11 +148,9 @@ class EditChildBloc extends Bloc<EditChildEvent, EditChildState>
           case EHttpMethod.patch:
             res = await childRepository.patchChild(child: state.child);
             break;
-          default:
-            break;
         }
 
-        if (res?.data == null) {
+        if (res.data == null) {
           emit(state.copyWith(
             status: ELoadingStatus.error,
             message: '저장에 실패했습니다.',
@@ -163,7 +161,7 @@ class EditChildBloc extends Bloc<EditChildEvent, EditChildState>
 
         emit(state.copyWith(
           status: ELoadingStatus.loaded,
-          result: res!.data,
+          result: res.data,
         ));
       },
       state: state,

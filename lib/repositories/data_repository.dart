@@ -9,9 +9,6 @@ import 'package:flutter/services.dart';
 
 class DataRepository {
   Future<Map<String, List<String>>> getAdminDistrict() async {
-    // TODO: remove
-    await Future.delayed(const Duration(seconds: 1));
-
     // Get json data
     var jsonStr = await rootBundle
         .loadString('assets/jsons/korea-administrative-district.json');
@@ -34,14 +31,12 @@ class DataRepository {
     // dio.get('/address');
 
     // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
     var resTmp = ResModel<List<AddressModel>>(
       code: 1000,
       data: [
         AddressModel(
           addressId: 1,
-          address: '경기도 안양시 동안구',
+          address: '서울특별시 성동구 왕십리로 16 (성수동1가, 트리마제) 주소가 너무 길다면 어떻게 될까',
           detailAddress: '100동 200호',
           category: EAddressCategory.home,
         ),
@@ -61,6 +56,66 @@ class DataRepository {
       (json) => (json as List<dynamic>)
           .map((address) => AddressModel.fromJson(address))
           .toList(),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<AddressModel>> postAddress({
+    required AddressModel address,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post(
+    //   '/address',
+    //   data: address.toJson(),
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<AddressModel>(
+      code: 1000,
+      data: AddressModel(
+        addressId: 999,
+        address: address.address,
+        detailAddress: address.detailAddress,
+        category: address.category,
+      ),
+    ).toJson((address) => address.toJson());
+
+    var res = ResModel<AddressModel>.fromJson(
+      resTmp,
+      (json) => AddressModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<AddressModel>> patchAddress({
+    required AddressModel address,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.patch(
+    //   '/address',
+    //   queryParameters: {
+    //     'addressId': address.addressId,
+    //   },
+    //   data: address.toJson(),
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<AddressModel>(
+      code: 1000,
+      data: address,
+    ).toJson((address) => address.toJson());
+
+    var res = ResModel<AddressModel>.fromJson(
+      resTmp,
+      (json) => AddressModel.fromJson(json),
     );
 
     return res;
