@@ -6,6 +6,8 @@ class AppInkButton extends StatelessWidget {
   final double borderRadSize;
   final Color? color;
   final Widget child;
+  final EdgeInsets padding;
+  final Color? shadowColor;
 
   const AppInkButton({
     super.key,
@@ -13,6 +15,11 @@ class AppInkButton extends StatelessWidget {
     this.borderRadSize = Sizes.size10,
     this.color,
     required this.child,
+    this.padding = const EdgeInsets.symmetric(
+      vertical: Sizes.size10,
+      horizontal: Sizes.size20,
+    ),
+    this.shadowColor,
   });
 
   @override
@@ -23,16 +30,14 @@ class AppInkButton extends StatelessWidget {
       splashColor: Theme.of(context).splashColor,
       borderRadius: BorderRadius.circular(borderRadSize),
       child: Ink(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size10,
-          horizontal: Sizes.size20,
-        ),
+        padding: padding,
         decoration: BoxDecoration(
           color: color ?? Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(borderRadSize),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).shadowColor.withOpacity(0.2),
+              color:
+                  shadowColor ?? Theme.of(context).shadowColor.withOpacity(0.2),
               blurRadius: Sizes.size3,
               spreadRadius: Sizes.size1,
             ),

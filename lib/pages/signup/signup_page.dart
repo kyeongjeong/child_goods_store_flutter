@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_event.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
@@ -34,9 +35,8 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void _onTapPhone() async {
-    var phoneNum = await context.push<String?>('/phone_verify');
-    if (phoneNum != null) {
-      // ignore: use_build_context_synchronously
+    var phoneNum = await context.push<String?>(Routes.phoneVerify);
+    if (phoneNum != null && mounted) {
       context.read<SignupBloc>().add(SignupChangePhoneNum(phoneNum));
     }
   }

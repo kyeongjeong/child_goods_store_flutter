@@ -154,7 +154,7 @@ class AuthRepository {
     //   },
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
@@ -176,7 +176,7 @@ class AuthRepository {
     //   },
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
@@ -202,7 +202,7 @@ class AuthRepository {
     //   }
     // );
 
-    // TODO: api connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);

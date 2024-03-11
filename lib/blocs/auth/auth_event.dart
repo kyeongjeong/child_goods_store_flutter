@@ -1,3 +1,5 @@
+import 'package:child_goods_store_flutter/models/user/user_model.dart';
+
 abstract class AuthEvent {}
 
 class AuthGoogleSignin extends AuthEvent {}
@@ -19,3 +21,9 @@ class Auth3C1SSignin extends AuthEvent {
 }
 
 class AuthGetUser extends AuthEvent {}
+
+class AuthSetUser extends AuthEvent {
+  final UserModel user;
+
+  AuthSetUser(this.user);
+}

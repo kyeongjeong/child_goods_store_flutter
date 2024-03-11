@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_event.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
@@ -34,7 +35,7 @@ class SigninPage extends StatelessWidget {
   }
 
   void _onTapSignup(BuildContext context) {
-    context.push('/signup');
+    context.push(Routes.signup);
   }
 
   @override
