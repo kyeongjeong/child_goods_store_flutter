@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/app_router.dart';
 import 'package:child_goods_store_flutter/blocs/app_data/app_data_bloc.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
+import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
@@ -30,11 +31,16 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => SearchRepository(),
         ),
+        RepositoryProvider(
+          create: (context) => DataRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => AppDataBloc(),
+            create: (context) => AppDataBloc(
+              dataRepository: context.read<DataRepository>(),
+            ),
           ),
         ],
         child: const AppRouter(),

@@ -1,13 +1,20 @@
-import 'dart:convert';
 import 'package:child_goods_store_flutter/blocs/app_data/app_data_event.dart';
 import 'package:child_goods_store_flutter/blocs/app_data/app_data_state.dart';
-import 'package:flutter/services.dart';
+import 'package:child_goods_store_flutter/enums/loading_status.dart';
+import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
+import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AppDataBloc extends Bloc<AppDataEvent, AppDataState> {
-  AppDataBloc() : super(AppDataState.init()) {
+class AppDataBloc extends Bloc<AppDataEvent, AppDataState>
+    with DioExceptionHandlerMixin {
+  final DataRepository dataRepository;
+
+  AppDataBloc({
+    required this.dataRepository,
+  }) : super(AppDataState.init()) {
     on<AppDataReset>(_appDataResetHandler);
     on<AppDataLoadAdminDistrict>(_appDataLoadAdminDistrictHandler);
+    on<AppDataLoadAddress>(_appDataLoadAddressHandler);
   }
 
   Future<void> _appDataResetHandler(
@@ -21,19 +28,47 @@ class AppDataBloc extends Bloc<AppDataEvent, AppDataState> {
     AppDataLoadAdminDistrict event,
     Emitter<AppDataState> emit,
   ) async {
-    // Get json data
-    var jsonStr = await rootBundle
-        .loadString('assets/jsons/korea-administrative-district.json');
-    Map<String, List<String>> districtData = {};
-    // Deserialize
-    var jsonData = await json.decode(jsonStr)['data'] as List<dynamic>;
-    for (var data in jsonData) {
-      var cast = data as Map<String, dynamic>;
-      String key = cast.keys.first;
-      List<String> values = List<String>.from(cast[key] as List<dynamic>);
-      districtData[key] = values;
-    }
+    emit(state.copyWith(
+      regionStatus: ELoadingStatus.loading,
+      status: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        var res = await dataRepository.getAdminDistrict();
 
-    emit(state.copyWith(region: districtData));
+        emit(state.copyWith(
+          regionStatus: ELoadingStatus.loaded,
+          status: ELoadingStatus.loaded,
+          region: res,
+        ));
+      },
+      state: state,
+      emit: emit,
+      initAfterError: false,
+    );
+  }
+
+  Future<void> _appDataLoadAddressHandler(
+    AppDataLoadAddress event,
+    Emitter<AppDataState> emit,
+  ) async {
+    emit(state.copyWith(
+      addressStatus: ELoadingStatus.loading,
+      status: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        var res = await dataRepository.getAddress();
+
+        emit(state.copyWith(
+          addressStatus: ELoadingStatus.loaded,
+          status: ELoadingStatus.loaded,
+          addresses: res.data,
+        ));
+      },
+      state: state,
+      emit: emit,
+      initAfterError: false,
+    );
   }
 }
