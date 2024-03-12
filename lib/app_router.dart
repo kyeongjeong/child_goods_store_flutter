@@ -42,6 +42,7 @@ import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/utils/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -101,111 +102,137 @@ class _AppRouterState extends State<AppRouter> {
       routes: [
         GoRoute(
           path: Routes.root,
-          builder: (context, state) => BlocProvider(
-            create: (context) => SplashCubit(),
-            child: const SplashPage(),
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => SplashCubit(),
+              child: const SplashPage(),
+            ),
           ),
         ),
         GoRoute(
           path: Routes.signin,
-          builder: (context, state) => const SigninPage(),
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: const SigninPage(),
+          ),
         ),
         GoRoute(
           path: Routes.signup,
-          builder: (context, state) => BlocProvider(
-            create: (context) => SignupBloc(
-              authRepository: context.read<AuthRepository>(),
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => SignupBloc(
+                authRepository: context.read<AuthRepository>(),
+              ),
+              child: const SignupPage(),
             ),
-            child: const SignupPage(),
           ),
         ),
         GoRoute(
           path: Routes.phoneVerify,
-          builder: (context, state) => BlocProvider(
-            create: (context) => PhoneVerifyBloc(
-              authRepository: context.read<AuthRepository>(),
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => PhoneVerifyBloc(
+                authRepository: context.read<AuthRepository>(),
+              ),
+              child: const PhoneVerifyPage(),
             ),
-            child: const PhoneVerifyPage(),
           ),
         ),
         GoRoute(
           path: Routes.editProfile,
-          builder: (context, state) => BlocProvider(
-            create: (context) => EditProfileBloc(
-              userRepository: context.read<UserRepository>(),
-              imageRepository: context.read<ImageRepository>(),
-              user: AuthBlocSingleton.bloc.state.user,
-              httpMethod:
-                  (AuthBlocSingleton.bloc.state.user?.nickName == null ||
-                          AuthBlocSingleton.bloc.state.user?.nickName ==
-                              Strings.nullStr)
-                      ? EHttpMethod.post
-                      : EHttpMethod.patch,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => EditProfileBloc(
+                userRepository: context.read<UserRepository>(),
+                imageRepository: context.read<ImageRepository>(),
+                user: AuthBlocSingleton.bloc.state.user,
+                httpMethod:
+                    (AuthBlocSingleton.bloc.state.user?.nickName == null ||
+                            AuthBlocSingleton.bloc.state.user?.nickName ==
+                                Strings.nullStr)
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+              ),
+              child: const EditProfilePage(),
             ),
-            child: const EditProfilePage(),
           ),
         ),
         GoRoute(
           path: Routes.editTag,
-          builder: (context, state) => BlocProvider(
-            create: (context) => EditTagBloc(
-              searchRepository: context.read<SearchRepository>(),
-              tags: (state.extra as GoRouterExtraModel<List<String>>?)?.data,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => EditTagBloc(
+                searchRepository: context.read<SearchRepository>(),
+                tags: (state.extra as GoRouterExtraModel<List<String>>?)?.data,
+              ),
+              child: const EditTagPage(),
             ),
-            child: const EditTagPage(),
           ),
         ),
         GoRoute(
           path: Routes.editAddress,
-          builder: (context, state) => BlocProvider(
-            create: (context) => EditAddressBloc(
-              dataRepository: context.read<DataRepository>(),
-              httpMethod:
-                  (state.extra as GoRouterExtraModel<AddressModel>?)?.data ==
-                          null
-                      ? EHttpMethod.post
-                      : EHttpMethod.patch,
-              address: (state.extra as GoRouterExtraModel<AddressModel>?)?.data,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => EditAddressBloc(
+                dataRepository: context.read<DataRepository>(),
+                httpMethod:
+                    (state.extra as GoRouterExtraModel<AddressModel>?)?.data ==
+                            null
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+                address:
+                    (state.extra as GoRouterExtraModel<AddressModel>?)?.data,
+              ),
+              child: const EditAddressPage(),
             ),
-            child: const EditAddressPage(),
           ),
         ),
         StatefulShellRoute.indexedStack(
-          builder: (context, state, navigationShell) => Scaffold(
-            body: navigationShell,
-            bottomNavigationBar: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              useLegacyColorScheme: true,
-              unselectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
-              selectedLabelStyle: const TextStyle(fontSize: Sizes.size12),
-              selectedIconTheme: const IconThemeData(size: Sizes.size28),
-              items: [
-                const BottomNavigationBarItem(
-                  label: '중고거래',
-                  icon: Icon(Icons.home),
-                ),
-                BottomNavigationBarItem(
-                  label: '공동구매',
-                  icon: Transform.scale(
-                    scale: 0.8,
-                    child: const Icon(FontAwesomeIcons.boxesStacked),
+          pageBuilder: (context, state, navigationShell) =>
+              PageTransition.cupertino(
+            key: state.pageKey,
+            child: Scaffold(
+              body: navigationShell,
+              bottomNavigationBar: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                useLegacyColorScheme: true,
+                unselectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
+                selectedLabelStyle: const TextStyle(fontSize: Sizes.size12),
+                selectedIconTheme: const IconThemeData(size: Sizes.size28),
+                items: [
+                  const BottomNavigationBarItem(
+                    label: '중고거래',
+                    icon: Icon(Icons.home),
                   ),
-                ),
-                const BottomNavigationBarItem(
-                  label: '자녀',
-                  icon: Icon(Icons.child_care_rounded),
-                ),
-                const BottomNavigationBarItem(
-                  label: '채팅',
-                  icon: Icon(Icons.chat_rounded),
-                ),
-                const BottomNavigationBarItem(
-                  label: '내 정보',
-                  icon: Icon(Icons.person_rounded),
-                ),
-              ],
-              currentIndex: navigationShell.currentIndex,
-              onTap: (value) => navigationShell.goBranch(value),
+                  BottomNavigationBarItem(
+                    label: '공동구매',
+                    icon: Transform.scale(
+                      scale: 0.8,
+                      child: const Icon(FontAwesomeIcons.boxesStacked),
+                    ),
+                  ),
+                  const BottomNavigationBarItem(
+                    label: '자녀',
+                    icon: Icon(Icons.child_care_rounded),
+                  ),
+                  const BottomNavigationBarItem(
+                    label: '채팅',
+                    icon: Icon(Icons.chat_rounded),
+                  ),
+                  const BottomNavigationBarItem(
+                    label: '내 정보',
+                    icon: Icon(Icons.person_rounded),
+                  ),
+                ],
+                currentIndex: navigationShell.currentIndex,
+                onTap: (value) => navigationShell.goBranch(value),
+              ),
             ),
           ),
           branches: [
@@ -266,53 +293,72 @@ class _AppRouterState extends State<AppRouter> {
         ),
         GoRoute(
           path: '${Routes.profile}/:userIdx',
-          builder: (context, state) => BlocProvider(
-            create: (context) => ProfileBloc(
-              userRepository: context.read<UserRepository>(),
-              userIdx: int.parse(state.pathParameters['userIdx'] as String),
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => ProfileBloc(
+                userRepository: context.read<UserRepository>(),
+                userIdx: int.parse(state.pathParameters['userIdx'] as String),
+              ),
+              child: const ProfilePage(popAble: true),
             ),
-            child: const ProfilePage(popAble: true),
           ),
         ),
         GoRoute(
           path: '${Routes.follow}/:userIdx',
-          builder: (context, state) => BlocProvider(
-            create: (context) => FollowBloc(
-              userRepository: context.read<UserRepository>(),
-              userIdx: int.parse(state.pathParameters['userIdx'] as String),
-              mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
-            ),
-            child: FollowPage(
-              mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => FollowBloc(
+                userRepository: context.read<UserRepository>(),
+                userIdx: int.parse(state.pathParameters['userIdx'] as String),
+                mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+              ),
+              child: FollowPage(
+                mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+              ),
             ),
           ),
         ),
         GoRoute(
           path: Routes.editChild,
-          builder: (context, state) => BlocProvider(
-            create: (context) => EditChildBloc(
-              childRepository: context.read<ChildRepository>(),
-              imageRepository: context.read<ImageRepository>(),
-              httpMethod:
-                  (state.extra as GoRouterExtraModel<ChildModel>?)?.data == null
-                      ? EHttpMethod.post
-                      : EHttpMethod.patch,
-              child: (state.extra as GoRouterExtraModel<ChildModel>?)?.data,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: BlocProvider(
+              create: (context) => EditChildBloc(
+                childRepository: context.read<ChildRepository>(),
+                imageRepository: context.read<ImageRepository>(),
+                httpMethod:
+                    (state.extra as GoRouterExtraModel<ChildModel>?)?.data ==
+                            null
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+                child: (state.extra as GoRouterExtraModel<ChildModel>?)?.data,
+              ),
+              child: const EditChildPage(),
             ),
-            child: const EditChildPage(),
           ),
         ),
         GoRoute(
           path: Routes.settings,
-          builder: (context, state) => const SettingsPage(),
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            child: const SettingsPage(),
+          ),
           routes: [
             GoRoute(
               path: SubRoutes.ship,
-              builder: (context, state) => const ShipPage(),
+              pageBuilder: (context, state) => PageTransition.cupertino(
+                key: state.pageKey,
+                child: const ShipPage(),
+              ),
             ),
             GoRoute(
               path: SubRoutes.notification,
-              builder: (context, state) => const NotificationPage(),
+              pageBuilder: (context, state) => PageTransition.cupertino(
+                key: state.pageKey,
+                child: const NotificationPage(),
+              ),
             ),
           ],
         ),

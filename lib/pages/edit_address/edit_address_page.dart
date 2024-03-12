@@ -12,6 +12,7 @@ import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
 import 'package:child_goods_store_flutter/widgets/app_text_form_field.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -44,9 +45,15 @@ class _EditAddressPageState extends State<EditAddressPage> {
   void _onTapEditAddress() async {
     Kpostal? result = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => KpostalView(
-          loadingColor: Theme.of(context).primaryColorDark,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            CupertinoPageTransition(
+          primaryRouteAnimation: animation,
+          secondaryRouteAnimation: secondaryAnimation,
+          linearTransition: false,
+          child: KpostalView(
+            loadingColor: Theme.of(context).primaryColorDark,
+          ),
         ),
       ),
     );
