@@ -27,15 +27,27 @@ class ProfileCard extends StatelessWidget {
   void _onTapFollowButton() {}
 
   void _onTapFollow(BuildContext context) {
-    context.push(
-      '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
-    );
+    if (popAble) {
+      context.replace(
+        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
+      );
+    } else {
+      context.push(
+        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
+      );
+    }
   }
 
   void _onTapFollowing(BuildContext context) {
-    context.push(
-      '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
-    );
+    if (popAble) {
+      context.replace(
+        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
+      );
+    } else {
+      context.push(
+        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
+      );
+    }
   }
 
   @override

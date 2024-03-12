@@ -1,11 +1,8 @@
-### Tag
-
-- Priority
-  `P0` `P1` `P2` `P3` `P4` `P5`
-
-- Deadline
-  `D-0` `D-1` `D-2` `D-3` `D-7`
-
 ### 문제
+
+### 상세 마일스톤
+
+- [] list item 1
+- [] list item 2
 
 ### 참고문서
