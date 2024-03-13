@@ -8,6 +8,7 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/GA/google_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -95,6 +96,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         }
         // Save jwt at secure_storage
         _saveJwt(jwt);
+        // LOGGING
+        GoogleAnalytics.instance.login(method);
         // Return to splash screen
         emit(const AuthState(
           status: ELoadingStatus.loaded,
@@ -180,6 +183,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         }
         // Save jwt at secure_storage
         _saveJwt(jwt);
+        // LOGGING
+        GoogleAnalytics.instance.login(EAuthMethod.u3C1S);
         // Return to splash screen
         emit(const AuthState(
           status: ELoadingStatus.loaded,
@@ -230,6 +235,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         if (res.data != null &&
             (res.data!.nickName == null ||
                 res.data!.nickName == Strings.nullStr)) {
+          // LOGGING
+          GoogleAnalytics.instance.autoLogin(res.data!);
           emit(AuthState(
             status: ELoadingStatus.loaded,
             authStatus: EAuthStatus.unAuthenticated,
@@ -238,6 +245,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
           return;
         }
         // Signin success
+        // LOGGING
+        GoogleAnalytics.instance.autoLogin(res.data!);
         emit(AuthState(
           status: ELoadingStatus.loaded,
           authStatus: EAuthStatus.authenticated,

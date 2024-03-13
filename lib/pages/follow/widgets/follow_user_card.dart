@@ -18,7 +18,7 @@ class FollowUserCard extends StatelessWidget {
   });
 
   void _onUserTap(BuildContext context) {
-    context.replace('${Routes.profile}/${user.userIdx}');
+    context.pushReplacement('${Routes.profile}/${user.userIdx}');
   }
 
   @override

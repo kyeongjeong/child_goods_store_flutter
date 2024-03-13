@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/GA/ga_route_observer.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.dart';
@@ -73,6 +74,7 @@ class _AppRouterState extends State<AppRouter> {
     _routerConfig = GoRouter(
       initialLocation: Routes.root,
       refreshListenable: AuthBlocSingleton.bloc,
+      observers: [GARouteObserver()],
       redirect: (context, state) {
         final authState = AuthBlocSingleton.bloc.state;
         final allowPageInUnknownState = [Routes.signup, Routes.phoneVerify];
@@ -104,6 +106,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.root,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => SplashCubit(),
               child: const SplashPage(),
@@ -114,6 +117,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.signin,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: const SigninPage(),
           ),
         ),
@@ -121,6 +125,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.signup,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => SignupBloc(
                 authRepository: context.read<AuthRepository>(),
@@ -133,6 +138,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.phoneVerify,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => PhoneVerifyBloc(
                 authRepository: context.read<AuthRepository>(),
@@ -145,6 +151,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.editProfile,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditProfileBloc(
                 userRepository: context.read<UserRepository>(),
@@ -165,6 +172,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.editTag,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditTagBloc(
                 searchRepository: context.read<SearchRepository>(),
@@ -178,6 +186,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.editAddress,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditAddressBloc(
                 dataRepository: context.read<DataRepository>(),
@@ -197,6 +206,7 @@ class _AppRouterState extends State<AppRouter> {
           pageBuilder: (context, state, navigationShell) =>
               PageTransition.cupertino(
             key: state.pageKey,
+            // ignore `name` field for disable GA
             child: Scaffold(
               body: navigationShell,
               bottomNavigationBar: BottomNavigationBar(
@@ -239,6 +249,7 @@ class _AppRouterState extends State<AppRouter> {
             StatefulShellBranch(
               routes: [
                 GoRoute(
+                  name: Routes.home,
                   path: Routes.home,
                   builder: (context, state) => const HomePage(),
                 ),
@@ -247,6 +258,7 @@ class _AppRouterState extends State<AppRouter> {
             StatefulShellBranch(
               routes: [
                 GoRoute(
+                  name: Routes.together,
                   path: Routes.together,
                   builder: (context, state) => const TogetherPage(),
                 ),
@@ -255,6 +267,7 @@ class _AppRouterState extends State<AppRouter> {
             StatefulShellBranch(
               routes: [
                 GoRoute(
+                  name: Routes.child,
                   path: Routes.child,
                   builder: (context, state) => BlocProvider(
                     create: (context) => ChildBloc(
@@ -268,6 +281,7 @@ class _AppRouterState extends State<AppRouter> {
             StatefulShellBranch(
               routes: [
                 GoRoute(
+                  name: Routes.chat,
                   path: Routes.chat,
                   builder: (context, state) => const ChatPage(),
                 ),
@@ -276,6 +290,7 @@ class _AppRouterState extends State<AppRouter> {
             StatefulShellBranch(
               routes: [
                 GoRoute(
+                  name: Routes.profile,
                   path: Routes.profile,
                   builder: (context, state) => BlocProvider(
                     create: (context) => ProfileBloc(
@@ -295,6 +310,10 @@ class _AppRouterState extends State<AppRouter> {
           path: '${Routes.profile}/:userIdx',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': int.parse(state.pathParameters['userIdx'] as String),
+            },
             child: BlocProvider(
               create: (context) => ProfileBloc(
                 userRepository: context.read<UserRepository>(),
@@ -308,6 +327,10 @@ class _AppRouterState extends State<AppRouter> {
           path: '${Routes.follow}/:userIdx',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': int.parse(state.pathParameters['userIdx'] as String),
+            },
             child: BlocProvider(
               create: (context) => FollowBloc(
                 userRepository: context.read<UserRepository>(),
@@ -324,6 +347,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.editChild,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: BlocProvider(
               create: (context) => EditChildBloc(
                 childRepository: context.read<ChildRepository>(),
@@ -343,6 +367,7 @@ class _AppRouterState extends State<AppRouter> {
           path: Routes.settings,
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
+            name: state.fullPath,
             child: const SettingsPage(),
           ),
           routes: [
@@ -350,6 +375,7 @@ class _AppRouterState extends State<AppRouter> {
               path: SubRoutes.ship,
               pageBuilder: (context, state) => PageTransition.cupertino(
                 key: state.pageKey,
+                name: state.fullPath,
                 child: const ShipPage(),
               ),
             ),
@@ -357,6 +383,7 @@ class _AppRouterState extends State<AppRouter> {
               path: SubRoutes.notification,
               pageBuilder: (context, state) => PageTransition.cupertino(
                 key: state.pageKey,
+                name: state.fullPath,
                 child: const NotificationPage(),
               ),
             ),
