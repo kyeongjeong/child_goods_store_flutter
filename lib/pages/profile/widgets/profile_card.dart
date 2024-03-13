@@ -28,7 +28,7 @@ class ProfileCard extends StatelessWidget {
 
   void _onTapFollow(BuildContext context) {
     if (popAble) {
-      context.replace(
+      context.pushReplacement(
         '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
       );
     } else {
@@ -40,7 +40,7 @@ class ProfileCard extends StatelessWidget {
 
   void _onTapFollowing(BuildContext context) {
     if (popAble) {
-      context.replace(
+      context.pushReplacement(
         '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
       );
     } else {

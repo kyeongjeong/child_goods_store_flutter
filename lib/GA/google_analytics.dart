@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/GA/models/ga_view_event.dart';
 import 'package:child_goods_store_flutter/enums/auth_method.dart';
 import 'package:child_goods_store_flutter/models/user/user_model.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -16,19 +17,9 @@ class GoogleAnalytics {
 
   bool _isSupported = false;
 
-  Future<void> initialize({
-    required int userId,
-  }) async {
+  Future<void> initialize() async {
     await _firebaseAnalytics.setAnalyticsCollectionEnabled(true);
     _isSupported = await _firebaseAnalytics.isSupported();
-    await _setUser(userId);
-  }
-
-  Future<void> _setUser(int userId) async {
-    if (_isSupported) {
-      await _firebaseAnalytics.setUserId(id: userId.toString());
-      debugPrint('[GA] Set user: $userId');
-    }
   }
 
   Future<void> login(EAuthMethod method) async {
@@ -39,11 +30,24 @@ class GoogleAnalytics {
   }
 
   Future<void> autoLogin(UserModel user) async {
-    if (_isSupported) {
+    if (_isSupported && user.userIdx != null) {
       await _firebaseAnalytics.logLogin(
-        parameters: user.toJson(),
+        parameters: {
+          'userId': user.userIdx!,
+          'eventAt': DateTime.now().toIso8601String(),
+        },
       );
       debugPrint('[GA] Auto login: User - ${user.nickName}(${user.userIdx})');
+    }
+  }
+
+  Future<void> pushPage(GAViewEvent event) async {
+    if (_isSupported) {
+      await _firebaseAnalytics.logScreenView(
+        screenName: event.page,
+        parameters: event.toJson(),
+      );
+      debugPrint('[GA] [VIEW]: ${event.toJson()}');
     }
   }
 }
