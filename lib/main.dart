@@ -19,8 +19,17 @@
 
 import 'dart:async';
 import 'package:child_goods_store_flutter/app.dart';
+import 'package:child_goods_store_flutter/configs/firebase_options.dart';
+import 'package:child_goods_store_flutter/utils/google_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 FutureOr<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await GoogleAnalytics.instance.initialize(userId: 999);
+
   runApp(const App());
 }

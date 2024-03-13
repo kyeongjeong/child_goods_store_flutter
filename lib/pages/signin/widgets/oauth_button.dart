@@ -30,6 +30,8 @@ class OauthButton extends StatelessWidget {
           Colors.white,
           BlendMode.srcIn,
         );
+      default:
+        return null;
     }
   }
 
@@ -41,6 +43,8 @@ class OauthButton extends StatelessWidget {
         return const Color(0xFFFEE500);
       case EAuthMethod.naver:
         return const Color(0xFF03C75A);
+      default:
+        return Colors.white;
     }
   }
 
@@ -52,6 +56,8 @@ class OauthButton extends StatelessWidget {
         return const Color.fromRGBO(0, 0, 0, 0.85);
       case EAuthMethod.naver:
         return Colors.white;
+      default:
+        return Colors.grey.shade800;
     }
   }
 

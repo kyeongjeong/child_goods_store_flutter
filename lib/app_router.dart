@@ -42,7 +42,9 @@ import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
+import 'package:child_goods_store_flutter/utils/google_analytics.dart';
 import 'package:child_goods_store_flutter/utils/page_transition.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -73,6 +75,11 @@ class _AppRouterState extends State<AppRouter> {
     _routerConfig = GoRouter(
       initialLocation: Routes.root,
       refreshListenable: AuthBlocSingleton.bloc,
+      observers: [
+        FirebaseAnalyticsObserver(
+          analytics: GoogleAnalytics.instance.firebaseInstance,
+        ),
+      ],
       redirect: (context, state) {
         final authState = AuthBlocSingleton.bloc.state;
         final allowPageInUnknownState = [Routes.signup, Routes.phoneVerify];
