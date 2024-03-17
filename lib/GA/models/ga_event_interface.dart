@@ -7,7 +7,7 @@ abstract class GAEvents {
 
   GAEvents({
     required this.type,
-  })  : userId = AuthBlocSingleton.bloc.state.user?.userIdx,
+  })  : userId = AuthBlocSingleton.bloc.state.user?.userId,
         eventAt = DateTime.now();
 
   Map<String, dynamic> toJson();

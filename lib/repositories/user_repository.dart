@@ -19,7 +19,7 @@ class UserRepository {
     var resTmp = ResModel<UserModel>(
       code: 1000,
       data: UserModel(
-        userIdx: 1,
+        userId: 1,
         nickName: 'Woong test',
         introduce: 'Hello world',
         phoneNum: '01012345678',
@@ -107,7 +107,7 @@ class UserRepository {
     var resTmp = ResModel<UserProfileModel>(
       code: 1000,
       data: UserProfileModel(
-        userIdx: AuthBlocSingleton.bloc.state.user?.userIdx,
+        userId: AuthBlocSingleton.bloc.state.user?.userId,
         nickName: AuthBlocSingleton.bloc.state.user?.nickName,
         profileImg: AuthBlocSingleton.bloc.state.user?.profileImg,
         introduce: AuthBlocSingleton.bloc.state.user?.introduce,
@@ -129,11 +129,11 @@ class UserRepository {
   }
 
   Future<ResModel<UserProfileModel>> getUserProfile({
-    required int userIdx,
+    required int userId,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/user/profile/$userIdx');
+    // dio.get('/user/profile/$userId');
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -141,8 +141,8 @@ class UserRepository {
     var resTmp = ResModel<UserProfileModel>(
       code: 1000,
       data: UserProfileModel(
-        userIdx: userIdx,
-        nickName: 'extra user $userIdx',
+        userId: userId,
+        nickName: 'extra user $userId',
         profileImg:
             'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
         introduce: 'hello flutter',
@@ -164,11 +164,11 @@ class UserRepository {
   }
 
   Future<ResModel<List<UserModel>>> getUserFollower({
-    required int userIdx,
+    required int userId,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/user/follower/$userIdx');
+    // dio.get('/user/follower/$userId');
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -177,18 +177,18 @@ class UserRepository {
       code: 1000,
       data: [
         UserModel(
-          userIdx: 100,
+          userId: 100,
           profileImg:
               'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
           nickName: '팔로워1',
         ),
         UserModel(
-          userIdx: 101,
+          userId: 101,
           profileImg: '',
           nickName: '팔로워2',
         ),
         UserModel(
-          userIdx: 102,
+          userId: 102,
           nickName: '팔로워3',
         ),
       ],
@@ -207,11 +207,11 @@ class UserRepository {
   }
 
   Future<ResModel<List<UserModel>>> getUserFollowing({
-    required int userIdx,
+    required int userId,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/user/following/$userIdx');
+    // dio.get('/user/following/$userId');
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -220,18 +220,18 @@ class UserRepository {
       code: 1000,
       data: [
         UserModel(
-          userIdx: 100,
+          userId: 100,
           profileImg:
               'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
           nickName: '팔로잉1',
         ),
         UserModel(
-          userIdx: 101,
+          userId: 101,
           profileImg: '',
           nickName: '팔로잉2',
         ),
         UserModel(
-          userIdx: 102,
+          userId: 102,
           nickName: '팔로잉3',
         ),
       ],

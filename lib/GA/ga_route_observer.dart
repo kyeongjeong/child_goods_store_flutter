@@ -14,6 +14,6 @@ class GARouteObserver extends NavigatorObserver {
       id: (route.settings.arguments as Map<String, dynamic>?)?['id'] as int?,
     );
 
-    await GoogleAnalytics.instance.pushPage(viewEvent);
+    await GoogleAnalytics.instance.event(viewEvent);
   }
 }

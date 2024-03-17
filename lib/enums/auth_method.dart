@@ -1,4 +1,5 @@
 enum EAuthMethod {
+  auto('Auto', '자동로그인'),
   google('Google', '구글'),
   naver('Naver', '네이버'),
   kakao('Kakao', '카카오'),

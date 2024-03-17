@@ -20,7 +20,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  int? get userIdx => throw _privateConstructorUsedError;
+  int? get userId => throw _privateConstructorUsedError;
   String? get nickName => throw _privateConstructorUsedError;
   String? get introduce => throw _privateConstructorUsedError;
   String? get profileImg => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {int? userIdx,
+      {int? userId,
       String? nickName,
       String? introduce,
       String? profileImg,
@@ -64,7 +64,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userIdx = freezed,
+    Object? userId = freezed,
     Object? nickName = freezed,
     Object? introduce = freezed,
     Object? profileImg = freezed,
@@ -74,9 +74,9 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? createAt = freezed,
   }) {
     return _then(_value.copyWith(
-      userIdx: freezed == userIdx
-          ? _value.userIdx
-          : userIdx // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int?,
       nickName: freezed == nickName
           ? _value.nickName
@@ -119,7 +119,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? userIdx,
+      {int? userId,
       String? nickName,
       String? introduce,
       String? profileImg,
@@ -140,7 +140,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userIdx = freezed,
+    Object? userId = freezed,
     Object? nickName = freezed,
     Object? introduce = freezed,
     Object? profileImg = freezed,
@@ -150,9 +150,9 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? createAt = freezed,
   }) {
     return _then(_$UserModelImpl(
-      userIdx: freezed == userIdx
-          ? _value.userIdx
-          : userIdx // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int?,
       nickName: freezed == nickName
           ? _value.nickName
@@ -190,7 +190,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserModelImpl implements _UserModel {
   _$UserModelImpl(
-      {this.userIdx,
+      {this.userId,
       this.nickName,
       this.introduce,
       this.profileImg,
@@ -203,7 +203,7 @@ class _$UserModelImpl implements _UserModel {
       _$$UserModelImplFromJson(json);
 
   @override
-  final int? userIdx;
+  final int? userId;
   @override
   final String? nickName;
   @override
@@ -221,7 +221,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(userIdx: $userIdx, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, phoneNum: $phoneNum, region: $region, town: $town, createAt: $createAt)';
+    return 'UserModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, phoneNum: $phoneNum, region: $region, town: $town, createAt: $createAt)';
   }
 
   @override
@@ -229,7 +229,7 @@ class _$UserModelImpl implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserModelImpl &&
-            (identical(other.userIdx, userIdx) || other.userIdx == userIdx) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.nickName, nickName) ||
                 other.nickName == nickName) &&
             (identical(other.introduce, introduce) ||
@@ -246,7 +246,7 @@ class _$UserModelImpl implements _UserModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userIdx, nickName, introduce,
+  int get hashCode => Object.hash(runtimeType, userId, nickName, introduce,
       profileImg, phoneNum, region, town, createAt);
 
   @JsonKey(ignore: true)
@@ -265,7 +265,7 @@ class _$UserModelImpl implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   factory _UserModel(
-      {final int? userIdx,
+      {final int? userId,
       final String? nickName,
       final String? introduce,
       final String? profileImg,
@@ -278,7 +278,7 @@ abstract class _UserModel implements UserModel {
       _$UserModelImpl.fromJson;
 
   @override
-  int? get userIdx;
+  int? get userId;
   @override
   String? get nickName;
   @override

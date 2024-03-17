@@ -295,7 +295,7 @@ class _AppRouterState extends State<AppRouter> {
                   builder: (context, state) => BlocProvider(
                     create: (context) => ProfileBloc(
                       userRepository: context.read<UserRepository>(),
-                      userIdx: AuthBlocSingleton.bloc.state.user!.userIdx!,
+                      userId: AuthBlocSingleton.bloc.state.user!.userId!,
                     ),
                     child: const ProfilePage(
                       popAble: false,
@@ -307,34 +307,34 @@ class _AppRouterState extends State<AppRouter> {
           ],
         ),
         GoRoute(
-          path: '${Routes.profile}/:userIdx',
+          path: '${Routes.profile}/:userId',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['userIdx'] as String),
+              'id': int.parse(state.pathParameters['userId'] as String),
             },
             child: BlocProvider(
               create: (context) => ProfileBloc(
                 userRepository: context.read<UserRepository>(),
-                userIdx: int.parse(state.pathParameters['userIdx'] as String),
+                userId: int.parse(state.pathParameters['userId'] as String),
               ),
               child: const ProfilePage(popAble: true),
             ),
           ),
         ),
         GoRoute(
-          path: '${Routes.follow}/:userIdx',
+          path: '${Routes.follow}/:userId',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
             name: state.fullPath,
             arguments: {
-              'id': int.parse(state.pathParameters['userIdx'] as String),
+              'id': int.parse(state.pathParameters['userId'] as String),
             },
             child: BlocProvider(
               create: (context) => FollowBloc(
                 userRepository: context.read<UserRepository>(),
-                userIdx: int.parse(state.pathParameters['userIdx'] as String),
+                userId: int.parse(state.pathParameters['userId'] as String),
                 mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
               ),
               child: FollowPage(
@@ -348,6 +348,12 @@ class _AppRouterState extends State<AppRouter> {
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
             name: state.fullPath,
+            arguments: {
+              'id': (state.extra as GoRouterExtraModel<ChildModel>?)
+                      ?.data
+                      ?.childId ??
+                  -1
+            },
             child: BlocProvider(
               create: (context) => EditChildBloc(
                 childRepository: context.read<ChildRepository>(),

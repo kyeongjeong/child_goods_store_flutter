@@ -119,7 +119,7 @@ class AuthRepository {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
     // var res = await dio.post(
-    //   '/auth',
+    //   '/login',
     //   data: {
     //     'email': email,
     //     'password': password,
