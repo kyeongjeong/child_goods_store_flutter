@@ -11,11 +11,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     with DioExceptionHandlerMixin {
   final UserRepository userRepository;
-  final int userIdx;
+  final int userId;
 
   ProfileBloc({
     required this.userRepository,
-    required this.userIdx,
+    required this.userId,
   }) : super(const ProfileState.init()) {
     on<ProfileGet>(_profileGetHandler);
 
@@ -36,10 +36,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     await handleApiRequest(
       () async {
         ResModel<UserProfileModel>? res;
-        if (userIdx == AuthBlocSingleton.bloc.state.user?.userIdx) {
+        if (userId == AuthBlocSingleton.bloc.state.user?.userId) {
           res = await userRepository.getMyProfile();
         } else {
-          res = await userRepository.getUserProfile(userIdx: userIdx);
+          res = await userRepository.getUserProfile(userId: userId);
         }
 
         emit(state.copyWith(

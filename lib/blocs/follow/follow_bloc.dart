@@ -11,12 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FollowBloc extends Bloc<FollowEvent, FollowState>
     with DioExceptionHandlerMixin {
   final UserRepository userRepository;
-  final int userIdx;
+  final int userId;
   final EFollowMode mode;
 
   FollowBloc({
     required this.userRepository,
-    required this.userIdx,
+    required this.userId,
     required this.mode,
   }) : super(FollowState.init()) {
     on<FollowGet>(_followGetHandler);
@@ -36,10 +36,10 @@ class FollowBloc extends Bloc<FollowEvent, FollowState>
         ResModel<List<UserModel>>? res;
         switch (mode) {
           case EFollowMode.follower:
-            res = await userRepository.getUserFollower(userIdx: userIdx);
+            res = await userRepository.getUserFollower(userId: userId);
             break;
           case EFollowMode.following:
-            res = await userRepository.getUserFollowing(userIdx: userIdx);
+            res = await userRepository.getUserFollowing(userId: userId);
             break;
         }
 

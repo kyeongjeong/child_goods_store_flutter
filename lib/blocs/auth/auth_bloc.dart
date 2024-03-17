@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:child_goods_store_flutter/GA/models/ga_login_event.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_event.dart';
 import 'package:child_goods_store_flutter/blocs/auth/auth_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
@@ -97,7 +98,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         // Save jwt at secure_storage
         _saveJwt(jwt);
         // LOGGING
-        GoogleAnalytics.instance.login(method);
+        GoogleAnalytics.instance.event(GALoginEvent(
+          method: method,
+        ));
         // Return to splash screen
         emit(const AuthState(
           status: ELoadingStatus.loaded,
@@ -184,7 +187,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         // Save jwt at secure_storage
         _saveJwt(jwt);
         // LOGGING
-        GoogleAnalytics.instance.login(EAuthMethod.u3C1S);
+        GoogleAnalytics.instance.event(GALoginEvent(
+          method: EAuthMethod.u3C1S,
+        ));
         // Return to splash screen
         emit(const AuthState(
           status: ELoadingStatus.loaded,
@@ -235,22 +240,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
         if (res.data != null &&
             (res.data!.nickName == null ||
                 res.data!.nickName == Strings.nullStr)) {
-          // LOGGING
-          GoogleAnalytics.instance.autoLogin(res.data!);
           emit(AuthState(
             status: ELoadingStatus.loaded,
             authStatus: EAuthStatus.unAuthenticated,
             user: res.data!,
           ));
+          // LOGGING
+          GoogleAnalytics.instance.event(GALoginEvent(
+            method: EAuthMethod.auto,
+          ));
           return;
         }
         // Signin success
-        // LOGGING
-        GoogleAnalytics.instance.autoLogin(res.data!);
         emit(AuthState(
           status: ELoadingStatus.loaded,
           authStatus: EAuthStatus.authenticated,
           user: res.data!,
+        ));
+        // LOGGING
+        GoogleAnalytics.instance.event(GALoginEvent(
+          method: EAuthMethod.auto,
         ));
       },
       state: state,

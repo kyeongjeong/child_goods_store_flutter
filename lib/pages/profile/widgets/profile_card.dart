@@ -29,11 +29,11 @@ class ProfileCard extends StatelessWidget {
   void _onTapFollow(BuildContext context) {
     if (popAble) {
       context.pushReplacement(
-        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
+        '${Routes.follow}/${userProfile.userId}?mode=${EFollowMode.follower.key}',
       );
     } else {
       context.push(
-        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.follower.key}',
+        '${Routes.follow}/${userProfile.userId}?mode=${EFollowMode.follower.key}',
       );
     }
   }
@@ -41,11 +41,11 @@ class ProfileCard extends StatelessWidget {
   void _onTapFollowing(BuildContext context) {
     if (popAble) {
       context.pushReplacement(
-        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
+        '${Routes.follow}/${userProfile.userId}?mode=${EFollowMode.following.key}',
       );
     } else {
       context.push(
-        '${Routes.follow}/${userProfile.userIdx}?mode=${EFollowMode.following.key}',
+        '${Routes.follow}/${userProfile.userId}?mode=${EFollowMode.following.key}',
       );
     }
   }

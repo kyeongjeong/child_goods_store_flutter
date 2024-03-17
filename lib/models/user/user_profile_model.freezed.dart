@@ -20,7 +20,7 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserProfileModel {
-  int? get userIdx => throw _privateConstructorUsedError;
+  int? get userId => throw _privateConstructorUsedError;
   String? get nickName => throw _privateConstructorUsedError;
   String? get introduce => throw _privateConstructorUsedError;
   String? get profileImg => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $UserProfileModelCopyWith<$Res> {
       _$UserProfileModelCopyWithImpl<$Res, UserProfileModel>;
   @useResult
   $Res call(
-      {int? userIdx,
+      {int? userId,
       String? nickName,
       String? introduce,
       String? profileImg,
@@ -65,7 +65,7 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userIdx = freezed,
+    Object? userId = freezed,
     Object? nickName = freezed,
     Object? introduce = freezed,
     Object? profileImg = freezed,
@@ -75,9 +75,9 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
     Object? createAt = freezed,
   }) {
     return _then(_value.copyWith(
-      userIdx: freezed == userIdx
-          ? _value.userIdx
-          : userIdx // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int?,
       nickName: freezed == nickName
           ? _value.nickName
@@ -120,7 +120,7 @@ abstract class _$$UserProfileModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? userIdx,
+      {int? userId,
       String? nickName,
       String? introduce,
       String? profileImg,
@@ -141,7 +141,7 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userIdx = freezed,
+    Object? userId = freezed,
     Object? nickName = freezed,
     Object? introduce = freezed,
     Object? profileImg = freezed,
@@ -151,9 +151,9 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
     Object? createAt = freezed,
   }) {
     return _then(_$UserProfileModelImpl(
-      userIdx: freezed == userIdx
-          ? _value.userIdx
-          : userIdx // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as int?,
       nickName: freezed == nickName
           ? _value.nickName
@@ -191,7 +191,7 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserProfileModelImpl implements _UserProfileModel {
   _$UserProfileModelImpl(
-      {this.userIdx,
+      {this.userId,
       this.nickName,
       this.introduce,
       this.profileImg,
@@ -204,7 +204,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
       _$$UserProfileModelImplFromJson(json);
 
   @override
-  final int? userIdx;
+  final int? userId;
   @override
   final String? nickName;
   @override
@@ -222,7 +222,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
 
   @override
   String toString() {
-    return 'UserProfileModel(userIdx: $userIdx, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, followNum: $followNum, followingNum: $followingNum, averageStars: $averageStars, createAt: $createAt)';
+    return 'UserProfileModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, followNum: $followNum, followingNum: $followingNum, averageStars: $averageStars, createAt: $createAt)';
   }
 
   @override
@@ -230,7 +230,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserProfileModelImpl &&
-            (identical(other.userIdx, userIdx) || other.userIdx == userIdx) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.nickName, nickName) ||
                 other.nickName == nickName) &&
             (identical(other.introduce, introduce) ||
@@ -249,7 +249,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userIdx, nickName, introduce,
+  int get hashCode => Object.hash(runtimeType, userId, nickName, introduce,
       profileImg, followNum, followingNum, averageStars, createAt);
 
   @JsonKey(ignore: true)
@@ -269,7 +269,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
 
 abstract class _UserProfileModel implements UserProfileModel {
   factory _UserProfileModel(
-      {final int? userIdx,
+      {final int? userId,
       final String? nickName,
       final String? introduce,
       final String? profileImg,
@@ -282,7 +282,7 @@ abstract class _UserProfileModel implements UserProfileModel {
       _$UserProfileModelImpl.fromJson;
 
   @override
-  int? get userIdx;
+  int? get userId;
   @override
   String? get nickName;
   @override

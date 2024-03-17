@@ -6,7 +6,7 @@ part 'user_profile_model.g.dart';
 @freezed
 class UserProfileModel with _$UserProfileModel {
   factory UserProfileModel({
-    int? userIdx,
+    int? userId,
     String? nickName,
     String? introduce,
     String? profileImg,
