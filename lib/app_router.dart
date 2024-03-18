@@ -6,7 +6,6 @@ import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart'
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
-import 'package:child_goods_store_flutter/blocs/phone_verify/phone_verify_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
@@ -29,7 +28,6 @@ import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
-import 'package:child_goods_store_flutter/pages/phone_verify/phone_verify_page.dart';
 import 'package:child_goods_store_flutter/pages/profile/profile_page.dart';
 import 'package:child_goods_store_flutter/pages/settings/settings_page.dart';
 import 'package:child_goods_store_flutter/pages/ship/ship_page.dart';
@@ -77,8 +75,8 @@ class _AppRouterState extends State<AppRouter> {
       observers: [GARouteObserver()],
       redirect: (context, state) {
         final authState = AuthBlocSingleton.bloc.state;
-        final allowPageInUnknownState = [Routes.signup, Routes.phoneVerify];
-        final allowPageInUnAuthState = [Routes.phoneVerify];
+        final allowPageInUnknownState = [Routes.signup]; // Routes.phoneVerify
+        final allowPageInUnAuthState = []; // Routes.phoneVerify
         final blockPageInAuthState = [Routes.root, Routes.signin];
 
         if (authState.authStatus == EAuthStatus.init) {
@@ -134,19 +132,19 @@ class _AppRouterState extends State<AppRouter> {
             ),
           ),
         ),
-        GoRoute(
-          path: Routes.phoneVerify,
-          pageBuilder: (context, state) => PageTransition.cupertino(
-            key: state.pageKey,
-            name: state.fullPath,
-            child: BlocProvider(
-              create: (context) => PhoneVerifyBloc(
-                authRepository: context.read<AuthRepository>(),
-              ),
-              child: const PhoneVerifyPage(),
-            ),
-          ),
-        ),
+        // GoRoute(
+        //   path: Routes.phoneVerify,
+        //   pageBuilder: (context, state) => PageTransition.cupertino(
+        //     key: state.pageKey,
+        //     name: state.fullPath,
+        //     child: BlocProvider(
+        //       create: (context) => PhoneVerifyBloc(
+        //         authRepository: context.read<AuthRepository>(),
+        //       ),
+        //       child: const PhoneVerifyPage(),
+        //     ),
+        //   ),
+        // ),
         GoRoute(
           path: Routes.editProfile,
           pageBuilder: (context, state) => PageTransition.cupertino(

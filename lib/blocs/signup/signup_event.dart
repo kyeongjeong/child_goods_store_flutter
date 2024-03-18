@@ -18,10 +18,19 @@ class SignupChangePWCheck extends SignupEvent {
   SignupChangePWCheck(this.passwordCheck);
 }
 
-class SignupChangePhoneNum extends SignupEvent {
-  final String phoneNum;
+class SignupChangeSendCode extends SignupEvent {}
 
-  SignupChangePhoneNum(this.phoneNum);
+class SignupChangeVerifyCode extends SignupEvent {
+  final String code;
+
+  SignupChangeVerifyCode(this.code);
 }
+
+// @Deprecated('phone verify is deprecated')
+// class SignupChangePhoneNum extends SignupEvent {
+//   final String phoneNum;
+
+//   SignupChangePhoneNum(this.phoneNum);
+// }
 
 class SignupSubmit extends SignupEvent {}

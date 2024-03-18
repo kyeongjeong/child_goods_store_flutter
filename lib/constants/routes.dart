@@ -3,7 +3,7 @@ class Routes {
   static const String signin = '/signin';
   static const String signup = '/signup';
 
-  static const String phoneVerify = '/phone_verify';
+  // static const String phoneVerify = '/phone_verify'; // deprecated
 
   static const String settings = '/settings';
 

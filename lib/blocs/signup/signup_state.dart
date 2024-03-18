@@ -5,13 +5,25 @@ class SignupState extends BlocState {
   final String? email;
   final String? password;
   final String? passwordCheck;
-  final String? phoneNum;
+  final ELoadingStatus sendStatus;
+  final ELoadingStatus verifyStatus;
+
+  /// `verifiedEmail == email` -> verified \
+  /// `else` -> not verified
+  final String? verifiedEmail;
+  final ELoadingStatus submitStatus;
+
+  // final String? phoneNum;
 
   const SignupState({
     this.email,
     this.password,
     this.passwordCheck,
-    this.phoneNum,
+    required this.sendStatus,
+    required this.verifyStatus,
+    this.verifiedEmail,
+    required this.submitStatus,
+    // this.phoneNum,
     required super.status,
     super.message,
   });
@@ -20,7 +32,11 @@ class SignupState extends BlocState {
       : email = null,
         password = null,
         passwordCheck = null,
-        phoneNum = null,
+        sendStatus = ELoadingStatus.init,
+        verifyStatus = ELoadingStatus.init,
+        verifiedEmail = null,
+        submitStatus = ELoadingStatus.init,
+        // phoneNum = null,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -33,13 +49,21 @@ class SignupState extends BlocState {
     String? email,
     String? password,
     String? passwordCheck,
-    String? phoneNum,
+    ELoadingStatus? sendStatus,
+    ELoadingStatus? verifyStatus,
+    String? verifiedEmail,
+    ELoadingStatus? submitStatus,
+    // String? phoneNum,
   }) =>
       SignupState(
         email: email ?? this.email,
         password: password ?? this.password,
         passwordCheck: passwordCheck ?? this.passwordCheck,
-        phoneNum: phoneNum ?? this.phoneNum,
+        sendStatus: sendStatus ?? this.sendStatus,
+        verifyStatus: verifyStatus ?? this.verifyStatus,
+        verifiedEmail: verifiedEmail ?? this.verifiedEmail,
+        submitStatus: submitStatus ?? this.submitStatus,
+        // phoneNum: phoneNum ?? this.phoneNum,
         status: status ?? this.status,
         message: message ?? this.message,
       );
@@ -49,7 +73,11 @@ class SignupState extends BlocState {
         email,
         password,
         passwordCheck,
-        phoneNum,
+        sendStatus,
+        verifyStatus,
+        verifiedEmail,
+        submitStatus,
+        // phoneNum,
         status,
         message,
       ];

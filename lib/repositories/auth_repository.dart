@@ -142,15 +142,15 @@ class AuthRepository {
     return res;
   }
 
-  Future<ResModel<void>> postPhoneSend({
-    required String phoneNum,
+  Future<ResModel<void>> postEmailSend({
+    required String email,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
     // dio.post(
-    //   '/phone/send',
+    //   '/email/send',
     //   data: {
-    //     'phoneNum': phoneNum,
+    //     'email': email,
     //   },
     // );
 
@@ -164,15 +164,17 @@ class AuthRepository {
     return res;
   }
 
-  Future<ResModel<void>> postPhoneVerify({
+  Future<ResModel<void>> postEmailVerify({
+    required String email,
     required String code,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
     // dio.post(
-    //   '/phone/verify',
+    //   '/email/verify',
     //   data: {
-    //     'code': code,
+    //     'email': email,
+    //     'authNum': code,
     //   },
     // );
 
@@ -189,7 +191,7 @@ class AuthRepository {
   Future<ResModel<void>> postSignup({
     required String email,
     required String password,
-    required String phoneNum,
+    // required String phoneNum,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
