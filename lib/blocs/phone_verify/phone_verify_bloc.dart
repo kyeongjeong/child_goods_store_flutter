@@ -56,7 +56,7 @@ class PhoneVerifyBloc extends Bloc<PhoneVerifyEvent, PhoneVerifyState>
             emit(state.copyWith(status: ELoadingStatus.init));
             return;
           }
-          await authRepository.postPhoneSend(phoneNum: state.phoneNum!);
+          // await authRepository.postPhoneSend(phoneNum: state.phoneNum!);
           emit(state.copyWith(
             status: ELoadingStatus.loaded,
             phoneStatus: ELoadingStatus.loaded,
@@ -71,7 +71,7 @@ class PhoneVerifyBloc extends Bloc<PhoneVerifyEvent, PhoneVerifyState>
             emit(state.copyWith(status: ELoadingStatus.init));
             return;
           }
-          await authRepository.postPhoneVerify(code: state.code!);
+          // await authRepository.postPhoneVerify(code: state.code!);
           emit(state.copyWith(
             status: ELoadingStatus.loaded,
             codeStatus: ELoadingStatus.loaded,
