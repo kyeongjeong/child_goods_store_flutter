@@ -2,7 +2,6 @@ import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_event.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
-import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
@@ -22,6 +21,20 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  late TextEditingController _verifyController;
+
+  @override
+  void initState() {
+    super.initState();
+    _verifyController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _verifyController.dispose();
+    super.dispose();
+  }
+
   void _onChangeEmail(String value) {
     context.read<SignupBloc>().add(SignupChangeEmail(value));
   }
@@ -34,11 +47,22 @@ class _SignupPageState extends State<SignupPage> {
     context.read<SignupBloc>().add(SignupChangePWCheck(value));
   }
 
-  void _onTapPhone() async {
-    var phoneNum = await context.push<String?>(Routes.phoneVerify);
-    if (phoneNum != null && mounted) {
-      context.read<SignupBloc>().add(SignupChangePhoneNum(phoneNum));
-    }
+  // @Deprecated('phone verify is deprecated')
+  // void _onTapPhone() async {
+  //   var phoneNum = await context.push<String?>(Routes.phoneVerify);
+  //   if (phoneNum != null && mounted) {
+  //     context.read<SignupBloc>().add(SignupChangePhoneNum(phoneNum));
+  //   }
+  // }
+
+  void _onTapEmailSend() {
+    context.read<SignupBloc>().add(SignupChangeSendCode());
+  }
+
+  void _onTapEmailVerify() {
+    context
+        .read<SignupBloc>()
+        .add(SignupChangeVerifyCode(_verifyController.text));
   }
 
   void _onTapSignup() {
@@ -55,7 +79,22 @@ class _SignupPageState extends State<SignupPage> {
             message: state.message ?? Strings.nullStr,
           );
         }
-        if (state.status == ELoadingStatus.loaded) {
+        if (state.status == ELoadingStatus.loaded &&
+            state.sendStatus == ELoadingStatus.loaded) {
+          AppSnackbar.show(
+            context,
+            message: '인증번호가 발송되었습니다!',
+          );
+        }
+        if (state.status == ELoadingStatus.loaded &&
+            state.verifyStatus == ELoadingStatus.loaded) {
+          AppSnackbar.show(
+            context,
+            message: '인증되었습니다!',
+          );
+        }
+        if (state.status == ELoadingStatus.loaded &&
+            state.submitStatus == ELoadingStatus.loaded) {
           context.pop();
         }
       },
@@ -92,35 +131,81 @@ class _SignupPageState extends State<SignupPage> {
                   obscureText: true,
                 ),
                 Gaps.v32,
-                const AppFont(
-                  '핸드폰 인증',
-                  fontSize: Sizes.size16,
-                  fontWeight: FontWeight.w700,
-                ),
-                Gaps.v10,
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: BlocBuilder<SignupBloc, SignupState>(
-                          builder: (context, state) => AppFont(
-                            state.phoneNum?.isNotEmpty == true
-                                ? state.phoneNum!
-                                : '번호를 변경해주세요.',
-                            fontSize: Sizes.size16,
+                Row(
+                  children: [
+                    const Expanded(
+                      child: AppFont(
+                        '이메일 인증',
+                        fontSize: Sizes.size16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    BlocBuilder<SignupBloc, SignupState>(
+                      builder: (context, state) => AppInkButton(
+                        onTap: state.status == ELoadingStatus.loading
+                            ? null
+                            : _onTapEmailSend,
+                        child: SizedBox(
+                          width: Sizes.size80,
+                          height: Sizes.size20,
+                          child: Center(
+                            child: state.status == ELoadingStatus.loading &&
+                                    state.sendStatus == ELoadingStatus.loading
+                                ? const SizedBox(
+                                    width: Sizes.size16,
+                                    height: Sizes.size16,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const AppFont(
+                                    '인증번호 발송',
+                                    color: Colors.white,
+                                  ),
                           ),
                         ),
                       ),
-                      AppInkButton(
-                        onTap: _onTapPhone,
-                        child: const AppFont(
-                          '번호 변경',
-                          color: Colors.white,
+                    ),
+                  ],
+                ),
+                Gaps.v10,
+                Row(
+                  children: [
+                    Expanded(
+                      child: AppTextFormField(
+                        controller: _verifyController,
+                        hintText: '인증번호를 입력해주세요',
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    Gaps.h40,
+                    BlocBuilder<SignupBloc, SignupState>(
+                      builder: (context, state) => AppInkButton(
+                        onTap: state.status == ELoadingStatus.loading
+                            ? null
+                            : _onTapEmailVerify,
+                        child: SizedBox(
+                          width: Sizes.size80,
+                          height: Sizes.size20,
+                          child: Center(
+                            child: state.status == ELoadingStatus.loading &&
+                                    state.verifyStatus == ELoadingStatus.loading
+                                ? const SizedBox(
+                                    width: Sizes.size16,
+                                    height: Sizes.size16,
+                                    child: CircularProgressIndicator(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                : const AppFont(
+                                    '인증',
+                                    color: Colors.white,
+                                  ),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -139,7 +224,8 @@ class _SignupPageState extends State<SignupPage> {
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),
                 child: Center(
-                  child: state.status == ELoadingStatus.loading
+                  child: state.status == ELoadingStatus.loading &&
+                          state.submitStatus == ELoadingStatus.loading
                       ? const SizedBox(
                           width: Sizes.size28,
                           height: Sizes.size28,

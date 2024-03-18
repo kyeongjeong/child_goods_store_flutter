@@ -68,12 +68,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     context.read<EditProfileBloc>().add(EditProfileChangeIntroduce(introduce));
   }
 
-  void _onTapPhone() async {
-    var phoneNum = await context.push<String?>(Routes.phoneVerify);
-    if (phoneNum != null && mounted) {
-      context.read<EditProfileBloc>().add(EditProfileChangePhoneNum(phoneNum));
-    }
-  }
+  // @Deprecated('phone verify is deprecated')
+  // void _onTapPhone() async {
+  //   var phoneNum = await context.push<String?>(Routes.phoneVerify);
+  //   if (phoneNum != null && mounted) {
+  //     context.read<EditProfileBloc>().add(EditProfileChangePhoneNum(phoneNum));
+  //   }
+  // }
 
   void _onChangedRegion(String? region) {
     context
@@ -179,28 +180,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   controller: _introduceController,
                   onChange: _onIntroduceChange,
                   hasNext: true,
-                ),
-                Gaps.v20,
-                Row(
-                  children: [
-                    Expanded(
-                      child: BlocBuilder<EditProfileBloc, EditProfileState>(
-                        builder: (context, state) => AppFont(
-                          state.user.phoneNum?.isNotEmpty == true
-                              ? state.user.phoneNum!
-                              : '번호를 변경해주세요.',
-                          fontSize: Sizes.size16,
-                        ),
-                      ),
-                    ),
-                    AppInkButton(
-                      onTap: _onTapPhone,
-                      child: const AppFont(
-                        '번호 변경',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
                 ),
                 Gaps.v20,
                 const AppFont(

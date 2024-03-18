@@ -16,7 +16,9 @@ class SignupBloc extends Bloc<SignupEvent, SignupState>
     on<SignupChangeEmail>(_signupChangeEmailHandler);
     on<SignupChangePW>(_signupChangePWHandler);
     on<SignupChangePWCheck>(_signupChangePWCheckHandler);
-    on<SignupChangePhoneNum>(_signupChangePhoneNumHandler);
+    on<SignupChangeSendCode>(_signupChangeSendCodeHandler);
+    on<SignupChangeVerifyCode>(_signupChangeVerifyCodeHandler);
+    // on<SignupChangePhoneNum>(_signupChangePhoneNumHandler);
     on<SignupSubmit>(_signupSubmitHandler);
   }
 
@@ -47,14 +49,103 @@ class SignupBloc extends Bloc<SignupEvent, SignupState>
     ));
   }
 
-  Future<void> _signupChangePhoneNumHandler(
-    SignupChangePhoneNum event,
+  Future<void> _signupChangeSendCodeHandler(
+    SignupChangeSendCode event,
     Emitter<SignupState> emit,
   ) async {
+    if (state.status == ELoadingStatus.loading) return;
+    // Validate
+    if (!_emailValidate(state.email)) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '이메일을 정확히 입력해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+
     emit(state.copyWith(
-      phoneNum: event.phoneNum,
+      status: ELoadingStatus.loading,
+      sendStatus: ELoadingStatus.loading,
     ));
+    await handleApiRequest(
+      () async {
+        await authRepository.postEmailSend(
+          email: state.email!,
+        );
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          sendStatus: ELoadingStatus.loaded,
+        ));
+      },
+      emit: emit,
+      state: state,
+      finallyCall: () async {
+        emit(state.copyWith(
+          status: ELoadingStatus.init,
+          sendStatus: ELoadingStatus.init,
+        ));
+      },
+    );
   }
+
+  Future<void> _signupChangeVerifyCodeHandler(
+    SignupChangeVerifyCode event,
+    Emitter<SignupState> emit,
+  ) async {
+    if (state.status == ELoadingStatus.loading) return;
+    // Validate
+    if (event.code == Strings.nullStr) {
+      emit(state.copyWith(
+        status: ELoadingStatus.error,
+        message: '인증번호를 입력해주세요.',
+      ));
+      emit(state.copyWith(status: ELoadingStatus.init));
+      return;
+    }
+
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      verifyStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        await authRepository.postEmailVerify(
+          email: state.email!,
+          code: event.code,
+        );
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          verifyStatus: ELoadingStatus.loaded,
+          verifiedEmail: state.email,
+        ));
+        emit(state.copyWith(
+          status: ELoadingStatus.init,
+          verifyStatus: ELoadingStatus.init,
+        ));
+      },
+      emit: emit,
+      state: state,
+      finallyCall: () async {
+        emit(state.copyWith(
+          status: ELoadingStatus.init,
+          verifyStatus: ELoadingStatus.init,
+        ));
+      },
+    );
+  }
+
+  // @Deprecated('phone verify is deprecated')
+  // Future<void> _signupChangePhoneNumHandler(
+  //   SignupChangePhoneNum event,
+  //   Emitter<SignupState> emit,
+  // ) async {
+  //   emit(state.copyWith(
+  //     phoneNum: event.phoneNum,
+  //   ));
+  // }
 
   Future<void> _signupSubmitHandler(
     SignupSubmit event,
@@ -63,10 +154,10 @@ class SignupBloc extends Bloc<SignupEvent, SignupState>
     if (state.status == ELoadingStatus.loading) return;
 
     // Validate
-    if (state.email == null || state.email == Strings.nullStr) {
+    if (!_emailValidate(state.email)) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
-        message: '이메일을 입력해주세요.',
+        message: '이메일을 정확히 입력해주세요.',
       ));
       emit(state.copyWith(status: ELoadingStatus.init));
       return;
@@ -87,27 +178,62 @@ class SignupBloc extends Bloc<SignupEvent, SignupState>
       emit(state.copyWith(status: ELoadingStatus.init));
       return;
     }
-    if (state.phoneNum == null || state.phoneNum == Strings.nullStr) {
+    if (state.email != state.verifiedEmail) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
-        message: '핸드폰 인증을 진행해주세요.',
+        message: '이메일을 인증해주세요.',
       ));
       emit(state.copyWith(status: ELoadingStatus.init));
       return;
     }
+    // @Deprecated('phone verify is deprecated')
+    // if (state.phoneNum == null || state.phoneNum == Strings.nullStr) {
+    //   emit(state.copyWith(
+    //     status: ELoadingStatus.error,
+    //     message: '핸드폰 인증을 진행해주세요.',
+    //   ));
+    //   emit(state.copyWith(status: ELoadingStatus.init));
+    //   return;
+    // }
 
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      submitStatus: ELoadingStatus.loading,
+    ));
     await handleApiRequest(
       () async {
-        emit(state.copyWith(status: ELoadingStatus.loading));
         await authRepository.postSignup(
           email: state.email!,
           password: state.password!,
-          phoneNum: state.phoneNum!,
+          // phoneNum: state.phoneNum!,
         );
-        emit(state.copyWith(status: ELoadingStatus.loaded));
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          submitStatus: ELoadingStatus.loaded,
+        ));
       },
       emit: emit,
       state: state,
+      finallyCall: () async {
+        emit(state.copyWith(
+          status: ELoadingStatus.init,
+          submitStatus: ELoadingStatus.init,
+        ));
+      },
     );
+  }
+
+  bool _emailValidate(String? value) {
+    if (value == null) return false;
+    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
+        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+    final regex = RegExp(pattern);
+
+    return value.isNotEmpty == true && !regex.hasMatch(value) ? false : true;
   }
 }
