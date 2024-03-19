@@ -10,7 +10,7 @@ class ChildRepository {
     // dio.interceptors.add(AuthInterceptor());
     // dio.get('/child');
 
-    // TODO: app connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ChildModel>>(
@@ -59,7 +59,7 @@ class ChildRepository {
     //   data: child.toJson(),
     // );
 
-    // TODO: app connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(
@@ -94,7 +94,7 @@ class ChildRepository {
     //   data: child.toJson(),
     // );
 
-    // TODO: app connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(

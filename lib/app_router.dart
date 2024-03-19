@@ -6,6 +6,7 @@ import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart'
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/product_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
@@ -28,6 +29,7 @@ import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
+import 'package:child_goods_store_flutter/pages/product_detail/product_detail_page.dart';
 import 'package:child_goods_store_flutter/pages/profile/profile_page.dart';
 import 'package:child_goods_store_flutter/pages/settings/settings_page.dart';
 import 'package:child_goods_store_flutter/pages/ship/ship_page.dart';
@@ -39,6 +41,7 @@ import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
+import 'package:child_goods_store_flutter/repositories/product_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:child_goods_store_flutter/utils/page_transition.dart';
@@ -304,6 +307,25 @@ class _AppRouterState extends State<AppRouter> {
             ),
           ],
         ),
+        GoRoute(
+          path: '${Routes.productDetail}/:productId',
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': int.parse(state.pathParameters['productId'] as String),
+            },
+            child: BlocProvider(
+              create: (context) => ProductDetailBloc(
+                productRepository: context.read<ProductRepository>(),
+                productId:
+                    int.parse(state.pathParameters['productId'] as String),
+              ),
+              child: const ProductDetailPage(),
+            ),
+          ),
+        ),
+
         GoRoute(
           path: '${Routes.profile}/:userId',
           pageBuilder: (context, state) => PageTransition.cupertino(

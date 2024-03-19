@@ -37,12 +37,13 @@ mixin DioExceptionHandlerMixin {
       if (initAfterError) {
         emit(state.copyWith(status: ELoadingStatus.init));
       }
-    } catch (e) {
+    } catch (e, s) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
         message: '[5001] ${e.toString().replaceAll('Exception: ', '')}',
       ));
       debugPrint('[DioExceptionHandlerMixin/Exception] ${e.toString()}');
+      debugPrintStack(stackTrace: s);
       if (initAfterError) {
         emit(state.copyWith(status: ELoadingStatus.init));
       }

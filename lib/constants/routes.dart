@@ -18,6 +18,8 @@ class Routes {
   static const String chat = '/chat';
   static const String profile = '/profile';
 
+  static const String productDetail = '/product';
+
   static const String follow = '/follow';
 }
 
