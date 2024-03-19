@@ -67,6 +67,7 @@ class _LoginFormState extends State<LoginForm> {
             onTap: state.status == ELoadingStatus.loading ? null : _onTapLogin,
             child: SizedBox(
               width: double.infinity,
+              height: Sizes.size24,
               child: Center(
                 child: state.status == ELoadingStatus.loading
                     ? const SizedBox(

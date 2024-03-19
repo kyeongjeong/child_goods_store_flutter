@@ -1,6 +1,6 @@
-import 'package:child_goods_store_flutter/blocs/product/product_detail_bloc.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_event.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_state.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

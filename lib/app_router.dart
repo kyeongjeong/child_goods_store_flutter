@@ -6,7 +6,7 @@ import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart'
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';

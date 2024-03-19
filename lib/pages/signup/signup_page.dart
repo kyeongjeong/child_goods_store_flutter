@@ -146,7 +146,7 @@ class _SignupPageState extends State<SignupPage> {
                             ? null
                             : _onTapEmailSend,
                         child: SizedBox(
-                          width: Sizes.size80,
+                          width: Sizes.size96,
                           height: Sizes.size20,
                           child: Center(
                             child: state.status == ELoadingStatus.loading &&
@@ -174,7 +174,7 @@ class _SignupPageState extends State<SignupPage> {
                     Expanded(
                       child: AppTextFormField(
                         controller: _verifyController,
-                        hintText: '인증번호를 입력해주세요',
+                        hintText: '인증번호',
                         keyboardType: TextInputType.number,
                       ),
                     ),
@@ -185,7 +185,7 @@ class _SignupPageState extends State<SignupPage> {
                             ? null
                             : _onTapEmailVerify,
                         child: SizedBox(
-                          width: Sizes.size80,
+                          width: Sizes.size96,
                           height: Sizes.size20,
                           child: Center(
                             child: state.status == ELoadingStatus.loading &&

@@ -31,13 +31,28 @@ class ProductDetailProfileWidget extends StatelessWidget {
             profileImg: profile.profileImg,
             radius: Sizes.size32,
           ),
-          Gaps.h20,
+          Gaps.h16,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppFont(profile.nickName ?? Strings.nullStr),
+              Padding(
+                padding: const EdgeInsets.only(left: Sizes.size4),
+                child: AppFont(profile.nickName ?? Strings.nullStr),
+              ),
               Gaps.v5,
-              const AppFont('평점'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.star_rounded,
+                    color: Colors.yellow.shade700,
+                  ),
+                  AppFont(
+                    '${profile.averageStars?.toStringAsFixed(1) ?? 0} / 5.0',
+                    fontSize: Sizes.size14,
+                  )
+                ],
+              ),
             ],
           ),
         ],

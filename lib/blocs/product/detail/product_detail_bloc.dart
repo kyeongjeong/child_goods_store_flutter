@@ -1,5 +1,5 @@
-import 'package:child_goods_store_flutter/blocs/product/product_detail_event.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_state.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
@@ -60,7 +60,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     if (state.status == ELoadingStatus.loading &&
         state.changeSaleStatus == ELoadingStatus.loading) return;
 
-    if (state.productModel?.state == event.status) return;
+    if (event.status != EProductSaleStatus.soldout &&
+        state.productModel?.state == event.status) return;
 
     emit(state.copyWith(
       status: ELoadingStatus.loading,
@@ -82,6 +83,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
         await productRepository.postProductStatus(
           status: event.status,
           productId: productId,
+          saledUserId: event.userId,
         );
 
         emit(state.copyWith(

@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_bloc.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_event.dart';
-import 'package:child_goods_store_flutter/blocs/product/product_detail_state.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
