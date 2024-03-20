@@ -5,6 +5,7 @@ class AppFont extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final Color? color;
+  final TextAlign? textAlign;
 
   const AppFont(
     this.text, {
@@ -12,6 +13,7 @@ class AppFont extends StatelessWidget {
     this.fontSize,
     this.fontWeight,
     this.color,
+    this.textAlign,
   });
 
   @override
@@ -23,6 +25,7 @@ class AppFont extends StatelessWidget {
         fontWeight: fontWeight,
         color: color,
       ),
+      textAlign: textAlign,
     );
   }
 }

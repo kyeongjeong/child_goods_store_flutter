@@ -24,27 +24,38 @@ class AppInkButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      highlightColor: Colors.transparent,
-      splashColor: Theme.of(context).splashColor,
-      borderRadius: BorderRadius.circular(borderRadSize),
-      child: Ink(
-        padding: padding,
-        decoration: BoxDecoration(
-          color: color ?? Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(borderRadSize),
-          boxShadow: [
-            BoxShadow(
-              color:
-                  shadowColor ?? Theme.of(context).shadowColor.withOpacity(0.2),
-              blurRadius: Sizes.size3,
-              spreadRadius: Sizes.size1,
-            ),
-          ],
+    return Stack(
+      fit: StackFit.passthrough,
+      children: [
+        Container(
+          clipBehavior: Clip.hardEdge,
+          padding: padding,
+          decoration: BoxDecoration(
+            color: color ?? Theme.of(context).primaryColor,
+            borderRadius: BorderRadius.circular(borderRadSize),
+            boxShadow: [
+              BoxShadow(
+                color: shadowColor ??
+                    Theme.of(context).shadowColor.withOpacity(0.2),
+                blurRadius: Sizes.size3,
+                spreadRadius: Sizes.size1,
+              ),
+            ],
+          ),
+          child: child,
         ),
-        child: child,
-      ),
+        Positioned.fill(
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onTap,
+              highlightColor: Colors.transparent,
+              splashColor: Theme.of(context).splashColor,
+              borderRadius: BorderRadius.circular(borderRadSize),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

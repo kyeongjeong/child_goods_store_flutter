@@ -16,7 +16,7 @@ import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
+import 'package:child_goods_store_flutter/utils/extensions.dart';
 
 class ProductDetailBottomBar extends StatelessWidget {
   const ProductDetailBottomBar({super.key});
@@ -140,7 +140,7 @@ class ProductDetailBottomBar extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AppFont(
-                      '${NumberFormat('###,###,###').format(state.productModel?.price)} 원',
+                      '${state.productModel?.price?.price()} 원',
                       fontSize: Sizes.size16,
                       fontWeight: FontWeight.w700,
                     ),
