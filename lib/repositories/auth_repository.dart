@@ -91,7 +91,7 @@ class AuthRepository {
     // var res = await dio.post(
     //   '/oauth',
     //   data: {
-    //     'method': method.key.toLowerCase(),
+    //     'method': method.key,
     //     'accessToken': accessToken,
     //   },
     // );

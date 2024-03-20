@@ -372,10 +372,10 @@ class _AppRouterState extends State<AppRouter> {
               create: (context) => FollowBloc(
                 userRepository: context.read<UserRepository>(),
                 userId: int.parse(state.pathParameters['userId'] as String),
-                mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+                mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
               child: FollowPage(
-                mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+                mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
             ),
           ),

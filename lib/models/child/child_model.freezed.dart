@@ -22,8 +22,10 @@ ChildModel _$ChildModelFromJson(Map<String, dynamic> json) {
 mixin _$ChildModel {
   int? get childId => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  int? get age => throw _privateConstructorUsedError; // month
-  String? get gender => throw _privateConstructorUsedError; // M or W
+  @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+  EChildAge? get age => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
+  EChildGender? get gender => throw _privateConstructorUsedError;
   String? get childImg => throw _privateConstructorUsedError;
   @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag => throw _privateConstructorUsedError;
@@ -43,8 +45,10 @@ abstract class $ChildModelCopyWith<$Res> {
   $Res call(
       {int? childId,
       String? name,
-      int? age,
-      String? gender,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+      EChildAge? age,
+      @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
+      EChildGender? gender,
       String? childImg,
       @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag});
 }
@@ -81,11 +85,11 @@ class _$ChildModelCopyWithImpl<$Res, $Val extends ChildModel>
       age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as EChildAge?,
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as EChildGender?,
       childImg: freezed == childImg
           ? _value.childImg
           : childImg // ignore: cast_nullable_to_non_nullable
@@ -109,8 +113,10 @@ abstract class _$$ChildModelImplCopyWith<$Res>
   $Res call(
       {int? childId,
       String? name,
-      int? age,
-      String? gender,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+      EChildAge? age,
+      @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
+      EChildGender? gender,
       String? childImg,
       @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag});
 }
@@ -145,11 +151,11 @@ class __$$ChildModelImplCopyWithImpl<$Res>
       age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as EChildAge?,
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as EChildGender?,
       childImg: freezed == childImg
           ? _value.childImg
           : childImg // ignore: cast_nullable_to_non_nullable
@@ -168,7 +174,8 @@ class _$ChildModelImpl implements _ChildModel {
   _$ChildModelImpl(
       {this.childId,
       this.name,
-      this.age,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson) this.age,
+      @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
       this.gender,
       this.childImg,
       @JsonKey(fromJson: strToList, toJson: listToStr)
@@ -183,11 +190,11 @@ class _$ChildModelImpl implements _ChildModel {
   @override
   final String? name;
   @override
-  final int? age;
-// month
+  @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+  final EChildAge? age;
   @override
-  final String? gender;
-// M or W
+  @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
+  final EChildGender? gender;
   @override
   final String? childImg;
   final List<String> _tag;
@@ -241,8 +248,10 @@ abstract class _ChildModel implements ChildModel {
   factory _ChildModel(
       {final int? childId,
       final String? name,
-      final int? age,
-      final String? gender,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+      final EChildAge? age,
+      @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
+      final EChildGender? gender,
       final String? childImg,
       @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> tag}) = _$ChildModelImpl;
@@ -255,10 +264,12 @@ abstract class _ChildModel implements ChildModel {
   @override
   String? get name;
   @override
-  int? get age;
-  @override // month
-  String? get gender;
-  @override // M or W
+  @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+  EChildAge? get age;
+  @override
+  @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
+  EChildGender? get gender;
+  @override
   String? get childImg;
   @override
   @JsonKey(fromJson: strToList, toJson: listToStr)

@@ -10,6 +10,10 @@ class ProductPreviewModel with _$ProductPreviewModel {
     int? productId,
     String? productName,
     int? price,
+    @JsonKey(
+      fromJson: EProductSaleStatus.fromJson,
+      toJson: EProductSaleStatus.toJson,
+    )
     EProductSaleStatus? state,
     String? productImage,
     bool? productHeart,

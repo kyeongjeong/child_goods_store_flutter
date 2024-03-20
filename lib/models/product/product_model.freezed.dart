@@ -25,7 +25,10 @@ mixin _$ProductModel {
   String? get productName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
   EProductStatus? get productStatus => throw _privateConstructorUsedError;
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
   EProductSaleStatus? get state => throw _privateConstructorUsedError;
   DateTime? get createAt => throw _privateConstructorUsedError;
   DateTime? get updateAt => throw _privateConstructorUsedError;
@@ -53,7 +56,11 @@ abstract class $ProductModelCopyWith<$Res> {
       String? productName,
       int? price,
       String? content,
+      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       EProductStatus? productStatus,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       EProductSaleStatus? state,
       DateTime? createAt,
       DateTime? updateAt,
@@ -170,7 +177,11 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       String? productName,
       int? price,
       String? content,
+      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       EProductStatus? productStatus,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       EProductSaleStatus? state,
       DateTime? createAt,
       DateTime? updateAt,
@@ -269,7 +280,11 @@ class _$ProductModelImpl implements _ProductModel {
       this.productName,
       this.price,
       this.content,
+      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       this.productStatus,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       this.state,
       this.createAt,
       this.updateAt,
@@ -295,8 +310,11 @@ class _$ProductModelImpl implements _ProductModel {
   @override
   final String? content;
   @override
+  @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
   final EProductStatus? productStatus;
   @override
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
   final EProductSaleStatus? state;
   @override
   final DateTime? createAt;
@@ -392,7 +410,11 @@ abstract class _ProductModel implements ProductModel {
       final String? productName,
       final int? price,
       final String? content,
+      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       final EProductStatus? productStatus,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       final EProductSaleStatus? state,
       final DateTime? createAt,
       final DateTime? updateAt,
@@ -415,8 +437,11 @@ abstract class _ProductModel implements ProductModel {
   @override
   String? get content;
   @override
+  @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
   EProductStatus? get productStatus;
   @override
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
   EProductSaleStatus? get state;
   @override
   DateTime? get createAt;

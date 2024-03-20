@@ -12,7 +12,7 @@ _$ProductPreviewModelImpl _$$ProductPreviewModelImplFromJson(
       productId: json['productId'] as int?,
       productName: json['productName'] as String?,
       price: json['price'] as int?,
-      state: $enumDecodeNullable(_$EProductSaleStatusEnumMap, json['state']),
+      state: EProductSaleStatus.fromJson(json['state'] as String?),
       productImage: json['productImage'] as String?,
       productHeart: json['productHeart'] as bool?,
     );
@@ -23,13 +23,7 @@ Map<String, dynamic> _$$ProductPreviewModelImplToJson(
       'productId': instance.productId,
       'productName': instance.productName,
       'price': instance.price,
-      'state': _$EProductSaleStatusEnumMap[instance.state],
+      'state': EProductSaleStatus.toJson(instance.state),
       'productImage': instance.productImage,
       'productHeart': instance.productHeart,
     };
-
-const _$EProductSaleStatusEnumMap = {
-  EProductSaleStatus.sale: 'sale',
-  EProductSaleStatus.reserved: 'reserved',
-  EProductSaleStatus.soldout: 'soldout',
-};

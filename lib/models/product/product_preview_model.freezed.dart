@@ -23,6 +23,8 @@ mixin _$ProductPreviewModel {
   int? get productId => throw _privateConstructorUsedError;
   String? get productName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
   EProductSaleStatus? get state => throw _privateConstructorUsedError;
   String? get productImage => throw _privateConstructorUsedError;
   bool? get productHeart => throw _privateConstructorUsedError;
@@ -43,6 +45,9 @@ abstract class $ProductPreviewModelCopyWith<$Res> {
       {int? productId,
       String? productName,
       int? price,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       EProductSaleStatus? state,
       String? productImage,
       bool? productHeart});
@@ -109,6 +114,9 @@ abstract class _$$ProductPreviewModelImplCopyWith<$Res>
       {int? productId,
       String? productName,
       int? price,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       EProductSaleStatus? state,
       String? productImage,
       bool? productHeart});
@@ -168,6 +176,9 @@ class _$ProductPreviewModelImpl implements _ProductPreviewModel {
       {this.productId,
       this.productName,
       this.price,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       this.state,
       this.productImage,
       this.productHeart});
@@ -182,6 +193,8 @@ class _$ProductPreviewModelImpl implements _ProductPreviewModel {
   @override
   final int? price;
   @override
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
   final EProductSaleStatus? state;
   @override
   final String? productImage;
@@ -235,6 +248,9 @@ abstract class _ProductPreviewModel implements ProductPreviewModel {
       {final int? productId,
       final String? productName,
       final int? price,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
       final EProductSaleStatus? state,
       final String? productImage,
       final bool? productHeart}) = _$ProductPreviewModelImpl;
@@ -249,6 +265,8 @@ abstract class _ProductPreviewModel implements ProductPreviewModel {
   @override
   int? get price;
   @override
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
   EProductSaleStatus? get state;
   @override
   String? get productImage;

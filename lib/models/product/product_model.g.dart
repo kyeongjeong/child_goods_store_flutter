@@ -15,9 +15,8 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
       productName: json['productName'] as String?,
       price: json['price'] as int?,
       content: json['content'] as String?,
-      productStatus:
-          $enumDecodeNullable(_$EProductStatusEnumMap, json['productStatus']),
-      state: $enumDecodeNullable(_$EProductSaleStatusEnumMap, json['state']),
+      productStatus: EProductStatus.fromJson(json['productStatus'] as String?),
+      state: EProductSaleStatus.fromJson(json['state'] as String?),
       createAt: json['createAt'] == null
           ? null
           : DateTime.parse(json['createAt'] as String),
@@ -38,24 +37,11 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
       'productName': instance.productName,
       'price': instance.price,
       'content': instance.content,
-      'productStatus': _$EProductStatusEnumMap[instance.productStatus],
-      'state': _$EProductSaleStatusEnumMap[instance.state],
+      'productStatus': EProductStatus.toJson(instance.productStatus),
+      'state': EProductSaleStatus.toJson(instance.state),
       'createAt': instance.createAt?.toIso8601String(),
       'updateAt': instance.updateAt?.toIso8601String(),
       'tag': listToStr(instance.tag),
       'productImage': listToStr(instance.productImage),
       'productHeart': instance.productHeart,
     };
-
-const _$EProductStatusEnumMap = {
-  EProductStatus.noUsage: 'noUsage',
-  EProductStatus.littleUsage: 'littleUsage',
-  EProductStatus.manyUsage: 'manyUsage',
-  EProductStatus.extremeUsage: 'extremeUsage',
-};
-
-const _$EProductSaleStatusEnumMap = {
-  EProductSaleStatus.sale: 'sale',
-  EProductSaleStatus.reserved: 'reserved',
-  EProductSaleStatus.soldout: 'soldout',
-};

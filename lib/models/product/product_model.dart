@@ -15,7 +15,15 @@ class ProductModel with _$ProductModel {
     String? productName,
     int? price,
     String? content,
+    @JsonKey(
+      fromJson: EProductStatus.fromJson,
+      toJson: EProductStatus.toJson,
+    )
     EProductStatus? productStatus,
+    @JsonKey(
+      fromJson: EProductSaleStatus.fromJson,
+      toJson: EProductSaleStatus.toJson,
+    )
     EProductSaleStatus? state,
     DateTime? createAt,
     DateTime? updateAt,

@@ -7,7 +7,7 @@ import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:child_goods_store_flutter/utils/extensions.dart';
+import 'package:child_goods_store_flutter/utils/other_extensions.dart';
 
 class ProductListItem extends StatelessWidget {
   final ProductPreviewModel product;

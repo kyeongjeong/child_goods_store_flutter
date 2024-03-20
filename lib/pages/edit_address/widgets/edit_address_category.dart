@@ -13,7 +13,7 @@ class EditAddressCategory extends StatelessWidget {
   const EditAddressCategory({super.key});
 
   void _onCategoryChange(BuildContext context, {String? category}) {
-    var cat = categoryToEAddressCategory(category);
+    var cat = category?.addressCategoryEnum;
     if (cat == null) return;
     context.read<EditAddressBloc>().add(EditAddressChangeCategory(cat));
   }

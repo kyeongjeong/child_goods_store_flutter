@@ -23,6 +23,7 @@ mixin _$AddressModel {
   int? get addressId => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get detailAddress => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
   EAddressCategory? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +42,8 @@ abstract class $AddressModelCopyWith<$Res> {
       {int? addressId,
       String? address,
       String? detailAddress,
+      @JsonKey(
+          fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
       EAddressCategory? category});
 }
 
@@ -95,6 +98,8 @@ abstract class _$$AddressModelImplCopyWith<$Res>
       {int? addressId,
       String? address,
       String? detailAddress,
+      @JsonKey(
+          fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
       EAddressCategory? category});
 }
 
@@ -139,7 +144,12 @@ class __$$AddressModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AddressModelImpl implements _AddressModel {
   _$AddressModelImpl(
-      {this.addressId, this.address, this.detailAddress, this.category});
+      {this.addressId,
+      this.address,
+      this.detailAddress,
+      @JsonKey(
+          fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
+      this.category});
 
   factory _$AddressModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddressModelImplFromJson(json);
@@ -151,6 +161,7 @@ class _$AddressModelImpl implements _AddressModel {
   @override
   final String? detailAddress;
   @override
+  @JsonKey(fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
   final EAddressCategory? category;
 
   @override
@@ -196,6 +207,8 @@ abstract class _AddressModel implements AddressModel {
       {final int? addressId,
       final String? address,
       final String? detailAddress,
+      @JsonKey(
+          fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
       final EAddressCategory? category}) = _$AddressModelImpl;
 
   factory _AddressModel.fromJson(Map<String, dynamic> json) =
@@ -208,6 +221,7 @@ abstract class _AddressModel implements AddressModel {
   @override
   String? get detailAddress;
   @override
+  @JsonKey(fromJson: EAddressCategory.fromJson, toJson: EAddressCategory.toJson)
   EAddressCategory? get category;
   @override
   @JsonKey(ignore: true)

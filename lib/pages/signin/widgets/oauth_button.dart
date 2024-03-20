@@ -77,7 +77,7 @@ class OauthButton extends StatelessWidget {
           ),
           Gaps.h10,
           AppFont(
-            '${method.ko} 계정으로 로그인',
+            '${method.text} 계정으로 로그인',
             color: _fontColor(),
             fontWeight: FontWeight.w700,
           ),
