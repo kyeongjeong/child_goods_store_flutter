@@ -10,11 +10,7 @@ enum EChildAge {
 
   const EChildAge(this.text);
 
-  static String toJson(EChildAge? en) {
-    if (en == null) {
-      throw Exception('[EChildAge.toJson] Null value');
-    }
-
+  static String? toJson(EChildAge? en) {
     switch (en) {
       case EChildAge.age6:
         return 'AGE_6';
@@ -28,15 +24,13 @@ enum EChildAge {
         return 'AGE_96';
       case EChildAge.age108:
         return 'AGE_108';
+      default:
+        return null;
     }
   }
 
-  static EChildAge fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[EChildAge.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static EChildAge? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'AGE_6':
         return EChildAge.age6;
       case 'AGE_12':
@@ -50,7 +44,7 @@ enum EChildAge {
       case 'AGE_108':
         return EChildAge.age108;
       default:
-        throw Exception('[EChildAge.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }

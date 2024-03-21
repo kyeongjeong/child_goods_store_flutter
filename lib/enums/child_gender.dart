@@ -6,31 +6,25 @@ enum EChildGender {
 
   const EChildGender(this.text);
 
-  static String toJson(EChildGender? en) {
-    if (en == null) {
-      throw Exception('[EChildGender.toJson] Null value');
-    }
-
+  static String? toJson(EChildGender? en) {
     switch (en) {
       case EChildGender.man:
         return 'MAN';
       case EChildGender.woman:
         return 'WOMAN';
+      default:
+        return null;
     }
   }
 
-  static EChildGender fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[EChildGender.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static EChildGender? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'MAN':
         return EChildGender.man;
       case 'WOMAN':
         return EChildGender.woman;
       default:
-        throw Exception('[EChildGender.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }

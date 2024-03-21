@@ -8,11 +8,7 @@ enum EProductStatus {
 
   const EProductStatus(this.text);
 
-  static String toJson(EProductStatus? en) {
-    if (en == null) {
-      throw Exception('[EProductStatus.toJson] Null value');
-    }
-
+  static String? toJson(EProductStatus? en) {
     switch (en) {
       case EProductStatus.noUsage:
         return 'NO_USAGE';
@@ -22,15 +18,13 @@ enum EProductStatus {
         return 'MANY_USAGE';
       case EProductStatus.extremeUsage:
         return 'EXTREME_USAGE';
+      default:
+        return null;
     }
   }
 
-  static EProductStatus fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[EProductStatus.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static EProductStatus? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'NO_USAGE':
         return EProductStatus.noUsage;
       case 'LITTLE_USAGE':
@@ -40,7 +34,7 @@ enum EProductStatus {
       case 'EXTREME_USAGE':
         return EProductStatus.extremeUsage;
       default:
-        throw Exception('[EProductStatus.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }

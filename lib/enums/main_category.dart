@@ -11,11 +11,7 @@ enum EMainCategory {
 
   const EMainCategory(this.text);
 
-  static String toJson(EMainCategory? en) {
-    if (en == null) {
-      throw Exception('[EMainCategory.toJson] Null value');
-    }
-
+  static String? toJson(EMainCategory? en) {
     switch (en) {
       case EMainCategory.clothing:
         return 'CLOTHING';
@@ -31,15 +27,13 @@ enum EMainCategory {
         return 'MATERNITY_ITEMS';
       case EMainCategory.feedingSupplies:
         return 'FEEDING_SUPPLIES';
+      default:
+        return null;
     }
   }
 
-  static EMainCategory fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[EMainCategory.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static EMainCategory? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'CLOTHING':
         return EMainCategory.clothing;
       case 'ACCESSORIES':
@@ -55,7 +49,7 @@ enum EMainCategory {
       case 'FEEDING_SUPPLIES':
         return EMainCategory.feedingSupplies;
       default:
-        throw Exception('[EMainCategory.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }

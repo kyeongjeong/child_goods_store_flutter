@@ -51,11 +51,7 @@ enum ESubCategory {
 
   const ESubCategory(this.text, this.mainCategory);
 
-  static String toJson(ESubCategory? en) {
-    if (en == null) {
-      throw Exception('[ESubCategory.toJson] Null value');
-    }
-
+  static String? toJson(ESubCategory? en) {
     switch (en) {
       case ESubCategory.top:
         return 'TOP';
@@ -139,15 +135,13 @@ enum ESubCategory {
         return 'PLATES';
       case ESubCategory.otherFeedingSupplies:
         return 'OTHER_FEEDING_SUPPLIES';
+      default:
+        return null;
     }
   }
 
-  static ESubCategory fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[ESubCategory.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static ESubCategory? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'TOP':
         return ESubCategory.top;
       case 'BOTTOM':
@@ -231,7 +225,7 @@ enum ESubCategory {
       case 'OTHER_FEEDING_SUPPLIES':
         return ESubCategory.otherFeedingSupplies;
       default:
-        throw Exception('[ESubCategory.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }

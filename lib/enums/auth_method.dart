@@ -9,11 +9,7 @@ enum EAuthMethod {
 
   const EAuthMethod(this.text);
 
-  static String toJson(EAuthMethod? en) {
-    if (en == null) {
-      throw Exception('[EAuthMethod.toJson] Null value');
-    }
-
+  static String? toJson(EAuthMethod? en) {
     switch (en) {
       case EAuthMethod.auto:
         return 'AUTO';
@@ -25,15 +21,13 @@ enum EAuthMethod {
         return 'KAKAO';
       case EAuthMethod.u3C1S:
         return 'U3C1S';
+      default:
+        return null;
     }
   }
 
-  static EAuthMethod fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[EAuthMethod.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static EAuthMethod? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'AUTO':
         return EAuthMethod.auto;
       case 'GOOGLE':
@@ -45,7 +39,7 @@ enum EAuthMethod {
       case 'U3C1S':
         return EAuthMethod.u3C1S;
       default:
-        throw Exception('[EAuthMethod.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }

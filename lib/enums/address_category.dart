@@ -8,11 +8,7 @@ enum EAddressCategory {
 
   const EAddressCategory(this.text);
 
-  static String toJson(EAddressCategory? en) {
-    if (en == null) {
-      throw Exception('[EAddressCategory.toJson] Null value');
-    }
-
+  static String? toJson(EAddressCategory? en) {
     switch (en) {
       case EAddressCategory.home:
         return 'HOME';
@@ -22,15 +18,13 @@ enum EAddressCategory {
         return 'SCHOOL';
       case EAddressCategory.etc:
         return 'ETC';
+      default:
+        return null;
     }
   }
 
-  static EAddressCategory fromJson(String? str) {
-    if (str == null) {
-      throw Exception('[EAddressCategory.fromJson] Null value');
-    }
-
-    switch (str.toUpperCase()) {
+  static EAddressCategory? fromJson(String? str) {
+    switch (str?.toUpperCase()) {
       case 'HOME':
         return EAddressCategory.home;
       case 'WORK':
@@ -40,8 +34,7 @@ enum EAddressCategory {
       case 'ETC':
         return EAddressCategory.etc;
       default:
-        throw Exception(
-            '[EAddressCategory.fromJson] Unknown string value: $str');
+        return null;
     }
   }
 }
