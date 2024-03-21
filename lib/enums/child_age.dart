@@ -12,7 +12,7 @@ enum EChildAge {
 
   static String toJson(EChildAge? en) {
     if (en == null) {
-      throw Exception('[EChildAgeExtension.toJson] Null value');
+      throw Exception('[EChildAge.toJson] Null value');
     }
 
     switch (en) {
@@ -33,7 +33,7 @@ enum EChildAge {
 
   static EChildAge fromJson(String? str) {
     if (str == null) {
-      throw Exception('[EChildAgeExtension.fromJson] Null value');
+      throw Exception('[EChildAge.fromJson] Null value');
     }
 
     switch (str.toUpperCase()) {
@@ -50,8 +50,7 @@ enum EChildAge {
       case 'AGE_108':
         return EChildAge.age108;
       default:
-        throw Exception(
-            '[EChildAgeExtension.fromJson] Unknown string value: $str');
+        throw Exception('[EChildAge.fromJson] Unknown string value: $str');
     }
   }
 }

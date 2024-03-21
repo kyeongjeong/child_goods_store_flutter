@@ -15,8 +15,7 @@ extension SFollowModeExtension on String {
       case 'following':
         return EFollowMode.following;
       default:
-        throw Exception(
-            '[SFollowModeExtension.enumVal] Unknown string value: $this');
+        throw Exception('[EFollowMode.enumVal] Unknown string value: $this');
     }
   }
 }

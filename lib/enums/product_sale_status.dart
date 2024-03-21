@@ -9,7 +9,7 @@ enum EProductSaleStatus {
 
   static String toJson(EProductSaleStatus? en) {
     if (en == null) {
-      throw Exception('[EProductSaleStatusExtension.toJson] Null value');
+      throw Exception('[EProductSaleStatus.toJson] Null value');
     }
 
     switch (en) {
@@ -24,7 +24,7 @@ enum EProductSaleStatus {
 
   static EProductSaleStatus fromJson(String? str) {
     if (str == null) {
-      throw Exception('[EProductSaleStatusExtension.fromJson] Null value');
+      throw Exception('[EProductSaleStatus.fromJson] Null value');
     }
 
     switch (str.toUpperCase()) {
@@ -36,7 +36,7 @@ enum EProductSaleStatus {
         return EProductSaleStatus.soldout;
       default:
         throw Exception(
-            '[EProductSaleStatusExtension.fromJson] Unknown string value: $str');
+            '[EProductSaleStatus.fromJson] Unknown string value: $str');
     }
   }
 }

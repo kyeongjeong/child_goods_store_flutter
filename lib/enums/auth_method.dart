@@ -11,7 +11,7 @@ enum EAuthMethod {
 
   static String toJson(EAuthMethod? en) {
     if (en == null) {
-      throw Exception('[EAuthMethodExtension.toJson] Null value');
+      throw Exception('[EAuthMethod.toJson] Null value');
     }
 
     switch (en) {
@@ -30,7 +30,7 @@ enum EAuthMethod {
 
   static EAuthMethod fromJson(String? str) {
     if (str == null) {
-      throw Exception('[EAuthMethodExtension.fromJson] Null value');
+      throw Exception('[EAuthMethod.fromJson] Null value');
     }
 
     switch (str.toUpperCase()) {
@@ -45,8 +45,7 @@ enum EAuthMethod {
       case 'U3C1S':
         return EAuthMethod.u3C1S;
       default:
-        throw Exception(
-            '[EAddressCategoryExtension.fromJson] Unknown string value: $str');
+        throw Exception('[EAuthMethod.fromJson] Unknown string value: $str');
     }
   }
 }

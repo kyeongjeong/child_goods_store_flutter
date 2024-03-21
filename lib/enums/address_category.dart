@@ -10,7 +10,7 @@ enum EAddressCategory {
 
   static String toJson(EAddressCategory? en) {
     if (en == null) {
-      throw Exception('[EAddressCategoryExtension.toJson] Null value');
+      throw Exception('[EAddressCategory.toJson] Null value');
     }
 
     switch (en) {
@@ -27,7 +27,7 @@ enum EAddressCategory {
 
   static EAddressCategory fromJson(String? str) {
     if (str == null) {
-      throw Exception('[EAddressCategoryExtension.fromJson] Null value');
+      throw Exception('[EAddressCategory.fromJson] Null value');
     }
 
     switch (str.toUpperCase()) {
@@ -41,7 +41,7 @@ enum EAddressCategory {
         return EAddressCategory.etc;
       default:
         throw Exception(
-            '[EAddressCategoryExtension.fromJson] Unknown string value: $str');
+            '[EAddressCategory.fromJson] Unknown string value: $str');
     }
   }
 }
