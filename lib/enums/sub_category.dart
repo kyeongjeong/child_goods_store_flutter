@@ -1,55 +1,77 @@
 import 'package:child_goods_store_flutter/enums/main_category.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum ESubCategory {
-  top('상의', EMainCategory.clothing),
-  bottom('하의', EMainCategory.clothing),
-  socks('양말', EMainCategory.clothing),
-  otherClothing('기타', EMainCategory.clothing),
+  top('상의', EMainCategory.clothing, FontAwesomeIcons.shirt),
+  bottom('하의', EMainCategory.clothing, FontAwesomeIcons.tent),
+  socks('양말', EMainCategory.clothing, FontAwesomeIcons.socks),
+  otherClothing(
+      '기타 의류', EMainCategory.clothing, FontAwesomeIcons.barsStaggered),
 
-  bag('가방', EMainCategory.accessories),
-  hat('모자', EMainCategory.accessories),
-  accessory('악세서리', EMainCategory.accessories),
-  otherAccessories('기타', EMainCategory.accessories),
+  bag('가방', EMainCategory.accessories, FontAwesomeIcons.briefcase),
+  hat('모자', EMainCategory.accessories, FontAwesomeIcons.hatWizard),
+  accessory('악세서리', EMainCategory.accessories, FontAwesomeIcons.splotch),
+  otherAccessories(
+      '기타 잡화', EMainCategory.accessories, FontAwesomeIcons.barsStaggered),
 
-  diaper('기저귀', EMainCategory.babyKidsItems),
-  stroller('유모차', EMainCategory.babyKidsItems),
-  babyCarrier('아기띠', EMainCategory.babyKidsItems),
-  carSeat('카시트', EMainCategory.babyKidsItems),
-  rider('보행기 / 쏘서', EMainCategory.babyKidsItems),
-  furniture('가구 / 침대 / 매트', EMainCategory.babyKidsItems),
-  bedding('이불/침구', EMainCategory.babyKidsItems),
-  babySkincare('유아동 스킨케어', EMainCategory.babyKidsItems),
-  otherBabyKidsItems('기타', EMainCategory.babyKidsItems),
+  diaper('기저귀', EMainCategory.babyKidsItems, FontAwesomeIcons.baby),
+  stroller('유모차', EMainCategory.babyKidsItems, FontAwesomeIcons.babyCarriage),
+  babyCarrier(
+      '아기띠', EMainCategory.babyKidsItems, FontAwesomeIcons.personBreastfeeding),
+  carSeat('카시트', EMainCategory.babyKidsItems, FontAwesomeIcons.car),
+  rider('보행기/쏘서', EMainCategory.babyKidsItems, FontAwesomeIcons.personWalking),
+  furniture('가구/침대/매트', EMainCategory.babyKidsItems, FontAwesomeIcons.bed),
+  bedding(
+      '이불/침구', EMainCategory.babyKidsItems, FontAwesomeIcons.mattressPillow),
+  babySkincare('유아동 스킨케어', EMainCategory.babyKidsItems, FontAwesomeIcons.flask),
+  otherBabyKidsItems(
+      '기타 유아동 용품', EMainCategory.babyKidsItems, FontAwesomeIcons.barsStaggered),
 
-  wipes('물티슈', EMainCategory.hygieneCleaning),
-  bath('목욕 / 구강용품', EMainCategory.hygieneCleaning),
-  cleaningItems('세정용품', EMainCategory.hygieneCleaning),
-  disinfectant('소독기', EMainCategory.hygieneCleaning),
-  otherHygieneCleaning('기타', EMainCategory.hygieneCleaning),
+  wipes('물티슈', EMainCategory.hygieneCleaning, FontAwesomeIcons.boxTissue),
+  bath('목욕/구강용품', EMainCategory.hygieneCleaning, FontAwesomeIcons.bath),
+  cleaningItems(
+      '세정용품', EMainCategory.hygieneCleaning, FontAwesomeIcons.pumpSoap),
+  disinfectant(
+      '소독기', EMainCategory.hygieneCleaning, FontAwesomeIcons.hardDrive),
+  otherHygieneCleaning('기타 위생/세척', EMainCategory.hygieneCleaning,
+      FontAwesomeIcons.barsStaggered),
 
-  doll('인형', EMainCategory.toys),
-  robot('로봇', EMainCategory.toys),
-  sports('스포츠', EMainCategory.toys),
-  waterPlay('물놀이', EMainCategory.toys),
-  educationalToy('교구', EMainCategory.toys),
-  playhouseTent('놀이집 텐트 / 미끄럼틀', EMainCategory.toys),
-  otherToys('기타', EMainCategory.toys),
+  doll('인형', EMainCategory.toys, FontAwesomeIcons.otter),
+  robot('로봇', EMainCategory.toys, FontAwesomeIcons.robot),
+  sports('스포츠', EMainCategory.toys, FontAwesomeIcons.baseballBatBall),
+  waterPlay('물놀이', EMainCategory.toys, FontAwesomeIcons.personSwimming),
+  educationalToy('교구', EMainCategory.toys, FontAwesomeIcons.bookOpen),
+  playhouseTent('놀이집 텐트/미끄럼틀', EMainCategory.toys, FontAwesomeIcons.campground),
+  otherToys('기타 교구/완구', EMainCategory.toys, FontAwesomeIcons.barsStaggered),
 
-  maternityClothing('임부의류 / 수유복', EMainCategory.maternityItems),
-  maternitySkincare('임부 스킨케어', EMainCategory.maternityItems),
-  otherMaternityItems('기타', EMainCategory.maternityItems),
+  maternityClothing('임부의류/수유복', EMainCategory.maternityItems,
+      FontAwesomeIcons.personBreastfeeding),
+  maternitySkincare(
+      '임부 스킨케어', EMainCategory.maternityItems, FontAwesomeIcons.flask),
+  otherMaternityItems('기타 임부 의류/용품', EMainCategory.maternityItems,
+      FontAwesomeIcons.barsStaggered),
 
-  food('식품', EMainCategory.feedingSupplies),
-  formula('분유', EMainCategory.feedingSupplies),
-  bottle('젖병', EMainCategory.feedingSupplies),
-  feedingSupplies('수유 용품', EMainCategory.feedingSupplies),
-  plates('수저 / 식판 / 이유식 용품', EMainCategory.feedingSupplies),
-  otherFeedingSupplies('기타', EMainCategory.feedingSupplies);
+  food('식품', EMainCategory.feedingSupplies, FontAwesomeIcons.bowlRice),
+  formula(
+      '분유', EMainCategory.feedingSupplies, FontAwesomeIcons.prescriptionBottle),
+  bottle('젖병', EMainCategory.feedingSupplies, FontAwesomeIcons.bottleWater),
+  feedingSupplies('수유 용품', EMainCategory.feedingSupplies,
+      FontAwesomeIcons.personBreastfeeding),
+  plates('수저/식판/이유식 용품', EMainCategory.feedingSupplies,
+      FontAwesomeIcons.kitchenSet),
+  otherFeedingSupplies('기타 식품/수유/이유 용품', EMainCategory.feedingSupplies,
+      FontAwesomeIcons.barsStaggered);
 
   final String text;
   final EMainCategory mainCategory;
+  final IconData icon;
 
-  const ESubCategory(this.text, this.mainCategory);
+  const ESubCategory(
+    this.text,
+    this.mainCategory,
+    this.icon,
+  );
 
   static String? toJson(ESubCategory? en) {
     switch (en) {
@@ -239,7 +261,7 @@ extension SSubCategoryExtension on String {
         return ESubCategory.bottom;
       case '양말':
         return ESubCategory.socks;
-      case '기타':
+      case '기타 의류':
         return ESubCategory.otherClothing;
 
       case '가방':
@@ -248,7 +270,7 @@ extension SSubCategoryExtension on String {
         return ESubCategory.hat;
       case '악세서리':
         return ESubCategory.accessory;
-      case '기타':
+      case '기타 잡화':
         return ESubCategory.otherAccessories;
 
       case '기저귀':
@@ -259,26 +281,26 @@ extension SSubCategoryExtension on String {
         return ESubCategory.babyCarrier;
       case '카시트':
         return ESubCategory.carSeat;
-      case '보행기 / 쏘서':
+      case '보행기/쏘서':
         return ESubCategory.rider;
-      case '가구 / 침대 / 매트':
+      case '가구/침대/매트':
         return ESubCategory.furniture;
       case '이불/침구':
         return ESubCategory.bedding;
       case '유아동 스킨케어':
         return ESubCategory.babySkincare;
-      case '기타':
+      case '기타 유아동 용품':
         return ESubCategory.otherBabyKidsItems;
 
       case '물티슈':
         return ESubCategory.wipes;
-      case '목욕 / 구강용품':
+      case '목욕/구강용품':
         return ESubCategory.bath;
       case '세정용품':
         return ESubCategory.cleaningItems;
       case '소독기':
         return ESubCategory.disinfectant;
-      case '기타':
+      case '기타 위생/세척':
         return ESubCategory.otherHygieneCleaning;
 
       case '인형':
@@ -291,16 +313,16 @@ extension SSubCategoryExtension on String {
         return ESubCategory.waterPlay;
       case '교구':
         return ESubCategory.educationalToy;
-      case '놀이집 텐트 / 미끄럼틀':
+      case '놀이집 텐트/미끄럼틀':
         return ESubCategory.playhouseTent;
-      case '기타':
+      case '기타 교구/완구':
         return ESubCategory.otherToys;
 
-      case '임부의류 / 수유복':
+      case '임부의류/수유복':
         return ESubCategory.maternityClothing;
       case '임부 스킨케어':
         return ESubCategory.maternitySkincare;
-      case '기타':
+      case '기타 임부 의류/용품':
         return ESubCategory.otherMaternityItems;
 
       case '식품':
@@ -311,9 +333,9 @@ extension SSubCategoryExtension on String {
         return ESubCategory.bottle;
       case '수유 용품':
         return ESubCategory.feedingSupplies;
-      case '수저 / 식판 / 이유식 용품':
+      case '수저/식판/이유식 용품':
         return ESubCategory.plates;
-      case '기타':
+      case '기타 식품/수유/이유 용품':
         return ESubCategory.otherFeedingSupplies;
       default:
         throw Exception(

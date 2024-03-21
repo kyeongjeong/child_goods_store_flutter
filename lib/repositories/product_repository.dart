@@ -1,7 +1,13 @@
+import 'package:child_goods_store_flutter/enums/child_age.dart';
+import 'package:child_goods_store_flutter/enums/child_gender.dart';
+import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
 import 'package:child_goods_store_flutter/enums/product_status.dart';
+import 'package:child_goods_store_flutter/enums/search_range.dart';
+import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
+import 'package:child_goods_store_flutter/main_prod.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
@@ -10,14 +16,41 @@ import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class ProductRepository {
-  Future<ResModel<List<ProductPreviewModel>>> getProductList(
-      // filters
-      ) async {
+  Future<ResModel<List<ProductPreviewModel>>> getProductList({
+    required ESearchRange region,
+    EMainCategory? mainCategory,
+    ESubCategory? subCategory,
+    EChildAge? age,
+    EChildGender? gender,
+    int? minPrice,
+    int? maxPrice,
+  }) async {
+    Map<String, dynamic> queryParams = {};
+    queryParams['region'] = region.key;
+    if (mainCategory != null) {
+      queryParams['mainCategory'] = mainCategory.key;
+    }
+    if (subCategory != null) {
+      queryParams['subCategory'] = subCategory.key;
+    }
+    if (age != null) {
+      queryParams['age'] = age.key;
+    }
+    if (gender != null) {
+      queryParams['gender'] = gender.key;
+    }
+    if (minPrice != null) {
+      queryParams['minPrice'] = minPrice;
+    }
+    if (maxPrice != null) {
+      queryParams['maxPrice'] = maxPrice;
+    }
+
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
     // dio.get(
     //   '/product',
-    //   queryParameters: {},
+    //   queryParameters: queryParams,
     // );
 
     // TODO: connect api

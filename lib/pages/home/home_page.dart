@@ -38,10 +38,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _scrollListener() {
-    if (_scrollController.offset >=
-        _scrollController.position.maxScrollExtent) {
-      _getProducts();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.offset >=
+          _scrollController.position.maxScrollExtent) {
+        _getProducts();
+      }
+    });
   }
 
   void _getProducts({bool force = false}) {

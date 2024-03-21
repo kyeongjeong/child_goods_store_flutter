@@ -1,11 +1,11 @@
 enum EMainCategory {
   clothing('의류'),
   accessories('잡화'),
-  babyKidsItems('유아동용품'),
-  hygieneCleaning('위생 / 세척'),
-  toys('교구 / 완구'),
-  maternityItems('임부 의류 / 용품'),
-  feedingSupplies('식품 / 수유 / 이유용품');
+  babyKidsItems('유아동 용품'),
+  hygieneCleaning('위생/세척'),
+  toys('교구/완구'),
+  maternityItems('임부 의류/용품'),
+  feedingSupplies('식품/수유/이유 용품');
 
   final String text;
 
@@ -61,15 +61,15 @@ extension SMainCategoryExtension on String {
         return EMainCategory.clothing;
       case '잡화':
         return EMainCategory.accessories;
-      case '유아동용품':
+      case '유아동 용품':
         return EMainCategory.babyKidsItems;
-      case '위생 / 세척':
+      case '위생/세척':
         return EMainCategory.hygieneCleaning;
-      case '교구 / 완구':
+      case '교구/완구':
         return EMainCategory.toys;
-      case '임부 의류 / 용품':
+      case '임부 의류/용품':
         return EMainCategory.maternityItems;
-      case '식품 / 수유 / 이유용품':
+      case '식품/수유/이유 용품':
         return EMainCategory.feedingSupplies;
       default:
         throw Exception(

@@ -446,6 +446,7 @@ class _AppRouterState extends State<AppRouter> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         primaryColor: Colors.cyan.shade600,
         splashColor: Colors.black.withOpacity(0.1),
+        dividerColor: Colors.black.withOpacity(0.2),
         appBarTheme: const AppBarTheme(
           centerTitle: false,
           surfaceTintColor: Colors.transparent,
