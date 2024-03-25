@@ -103,7 +103,7 @@ class EditChildBloc extends Bloc<EditChildEvent, EditChildState>
       emit(state.copyWith(status: ELoadingStatus.init));
       return;
     }
-    if (state.child.gender == null || state.child.gender == Strings.nullStr) {
+    if (state.child.gender == null) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
         message: '자녀 성별을 선택해주세요.',

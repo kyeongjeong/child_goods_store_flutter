@@ -1,3 +1,5 @@
+import 'package:child_goods_store_flutter/enums/child_age.dart';
+import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
@@ -10,7 +12,7 @@ class ChildRepository {
     // dio.interceptors.add(AuthInterceptor());
     // dio.get('/child');
 
-    // TODO: app connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<List<ChildModel>>(
@@ -19,8 +21,8 @@ class ChildRepository {
         ChildModel(
           childId: 1,
           name: '민준',
-          age: 12,
-          gender: 'M',
+          age: EChildAge.age12,
+          gender: EChildGender.man,
           childImg:
               'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
           tag: ['파란색', '편한', '토이스토리', '로봇', '공룡', '태그 뭐하지', '좀 많으면 어캐될까'],
@@ -28,8 +30,8 @@ class ChildRepository {
         ChildModel(
           childId: 2,
           name: '이현',
-          age: 12,
-          gender: 'W',
+          age: EChildAge.age12,
+          gender: EChildGender.woman,
           childImg:
               'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
           tag: ['귀여운', '알록달록한', '공주'],
@@ -59,7 +61,9 @@ class ChildRepository {
     //   data: child.toJson(),
     // );
 
-    // TODO: app connect
+    print(child.toJson());
+
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(
@@ -94,7 +98,7 @@ class ChildRepository {
     //   data: child.toJson(),
     // );
 
-    // TODO: app connect
+    // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
     var resTmp = ResModel<ChildModel>(

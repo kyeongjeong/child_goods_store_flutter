@@ -3,9 +3,12 @@ import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_product/edit_product_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
@@ -19,15 +22,18 @@ import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
+import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_product/edit_product_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
+import 'package:child_goods_store_flutter/pages/product_detail/product_detail_page.dart';
 import 'package:child_goods_store_flutter/pages/profile/profile_page.dart';
 import 'package:child_goods_store_flutter/pages/settings/settings_page.dart';
 import 'package:child_goods_store_flutter/pages/ship/ship_page.dart';
@@ -39,6 +45,7 @@ import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
+import 'package:child_goods_store_flutter/repositories/product_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:child_goods_store_flutter/utils/page_transition.dart';
@@ -207,39 +214,50 @@ class _AppRouterState extends State<AppRouter> {
             // ignore `name` field for disable GA
             child: Scaffold(
               body: navigationShell,
-              bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                useLegacyColorScheme: true,
-                unselectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
-                selectedLabelStyle: const TextStyle(fontSize: Sizes.size12),
-                selectedIconTheme: const IconThemeData(size: Sizes.size28),
-                items: [
-                  const BottomNavigationBarItem(
-                    label: '중고거래',
-                    icon: Icon(Icons.home),
-                  ),
-                  BottomNavigationBarItem(
-                    label: '공동구매',
-                    icon: Transform.scale(
-                      scale: 0.8,
-                      child: const Icon(FontAwesomeIcons.boxesStacked),
+              bottomNavigationBar: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: Sizes.size5,
+                      spreadRadius: Sizes.size1,
                     ),
-                  ),
-                  const BottomNavigationBarItem(
-                    label: '자녀',
-                    icon: Icon(Icons.child_care_rounded),
-                  ),
-                  const BottomNavigationBarItem(
-                    label: '채팅',
-                    icon: Icon(Icons.chat_rounded),
-                  ),
-                  const BottomNavigationBarItem(
-                    label: '내 정보',
-                    icon: Icon(Icons.person_rounded),
-                  ),
-                ],
-                currentIndex: navigationShell.currentIndex,
-                onTap: (value) => navigationShell.goBranch(value),
+                  ],
+                ),
+                child: BottomNavigationBar(
+                  enableFeedback: false,
+                  type: BottomNavigationBarType.fixed,
+                  unselectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
+                  selectedLabelStyle: const TextStyle(fontSize: Sizes.size12),
+                  selectedIconTheme: const IconThemeData(size: Sizes.size28),
+                  items: [
+                    const BottomNavigationBarItem(
+                      label: '중고거래',
+                      icon: Icon(Icons.home),
+                    ),
+                    BottomNavigationBarItem(
+                      label: '공동구매',
+                      icon: Transform.scale(
+                        scale: 0.8,
+                        child: const Icon(FontAwesomeIcons.boxesStacked),
+                      ),
+                    ),
+                    const BottomNavigationBarItem(
+                      label: '자녀',
+                      icon: Icon(Icons.child_care_rounded),
+                    ),
+                    const BottomNavigationBarItem(
+                      label: '채팅',
+                      icon: Icon(Icons.chat_rounded),
+                    ),
+                    const BottomNavigationBarItem(
+                      label: '내 정보',
+                      icon: Icon(Icons.person_rounded),
+                    ),
+                  ],
+                  currentIndex: navigationShell.currentIndex,
+                  onTap: (value) => navigationShell.goBranch(value),
+                ),
               ),
             ),
           ),
@@ -249,7 +267,12 @@ class _AppRouterState extends State<AppRouter> {
                 GoRoute(
                   name: Routes.home,
                   path: Routes.home,
-                  builder: (context, state) => const HomePage(),
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => ProductListBloc(
+                      productRepository: context.read<ProductRepository>(),
+                    ),
+                    child: const HomePage(),
+                  ),
                 ),
               ],
             ),
@@ -305,6 +328,25 @@ class _AppRouterState extends State<AppRouter> {
           ],
         ),
         GoRoute(
+          path: '${Routes.productDetail}/:productId',
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': int.parse(state.pathParameters['productId'] as String),
+            },
+            child: BlocProvider(
+              create: (context) => ProductDetailBloc(
+                productRepository: context.read<ProductRepository>(),
+                productId:
+                    int.parse(state.pathParameters['productId'] as String),
+              ),
+              child: const ProductDetailPage(),
+            ),
+          ),
+        ),
+
+        GoRoute(
           path: '${Routes.profile}/:userId',
           pageBuilder: (context, state) => PageTransition.cupertino(
             key: state.pageKey,
@@ -333,11 +375,38 @@ class _AppRouterState extends State<AppRouter> {
               create: (context) => FollowBloc(
                 userRepository: context.read<UserRepository>(),
                 userId: int.parse(state.pathParameters['userId'] as String),
-                mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+                mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
               child: FollowPage(
-                mode: strToEFollowMode(state.uri.queryParameters['mode'])!,
+                mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: Routes.editProduct,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': (state.extra as GoRouterExtraModel<ProductModel>?)
+                      ?.data
+                      ?.productId ??
+                  -1
+            },
+            child: BlocProvider(
+              create: (context) => EditProductBloc(
+                productRepository: context.read<ProductRepository>(),
+                imageRepository: context.read<ImageRepository>(),
+                httpMethod:
+                    (state.extra as GoRouterExtraModel<ProductModel>?)?.data ==
+                            null
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+                product:
+                    (state.extra as GoRouterExtraModel<ProductModel>?)?.data,
+              ),
+              child: const EditProductPage(),
             ),
           ),
         ),
@@ -407,8 +476,12 @@ class _AppRouterState extends State<AppRouter> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         primaryColor: Colors.cyan.shade600,
         splashColor: Colors.black.withOpacity(0.1),
+        dividerColor: Colors.black.withOpacity(0.2),
         appBarTheme: const AppBarTheme(
           centerTitle: false,
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.black,
+          scrolledUnderElevation: Sizes.size1,
           titleTextStyle: TextStyle(
             fontSize: Sizes.size16,
             fontWeight: FontWeight.w700,

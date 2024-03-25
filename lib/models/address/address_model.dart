@@ -10,6 +10,10 @@ class AddressModel with _$AddressModel {
     int? addressId,
     String? address,
     String? detailAddress,
+    @JsonKey(
+      fromJson: EAddressCategory.fromJson,
+      toJson: EAddressCategory.toJson,
+    )
     EAddressCategory? category,
   }) = _AddressModel;
 

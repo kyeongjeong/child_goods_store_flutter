@@ -11,8 +11,7 @@ _$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
       addressId: json['addressId'] as int?,
       address: json['address'] as String?,
       detailAddress: json['detailAddress'] as String?,
-      category:
-          $enumDecodeNullable(_$EAddressCategoryEnumMap, json['category']),
+      category: EAddressCategory.fromJson(json['category'] as String?),
     );
 
 Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
@@ -20,12 +19,5 @@ Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
       'addressId': instance.addressId,
       'address': instance.address,
       'detailAddress': instance.detailAddress,
-      'category': _$EAddressCategoryEnumMap[instance.category],
+      'category': EAddressCategory.toJson(instance.category),
     };
-
-const _$EAddressCategoryEnumMap = {
-  EAddressCategory.home: 'home',
-  EAddressCategory.work: 'work',
-  EAddressCategory.school: 'school',
-  EAddressCategory.etc: 'etc',
-};

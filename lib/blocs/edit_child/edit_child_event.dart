@@ -1,3 +1,5 @@
+import 'package:child_goods_store_flutter/enums/child_age.dart';
+import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:image_picker/image_picker.dart';
 
 abstract class EditChildEvent {}
@@ -16,16 +18,14 @@ class EditChildChangeName extends EditChildEvent {
 }
 
 class EditChildChangeGender extends EditChildEvent {
-  final String gender;
+  final EChildGender gender;
 
-  /// gender: M or W
   EditChildChangeGender(this.gender);
 }
 
 class EditChildChangeAge extends EditChildEvent {
-  final int age;
+  final EChildAge age;
 
-  /// age: month unit
   EditChildChangeAge(this.age);
 }
 

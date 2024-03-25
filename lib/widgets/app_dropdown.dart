@@ -46,6 +46,10 @@ class AppDropdown extends StatelessWidget {
           icon: const Icon(Icons.arrow_drop_down_rounded),
           value: _valueCheck(),
           menuMaxHeight: 300,
+          style: const TextStyle(
+            fontSize: Sizes.size14,
+            color: Colors.black,
+          ),
           hint: AppFont(hint),
           items: [
             for (var value in values)

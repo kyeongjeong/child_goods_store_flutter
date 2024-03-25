@@ -17,8 +17,8 @@ class EditChildAge extends StatelessWidget {
     BuildContext context, {
     required String age,
   }) {
-    if (strToAge(age) == null) return;
-    context.read<EditChildBloc>().add(EditChildChangeAge(strToAge(age)!));
+    var ag = age.childAgeEnum;
+    context.read<EditChildBloc>().add(EditChildChangeAge(ag));
   }
 
   @override
@@ -36,7 +36,7 @@ class EditChildAge extends StatelessWidget {
           builder: (context, state) => AppDropdown(
             width: double.infinity,
             hint: '연령(개월)',
-            value: ageToEChildAge(state.child.age)?.text,
+            value: state.child.age?.text,
             values: [for (var eAge in EChildAge.values) eAge.text],
             onChanged: (value) => _onAgeChange(
               context,

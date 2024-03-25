@@ -2,9 +2,10 @@ import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_event.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
+import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
-import 'package:child_goods_store_flutter/pages/child/widgets/child_icon_button.dart';
+import 'package:child_goods_store_flutter/widgets/common/v_icon_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_h_spliter.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
@@ -72,8 +73,9 @@ class ChildListCard extends StatelessWidget {
               for (var child in children)
                 Padding(
                   padding: const EdgeInsets.only(right: Sizes.size10),
-                  child: ChildIconButton(
-                    child: child,
+                  child: VIconButton(
+                    image: child.childImg,
+                    title: child.name ?? Strings.nullStr,
                     onTap: () => _onTapSelectChild(
                       context,
                       childId: child.childId!,
