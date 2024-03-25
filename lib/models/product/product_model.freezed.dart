@@ -25,6 +25,10 @@ mixin _$ProductModel {
   String? get productName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+  EMainCategory? get mainCategory => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+  ESubCategory? get subCategory => throw _privateConstructorUsedError;
   @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
   EProductStatus? get productStatus => throw _privateConstructorUsedError;
   @JsonKey(
@@ -56,6 +60,10 @@ abstract class $ProductModelCopyWith<$Res> {
       String? productName,
       int? price,
       String? content,
+      @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+      EMainCategory? mainCategory,
+      @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+      ESubCategory? subCategory,
       @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       EProductStatus? productStatus,
       @JsonKey(
@@ -90,6 +98,8 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? productName = freezed,
     Object? price = freezed,
     Object? content = freezed,
+    Object? mainCategory = freezed,
+    Object? subCategory = freezed,
     Object? productStatus = freezed,
     Object? state = freezed,
     Object? createAt = freezed,
@@ -119,6 +129,14 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      mainCategory: freezed == mainCategory
+          ? _value.mainCategory
+          : mainCategory // ignore: cast_nullable_to_non_nullable
+              as EMainCategory?,
+      subCategory: freezed == subCategory
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as ESubCategory?,
       productStatus: freezed == productStatus
           ? _value.productStatus
           : productStatus // ignore: cast_nullable_to_non_nullable
@@ -177,6 +195,10 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       String? productName,
       int? price,
       String? content,
+      @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+      EMainCategory? mainCategory,
+      @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+      ESubCategory? subCategory,
       @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       EProductStatus? productStatus,
       @JsonKey(
@@ -210,6 +232,8 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? productName = freezed,
     Object? price = freezed,
     Object? content = freezed,
+    Object? mainCategory = freezed,
+    Object? subCategory = freezed,
     Object? productStatus = freezed,
     Object? state = freezed,
     Object? createAt = freezed,
@@ -239,6 +263,14 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      mainCategory: freezed == mainCategory
+          ? _value.mainCategory
+          : mainCategory // ignore: cast_nullable_to_non_nullable
+              as EMainCategory?,
+      subCategory: freezed == subCategory
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as ESubCategory?,
       productStatus: freezed == productStatus
           ? _value.productStatus
           : productStatus // ignore: cast_nullable_to_non_nullable
@@ -280,6 +312,10 @@ class _$ProductModelImpl implements _ProductModel {
       this.productName,
       this.price,
       this.content,
+      @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+      this.mainCategory,
+      @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+      this.subCategory,
       @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       this.productStatus,
       @JsonKey(
@@ -309,6 +345,12 @@ class _$ProductModelImpl implements _ProductModel {
   final int? price;
   @override
   final String? content;
+  @override
+  @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+  final EMainCategory? mainCategory;
+  @override
+  @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+  final ESubCategory? subCategory;
   @override
   @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
   final EProductStatus? productStatus;
@@ -343,7 +385,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, productStatus: $productStatus, state: $state, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
+    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productStatus: $productStatus, state: $state, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
   }
 
   @override
@@ -358,6 +400,10 @@ class _$ProductModelImpl implements _ProductModel {
                 other.productName == productName) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.mainCategory, mainCategory) ||
+                other.mainCategory == mainCategory) &&
+            (identical(other.subCategory, subCategory) ||
+                other.subCategory == subCategory) &&
             (identical(other.productStatus, productStatus) ||
                 other.productStatus == productStatus) &&
             (identical(other.state, state) || other.state == state) &&
@@ -381,6 +427,8 @@ class _$ProductModelImpl implements _ProductModel {
       productName,
       price,
       content,
+      mainCategory,
+      subCategory,
       productStatus,
       state,
       createAt,
@@ -410,6 +458,10 @@ abstract class _ProductModel implements ProductModel {
       final String? productName,
       final int? price,
       final String? content,
+      @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+      final EMainCategory? mainCategory,
+      @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+      final ESubCategory? subCategory,
       @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
       final EProductStatus? productStatus,
       @JsonKey(
@@ -436,6 +488,12 @@ abstract class _ProductModel implements ProductModel {
   int? get price;
   @override
   String? get content;
+  @override
+  @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
+  EMainCategory? get mainCategory;
+  @override
+  @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
+  ESubCategory? get subCategory;
   @override
   @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
   EProductStatus? get productStatus;

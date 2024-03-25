@@ -10,6 +10,7 @@ class Routes {
   static const String editTag = '/edit_tag';
   static const String editProfile = '/edit_profile';
   static const String editAddress = '/edit_address';
+  static const String editProduct = '/edit_product';
   static const String editChild = '/edit_child';
 
   static const String home = '/home';

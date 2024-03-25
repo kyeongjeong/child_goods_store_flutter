@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_product/edit_product_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
@@ -21,10 +22,12 @@ import 'package:child_goods_store_flutter/flavors.dart';
 import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
+import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_product/edit_product_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
@@ -377,6 +380,33 @@ class _AppRouterState extends State<AppRouter> {
               child: FollowPage(
                 mode: (state.uri.queryParameters['mode'])!.followModeEnum,
               ),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: Routes.editProduct,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': (state.extra as GoRouterExtraModel<ProductModel>?)
+                      ?.data
+                      ?.productId ??
+                  -1
+            },
+            child: BlocProvider(
+              create: (context) => EditProductBloc(
+                productRepository: context.read<ProductRepository>(),
+                imageRepository: context.read<ImageRepository>(),
+                httpMethod:
+                    (state.extra as GoRouterExtraModel<ProductModel>?)?.data ==
+                            null
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+                product:
+                    (state.extra as GoRouterExtraModel<ProductModel>?)?.data,
+              ),
+              child: const EditProductPage(),
             ),
           ),
         ),

@@ -15,6 +15,8 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
       productName: json['productName'] as String?,
       price: json['price'] as int?,
       content: json['content'] as String?,
+      mainCategory: EMainCategory.fromJson(json['mainCategory'] as String?),
+      subCategory: ESubCategory.fromJson(json['subCategory'] as String?),
       productStatus: EProductStatus.fromJson(json['productStatus'] as String?),
       state: EProductSaleStatus.fromJson(json['state'] as String?),
       createAt: json['createAt'] == null
@@ -37,6 +39,8 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
       'productName': instance.productName,
       'price': instance.price,
       'content': instance.content,
+      'mainCategory': EMainCategory.toJson(instance.mainCategory),
+      'subCategory': ESubCategory.toJson(instance.subCategory),
       'productStatus': EProductStatus.toJson(instance.productStatus),
       'state': EProductSaleStatus.toJson(instance.state),
       'createAt': instance.createAt?.toIso8601String(),

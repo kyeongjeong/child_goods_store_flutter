@@ -107,6 +107,8 @@ class ProductRepository {
         productName: '$productId th product',
         price: 12000,
         content: '$productId th product contents',
+        mainCategory: EMainCategory.clothing,
+        subCategory: ESubCategory.top,
         productStatus: EProductStatus.littleUsage,
         state: EProductSaleStatus.sale,
         createAt: DateTime.now(),
@@ -226,6 +228,62 @@ class ProductRepository {
       (json) => (json as List<dynamic>)
           .map((user) => UserProfileModel.fromJson(user))
           .toList(),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<int>> postProduct({
+    required ProductModel product,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post(
+    //   '/product',
+    //   data: product.toJson(),
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<int>(
+      code: 1000,
+      data: 999,
+    ).toJson(
+      (id) => id.toString(),
+    );
+
+    var res = ResModel<int>.fromJson(
+      resTmp,
+      (json) => int.parse(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<int>> patchProduct({
+    required ProductModel product,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post(
+    //   '/product/${product.productId}',
+    //   data: product.toJson(),
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<int>(
+      code: 1000,
+      data: product.productId,
+    ).toJson(
+      (id) => id.toString(),
+    );
+
+    var res = ResModel<int>.fromJson(
+      resTmp,
+      (json) => int.parse(json),
     );
 
     return res;

@@ -4,10 +4,13 @@ import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bl
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
+import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
+import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/pages/product_detail/widgets/product_detail_buyer_list.dart';
 import 'package:child_goods_store_flutter/repositories/product_repository.dart';
 import 'package:child_goods_store_flutter/widgets/app_bottom_sheet.dart';
@@ -18,10 +21,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:child_goods_store_flutter/utils/other_extensions.dart';
 
-class ProductDetailBottomBar extends StatelessWidget {
+class ProductDetailBottomBar extends StatefulWidget {
   const ProductDetailBottomBar({super.key});
 
-  void _onTapChangeStatus(BuildContext context) {
+  @override
+  State<ProductDetailBottomBar> createState() => _ProductDetailBottomBarState();
+}
+
+class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
+  void _onTapChangeStatus({
+    required ProductBuyerBloc bloc,
+  }) {
     AppBottomSheet.show(
       context,
       child: Material(
@@ -32,9 +42,8 @@ class ProductDetailBottomBar extends StatelessWidget {
                 color: Colors.transparent,
                 shadowColor: Colors.transparent,
                 onTap: () => _onTapChangeStatusItem(
-                  context,
                   status: status,
-                  bloc: context.read<ProductBuyerBloc>(),
+                  bloc: bloc,
                 ),
                 child: SizedBox(
                   width: double.infinity,
@@ -59,8 +68,7 @@ class ProductDetailBottomBar extends StatelessWidget {
     );
   }
 
-  void _onTapChangeStatusItem(
-    BuildContext context, {
+  void _onTapChangeStatusItem({
     required EProductSaleStatus status,
     required ProductBuyerBloc bloc,
   }) {
@@ -76,19 +84,13 @@ class ProductDetailBottomBar extends StatelessWidget {
         builder: (_, controller) => ProductDetailBuyerList(
           controller: controller,
           bloc: bloc,
-          onSelectBuyer: (userId) => _onSelectBuyer(
-            context,
-            userId: userId,
-          ),
+          onSelectBuyer: (userId) => _onSelectBuyer(userId),
         ),
       );
     }
   }
 
-  void _onSelectBuyer(
-    BuildContext context, {
-    required int userId,
-  }) {
+  void _onSelectBuyer(int userId) {
     context.read<ProductDetailBloc>().add(ProductDetailChangeSaleStatus(
           EProductSaleStatus.soldout,
           userId: userId,
@@ -96,7 +98,18 @@ class ProductDetailBottomBar extends StatelessWidget {
     context.pop();
   }
 
-  void _onTapEditProduct() {}
+  void _onTapEditProduct() async {
+    var res = await context.push<GoRouterExtraModel<int>>(
+      Routes.editProduct,
+      extra: GoRouterExtraModel<ProductModel>(
+        data: context.read<ProductDetailBloc>().state.productModel,
+      ),
+    );
+
+    if (res?.data != null && mounted) {
+      context.read<ProductDetailBloc>().add(ProductDetailGet());
+    }
+  }
 
   void _onTapChat() {}
 
@@ -127,11 +140,12 @@ class ProductDetailBottomBar extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: Theme.of(context).scaffoldBackgroundColor,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   spreadRadius: Sizes.size1,
                   blurRadius: Sizes.size5,
-                  offset: Offset(0, Sizes.size2),
+                  offset: const Offset(0, Sizes.size2),
+                  color: Colors.black.withOpacity(0.3),
                 ),
               ],
             ),
@@ -150,7 +164,9 @@ class ProductDetailBottomBar extends StatelessWidget {
                     AppInkButton(
                       onTap: state.changeSaleStatus == ELoadingStatus.loading
                           ? null
-                          : () => _onTapChangeStatus(context),
+                          : () => _onTapChangeStatus(
+                                bloc: context.read<ProductBuyerBloc>(),
+                              ),
                       padding: const EdgeInsets.symmetric(
                         vertical: Sizes.size10,
                         horizontal: Sizes.size14,

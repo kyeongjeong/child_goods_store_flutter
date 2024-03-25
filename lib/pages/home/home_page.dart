@@ -2,16 +2,20 @@ import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.d
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/flavors.dart';
+import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/pages/home/widgets/home_app_bar.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
+import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
 import 'package:child_goods_store_flutter/widgets/common/product_listitem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -53,7 +57,16 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _pushEditProduct() {}
+  void _pushAddProduct() async {
+    var res = await context.push<GoRouterExtraModel<int>>(Routes.editProduct);
+
+    if (res?.data != null && mounted) {
+      AppSnackbar.show(
+        context,
+        message: '상품이 등록되었습니다!',
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +79,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(Sizes.size16),
         borderRadSize: Sizes.size40,
         color: Theme.of(context).primaryColor.withOpacity(0.6),
-        onTap: _pushEditProduct,
+        onTap: _pushAddProduct,
         child: const Icon(
           Icons.add_rounded,
           color: Colors.white,

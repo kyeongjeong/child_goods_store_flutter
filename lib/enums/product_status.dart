@@ -39,6 +39,23 @@ enum EProductStatus {
   }
 }
 
+extension SAddressCategoryExtension on String {
+  EProductStatus get productStatusEnum {
+    switch (this) {
+      case '새거에요':
+        return EProductStatus.noUsage;
+      case '조금 썼어요':
+        return EProductStatus.littleUsage;
+      case '많이 썼어요':
+        return EProductStatus.manyUsage;
+      case '헌거에요':
+        return EProductStatus.extremeUsage;
+      default:
+        throw Exception('[EProductStatus.enumVal] Unknown string value: $this');
+    }
+  }
+}
+
 extension EProductStatusExtension on EProductStatus {
   String get key {
     switch (this) {
