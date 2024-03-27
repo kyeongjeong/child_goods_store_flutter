@@ -12,6 +12,7 @@ import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.d
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
+import 'package:child_goods_store_flutter/blocs/together/list/together_list_bloc.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
@@ -47,6 +48,7 @@ import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/product_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
+import 'package:child_goods_store_flutter/repositories/together_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:child_goods_store_flutter/utils/page_transition.dart';
 import 'package:flutter/material.dart';
@@ -281,7 +283,12 @@ class _AppRouterState extends State<AppRouter> {
                 GoRoute(
                   name: Routes.together,
                   path: Routes.together,
-                  builder: (context, state) => const TogetherPage(),
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => TogetherListBloc(
+                      togetherRepository: context.read<TogetherRepository>(),
+                    ),
+                    child: const TogetherPage(),
+                  ),
                 ),
               ],
             ),

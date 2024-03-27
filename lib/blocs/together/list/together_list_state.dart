@@ -5,58 +5,47 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
-import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
+import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
 
-class ProductListState extends BlocState {
-  // ignore: constant_identifier_names
-  static const int MIN_PRICE = 0;
-  // ignore: constant_identifier_names
-  static const int MAX_PRICE = 200000;
-
+class TogetherListState extends BlocState {
   final EMainCategory? mainCategory;
   final ESubCategory? subCategory;
   final ESearchRange region;
   final EChildAge? age;
   final EChildGender? gender;
-  final int minPrice;
-  final int maxPrice;
   final bool applyFilter;
-  final List<ProductPreviewModel> products;
+  final List<TogetherPreviewModel> togethers;
 
-  const ProductListState({
+  const TogetherListState({
     this.mainCategory,
     this.subCategory,
     required this.region,
-    required this.products,
+    required this.togethers,
     this.age,
     this.gender,
-    required this.minPrice,
-    required this.maxPrice,
     required this.applyFilter,
     required super.status,
     super.message,
   });
 
-  const ProductListState.init()
+  const TogetherListState.init()
       : mainCategory = null,
         subCategory = null,
         region = ESearchRange.myRegion,
         age = null,
         gender = null,
-        minPrice = MIN_PRICE,
-        maxPrice = MAX_PRICE,
         applyFilter = true,
-        products = const [],
+        togethers = const [],
         super(
           status: ELoadingStatus.init,
           message: null,
         );
 
   @override
-  ProductListState copyWith({
+  TogetherListState copyWith({
     ELoadingStatus? status,
     String? message,
-    List<ProductPreviewModel>? products,
+    List<TogetherPreviewModel>? togethers,
     EMainCategory? mainCategory,
     bool? resetMain,
     ESubCategory? subCategory,
@@ -66,14 +55,12 @@ class ProductListState extends BlocState {
     bool? resetAge,
     EChildGender? gender,
     bool? resetGender,
-    int? minPrice,
-    int? maxPrice,
     bool? applyFilter,
   }) =>
-      ProductListState(
+      TogetherListState(
         status: status ?? this.status,
         message: message ?? this.message,
-        products: products ?? this.products,
+        togethers: togethers ?? this.togethers,
         mainCategory:
             resetMain == true ? null : (mainCategory ?? this.mainCategory),
         subCategory:
@@ -81,8 +68,6 @@ class ProductListState extends BlocState {
         region: region ?? this.region,
         age: resetAge == true ? null : (age ?? this.age),
         gender: resetGender == true ? null : (gender ?? this.gender),
-        minPrice: minPrice ?? this.minPrice,
-        maxPrice: maxPrice ?? this.maxPrice,
         applyFilter: applyFilter ?? this.applyFilter,
       );
 
@@ -90,14 +75,12 @@ class ProductListState extends BlocState {
   List<Object?> get props => [
         status,
         message,
-        products,
+        togethers,
         mainCategory,
         subCategory,
         region,
         age,
         gender,
-        minPrice,
-        maxPrice,
         applyFilter,
       ];
 }

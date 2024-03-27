@@ -6,6 +6,7 @@ import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/product_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
+import 'package:child_goods_store_flutter/repositories/together_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => ProductRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => TogetherRepository(),
         ),
         RepositoryProvider(
           create: (context) => ImageRepository(),
