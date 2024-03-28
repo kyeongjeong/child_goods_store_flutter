@@ -42,7 +42,7 @@ class TogetherListItem extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: AppNetworkImage(
-                      profileImg: together.productImage,
+                      profileImg: together.togetherImage,
                     ),
                   ),
                   Container(
@@ -68,7 +68,7 @@ class TogetherListItem extends StatelessWidget {
                       right: Sizes.size5,
                     ),
                     child: Icon(
-                      together.productHeart == true
+                      together.togetherHeart == true
                           ? Icons.favorite_rounded
                           : Icons.favorite_border_rounded,
                       color: Colors.redAccent,

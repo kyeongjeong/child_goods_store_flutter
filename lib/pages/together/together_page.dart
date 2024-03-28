@@ -57,8 +57,7 @@ class _TogetherPageState extends State<TogetherPage> {
   }
 
   void _pushAddTogether() async {
-    // TODO: Routes change to editTogether
-    var res = await context.push<GoRouterExtraModel<int>>(Routes.editProduct);
+    var res = await context.push<GoRouterExtraModel<int>>(Routes.editTogether);
 
     if (res?.data != null && mounted) {
       AppSnackbar.show(

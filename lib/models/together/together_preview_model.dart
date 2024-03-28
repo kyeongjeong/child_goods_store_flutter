@@ -13,8 +13,8 @@ class TogetherPreviewModel with _$TogetherPreviewModel {
     int? totalNum,
     int? purchaseNum,
     DateTime? deadline,
-    String? productImage,
-    bool? productHeart,
+    String? togetherImage,
+    bool? togetherHeart,
   }) = _TogetherPreviewModel;
 
   factory TogetherPreviewModel.fromJson(Map<String, dynamic> json) =>

@@ -6,6 +6,7 @@ import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart'
 import 'package:child_goods_store_flutter/blocs/edit_product/edit_product_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_together/edit_together_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
+import 'package:child_goods_store_flutter/models/together/together_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.dart';
@@ -31,6 +33,7 @@ import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart'
 import 'package:child_goods_store_flutter/pages/edit_product/edit_product_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_together/edit_together_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
 import 'package:child_goods_store_flutter/pages/home/home_page.dart';
 import 'package:child_goods_store_flutter/pages/notification/notification_page.dart';
@@ -414,6 +417,33 @@ class _AppRouterState extends State<AppRouter> {
                     (state.extra as GoRouterExtraModel<ProductModel>?)?.data,
               ),
               child: const EditProductPage(),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: Routes.editTogether,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': (state.extra as GoRouterExtraModel<TogetherModel>?)
+                      ?.data
+                      ?.togetherId ??
+                  -1
+            },
+            child: BlocProvider(
+              create: (context) => EditTogetherBloc(
+                togetherRepository: context.read<TogetherRepository>(),
+                imageRepository: context.read<ImageRepository>(),
+                httpMethod:
+                    (state.extra as GoRouterExtraModel<TogetherModel>?)?.data ==
+                            null
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+                together:
+                    (state.extra as GoRouterExtraModel<TogetherModel>?)?.data,
+              ),
+              child: const EditTogetherPage(),
             ),
           ),
         ),

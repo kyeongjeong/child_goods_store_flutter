@@ -27,8 +27,8 @@ mixin _$TogetherPreviewModel {
   int? get totalNum => throw _privateConstructorUsedError;
   int? get purchaseNum => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
-  String? get productImage => throw _privateConstructorUsedError;
-  bool? get productHeart => throw _privateConstructorUsedError;
+  String? get togetherImage => throw _privateConstructorUsedError;
+  bool? get togetherHeart => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,8 +50,8 @@ abstract class $TogetherPreviewModelCopyWith<$Res> {
       int? totalNum,
       int? purchaseNum,
       DateTime? deadline,
-      String? productImage,
-      bool? productHeart});
+      String? togetherImage,
+      bool? togetherHeart});
 }
 
 /// @nodoc
@@ -75,8 +75,8 @@ class _$TogetherPreviewModelCopyWithImpl<$Res,
     Object? totalNum = freezed,
     Object? purchaseNum = freezed,
     Object? deadline = freezed,
-    Object? productImage = freezed,
-    Object? productHeart = freezed,
+    Object? togetherImage = freezed,
+    Object? togetherHeart = freezed,
   }) {
     return _then(_value.copyWith(
       togetherId: freezed == togetherId
@@ -107,13 +107,13 @@ class _$TogetherPreviewModelCopyWithImpl<$Res,
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      productImage: freezed == productImage
-          ? _value.productImage
-          : productImage // ignore: cast_nullable_to_non_nullable
+      togetherImage: freezed == togetherImage
+          ? _value.togetherImage
+          : togetherImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      productHeart: freezed == productHeart
-          ? _value.productHeart
-          : productHeart // ignore: cast_nullable_to_non_nullable
+      togetherHeart: freezed == togetherHeart
+          ? _value.togetherHeart
+          : togetherHeart // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -135,8 +135,8 @@ abstract class _$$TogetherPreviewModelImplCopyWith<$Res>
       int? totalNum,
       int? purchaseNum,
       DateTime? deadline,
-      String? productImage,
-      bool? productHeart});
+      String? togetherImage,
+      bool? togetherHeart});
 }
 
 /// @nodoc
@@ -157,8 +157,8 @@ class __$$TogetherPreviewModelImplCopyWithImpl<$Res>
     Object? totalNum = freezed,
     Object? purchaseNum = freezed,
     Object? deadline = freezed,
-    Object? productImage = freezed,
-    Object? productHeart = freezed,
+    Object? togetherImage = freezed,
+    Object? togetherHeart = freezed,
   }) {
     return _then(_$TogetherPreviewModelImpl(
       togetherId: freezed == togetherId
@@ -189,13 +189,13 @@ class __$$TogetherPreviewModelImplCopyWithImpl<$Res>
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      productImage: freezed == productImage
-          ? _value.productImage
-          : productImage // ignore: cast_nullable_to_non_nullable
+      togetherImage: freezed == togetherImage
+          ? _value.togetherImage
+          : togetherImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      productHeart: freezed == productHeart
-          ? _value.productHeart
-          : productHeart // ignore: cast_nullable_to_non_nullable
+      togetherHeart: freezed == togetherHeart
+          ? _value.togetherHeart
+          : togetherHeart // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -212,8 +212,8 @@ class _$TogetherPreviewModelImpl implements _TogetherPreviewModel {
       this.totalNum,
       this.purchaseNum,
       this.deadline,
-      this.productImage,
-      this.productHeart});
+      this.togetherImage,
+      this.togetherHeart});
 
   factory _$TogetherPreviewModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TogetherPreviewModelImplFromJson(json);
@@ -233,13 +233,13 @@ class _$TogetherPreviewModelImpl implements _TogetherPreviewModel {
   @override
   final DateTime? deadline;
   @override
-  final String? productImage;
+  final String? togetherImage;
   @override
-  final bool? productHeart;
+  final bool? togetherHeart;
 
   @override
   String toString() {
-    return 'TogetherPreviewModel(togetherId: $togetherId, togetherName: $togetherName, totalPrice: $totalPrice, purchasePrice: $purchasePrice, totalNum: $totalNum, purchaseNum: $purchaseNum, deadline: $deadline, productImage: $productImage, productHeart: $productHeart)';
+    return 'TogetherPreviewModel(togetherId: $togetherId, togetherName: $togetherName, totalPrice: $totalPrice, purchasePrice: $purchasePrice, totalNum: $totalNum, purchaseNum: $purchaseNum, deadline: $deadline, togetherImage: $togetherImage, togetherHeart: $togetherHeart)';
   }
 
   @override
@@ -261,10 +261,10 @@ class _$TogetherPreviewModelImpl implements _TogetherPreviewModel {
                 other.purchaseNum == purchaseNum) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
-            (identical(other.productImage, productImage) ||
-                other.productImage == productImage) &&
-            (identical(other.productHeart, productHeart) ||
-                other.productHeart == productHeart));
+            (identical(other.togetherImage, togetherImage) ||
+                other.togetherImage == togetherImage) &&
+            (identical(other.togetherHeart, togetherHeart) ||
+                other.togetherHeart == togetherHeart));
   }
 
   @JsonKey(ignore: true)
@@ -278,8 +278,8 @@ class _$TogetherPreviewModelImpl implements _TogetherPreviewModel {
       totalNum,
       purchaseNum,
       deadline,
-      productImage,
-      productHeart);
+      togetherImage,
+      togetherHeart);
 
   @JsonKey(ignore: true)
   @override
@@ -306,8 +306,8 @@ abstract class _TogetherPreviewModel implements TogetherPreviewModel {
       final int? totalNum,
       final int? purchaseNum,
       final DateTime? deadline,
-      final String? productImage,
-      final bool? productHeart}) = _$TogetherPreviewModelImpl;
+      final String? togetherImage,
+      final bool? togetherHeart}) = _$TogetherPreviewModelImpl;
 
   factory _TogetherPreviewModel.fromJson(Map<String, dynamic> json) =
       _$TogetherPreviewModelImpl.fromJson;
@@ -327,9 +327,9 @@ abstract class _TogetherPreviewModel implements TogetherPreviewModel {
   @override
   DateTime? get deadline;
   @override
-  String? get productImage;
+  String? get togetherImage;
   @override
-  bool? get productHeart;
+  bool? get togetherHeart;
   @override
   @JsonKey(ignore: true)
   _$$TogetherPreviewModelImplCopyWith<_$TogetherPreviewModelImpl>

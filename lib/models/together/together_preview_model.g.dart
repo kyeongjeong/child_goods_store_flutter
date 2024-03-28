@@ -18,8 +18,8 @@ _$TogetherPreviewModelImpl _$$TogetherPreviewModelImplFromJson(
       deadline: json['deadline'] == null
           ? null
           : DateTime.parse(json['deadline'] as String),
-      productImage: json['productImage'] as String?,
-      productHeart: json['productHeart'] as bool?,
+      togetherImage: json['togetherImage'] as String?,
+      togetherHeart: json['togetherHeart'] as bool?,
     );
 
 Map<String, dynamic> _$$TogetherPreviewModelImplToJson(
@@ -32,6 +32,6 @@ Map<String, dynamic> _$$TogetherPreviewModelImplToJson(
       'totalNum': instance.totalNum,
       'purchaseNum': instance.purchaseNum,
       'deadline': instance.deadline?.toIso8601String(),
-      'productImage': instance.productImage,
-      'productHeart': instance.productHeart,
+      'togetherImage': instance.togetherImage,
+      'togetherHeart': instance.togetherHeart,
     };
