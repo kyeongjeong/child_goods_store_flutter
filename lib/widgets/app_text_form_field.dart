@@ -1,4 +1,5 @@
 import 'package:child_goods_store_flutter/constants/sizes.dart';
+import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:flutter/material.dart';
 
 class AppTextFormField extends StatefulWidget {
@@ -13,6 +14,7 @@ class AppTextFormField extends StatefulWidget {
   final bool hasNext;
   final bool obscureText;
   final bool? enabled;
+  final String? suffixText;
 
   const AppTextFormField({
     super.key,
@@ -27,6 +29,7 @@ class AppTextFormField extends StatefulWidget {
     this.hasNext = false,
     this.obscureText = false,
     this.enabled,
+    this.suffixText,
   });
 
   @override
@@ -77,7 +80,9 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           horizontal: Sizes.size10,
         ),
         hintText: widget.hintText,
+        suffix: widget.suffixText != null ? AppFont(widget.suffixText!) : null,
       ),
+      textAlign: widget.suffixText != null ? TextAlign.right : TextAlign.left,
       obscureText: widget.obscureText,
       cursorRadius: const Radius.circular(Sizes.size5),
       keyboardType: widget.keyboardType ??

@@ -1,4 +1,5 @@
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
@@ -7,6 +8,7 @@ import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:child_goods_store_flutter/utils/other_extensions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class TogetherListItem extends StatelessWidget {
@@ -18,9 +20,7 @@ class TogetherListItem extends StatelessWidget {
   });
 
   void _pushTogether(BuildContext context) {
-    // TODO: push page to together detail page
-    print('push page to /together/${together.togetherId}');
-    // context.push('${Routes.productDetail}/${product.productId}');
+    context.push('${Routes.togetherDetail}/${together.togetherId}');
   }
 
   @override

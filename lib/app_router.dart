@@ -13,6 +13,7 @@ import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.d
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
+import 'package:child_goods_store_flutter/blocs/together/detail/together_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/together/list/together_list_bloc.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
@@ -45,6 +46,7 @@ import 'package:child_goods_store_flutter/pages/signin/signin_page.dart';
 import 'package:child_goods_store_flutter/pages/signup/signup_page.dart';
 import 'package:child_goods_store_flutter/pages/splash/splash_page.dart';
 import 'package:child_goods_store_flutter/pages/together/together_page.dart';
+import 'package:child_goods_store_flutter/pages/together_detail/together_detail_page.dart';
 import 'package:child_goods_store_flutter/repositories/auth_repository.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/data_repository.dart';
@@ -355,7 +357,24 @@ class _AppRouterState extends State<AppRouter> {
             ),
           ),
         ),
-
+        GoRoute(
+          path: '${Routes.together}/:togetherId',
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': int.parse(state.pathParameters['togetherId'] as String),
+            },
+            child: BlocProvider(
+              create: (context) => TogetherDetailBloc(
+                togetherRepository: context.read<TogetherRepository>(),
+                togetherId:
+                    int.parse(state.pathParameters['togetherId'] as String),
+              ),
+              child: const TogetherDetailPage(),
+            ),
+          ),
+        ),
         GoRoute(
           path: '${Routes.profile}/:userId',
           pageBuilder: (context, state) => PageTransition.cupertino(

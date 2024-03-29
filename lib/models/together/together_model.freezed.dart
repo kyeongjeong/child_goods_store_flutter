@@ -25,10 +25,14 @@ mixin _$TogetherModel {
   String? get togetherName => throw _privateConstructorUsedError;
   String? get details => throw _privateConstructorUsedError;
   int? get totalPrice => throw _privateConstructorUsedError;
+  int? get purchacePrice => throw _privateConstructorUsedError;
   @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
   EMainCategory? get mainCategory => throw _privateConstructorUsedError;
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   ESubCategory? get subCategory => throw _privateConstructorUsedError;
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
+  EProductSaleStatus? get status => throw _privateConstructorUsedError;
   String? get link => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
@@ -59,10 +63,15 @@ abstract class $TogetherModelCopyWith<$Res> {
       String? togetherName,
       String? details,
       int? totalPrice,
+      int? purchacePrice,
       @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
       EMainCategory? mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       ESubCategory? subCategory,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
+      EProductSaleStatus? status,
       String? link,
       DateTime? deadline,
       String? address,
@@ -95,8 +104,10 @@ class _$TogetherModelCopyWithImpl<$Res, $Val extends TogetherModel>
     Object? togetherName = freezed,
     Object? details = freezed,
     Object? totalPrice = freezed,
+    Object? purchacePrice = freezed,
     Object? mainCategory = freezed,
     Object? subCategory = freezed,
+    Object? status = freezed,
     Object? link = freezed,
     Object? deadline = freezed,
     Object? address = freezed,
@@ -128,6 +139,10 @@ class _$TogetherModelCopyWithImpl<$Res, $Val extends TogetherModel>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int?,
+      purchacePrice: freezed == purchacePrice
+          ? _value.purchacePrice
+          : purchacePrice // ignore: cast_nullable_to_non_nullable
+              as int?,
       mainCategory: freezed == mainCategory
           ? _value.mainCategory
           : mainCategory // ignore: cast_nullable_to_non_nullable
@@ -136,6 +151,10 @@ class _$TogetherModelCopyWithImpl<$Res, $Val extends TogetherModel>
           ? _value.subCategory
           : subCategory // ignore: cast_nullable_to_non_nullable
               as ESubCategory?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as EProductSaleStatus?,
       link: freezed == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -202,10 +221,15 @@ abstract class _$$TogetherModelImplCopyWith<$Res>
       String? togetherName,
       String? details,
       int? totalPrice,
+      int? purchacePrice,
       @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
       EMainCategory? mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       ESubCategory? subCategory,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
+      EProductSaleStatus? status,
       String? link,
       DateTime? deadline,
       String? address,
@@ -237,8 +261,10 @@ class __$$TogetherModelImplCopyWithImpl<$Res>
     Object? togetherName = freezed,
     Object? details = freezed,
     Object? totalPrice = freezed,
+    Object? purchacePrice = freezed,
     Object? mainCategory = freezed,
     Object? subCategory = freezed,
+    Object? status = freezed,
     Object? link = freezed,
     Object? deadline = freezed,
     Object? address = freezed,
@@ -270,6 +296,10 @@ class __$$TogetherModelImplCopyWithImpl<$Res>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int?,
+      purchacePrice: freezed == purchacePrice
+          ? _value.purchacePrice
+          : purchacePrice // ignore: cast_nullable_to_non_nullable
+              as int?,
       mainCategory: freezed == mainCategory
           ? _value.mainCategory
           : mainCategory // ignore: cast_nullable_to_non_nullable
@@ -278,6 +308,10 @@ class __$$TogetherModelImplCopyWithImpl<$Res>
           ? _value.subCategory
           : subCategory // ignore: cast_nullable_to_non_nullable
               as ESubCategory?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as EProductSaleStatus?,
       link: freezed == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -327,10 +361,15 @@ class _$TogetherModelImpl implements _TogetherModel {
       this.togetherName,
       this.details,
       this.totalPrice,
+      this.purchacePrice,
       @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
       this.mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       this.subCategory,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
+      this.status,
       this.link,
       this.deadline,
       this.address,
@@ -359,11 +398,17 @@ class _$TogetherModelImpl implements _TogetherModel {
   @override
   final int? totalPrice;
   @override
+  final int? purchacePrice;
+  @override
   @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
   final EMainCategory? mainCategory;
   @override
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   final ESubCategory? subCategory;
+  @override
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
+  final EProductSaleStatus? status;
   @override
   final String? link;
   @override
@@ -399,7 +444,7 @@ class _$TogetherModelImpl implements _TogetherModel {
 
   @override
   String toString() {
-    return 'TogetherModel(togetherId: $togetherId, user: $user, togetherName: $togetherName, details: $details, totalPrice: $totalPrice, mainCategory: $mainCategory, subCategory: $subCategory, link: $link, deadline: $deadline, address: $address, detailAddress: $detailAddress, totalNum: $totalNum, purchaseNum: $purchaseNum, tag: $tag, togetherImage: $togetherImage, togetherHeart: $togetherHeart)';
+    return 'TogetherModel(togetherId: $togetherId, user: $user, togetherName: $togetherName, details: $details, totalPrice: $totalPrice, purchacePrice: $purchacePrice, mainCategory: $mainCategory, subCategory: $subCategory, status: $status, link: $link, deadline: $deadline, address: $address, detailAddress: $detailAddress, totalNum: $totalNum, purchaseNum: $purchaseNum, tag: $tag, togetherImage: $togetherImage, togetherHeart: $togetherHeart)';
   }
 
   @override
@@ -415,10 +460,13 @@ class _$TogetherModelImpl implements _TogetherModel {
             (identical(other.details, details) || other.details == details) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
+            (identical(other.purchacePrice, purchacePrice) ||
+                other.purchacePrice == purchacePrice) &&
             (identical(other.mainCategory, mainCategory) ||
                 other.mainCategory == mainCategory) &&
             (identical(other.subCategory, subCategory) ||
                 other.subCategory == subCategory) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.link, link) || other.link == link) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
@@ -445,8 +493,10 @@ class _$TogetherModelImpl implements _TogetherModel {
       togetherName,
       details,
       totalPrice,
+      purchacePrice,
       mainCategory,
       subCategory,
+      status,
       link,
       deadline,
       address,
@@ -478,10 +528,15 @@ abstract class _TogetherModel implements TogetherModel {
       final String? togetherName,
       final String? details,
       final int? totalPrice,
+      final int? purchacePrice,
       @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
       final EMainCategory? mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       final ESubCategory? subCategory,
+      @JsonKey(
+          fromJson: EProductSaleStatus.fromJson,
+          toJson: EProductSaleStatus.toJson)
+      final EProductSaleStatus? status,
       final String? link,
       final DateTime? deadline,
       final String? address,
@@ -507,11 +562,17 @@ abstract class _TogetherModel implements TogetherModel {
   @override
   int? get totalPrice;
   @override
+  int? get purchacePrice;
+  @override
   @JsonKey(fromJson: EMainCategory.fromJson, toJson: EMainCategory.toJson)
   EMainCategory? get mainCategory;
   @override
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   ESubCategory? get subCategory;
+  @override
+  @JsonKey(
+      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
+  EProductSaleStatus? get status;
   @override
   String? get link;
   @override

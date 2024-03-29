@@ -1,6 +1,7 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
@@ -8,6 +9,8 @@ import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart'
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
+import 'package:child_goods_store_flutter/models/user/user_model.dart';
+import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
@@ -76,6 +79,92 @@ class TogetherRepository {
     return res;
   }
 
+  Future<ResModel<TogetherModel>> getTogether({
+    required int togetherId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.get('/together/$togetherId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<TogetherModel>(
+      code: 1000,
+      data: TogetherModel(
+        togetherId: togetherId,
+        user: UserProfileModel(
+          userId: 10, // 분기
+          nickName: 'together $togetherId opener',
+          averageStars: 4.5,
+        ),
+        togetherName: '$togetherId th together',
+        totalPrice: 100000,
+        purchacePrice: 1000,
+        mainCategory: EMainCategory.clothing,
+        subCategory: ESubCategory.bottom,
+        status: EProductSaleStatus.sale,
+        details: '$togetherId th together details',
+        link: 'https://www.google.com',
+        deadline: DateTime.now(),
+        address: '서울특별시 노원구 광운로',
+        detailAddress: '새빛관 1층',
+        totalNum: 100,
+        purchaseNum: 50,
+        tag: List.generate(3, (index) => '$togetherId-$index tag'),
+        togetherImage: [
+          'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
+          'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
+          'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
+        ],
+        togetherHeart: false,
+      ),
+    ).toJson((together) => together.toJson());
+
+    var res = ResModel<TogetherModel>.fromJson(
+      resTmp,
+      (json) => TogetherModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<void>> postTogetherHeart({
+    required int togetherId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post('/together/heart/$togetherId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    mockThrowDioError(errorModel: ResModel(code: 4000, message: 'asd'));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
+
+  Future<ResModel<void>> deleteTogetherHeart({
+    required int togetherId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.delete('/together/heart/$togetherId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
+
   Future<ResModel<int>> postTogether({
     required TogetherModel together,
   }) async {
@@ -85,8 +174,6 @@ class TogetherRepository {
     //   '/together',
     //   data: together.toJson(),
     // );
-
-    print(together.toJson());
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
