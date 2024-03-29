@@ -21,6 +21,7 @@ class Routes {
   static const String profile = '/profile';
 
   static const String productDetail = '/product';
+  static const String togetherDetail = '/together';
 
   static const String follow = '/follow';
 }

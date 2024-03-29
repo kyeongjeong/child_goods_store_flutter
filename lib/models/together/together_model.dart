@@ -1,4 +1,5 @@
 import 'package:child_goods_store_flutter/enums/main_category.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/utils/string_to_list_converter.dart';
@@ -15,6 +16,7 @@ class TogetherModel with _$TogetherModel {
     String? togetherName,
     String? details,
     int? totalPrice,
+    int? purchasePrice,
     @JsonKey(
       fromJson: EMainCategory.fromJson,
       toJson: EMainCategory.toJson,
@@ -25,6 +27,11 @@ class TogetherModel with _$TogetherModel {
       toJson: ESubCategory.toJson,
     )
     ESubCategory? subCategory,
+    @JsonKey(
+      fromJson: EProductSaleStatus.fromJson,
+      toJson: EProductSaleStatus.toJson,
+    )
+    EProductSaleStatus? status,
     String? link,
     DateTime? deadline,
     String? address,
