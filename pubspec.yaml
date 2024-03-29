@@ -59,6 +59,7 @@ dependencies:
   image_picker: ^1.0.7
   kpostal: ^0.5.1
   carousel_slider: ^4.2.1
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

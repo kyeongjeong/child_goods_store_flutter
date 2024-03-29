@@ -11,6 +11,7 @@ class Routes {
   static const String editProfile = '/edit_profile';
   static const String editAddress = '/edit_address';
   static const String editProduct = '/edit_product';
+  static const String editTogether = '/edit_together';
   static const String editChild = '/edit_child';
 
   static const String home = '/home';
@@ -20,6 +21,7 @@ class Routes {
   static const String profile = '/profile';
 
   static const String productDetail = '/product';
+  static const String togetherDetail = '/together';
 
   static const String follow = '/follow';
 }
