@@ -18,7 +18,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     required this.productId,
   }) : super(const ProductDetailState.init()) {
     on<ProductDetailGet>(_productDetailGetHandler);
-    on<ProductDetailChangeSaleState>(_ProductDetailChangeSaleStateHandler);
+    on<ProductDetailChangeSaleState>(_productDetailChangeSaleStateHandler);
     on<ProductDetailChangeHeart>(_productDetailChangeHeartHandler);
 
     add(ProductDetailGet());
@@ -53,7 +53,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     );
   }
 
-  Future<void> _ProductDetailChangeSaleStateHandler(
+  Future<void> _productDetailChangeSaleStateHandler(
     ProductDetailChangeSaleState event,
     Emitter<ProductDetailState> emit,
   ) async {

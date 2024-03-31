@@ -222,11 +222,12 @@ class _AppRouterState extends State<AppRouter> {
             child: Scaffold(
               body: navigationShell,
               bottomNavigationBar: Container(
+                height: Sizes.size60,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
-                      blurRadius: Sizes.size5,
+                      blurRadius: Sizes.size3,
                       spreadRadius: Sizes.size1,
                     ),
                   ],
@@ -234,8 +235,8 @@ class _AppRouterState extends State<AppRouter> {
                 child: BottomNavigationBar(
                   enableFeedback: false,
                   type: BottomNavigationBarType.fixed,
-                  unselectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
-                  selectedLabelStyle: const TextStyle(fontSize: Sizes.size12),
+                  unselectedLabelStyle: const TextStyle(fontSize: Sizes.size8),
+                  selectedLabelStyle: const TextStyle(fontSize: Sizes.size10),
                   selectedIconTheme: const IconThemeData(size: Sizes.size28),
                   items: [
                     const BottomNavigationBarItem(
@@ -529,10 +530,16 @@ class _AppRouterState extends State<AppRouter> {
       debugShowCheckedModeBanner: false,
       title: F.title,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white).copyWith(
+          background: Colors.white,
+        ),
+        scaffoldBackgroundColor: Colors.white,
         primaryColor: Colors.cyan.shade600,
         splashColor: Colors.black.withOpacity(0.1),
         dividerColor: Colors.black.withOpacity(0.2),
+        bottomSheetTheme: const BottomSheetThemeData(
+          surfaceTintColor: Colors.transparent,
+        ),
         appBarTheme: const AppBarTheme(
           centerTitle: false,
           surfaceTintColor: Colors.transparent,

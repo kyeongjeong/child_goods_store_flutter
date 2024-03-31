@@ -67,7 +67,7 @@ class _TogetherDetailBottomBarState extends State<TogetherDetailBottomBar> {
           return const SizedBox();
         }
         return Container(
-          height: Sizes.size52 + MediaQuery.paddingOf(context).bottom,
+          height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
           padding: EdgeInsets.only(
             bottom: MediaQuery.paddingOf(context).bottom,
             left: Sizes.size20,
@@ -78,7 +78,7 @@ class _TogetherDetailBottomBarState extends State<TogetherDetailBottomBar> {
             boxShadow: [
               BoxShadow(
                 spreadRadius: Sizes.size1,
-                blurRadius: Sizes.size5,
+                blurRadius: Sizes.size3,
                 offset: const Offset(0, Sizes.size2),
                 color: Colors.black.withOpacity(0.3),
               ),

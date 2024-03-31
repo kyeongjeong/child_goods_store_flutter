@@ -89,8 +89,7 @@ class _EditProductPageState extends State<EditProductPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: AppFont(
-              '상품 정보 수정 - ${context.read<EditProductBloc>().httpMethod.toString()}'),
+          title: const AppFont('상품 정보 수정'),
           centerTitle: false,
         ),
         body: SingleChildScrollView(
@@ -123,7 +122,6 @@ class _EditProductPageState extends State<EditProductPage> {
                       singleLine: false,
                       controller: _contentController,
                       onChange: _onChangeContent,
-                      hasNext: true,
                     ),
                     Gaps.v10,
                     AppTextFormField(
@@ -141,6 +139,7 @@ class _EditProductPageState extends State<EditProductPage> {
                   ],
                 ),
               ),
+              Gaps.v40,
             ],
           ),
         ),
@@ -151,9 +150,10 @@ class _EditProductPageState extends State<EditProductPage> {
                   ? null
                   : _onTapComplete,
               borderRadSize: 0,
+              padding: EdgeInsets.zero,
               child: Container(
                 width: double.infinity,
-                height: Sizes.size32,
+                height: Sizes.size60,
                 margin: EdgeInsets.only(
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),

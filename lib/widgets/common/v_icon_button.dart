@@ -58,7 +58,7 @@ class VIconButton extends StatelessWidget {
                     height: Sizes.size64,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withOpacity(0.1),
                         width: Sizes.size5,
                       ),
                       borderRadius: BorderRadius.circular(Sizes.size32),
@@ -75,11 +75,11 @@ class VIconButton extends StatelessWidget {
                         shadows: const [
                           Shadow(
                             color: Colors.white,
-                            blurRadius: Sizes.size5,
+                            blurRadius: Sizes.size3,
                           ),
                           Shadow(
                             color: Colors.white,
-                            blurRadius: Sizes.size5,
+                            blurRadius: Sizes.size3,
                           ),
                           Shadow(
                             color: Colors.white,

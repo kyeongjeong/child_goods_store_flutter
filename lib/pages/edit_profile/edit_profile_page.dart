@@ -112,8 +112,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: AppFont(
-              '프로필 설정 - ${context.read<EditProfileBloc>().httpMethod.toString()}'),
+          title: const AppFont('프로필 설정'),
           centerTitle: false,
         ),
         body: SingleChildScrollView(
@@ -150,7 +149,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             shadows: [
                               Shadow(
                                 color: Theme.of(context).shadowColor,
-                                blurRadius: Sizes.size5,
+                                blurRadius: Sizes.size3,
                               ),
                             ],
                           ),
@@ -231,9 +230,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ? null
                   : _onTapComplete,
               borderRadSize: 0,
+              padding: EdgeInsets.zero,
               child: Container(
                 width: double.infinity,
-                height: Sizes.size32,
+                height: Sizes.size60,
                 margin: EdgeInsets.only(
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),

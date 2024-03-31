@@ -113,9 +113,10 @@ class _EditTagPageState extends State<EditTagPage> {
       bottomNavigationBar: AppInkButton(
         onTap: _onTapComplete,
         borderRadSize: 0,
+        padding: EdgeInsets.zero,
         child: Container(
           width: double.infinity,
-          height: Sizes.size32,
+          height: Sizes.size60,
           margin: EdgeInsets.only(
             bottom: MediaQuery.paddingOf(context).bottom,
           ),

@@ -41,6 +41,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(toolbarHeight: 0),
       body: Center(
         child: MultiBlocListener(
           listeners: [

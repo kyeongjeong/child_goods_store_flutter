@@ -36,7 +36,7 @@ class AppInkButton extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: shadowColor ??
-                    Theme.of(context).shadowColor.withOpacity(0.2),
+                    Theme.of(context).shadowColor.withOpacity(0.1),
                 blurRadius: Sizes.size3,
                 spreadRadius: Sizes.size1,
               ),
