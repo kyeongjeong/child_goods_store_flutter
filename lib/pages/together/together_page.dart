@@ -108,7 +108,7 @@ class _TogetherPageState extends State<TogetherPage> {
                 itemBuilder: (context, index) => TogetherListItem(
                   together: state.togethers[index],
                 ),
-                separatorBuilder: (context, index) => Gaps.v10,
+                separatorBuilder: (context, index) => Gaps.v16,
                 itemCount: state.togethers.length,
               ),
             ),

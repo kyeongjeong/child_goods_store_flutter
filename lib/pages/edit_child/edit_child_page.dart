@@ -82,8 +82,7 @@ class _EditChildPageState extends State<EditChildPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: AppFont(
-              '자녀 정보 수정 - ${context.read<EditChildBloc>().httpMethod.toString()}'),
+          title: const AppFont('자녀 정보 수정'),
           centerTitle: false,
         ),
         body: SingleChildScrollView(
@@ -120,7 +119,7 @@ class _EditChildPageState extends State<EditChildPage> {
                             shadows: [
                               Shadow(
                                 color: Theme.of(context).shadowColor,
-                                blurRadius: Sizes.size5,
+                                blurRadius: Sizes.size3,
                               ),
                             ],
                           ),
@@ -160,9 +159,10 @@ class _EditChildPageState extends State<EditChildPage> {
                   ? null
                   : _onTapComplete,
               borderRadSize: 0,
+              padding: EdgeInsets.zero,
               child: Container(
                 width: double.infinity,
-                height: Sizes.size32,
+                height: Sizes.size60,
                 margin: EdgeInsets.only(
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),

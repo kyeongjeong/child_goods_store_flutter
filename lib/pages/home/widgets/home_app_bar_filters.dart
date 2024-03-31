@@ -134,23 +134,22 @@ class _HomeAppBarFiltersState extends State<HomeAppBarFilters> {
               bloc: bloc,
               builder: (context, state) => Column(
                 children: [
-                  Row(
-                    children: [
-                      Flexible(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: Sizes.size10),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(Sizes.size20),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: Sizes.size5,
-                                spreadRadius: Sizes.size1,
-                                color: Colors.black.withOpacity(0.2),
-                              ),
-                            ],
-                          ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: Sizes.size10),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(Sizes.size10),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: Sizes.size3,
+                          spreadRadius: Sizes.size1,
+                          color: Colors.black.withOpacity(0.1),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Flexible(
                           child: Center(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -161,23 +160,12 @@ class _HomeAppBarFiltersState extends State<HomeAppBarFilters> {
                             ),
                           ),
                         ),
-                      ),
-                      Gaps.h20,
-                      Flexible(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: Sizes.size10),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(Sizes.size20),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: Sizes.size5,
-                                spreadRadius: Sizes.size1,
-                                color: Colors.black.withOpacity(0.2),
-                              ),
-                            ],
-                          ),
+                        Container(
+                          width: Sizes.size1,
+                          height: Sizes.size20,
+                          color: Colors.black.withOpacity(0.2),
+                        ),
+                        Flexible(
                           child: Center(
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -189,10 +177,10 @@ class _HomeAppBarFiltersState extends State<HomeAppBarFilters> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Gaps.v10,
+                  Gaps.v12,
                   RangeSlider(
                     activeColor: Theme.of(context).primaryColor,
                     values: RangeValues(

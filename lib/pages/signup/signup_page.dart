@@ -217,9 +217,10 @@ class _SignupPageState extends State<SignupPage> {
               onTap:
                   state.status == ELoadingStatus.loading ? null : _onTapSignup,
               borderRadSize: 0,
+              padding: EdgeInsets.zero,
               child: Container(
                 width: double.infinity,
-                height: Sizes.size32,
+                height: Sizes.size60,
                 margin: EdgeInsets.only(
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),

@@ -117,8 +117,7 @@ class _EditTogetherPageState extends State<EditTogetherPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: AppFont(
-              '공동 구매글 수정 - ${context.read<EditTogetherBloc>().httpMethod.toString()}'),
+          title: const AppFont('공동구매글 수정'),
           centerTitle: false,
         ),
         body: SingleChildScrollView(
@@ -202,9 +201,10 @@ class _EditTogetherPageState extends State<EditTogetherPage> {
                   ? null
                   : _onTapComplete,
               borderRadSize: 0,
+              padding: EdgeInsets.zero,
               child: Container(
                 width: double.infinity,
-                height: Sizes.size32,
+                height: Sizes.size60,
                 margin: EdgeInsets.only(
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),

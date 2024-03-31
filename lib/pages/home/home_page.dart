@@ -109,8 +109,8 @@ class _HomePageState extends State<HomePage> {
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 300,
                   childAspectRatio: 2 / 3,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
+                  crossAxisSpacing: Sizes.size16,
+                  mainAxisSpacing: Sizes.size16,
                 ),
                 itemBuilder: (context, index) => ProductListItem(
                   product: state.products[index],

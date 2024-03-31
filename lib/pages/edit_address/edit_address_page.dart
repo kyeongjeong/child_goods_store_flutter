@@ -90,8 +90,7 @@ class _EditAddressPageState extends State<EditAddressPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: AppFont(
-              '배송지 수정 - ${context.read<EditAddressBloc>().httpMethod.toString()}'),
+          title: const AppFont('배송지 수정'),
           centerTitle: false,
         ),
         body: SingleChildScrollView(
@@ -169,9 +168,10 @@ class _EditAddressPageState extends State<EditAddressPage> {
                   ? null
                   : _onTapComplete,
               borderRadSize: 0,
+              padding: EdgeInsets.zero,
               child: Container(
                 width: double.infinity,
-                height: Sizes.size32,
+                height: Sizes.size60,
                 margin: EdgeInsets.only(
                   bottom: MediaQuery.paddingOf(context).bottom,
                 ),

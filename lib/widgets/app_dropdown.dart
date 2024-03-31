@@ -32,7 +32,7 @@ class AppDropdown extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).shadowColor.withOpacity(0.2),
+            color: Theme.of(context).shadowColor.withOpacity(0.1),
             blurRadius: Sizes.size3,
             spreadRadius: Sizes.size1,
           ),
