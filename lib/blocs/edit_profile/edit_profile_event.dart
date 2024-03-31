@@ -21,11 +21,12 @@ class EditProfileChangeIntroduce extends EditProfileEvent {
   EditProfileChangeIntroduce(this.introduce);
 }
 
-class EditProfileChangePhoneNum extends EditProfileEvent {
-  final String phoneNum;
+// @deprecated
+// class EditProfileChangePhoneNum extends EditProfileEvent {
+//   final String phoneNum;
 
-  EditProfileChangePhoneNum(this.phoneNum);
-}
+//   EditProfileChangePhoneNum(this.phoneNum);
+// }
 
 class EditProfileChangeRegion extends EditProfileEvent {
   final String region;

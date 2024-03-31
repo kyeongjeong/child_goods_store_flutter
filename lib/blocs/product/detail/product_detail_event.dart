@@ -1,15 +1,15 @@
-import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 
 abstract class ProductDetailEvent {}
 
 class ProductDetailGet extends ProductDetailEvent {}
 
-class ProductDetailChangeSaleStatus extends ProductDetailEvent {
-  final EProductSaleStatus status;
+class ProductDetailChangeSaleState extends ProductDetailEvent {
+  final EProductSaleState state;
   final int? userId;
 
-  ProductDetailChangeSaleStatus(
-    this.status, {
+  ProductDetailChangeSaleState(
+    this.state, {
     this.userId,
   });
 }

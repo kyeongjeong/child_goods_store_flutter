@@ -13,7 +13,8 @@ _$ChildModelImpl _$$ChildModelImplFromJson(Map<String, dynamic> json) =>
       age: EChildAge.fromJson(json['age'] as String?),
       gender: EChildGender.fromJson(json['gender'] as String?),
       childImg: json['childImg'] as String?,
-      tag: json['tag'] == null ? const [] : strToList(json['tag'] as String?),
+      tag: (json['tag'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$ChildModelImplToJson(_$ChildModelImpl instance) =>
@@ -23,5 +24,5 @@ Map<String, dynamic> _$$ChildModelImplToJson(_$ChildModelImpl instance) =>
       'age': EChildAge.toJson(instance.age),
       'gender': EChildGender.toJson(instance.gender),
       'childImg': instance.childImg,
-      'tag': listToStr(instance.tag),
+      'tag': instance.tag,
     };

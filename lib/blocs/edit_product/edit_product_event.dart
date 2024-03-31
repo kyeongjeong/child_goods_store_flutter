@@ -1,5 +1,5 @@
 import 'package:child_goods_store_flutter/enums/main_category.dart';
-import 'package:child_goods_store_flutter/enums/product_status.dart';
+import 'package:child_goods_store_flutter/enums/product_state.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -59,10 +59,10 @@ class EditProductChangePrice extends EditProductEvent {
   EditProductChangePrice(this.price);
 }
 
-class EditProductChangeStatus extends EditProductEvent {
-  final EProductStatus productStatus;
+class EditProductChangeState extends EditProductEvent {
+  final EProductState productState;
 
-  EditProductChangeStatus(this.productStatus);
+  EditProductChangeState(this.productState);
 }
 
 class EditProductSubmit extends EditProductEvent {}

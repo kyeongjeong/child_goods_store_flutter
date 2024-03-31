@@ -29,16 +29,14 @@ mixin _$ProductModel {
   EMainCategory? get mainCategory => throw _privateConstructorUsedError;
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   ESubCategory? get subCategory => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-  EProductStatus? get productStatus => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+  EProductState? get productState => throw _privateConstructorUsedError;
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  EProductSaleStatus? get state => throw _privateConstructorUsedError;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  EProductSaleState? get state => throw _privateConstructorUsedError;
   DateTime? get createAt => throw _privateConstructorUsedError;
   DateTime? get updateAt => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get productImage => throw _privateConstructorUsedError;
   bool? get productHeart => throw _privateConstructorUsedError;
 
@@ -64,16 +62,15 @@ abstract class $ProductModelCopyWith<$Res> {
       EMainCategory? mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       ESubCategory? subCategory,
-      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-      EProductStatus? productStatus,
+      @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+      EProductState? productState,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      EProductSaleStatus? state,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      EProductSaleState? state,
       DateTime? createAt,
       DateTime? updateAt,
-      @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
+      List<String> tag,
       List<String> productImage,
       bool? productHeart});
 
@@ -100,7 +97,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? content = freezed,
     Object? mainCategory = freezed,
     Object? subCategory = freezed,
-    Object? productStatus = freezed,
+    Object? productState = freezed,
     Object? state = freezed,
     Object? createAt = freezed,
     Object? updateAt = freezed,
@@ -137,14 +134,14 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.subCategory
           : subCategory // ignore: cast_nullable_to_non_nullable
               as ESubCategory?,
-      productStatus: freezed == productStatus
-          ? _value.productStatus
-          : productStatus // ignore: cast_nullable_to_non_nullable
-              as EProductStatus?,
+      productState: freezed == productState
+          ? _value.productState
+          : productState // ignore: cast_nullable_to_non_nullable
+              as EProductState?,
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as EProductSaleStatus?,
+              as EProductSaleState?,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -199,16 +196,15 @@ abstract class _$$ProductModelImplCopyWith<$Res>
       EMainCategory? mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       ESubCategory? subCategory,
-      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-      EProductStatus? productStatus,
+      @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+      EProductState? productState,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      EProductSaleStatus? state,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      EProductSaleState? state,
       DateTime? createAt,
       DateTime? updateAt,
-      @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
+      List<String> tag,
       List<String> productImage,
       bool? productHeart});
 
@@ -234,7 +230,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? content = freezed,
     Object? mainCategory = freezed,
     Object? subCategory = freezed,
-    Object? productStatus = freezed,
+    Object? productState = freezed,
     Object? state = freezed,
     Object? createAt = freezed,
     Object? updateAt = freezed,
@@ -271,14 +267,14 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.subCategory
           : subCategory // ignore: cast_nullable_to_non_nullable
               as ESubCategory?,
-      productStatus: freezed == productStatus
-          ? _value.productStatus
-          : productStatus // ignore: cast_nullable_to_non_nullable
-              as EProductStatus?,
+      productState: freezed == productState
+          ? _value.productState
+          : productState // ignore: cast_nullable_to_non_nullable
+              as EProductState?,
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as EProductSaleStatus?,
+              as EProductSaleState?,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -316,17 +312,15 @@ class _$ProductModelImpl implements _ProductModel {
       this.mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       this.subCategory,
-      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-      this.productStatus,
+      @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+      this.productState,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
       this.state,
       this.createAt,
       this.updateAt,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> tag = const [],
-      @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> productImage = const [],
       this.productHeart})
       : _tag = tag,
@@ -352,19 +346,19 @@ class _$ProductModelImpl implements _ProductModel {
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   final ESubCategory? subCategory;
   @override
-  @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-  final EProductStatus? productStatus;
+  @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+  final EProductState? productState;
   @override
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  final EProductSaleStatus? state;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  final EProductSaleState? state;
   @override
   final DateTime? createAt;
   @override
   final DateTime? updateAt;
   final List<String> _tag;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
+  @JsonKey()
   List<String> get tag {
     if (_tag is EqualUnmodifiableListView) return _tag;
     // ignore: implicit_dynamic_type
@@ -373,7 +367,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   final List<String> _productImage;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
+  @JsonKey()
   List<String> get productImage {
     if (_productImage is EqualUnmodifiableListView) return _productImage;
     // ignore: implicit_dynamic_type
@@ -385,7 +379,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productStatus: $productStatus, state: $state, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
+    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productState: $productState, state: $state, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
   }
 
   @override
@@ -404,8 +398,8 @@ class _$ProductModelImpl implements _ProductModel {
                 other.mainCategory == mainCategory) &&
             (identical(other.subCategory, subCategory) ||
                 other.subCategory == subCategory) &&
-            (identical(other.productStatus, productStatus) ||
-                other.productStatus == productStatus) &&
+            (identical(other.productState, productState) ||
+                other.productState == productState) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
@@ -429,7 +423,7 @@ class _$ProductModelImpl implements _ProductModel {
       content,
       mainCategory,
       subCategory,
-      productStatus,
+      productState,
       state,
       createAt,
       updateAt,
@@ -462,16 +456,15 @@ abstract class _ProductModel implements ProductModel {
       final EMainCategory? mainCategory,
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       final ESubCategory? subCategory,
-      @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-      final EProductStatus? productStatus,
+      @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+      final EProductState? productState,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      final EProductSaleStatus? state,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      final EProductSaleState? state,
       final DateTime? createAt,
       final DateTime? updateAt,
-      @JsonKey(fromJson: strToList, toJson: listToStr) final List<String> tag,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
+      final List<String> tag,
       final List<String> productImage,
       final bool? productHeart}) = _$ProductModelImpl;
 
@@ -495,21 +488,19 @@ abstract class _ProductModel implements ProductModel {
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   ESubCategory? get subCategory;
   @override
-  @JsonKey(fromJson: EProductStatus.fromJson, toJson: EProductStatus.toJson)
-  EProductStatus? get productStatus;
+  @JsonKey(fromJson: EProductState.fromJson, toJson: EProductState.toJson)
+  EProductState? get productState;
   @override
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  EProductSaleStatus? get state;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  EProductSaleState? get state;
   @override
   DateTime? get createAt;
   @override
   DateTime? get updateAt;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get productImage;
   @override
   bool? get productHeart;

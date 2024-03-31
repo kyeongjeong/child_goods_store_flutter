@@ -10,7 +10,7 @@ class UserModel with _$UserModel {
     String? nickName,
     String? introduce,
     String? profileImg,
-    String? phoneNum,
+    // String? phoneNum, // deprecated
     String? region,
     String? town,
     DateTime? createAt,

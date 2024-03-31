@@ -1,14 +1,14 @@
 import 'package:child_goods_store_flutter/constants/sizes.dart';
-import 'package:child_goods_store_flutter/enums/product_status.dart';
+import 'package:child_goods_store_flutter/enums/product_state.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailStatusWidget extends StatelessWidget {
-  final EProductStatus productStatus;
+  final EProductState productState;
 
   const ProductDetailStatusWidget({
     super.key,
-    required this.productStatus,
+    required this.productState,
   });
 
   @override
@@ -38,7 +38,7 @@ class ProductDetailStatusWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size20),
             child: AppFont(
-              productStatus.text,
+              productState.text,
               fontWeight: FontWeight.w700,
             ),
           ),

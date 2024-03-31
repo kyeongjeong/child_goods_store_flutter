@@ -6,7 +6,7 @@ import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
-import 'package:child_goods_store_flutter/enums/product_status.dart';
+import 'package:child_goods_store_flutter/enums/product_state.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
 import 'package:child_goods_store_flutter/pages/product_detail/widgets/product_detail_bottom_bar.dart';
 import 'package:child_goods_store_flutter/pages/product_detail/widgets/product_detail_heart_widget.dart';
@@ -119,8 +119,8 @@ class ProductDetailPage extends StatelessWidget {
                 AppFont(state.productModel?.content ?? Strings.nullStr),
                 Gaps.v10,
                 ProductDetailStatusWidget(
-                  productStatus: state.productModel?.productStatus ??
-                      EProductStatus.manyUsage,
+                  productState: state.productModel?.productState ??
+                      EProductState.manyUsage,
                 ),
               ],
             ),

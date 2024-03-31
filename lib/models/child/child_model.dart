@@ -1,6 +1,5 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/child_gender.dart';
-import 'package:child_goods_store_flutter/utils/string_to_list_converter.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'child_model.freezed.dart';
@@ -16,9 +15,7 @@ class ChildModel with _$ChildModel {
     @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
     EChildGender? gender,
     String? childImg,
-    @JsonKey(fromJson: strToList, toJson: listToStr)
-    @Default([])
-    List<String> tag,
+    @Default([]) List<String> tag,
   }) = _ChildModel;
 
   factory ChildModel.fromJson(Map<String, dynamic> json) =>

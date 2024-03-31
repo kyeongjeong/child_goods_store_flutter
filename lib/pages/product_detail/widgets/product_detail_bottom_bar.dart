@@ -8,7 +8,7 @@ import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
-import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
 import 'package:child_goods_store_flutter/pages/product_detail/widgets/product_detail_buyer_list.dart';
@@ -37,7 +37,7 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
       child: Material(
         child: Column(
           children: [
-            for (var status in EProductSaleStatus.values)
+            for (var status in EProductSaleState.values)
               AppInkButton(
                 color: Colors.transparent,
                 shadowColor: Colors.transparent,
@@ -69,13 +69,13 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
   }
 
   void _onTapChangeStatusItem({
-    required EProductSaleStatus status,
+    required EProductSaleState status,
     required ProductBuyerBloc bloc,
   }) {
-    if (status != EProductSaleStatus.soldout) {
+    if (status != EProductSaleState.soldout) {
       context
           .read<ProductDetailBloc>()
-          .add(ProductDetailChangeSaleStatus(status));
+          .add(ProductDetailChangeSaleState(status));
       context.pop();
     } else {
       context.pop();
@@ -91,8 +91,8 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
   }
 
   void _onSelectBuyer(int userId) {
-    context.read<ProductDetailBloc>().add(ProductDetailChangeSaleStatus(
-          EProductSaleStatus.soldout,
+    context.read<ProductDetailBloc>().add(ProductDetailChangeSaleState(
+          EProductSaleState.soldout,
           userId: userId,
         ));
     context.pop();

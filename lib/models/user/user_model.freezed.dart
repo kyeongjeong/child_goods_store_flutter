@@ -23,8 +23,8 @@ mixin _$UserModel {
   int? get userId => throw _privateConstructorUsedError;
   String? get nickName => throw _privateConstructorUsedError;
   String? get introduce => throw _privateConstructorUsedError;
-  String? get profileImg => throw _privateConstructorUsedError;
-  String? get phoneNum => throw _privateConstructorUsedError;
+  String? get profileImg =>
+      throw _privateConstructorUsedError; // String? phoneNum, // deprecated
   String? get region => throw _privateConstructorUsedError;
   String? get town => throw _privateConstructorUsedError;
   DateTime? get createAt => throw _privateConstructorUsedError;
@@ -45,7 +45,6 @@ abstract class $UserModelCopyWith<$Res> {
       String? nickName,
       String? introduce,
       String? profileImg,
-      String? phoneNum,
       String? region,
       String? town,
       DateTime? createAt});
@@ -68,7 +67,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? nickName = freezed,
     Object? introduce = freezed,
     Object? profileImg = freezed,
-    Object? phoneNum = freezed,
     Object? region = freezed,
     Object? town = freezed,
     Object? createAt = freezed,
@@ -89,10 +87,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       profileImg: freezed == profileImg
           ? _value.profileImg
           : profileImg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNum: freezed == phoneNum
-          ? _value.phoneNum
-          : phoneNum // ignore: cast_nullable_to_non_nullable
               as String?,
       region: freezed == region
           ? _value.region
@@ -123,7 +117,6 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? nickName,
       String? introduce,
       String? profileImg,
-      String? phoneNum,
       String? region,
       String? town,
       DateTime? createAt});
@@ -144,7 +137,6 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? nickName = freezed,
     Object? introduce = freezed,
     Object? profileImg = freezed,
-    Object? phoneNum = freezed,
     Object? region = freezed,
     Object? town = freezed,
     Object? createAt = freezed,
@@ -165,10 +157,6 @@ class __$$UserModelImplCopyWithImpl<$Res>
       profileImg: freezed == profileImg
           ? _value.profileImg
           : profileImg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      phoneNum: freezed == phoneNum
-          ? _value.phoneNum
-          : phoneNum // ignore: cast_nullable_to_non_nullable
               as String?,
       region: freezed == region
           ? _value.region
@@ -194,7 +182,6 @@ class _$UserModelImpl implements _UserModel {
       this.nickName,
       this.introduce,
       this.profileImg,
-      this.phoneNum,
       this.region,
       this.town,
       this.createAt});
@@ -210,8 +197,7 @@ class _$UserModelImpl implements _UserModel {
   final String? introduce;
   @override
   final String? profileImg;
-  @override
-  final String? phoneNum;
+// String? phoneNum, // deprecated
   @override
   final String? region;
   @override
@@ -221,7 +207,7 @@ class _$UserModelImpl implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, phoneNum: $phoneNum, region: $region, town: $town, createAt: $createAt)';
+    return 'UserModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, region: $region, town: $town, createAt: $createAt)';
   }
 
   @override
@@ -236,8 +222,6 @@ class _$UserModelImpl implements _UserModel {
                 other.introduce == introduce) &&
             (identical(other.profileImg, profileImg) ||
                 other.profileImg == profileImg) &&
-            (identical(other.phoneNum, phoneNum) ||
-                other.phoneNum == phoneNum) &&
             (identical(other.region, region) || other.region == region) &&
             (identical(other.town, town) || other.town == town) &&
             (identical(other.createAt, createAt) ||
@@ -247,7 +231,7 @@ class _$UserModelImpl implements _UserModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, nickName, introduce,
-      profileImg, phoneNum, region, town, createAt);
+      profileImg, region, town, createAt);
 
   @JsonKey(ignore: true)
   @override
@@ -269,7 +253,6 @@ abstract class _UserModel implements UserModel {
       final String? nickName,
       final String? introduce,
       final String? profileImg,
-      final String? phoneNum,
       final String? region,
       final String? town,
       final DateTime? createAt}) = _$UserModelImpl;
@@ -285,9 +268,7 @@ abstract class _UserModel implements UserModel {
   String? get introduce;
   @override
   String? get profileImg;
-  @override
-  String? get phoneNum;
-  @override
+  @override // String? phoneNum, // deprecated
   String? get region;
   @override
   String? get town;
