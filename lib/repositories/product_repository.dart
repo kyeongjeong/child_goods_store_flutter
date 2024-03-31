@@ -1,8 +1,8 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
-import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
-import 'package:child_goods_store_flutter/enums/product_status.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
+import 'package:child_goods_store_flutter/enums/product_state.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
@@ -64,7 +64,7 @@ class ProductRepository {
             productId: productId,
             productName: '$productId th product',
             price: 12000,
-            state: EProductSaleStatus.sale,
+            state: EProductSaleState.sale,
             productImage: productId % 3 == 0
                 ? ''
                 : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
@@ -109,8 +109,8 @@ class ProductRepository {
         content: '$productId th product contents',
         mainCategory: EMainCategory.clothing,
         subCategory: ESubCategory.top,
-        productStatus: EProductStatus.littleUsage,
-        state: EProductSaleStatus.sale,
+        productState: EProductState.littleUsage,
+        state: EProductSaleState.sale,
         createAt: DateTime.now(),
         updateAt: DateTime.now(),
         tag: List.generate(3, (index) => '$productId-$index tag'),
@@ -131,9 +131,10 @@ class ProductRepository {
     return res;
   }
 
-  Future<ResModel<void>> postProductStatus({
+  // TODO: change url status to stste?
+  Future<ResModel<void>> postProductState({
     required int productId,
-    required EProductSaleStatus status,
+    required EProductSaleState state,
     int? saledUserId,
   }) async {
     // Dio dio = Dio();
@@ -141,7 +142,7 @@ class ProductRepository {
     // dio.post(
     //   '/product/status/$productId',
     //   data: {
-    //     'status': status.key,
+    //     'state': state.key,
     //     'userId': saledUserId ?? -1,
     //   },
     // );

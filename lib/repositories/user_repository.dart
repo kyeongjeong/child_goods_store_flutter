@@ -22,7 +22,7 @@ class UserRepository {
         userId: 1,
         nickName: 'Woong test',
         introduce: 'Hello world',
-        phoneNum: '01012345678',
+        // phoneNum: '01012345678',
         profileImg: '',
         region: '경기도',
         town: '안양시',

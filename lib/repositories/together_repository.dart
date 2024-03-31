@@ -1,7 +1,7 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
-import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
@@ -103,7 +103,7 @@ class TogetherRepository {
         purchasePrice: 1000,
         mainCategory: EMainCategory.clothing,
         subCategory: ESubCategory.bottom,
-        status: EProductSaleStatus.sale,
+        state: EProductSaleState.sale,
         details: '$togetherId th together details',
         link: 'https://www.google.com',
         deadline: DateTime.now(),

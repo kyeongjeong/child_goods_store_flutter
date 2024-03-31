@@ -18,7 +18,7 @@ _$TogetherModelImpl _$$TogetherModelImplFromJson(Map<String, dynamic> json) =>
       purchasePrice: json['purchasePrice'] as int?,
       mainCategory: EMainCategory.fromJson(json['mainCategory'] as String?),
       subCategory: ESubCategory.fromJson(json['subCategory'] as String?),
-      status: EProductSaleStatus.fromJson(json['status'] as String?),
+      state: EProductSaleState.fromJson(json['state'] as String?),
       link: json['link'] as String?,
       deadline: json['deadline'] == null
           ? null
@@ -27,10 +27,12 @@ _$TogetherModelImpl _$$TogetherModelImplFromJson(Map<String, dynamic> json) =>
       detailAddress: json['detailAddress'] as String?,
       totalNum: json['totalNum'] as int?,
       purchaseNum: json['purchaseNum'] as int?,
-      tag: json['tag'] == null ? const [] : strToList(json['tag'] as String?),
-      togetherImage: json['togetherImage'] == null
-          ? const []
-          : strToList(json['togetherImage'] as String?),
+      tag: (json['tag'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
+      togetherImage: (json['togetherImage'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       togetherHeart: json['togetherHeart'] as bool?,
     );
 
@@ -44,14 +46,14 @@ Map<String, dynamic> _$$TogetherModelImplToJson(_$TogetherModelImpl instance) =>
       'purchasePrice': instance.purchasePrice,
       'mainCategory': EMainCategory.toJson(instance.mainCategory),
       'subCategory': ESubCategory.toJson(instance.subCategory),
-      'status': EProductSaleStatus.toJson(instance.status),
+      'state': EProductSaleState.toJson(instance.state),
       'link': instance.link,
       'deadline': instance.deadline?.toIso8601String(),
       'address': instance.address,
       'detailAddress': instance.detailAddress,
       'totalNum': instance.totalNum,
       'purchaseNum': instance.purchaseNum,
-      'tag': listToStr(instance.tag),
-      'togetherImage': listToStr(instance.togetherImage),
+      'tag': instance.tag,
+      'togetherImage': instance.togetherImage,
       'togetherHeart': instance.togetherHeart,
     };

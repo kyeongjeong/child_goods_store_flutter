@@ -31,17 +31,15 @@ mixin _$TogetherModel {
   @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
   ESubCategory? get subCategory => throw _privateConstructorUsedError;
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  EProductSaleStatus? get status => throw _privateConstructorUsedError;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  EProductSaleState? get state => throw _privateConstructorUsedError;
   String? get link => throw _privateConstructorUsedError;
   DateTime? get deadline => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get detailAddress => throw _privateConstructorUsedError;
   int? get totalNum => throw _privateConstructorUsedError;
   int? get purchaseNum => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get togetherImage => throw _privateConstructorUsedError;
   bool? get togetherHeart => throw _privateConstructorUsedError;
 
@@ -69,17 +67,16 @@ abstract class $TogetherModelCopyWith<$Res> {
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       ESubCategory? subCategory,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      EProductSaleStatus? status,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      EProductSaleState? state,
       String? link,
       DateTime? deadline,
       String? address,
       String? detailAddress,
       int? totalNum,
       int? purchaseNum,
-      @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
+      List<String> tag,
       List<String> togetherImage,
       bool? togetherHeart});
 
@@ -107,7 +104,7 @@ class _$TogetherModelCopyWithImpl<$Res, $Val extends TogetherModel>
     Object? purchasePrice = freezed,
     Object? mainCategory = freezed,
     Object? subCategory = freezed,
-    Object? status = freezed,
+    Object? state = freezed,
     Object? link = freezed,
     Object? deadline = freezed,
     Object? address = freezed,
@@ -151,10 +148,10 @@ class _$TogetherModelCopyWithImpl<$Res, $Val extends TogetherModel>
           ? _value.subCategory
           : subCategory // ignore: cast_nullable_to_non_nullable
               as ESubCategory?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as EProductSaleStatus?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as EProductSaleState?,
       link: freezed == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -227,17 +224,16 @@ abstract class _$$TogetherModelImplCopyWith<$Res>
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       ESubCategory? subCategory,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      EProductSaleStatus? status,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      EProductSaleState? state,
       String? link,
       DateTime? deadline,
       String? address,
       String? detailAddress,
       int? totalNum,
       int? purchaseNum,
-      @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
+      List<String> tag,
       List<String> togetherImage,
       bool? togetherHeart});
 
@@ -264,7 +260,7 @@ class __$$TogetherModelImplCopyWithImpl<$Res>
     Object? purchasePrice = freezed,
     Object? mainCategory = freezed,
     Object? subCategory = freezed,
-    Object? status = freezed,
+    Object? state = freezed,
     Object? link = freezed,
     Object? deadline = freezed,
     Object? address = freezed,
@@ -308,10 +304,10 @@ class __$$TogetherModelImplCopyWithImpl<$Res>
           ? _value.subCategory
           : subCategory // ignore: cast_nullable_to_non_nullable
               as ESubCategory?,
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as EProductSaleStatus?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as EProductSaleState?,
       link: freezed == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -367,18 +363,16 @@ class _$TogetherModelImpl implements _TogetherModel {
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       this.subCategory,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      this.status,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      this.state,
       this.link,
       this.deadline,
       this.address,
       this.detailAddress,
       this.totalNum,
       this.purchaseNum,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> tag = const [],
-      @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> togetherImage = const [],
       this.togetherHeart})
       : _tag = tag,
@@ -407,8 +401,8 @@ class _$TogetherModelImpl implements _TogetherModel {
   final ESubCategory? subCategory;
   @override
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  final EProductSaleStatus? status;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  final EProductSaleState? state;
   @override
   final String? link;
   @override
@@ -423,7 +417,7 @@ class _$TogetherModelImpl implements _TogetherModel {
   final int? purchaseNum;
   final List<String> _tag;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
+  @JsonKey()
   List<String> get tag {
     if (_tag is EqualUnmodifiableListView) return _tag;
     // ignore: implicit_dynamic_type
@@ -432,7 +426,7 @@ class _$TogetherModelImpl implements _TogetherModel {
 
   final List<String> _togetherImage;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
+  @JsonKey()
   List<String> get togetherImage {
     if (_togetherImage is EqualUnmodifiableListView) return _togetherImage;
     // ignore: implicit_dynamic_type
@@ -444,7 +438,7 @@ class _$TogetherModelImpl implements _TogetherModel {
 
   @override
   String toString() {
-    return 'TogetherModel(togetherId: $togetherId, user: $user, togetherName: $togetherName, details: $details, totalPrice: $totalPrice, purchasePrice: $purchasePrice, mainCategory: $mainCategory, subCategory: $subCategory, status: $status, link: $link, deadline: $deadline, address: $address, detailAddress: $detailAddress, totalNum: $totalNum, purchaseNum: $purchaseNum, tag: $tag, togetherImage: $togetherImage, togetherHeart: $togetherHeart)';
+    return 'TogetherModel(togetherId: $togetherId, user: $user, togetherName: $togetherName, details: $details, totalPrice: $totalPrice, purchasePrice: $purchasePrice, mainCategory: $mainCategory, subCategory: $subCategory, state: $state, link: $link, deadline: $deadline, address: $address, detailAddress: $detailAddress, totalNum: $totalNum, purchaseNum: $purchaseNum, tag: $tag, togetherImage: $togetherImage, togetherHeart: $togetherHeart)';
   }
 
   @override
@@ -466,7 +460,7 @@ class _$TogetherModelImpl implements _TogetherModel {
                 other.mainCategory == mainCategory) &&
             (identical(other.subCategory, subCategory) ||
                 other.subCategory == subCategory) &&
-            (identical(other.status, status) || other.status == status) &&
+            (identical(other.state, state) || other.state == state) &&
             (identical(other.link, link) || other.link == link) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
@@ -496,7 +490,7 @@ class _$TogetherModelImpl implements _TogetherModel {
       purchasePrice,
       mainCategory,
       subCategory,
-      status,
+      state,
       link,
       deadline,
       address,
@@ -534,17 +528,16 @@ abstract class _TogetherModel implements TogetherModel {
       @JsonKey(fromJson: ESubCategory.fromJson, toJson: ESubCategory.toJson)
       final ESubCategory? subCategory,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      final EProductSaleStatus? status,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      final EProductSaleState? state,
       final String? link,
       final DateTime? deadline,
       final String? address,
       final String? detailAddress,
       final int? totalNum,
       final int? purchaseNum,
-      @JsonKey(fromJson: strToList, toJson: listToStr) final List<String> tag,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
+      final List<String> tag,
       final List<String> togetherImage,
       final bool? togetherHeart}) = _$TogetherModelImpl;
 
@@ -571,8 +564,8 @@ abstract class _TogetherModel implements TogetherModel {
   ESubCategory? get subCategory;
   @override
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  EProductSaleStatus? get status;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  EProductSaleState? get state;
   @override
   String? get link;
   @override
@@ -586,10 +579,8 @@ abstract class _TogetherModel implements TogetherModel {
   @override
   int? get purchaseNum;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get togetherImage;
   @override
   bool? get togetherHeart;

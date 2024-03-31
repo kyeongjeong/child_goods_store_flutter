@@ -1,7 +1,7 @@
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
-import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/repositories/product_repository.dart';
@@ -18,7 +18,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     required this.productId,
   }) : super(const ProductDetailState.init()) {
     on<ProductDetailGet>(_productDetailGetHandler);
-    on<ProductDetailChangeSaleStatus>(_productDetailChangeSaleStatusHandler);
+    on<ProductDetailChangeSaleState>(_ProductDetailChangeSaleStateHandler);
     on<ProductDetailChangeHeart>(_productDetailChangeHeartHandler);
 
     add(ProductDetailGet());
@@ -53,15 +53,15 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     );
   }
 
-  Future<void> _productDetailChangeSaleStatusHandler(
-    ProductDetailChangeSaleStatus event,
+  Future<void> _ProductDetailChangeSaleStateHandler(
+    ProductDetailChangeSaleState event,
     Emitter<ProductDetailState> emit,
   ) async {
     if (state.status == ELoadingStatus.loading &&
         state.changeSaleStatus == ELoadingStatus.loading) return;
 
-    if (event.status != EProductSaleStatus.soldout &&
-        state.productModel?.state == event.status) return;
+    if (event.state != EProductSaleState.soldout &&
+        state.productModel?.state == event.state) return;
 
     emit(state.copyWith(
       status: ELoadingStatus.loading,
@@ -69,8 +69,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
     ));
     await handleApiRequest(
       () async {
-        if (event.status == EProductSaleStatus.soldout &&
-            event.userId == null) {
+        if (event.state == EProductSaleState.soldout && event.userId == null) {
           mockThrowDioError(
             errorModel: ResModel(
               code: 5000,
@@ -80,8 +79,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
           return;
         }
 
-        await productRepository.postProductStatus(
-          status: event.status,
+        await productRepository.postProductState(
+          state: event.state,
           productId: productId,
           saledUserId: event.userId,
         );
@@ -90,7 +89,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState>
           status: ELoadingStatus.loaded,
           changeSaleStatus: ELoadingStatus.loaded,
           productModel: state.productModel?.copyWith(
-            state: event.status,
+            state: event.state,
           ),
         ));
       },

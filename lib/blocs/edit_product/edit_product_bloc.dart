@@ -32,7 +32,7 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     on<EditProductChangeSubCat>(_editProductChangeSubCatHandler);
     on<EditProductChangeTags>(_editProductChangeTagsHandler);
     on<EditProductChangePrice>(_editProductChangePriceHandler);
-    on<EditProductChangeStatus>(_editProductChangeStatusHandler);
+    on<EditProductChangeState>(_editProductChangeStateHandler);
     on<EditProductSubmit>(_editProductSubmitHandler);
   }
 
@@ -148,13 +148,13 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     ));
   }
 
-  Future<void> _editProductChangeStatusHandler(
-    EditProductChangeStatus event,
+  Future<void> _editProductChangeStateHandler(
+    EditProductChangeState event,
     Emitter<EditProductState> emit,
   ) async {
     emit(state.copyWith(
       product: state.product.copyWith(
-        productStatus: event.productStatus,
+        productState: event.productState,
       ),
     ));
   }
@@ -192,7 +192,7 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
       emit(state.copyWith(status: ELoadingStatus.init));
       return;
     }
-    if (state.product.productStatus == null) {
+    if (state.product.productState == null) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
         message: '상품 상태를 골라주세요.',

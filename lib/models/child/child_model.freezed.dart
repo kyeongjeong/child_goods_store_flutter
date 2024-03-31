@@ -27,7 +27,6 @@ mixin _$ChildModel {
   @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
   EChildGender? get gender => throw _privateConstructorUsedError;
   String? get childImg => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +49,7 @@ abstract class $ChildModelCopyWith<$Res> {
       @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
       EChildGender? gender,
       String? childImg,
-      @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag});
+      List<String> tag});
 }
 
 /// @nodoc
@@ -118,7 +117,7 @@ abstract class _$$ChildModelImplCopyWith<$Res>
       @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
       EChildGender? gender,
       String? childImg,
-      @JsonKey(fromJson: strToList, toJson: listToStr) List<String> tag});
+      List<String> tag});
 }
 
 /// @nodoc
@@ -178,7 +177,6 @@ class _$ChildModelImpl implements _ChildModel {
       @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
       this.gender,
       this.childImg,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> tag = const []})
       : _tag = tag;
 
@@ -199,7 +197,7 @@ class _$ChildModelImpl implements _ChildModel {
   final String? childImg;
   final List<String> _tag;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
+  @JsonKey()
   List<String> get tag {
     if (_tag is EqualUnmodifiableListView) return _tag;
     // ignore: implicit_dynamic_type
@@ -253,7 +251,6 @@ abstract class _ChildModel implements ChildModel {
       @JsonKey(fromJson: EChildGender.fromJson, toJson: EChildGender.toJson)
       final EChildGender? gender,
       final String? childImg,
-      @JsonKey(fromJson: strToList, toJson: listToStr)
       final List<String> tag}) = _$ChildModelImpl;
 
   factory _ChildModel.fromJson(Map<String, dynamic> json) =
@@ -272,7 +269,6 @@ abstract class _ChildModel implements ChildModel {
   @override
   String? get childImg;
   @override
-  @JsonKey(fromJson: strToList, toJson: listToStr)
   List<String> get tag;
   @override
   @JsonKey(ignore: true)

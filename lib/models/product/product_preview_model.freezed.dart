@@ -24,8 +24,8 @@ mixin _$ProductPreviewModel {
   String? get productName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  EProductSaleStatus? get state => throw _privateConstructorUsedError;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  EProductSaleState? get state => throw _privateConstructorUsedError;
   String? get productImage => throw _privateConstructorUsedError;
   bool? get productHeart => throw _privateConstructorUsedError;
 
@@ -46,9 +46,9 @@ abstract class $ProductPreviewModelCopyWith<$Res> {
       String? productName,
       int? price,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      EProductSaleStatus? state,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      EProductSaleState? state,
       String? productImage,
       bool? productHeart});
 }
@@ -89,7 +89,7 @@ class _$ProductPreviewModelCopyWithImpl<$Res, $Val extends ProductPreviewModel>
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as EProductSaleStatus?,
+              as EProductSaleState?,
       productImage: freezed == productImage
           ? _value.productImage
           : productImage // ignore: cast_nullable_to_non_nullable
@@ -115,9 +115,9 @@ abstract class _$$ProductPreviewModelImplCopyWith<$Res>
       String? productName,
       int? price,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      EProductSaleStatus? state,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      EProductSaleState? state,
       String? productImage,
       bool? productHeart});
 }
@@ -156,7 +156,7 @@ class __$$ProductPreviewModelImplCopyWithImpl<$Res>
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as EProductSaleStatus?,
+              as EProductSaleState?,
       productImage: freezed == productImage
           ? _value.productImage
           : productImage // ignore: cast_nullable_to_non_nullable
@@ -177,8 +177,8 @@ class _$ProductPreviewModelImpl implements _ProductPreviewModel {
       this.productName,
       this.price,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
       this.state,
       this.productImage,
       this.productHeart});
@@ -194,8 +194,8 @@ class _$ProductPreviewModelImpl implements _ProductPreviewModel {
   final int? price;
   @override
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  final EProductSaleStatus? state;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  final EProductSaleState? state;
   @override
   final String? productImage;
   @override
@@ -249,9 +249,9 @@ abstract class _ProductPreviewModel implements ProductPreviewModel {
       final String? productName,
       final int? price,
       @JsonKey(
-          fromJson: EProductSaleStatus.fromJson,
-          toJson: EProductSaleStatus.toJson)
-      final EProductSaleStatus? state,
+          fromJson: EProductSaleState.fromJson,
+          toJson: EProductSaleState.toJson)
+      final EProductSaleState? state,
       final String? productImage,
       final bool? productHeart}) = _$ProductPreviewModelImpl;
 
@@ -266,8 +266,8 @@ abstract class _ProductPreviewModel implements ProductPreviewModel {
   int? get price;
   @override
   @JsonKey(
-      fromJson: EProductSaleStatus.fromJson, toJson: EProductSaleStatus.toJson)
-  EProductSaleStatus? get state;
+      fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
+  EProductSaleState? get state;
   @override
   String? get productImage;
   @override

@@ -1,4 +1,4 @@
-import 'package:child_goods_store_flutter/enums/product_sale_status.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'product_preview_model.freezed.dart';
@@ -11,10 +11,10 @@ class ProductPreviewModel with _$ProductPreviewModel {
     String? productName,
     int? price,
     @JsonKey(
-      fromJson: EProductSaleStatus.fromJson,
-      toJson: EProductSaleStatus.toJson,
+      fromJson: EProductSaleState.fromJson,
+      toJson: EProductSaleState.toJson,
     )
-    EProductSaleStatus? state,
+    EProductSaleState? state,
     String? productImage,
     bool? productHeart,
   }) = _ProductPreviewModel;

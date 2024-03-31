@@ -27,7 +27,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
     on<EditProfileChangeImage>(_editProfileChangeImageHandler);
     on<EditProfileChangeNickName>(_editProfileChangeNickNameHandler);
     on<EditProfileChangeIntroduce>(_editProfileChangeIntroduceHandler);
-    on<EditProfileChangePhoneNum>(_editProfileChangePhoneNumHandler);
+    // on<EditProfileChangePhoneNum>(_editProfileChangePhoneNumHandler);
     on<EditProfileChangeRegion>(_editProfileChangeRegionHandler);
     on<EditProfileChangeTown>(_editProfileChangeTownHandler);
     on<EditProfileSubmit>(_editProfileSubmitHandler);
@@ -69,16 +69,16 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
     ));
   }
 
-  Future<void> _editProfileChangePhoneNumHandler(
-    EditProfileChangePhoneNum event,
-    Emitter<EditProfileState> emit,
-  ) async {
-    emit(state.copyWith(
-      user: state.user.copyWith(
-        phoneNum: event.phoneNum,
-      ),
-    ));
-  }
+  // Future<void> _editProfileChangePhoneNumHandler(
+  //   EditProfileChangePhoneNum event,
+  //   Emitter<EditProfileState> emit,
+  // ) async {
+  //   emit(state.copyWith(
+  //     user: state.user.copyWith(
+  //       phoneNum: event.phoneNum,
+  //     ),
+  //   ));
+  // }
 
   Future<void> _editProfileChangeRegionHandler(
     EditProfileChangeRegion event,
@@ -118,14 +118,14 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
       emit(state.copyWith(status: ELoadingStatus.init));
       return;
     }
-    if (state.user.phoneNum == null || state.user.phoneNum == Strings.nullStr) {
-      emit(state.copyWith(
-        status: ELoadingStatus.error,
-        message: '핸드폰 인증을 진행해주세요.',
-      ));
-      emit(state.copyWith(status: ELoadingStatus.init));
-      return;
-    }
+    // if (state.user.phoneNum == null || state.user.phoneNum == Strings.nullStr) {
+    //   emit(state.copyWith(
+    //     status: ELoadingStatus.error,
+    //     message: '핸드폰 인증을 진행해주세요.',
+    //   ));
+    //   emit(state.copyWith(status: ELoadingStatus.init));
+    //   return;
+    // }
     if (state.user.region == null || state.user.region == Strings.nullStr) {
       emit(state.copyWith(
         status: ELoadingStatus.error,
