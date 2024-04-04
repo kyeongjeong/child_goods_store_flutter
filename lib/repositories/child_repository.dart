@@ -1,7 +1,9 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/child_gender.dart';
+import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
+import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
@@ -61,8 +63,6 @@ class ChildRepository {
     //   data: child.toJson(),
     // );
 
-    print(child.toJson());
-
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
 
@@ -118,6 +118,47 @@ class ChildRepository {
     var res = ResModel<ChildModel>.fromJson(
       resTmp,
       (json) => ChildModel.fromJson(json),
+    );
+
+    return res;
+  }
+
+  Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
+    required int childId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.get(
+    //   '/child/$childId',
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<List<ProductPreviewModel>>(
+      code: 1000,
+      data: [
+        for (var productId in List.generate(10, (index) => index + 1))
+          ProductPreviewModel(
+            productId: productId,
+            productName: '$productId th product',
+            price: 12000,
+            state: EProductSaleState.sale,
+            productImage: productId % 3 == 0
+                ? ''
+                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
+            productHeart: productId % 3 == 0 ? false : true,
+          ),
+      ],
+    ).toJson(
+      (products) => products.map((prod) => prod.toJson()).toList(),
+    );
+
+    var res = ResModel<List<ProductPreviewModel>>.fromJson(
+      resTmp,
+      (json) => (json as List<dynamic>)
+          .map((prod) => ProductPreviewModel.fromJson(prod))
+          .toList(),
     );
 
     return res;

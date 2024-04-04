@@ -72,7 +72,7 @@ class _TogetherPageState extends State<TogetherPage> {
     return Scaffold(
       appBar: AppBar(
         title: const AppFont('공동구매'),
-        scrolledUnderElevation: 0,
+        elevation: Sizes.size1,
       ),
       floatingActionButton: AppInkButton(
         padding: const EdgeInsets.all(Sizes.size16),
@@ -89,7 +89,7 @@ class _TogetherPageState extends State<TogetherPage> {
         slivers: [
           const SliverAppBar(
             flexibleSpace: TogetherAppBar(),
-            collapsedHeight: 200,
+            collapsedHeight: 210,
             floating: true,
             snap: true,
           ),

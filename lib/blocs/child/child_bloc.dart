@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/blocs/child/child_state.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
+import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,7 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
     on<ChildAdd>(_childAddHandler);
     on<ChildEdit>(_childEditHandler);
     on<ChildSelect>(_childSelectHandler);
+    on<ChildGetProductList>(_childGetProductListHandler);
 
     add(ChildGetChildren());
   }
@@ -26,11 +28,11 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
     Emitter<ChildState> emit,
   ) async {
     if (state.status == ELoadingStatus.loading &&
-        state.childListState == ELoadingStatus.loading) return;
+        state.childListStatus == ELoadingStatus.loading) return;
 
     emit(state.copyWith(
       status: ELoadingStatus.loading,
-      childListState: ELoadingStatus.loading,
+      childListStatus: ELoadingStatus.loading,
     ));
     await handleApiRequest(
       () async {
@@ -38,7 +40,7 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
 
         emit(state.copyWith(
           status: ELoadingStatus.loaded,
-          childListState: ELoadingStatus.loaded,
+          childListStatus: ELoadingStatus.loaded,
           childList: res.data,
         ));
 
@@ -64,9 +66,16 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
     );
 
     if (selectedChild.childId != -1) {
-      emit(state.copyWith(selectedChild: selectedChild));
+      emit(state.copyWith(
+        selectedChild: selectedChild,
+        productList: [],
+      ));
+      add(ChildGetProductList());
     } else {
-      emit(state.copyWith(nullSelectedChild: true));
+      emit(state.copyWith(
+        nullSelectedChild: true,
+        productList: [],
+      ));
     }
   }
 
@@ -98,5 +107,40 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
     emit(state.copyWith(childList: res));
 
     add(ChildSelect(event.child.childId!));
+  }
+
+  Future<void> _childGetProductListHandler(
+    ChildGetProductList event,
+    Emitter<ChildState> emit,
+  ) async {
+    if (state.selectedChild?.childId == null) return;
+    if (state.status == ELoadingStatus.loading &&
+        state.productListStatus == ELoadingStatus.loading) return;
+
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      productListStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        var res = await childRepository.getChildProductList(
+          childId: state.selectedChild!.childId!,
+        );
+
+        List<ProductPreviewModel> newList = [];
+        newList
+          ..addAll(state.productList)
+          ..addAll(res.data ?? []);
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          productListStatus: ELoadingStatus.loaded,
+          productList: newList,
+        ));
+      },
+      state: state,
+      emit: emit,
+      initAfterError: false,
+    );
   }
 }

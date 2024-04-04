@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: AppFont(F.title),
-        scrolledUnderElevation: 0,
+        elevation: Sizes.size1,
       ),
       floatingActionButton: AppInkButton(
         padding: const EdgeInsets.all(Sizes.size16),
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
         slivers: [
           const SliverAppBar(
             flexibleSpace: HomeAppBar(),
-            collapsedHeight: 200,
+            collapsedHeight: 210,
             floating: true,
             snap: true,
           ),

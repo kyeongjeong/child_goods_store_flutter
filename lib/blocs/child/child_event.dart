@@ -21,3 +21,5 @@ class ChildSelect extends ChildEvent {
 
   ChildSelect(this.childId);
 }
+
+class ChildGetProductList extends ChildEvent {}

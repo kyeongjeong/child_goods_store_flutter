@@ -46,10 +46,11 @@ class _TogetherAppBarState extends State<TogetherAppBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 210,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Gaps.v5,
           BlocBuilder<TogetherListBloc, TogetherListState>(
             builder: (context, state) => Padding(
               padding: const EdgeInsets.symmetric(
