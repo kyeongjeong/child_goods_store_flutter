@@ -46,10 +46,11 @@ class _HomeAppBarState extends State<HomeAppBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 210,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Gaps.v5,
           BlocBuilder<ProductListBloc, ProductListState>(
             builder: (context, state) => Padding(
               padding: const EdgeInsets.symmetric(

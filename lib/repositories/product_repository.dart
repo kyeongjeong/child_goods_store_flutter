@@ -131,7 +131,6 @@ class ProductRepository {
     return res;
   }
 
-  // TODO: change url status to stste?
   Future<ResModel<void>> postProductState({
     required int productId,
     required EProductSaleState state,
@@ -140,7 +139,7 @@ class ProductRepository {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
     // dio.post(
-    //   '/product/status/$productId',
+    //   '/product/state/$productId',
     //   data: {
     //     'state': state.key,
     //     'userId': saledUserId ?? -1,

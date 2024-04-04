@@ -222,7 +222,7 @@ class _AppRouterState extends State<AppRouter> {
             child: Scaffold(
               body: navigationShell,
               bottomNavigationBar: Container(
-                height: Sizes.size60,
+                height: Sizes.size60 + MediaQuery.paddingOf(context).bottom,
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
