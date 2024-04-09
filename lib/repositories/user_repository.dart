@@ -8,6 +8,8 @@ import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class UserRepository {
+  ///
+  /// API 6
   Future<ResModel<UserModel>> getUser() async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
@@ -40,6 +42,8 @@ class UserRepository {
     return res;
   }
 
+  ///
+  /// API 7
   Future<ResModel<UserModel>> postUser({
     required UserModel user,
   }) async {
@@ -68,6 +72,8 @@ class UserRepository {
     return res;
   }
 
+  ///
+  /// API 8
   Future<ResModel<UserModel>> patchUser({
     required UserModel user,
   }) async {
@@ -96,6 +102,8 @@ class UserRepository {
     return res;
   }
 
+  ///
+  /// API 9
   Future<ResModel<UserProfileModel>> getMyProfile() async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
@@ -128,6 +136,8 @@ class UserRepository {
     return res;
   }
 
+  ///
+  /// API 10
   Future<ResModel<UserProfileModel>> getUserProfile({
     required int userId,
   }) async {
@@ -163,6 +173,8 @@ class UserRepository {
     return res;
   }
 
+  ///
+  /// API 20
   Future<ResModel<List<UserModel>>> getUserFollower({
     required int userId,
   }) async {
@@ -206,6 +218,8 @@ class UserRepository {
     return res;
   }
 
+  ///
+  /// API 21
   Future<ResModel<List<UserModel>>> getUserFollowing({
     required int userId,
   }) async {

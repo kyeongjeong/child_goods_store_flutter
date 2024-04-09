@@ -16,6 +16,8 @@ import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class ProductRepository {
+  ///
+  /// API 101
   Future<ResModel<List<ProductPreviewModel>>> getProductList({
     required ESearchRange region,
     EMainCategory? mainCategory,
@@ -85,6 +87,8 @@ class ProductRepository {
     return res;
   }
 
+  ///
+  /// API 106
   Future<ResModel<ProductModel>> getProduct({
     required int productId,
   }) async {
@@ -131,6 +135,106 @@ class ProductRepository {
     return res;
   }
 
+  ///
+  /// API 107
+  Future<ResModel<void>> postProductHeart({
+    required int productId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post('/product/heart/$productId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
+
+  ///
+  /// API 108
+  Future<ResModel<void>> deleteProductHeart({
+    required int productId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.delete('/product/heart/$productId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
+
+  ///
+  /// API 109
+  Future<ResModel<int>> postProduct({
+    required ProductModel product,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post(
+    //   '/product',
+    //   data: product.toJson(),
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<int>(
+      code: 1000,
+      data: 999,
+    ).toJson(
+      (id) => id.toString(),
+    );
+
+    var res = ResModel<int>.fromJson(
+      resTmp,
+      (json) => int.parse(json),
+    );
+
+    return res;
+  }
+
+  ///
+  /// API 110
+  Future<ResModel<int>> patchProduct({
+    required ProductModel product,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.patch(
+    //   '/product/${product.productId}',
+    //   data: product.toJson(),
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<int>(
+      code: 1000,
+      data: product.productId,
+    ).toJson(
+      (id) => id.toString(),
+    );
+
+    var res = ResModel<int>.fromJson(
+      resTmp,
+      (json) => int.parse(json),
+    );
+
+    return res;
+  }
+
+  ///
+  /// API 111
   Future<ResModel<void>> postProductState({
     required int productId,
     required EProductSaleState state,
@@ -156,40 +260,8 @@ class ProductRepository {
     return res;
   }
 
-  Future<ResModel<void>> postProductHeart({
-    required int productId,
-  }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post('/product/heart/$productId');
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel(code: 1000).toJson((p0) => null);
-
-    var res = ResModel.fromJson(resTmp, (json) => null);
-
-    return res;
-  }
-
-  Future<ResModel<void>> deleteProductHeart({
-    required int productId,
-  }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.delete('/product/heart/$productId');
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel(code: 1000).toJson((p0) => null);
-
-    var res = ResModel.fromJson(resTmp, (json) => null);
-
-    return res;
-  }
-
+  ///
+  /// API 112
   Future<ResModel<List<UserProfileModel>>> getProductBuyer({
     required int productId,
   }) async {
@@ -228,62 +300,6 @@ class ProductRepository {
       (json) => (json as List<dynamic>)
           .map((user) => UserProfileModel.fromJson(user))
           .toList(),
-    );
-
-    return res;
-  }
-
-  Future<ResModel<int>> postProduct({
-    required ProductModel product,
-  }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/product',
-    //   data: product.toJson(),
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<int>(
-      code: 1000,
-      data: 999,
-    ).toJson(
-      (id) => id.toString(),
-    );
-
-    var res = ResModel<int>.fromJson(
-      resTmp,
-      (json) => int.parse(json),
-    );
-
-    return res;
-  }
-
-  Future<ResModel<int>> patchProduct({
-    required ProductModel product,
-  }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(AuthInterceptor());
-    // dio.post(
-    //   '/product/${product.productId}',
-    //   data: product.toJson(),
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<int>(
-      code: 1000,
-      data: product.productId,
-    ).toJson(
-      (id) => id.toString(),
-    );
-
-    var res = ResModel<int>.fromJson(
-      resTmp,
-      (json) => int.parse(json),
     );
 
     return res;

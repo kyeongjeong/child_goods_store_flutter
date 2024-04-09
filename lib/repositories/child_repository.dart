@@ -9,6 +9,8 @@ import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class ChildRepository {
+  ///
+  /// API 11
   Future<ResModel<List<ChildModel>>> getChild() async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
@@ -53,6 +55,8 @@ class ChildRepository {
     return res;
   }
 
+  ///
+  /// API 12
   Future<ResModel<ChildModel>> postChild({
     required ChildModel child,
   }) async {
@@ -88,6 +92,8 @@ class ChildRepository {
     return res;
   }
 
+  ///
+  /// API 13
   Future<ResModel<ChildModel>> patchChild({
     required ChildModel child,
   }) async {
@@ -123,6 +129,7 @@ class ChildRepository {
     return res;
   }
 
+  /// API 102
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
   }) async {

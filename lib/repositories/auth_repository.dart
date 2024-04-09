@@ -82,6 +82,8 @@ class AuthRepository {
     return;
   }
 
+  ///
+  /// API 1
   Future<ResModel<String>> signinWithOauth2({
     required EAuthMethod method,
     required String accessToken,
@@ -112,6 +114,8 @@ class AuthRepository {
     return res;
   }
 
+  ///
+  /// API 2
   Future<ResModel<String>> signinWith3C1S({
     required String email,
     required String password,
@@ -142,6 +146,36 @@ class AuthRepository {
     return res;
   }
 
+  ///
+  /// API 3
+  Future<ResModel<void>> postSignup({
+    required String email,
+    required String password,
+    // required String phoneNum,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.post(
+    //   '/signup',
+    //   data: {
+    //     'email': email,
+    //     'password': password,
+    //     'phoneNum': phoneNum,
+    //   }
+    // );
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
+
+    var res = ResModel<void>.fromJson(resTmp, (json) {});
+
+    return res;
+  }
+
+  ///
+  /// API 4
   Future<ResModel<void>> postEmailSend({
     required String email,
   }) async {
@@ -164,6 +198,8 @@ class AuthRepository {
     return res;
   }
 
+  ///
+  /// API 5
   Future<ResModel<void>> postEmailVerify({
     required String email,
     required String code,
@@ -176,32 +212,6 @@ class AuthRepository {
     //     'email': email,
     //     'authNum': code,
     //   },
-    // );
-
-    // TODO: connect api
-    await Future.delayed(const Duration(seconds: 1));
-
-    var resTmp = ResModel<void>(code: 1000).toJson((p0) => null);
-
-    var res = ResModel<void>.fromJson(resTmp, (json) {});
-
-    return res;
-  }
-
-  Future<ResModel<void>> postSignup({
-    required String email,
-    required String password,
-    // required String phoneNum,
-  }) async {
-    // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
-    // dio.post(
-    //   '/signup',
-    //   data: {
-    //     'email': email,
-    //     'password': password,
-    //     'phoneNum': phoneNum,
-    //   }
     // );
 
     // TODO: connect api

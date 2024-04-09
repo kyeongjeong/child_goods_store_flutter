@@ -3,6 +3,8 @@ import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:dio/dio.dart';
 
 class SearchRepository {
+  ///
+  /// API 24
   Future<ResModel<List<String>>> seatchTag({
     required String query,
   }) async {
