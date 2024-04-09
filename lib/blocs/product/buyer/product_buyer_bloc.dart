@@ -15,8 +15,6 @@ class ProductBuyerBloc extends Bloc<ProductBuyerEvent, ProductBuyerState>
     required this.productId,
   }) : super(const ProductBuyerState.init()) {
     on<ProductBuyerGet>(_productBuyerGetHandler);
-
-    add(ProductBuyerGet());
   }
 
   Future<void> _productBuyerGetHandler(

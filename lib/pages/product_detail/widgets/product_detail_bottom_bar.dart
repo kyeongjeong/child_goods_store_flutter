@@ -1,5 +1,6 @@
 import 'package:child_goods_store_flutter/blocs/auth/auth_bloc_singleton.dart';
 import 'package:child_goods_store_flutter/blocs/product/buyer/product_buyer_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/product/buyer/product_buyer_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_event.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_state.dart';
@@ -79,6 +80,7 @@ class _ProductDetailBottomBarState extends State<ProductDetailBottomBar> {
       context.pop();
     } else {
       context.pop();
+      bloc.add(ProductBuyerGet());
       AppBottomSheet.showList(
         context,
         builder: (_, controller) => ProductDetailBuyerList(
