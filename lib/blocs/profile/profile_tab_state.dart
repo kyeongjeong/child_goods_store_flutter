@@ -6,22 +6,18 @@ import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
 
 class ProfileTabState extends BlocState {
-  final double outerScrollPos;
   final EChatItemType category;
 
-  final double myScrollPos;
   final ELoadingStatus myProductsStatus;
   final List<ProductPreviewModel> myProducts;
   final ELoadingStatus myTogethersStatus;
   final List<TogetherPreviewModel> myTogethers;
 
-  final double heartScrollPos;
   final ELoadingStatus heartProductsStatus;
   final List<ProductPreviewModel> heartProducts;
   final ELoadingStatus heartTogethersStatus;
   final List<TogetherPreviewModel> heartTogethers;
 
-  final double purchaseScrollPos;
   final ELoadingStatus purchaseProductsStatus;
   final List<PurchaseModel> purchaseProducts;
   final ELoadingStatus purchaseTogethersStatus;
@@ -30,19 +26,15 @@ class ProfileTabState extends BlocState {
   // TODO: review list
 
   const ProfileTabState({
-    required this.outerScrollPos,
     required this.category,
-    required this.myScrollPos,
     required this.myProductsStatus,
     required this.myProducts,
     required this.myTogethersStatus,
     required this.myTogethers,
-    required this.heartScrollPos,
     required this.heartProductsStatus,
     required this.heartProducts,
     required this.heartTogethersStatus,
     required this.heartTogethers,
-    required this.purchaseScrollPos,
     required this.purchaseProductsStatus,
     required this.purchaseProducts,
     required this.purchaseTogethersStatus,
@@ -52,19 +44,15 @@ class ProfileTabState extends BlocState {
   });
 
   const ProfileTabState.init()
-      : outerScrollPos = 0,
-        category = EChatItemType.product,
-        myScrollPos = 0,
+      : category = EChatItemType.product,
         myProductsStatus = ELoadingStatus.init,
         myProducts = const [],
         myTogethersStatus = ELoadingStatus.init,
         myTogethers = const [],
-        heartScrollPos = 0,
         heartProductsStatus = ELoadingStatus.init,
         heartProducts = const [],
         heartTogethersStatus = ELoadingStatus.init,
         heartTogethers = const [],
-        purchaseScrollPos = 0,
         purchaseProductsStatus = ELoadingStatus.init,
         purchaseProducts = const [],
         purchaseTogethersStatus = ELoadingStatus.init,
@@ -78,19 +66,15 @@ class ProfileTabState extends BlocState {
   ProfileTabState copyWith({
     ELoadingStatus? status,
     String? message,
-    double? outerScrollPos,
     EChatItemType? category,
-    double? myScrollPos,
     ELoadingStatus? myProductsStatus,
     List<ProductPreviewModel>? myProducts,
     ELoadingStatus? myTogethersStatus,
     List<TogetherPreviewModel>? myTogethers,
-    double? heartScrollPos,
     ELoadingStatus? heartProductsStatus,
     List<ProductPreviewModel>? heartProducts,
     ELoadingStatus? heartTogethersStatus,
     List<TogetherPreviewModel>? heartTogethers,
-    double? purchaseScrollPos,
     ELoadingStatus? purchaseProductsStatus,
     List<PurchaseModel>? purchaseProducts,
     ELoadingStatus? purchaseTogethersStatus,
@@ -99,19 +83,15 @@ class ProfileTabState extends BlocState {
       ProfileTabState(
         status: status ?? this.status,
         message: message ?? this.message,
-        outerScrollPos: outerScrollPos ?? this.outerScrollPos,
         category: category ?? this.category,
-        myScrollPos: myScrollPos ?? this.myScrollPos,
         myProductsStatus: myProductsStatus ?? this.myProductsStatus,
         myProducts: myProducts ?? this.myProducts,
         myTogethersStatus: myTogethersStatus ?? this.myTogethersStatus,
         myTogethers: myTogethers ?? this.myTogethers,
-        heartScrollPos: heartScrollPos ?? this.heartScrollPos,
         heartProductsStatus: heartProductsStatus ?? this.heartProductsStatus,
         heartProducts: heartProducts ?? this.heartProducts,
         heartTogethersStatus: heartTogethersStatus ?? this.heartTogethersStatus,
         heartTogethers: heartTogethers ?? this.heartTogethers,
-        purchaseScrollPos: purchaseScrollPos ?? this.purchaseScrollPos,
         purchaseProductsStatus:
             purchaseProductsStatus ?? this.purchaseProductsStatus,
         purchaseProducts: purchaseProducts ?? this.purchaseProducts,
@@ -124,19 +104,15 @@ class ProfileTabState extends BlocState {
   List<Object?> get props => [
         status,
         message,
-        outerScrollPos,
         category,
-        myScrollPos,
         myProductsStatus,
         myProducts,
         myTogethersStatus,
         myTogethers,
-        heartScrollPos,
         heartProductsStatus,
         heartProducts,
         heartTogethersStatus,
         heartTogethers,
-        purchaseScrollPos,
         purchaseProductsStatus,
         purchaseProducts,
         purchaseTogethersStatus,

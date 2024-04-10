@@ -17,7 +17,6 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     required this.profileRepository,
     required this.userId,
   }) : super(const ProfileTabState.init()) {
-    on<ProfileTabScroll>(_profileTabScrollHandler);
     on<ProfileTabChangeCategory>(_profileTabChangeCategoryHandler);
     on<ProfileTabGetProducts>(_profileTabGetProductsHandler);
     on<ProfileTabGetTogethers>(_profileTabGetTogethersHandler);
@@ -26,19 +25,6 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     on<ProfileTabGetPurchaseProducts>(_profileTabGetPurchaseProductsHandler);
     on<ProfileTabGetPurchaseTogethers>(_profileTabGetPurchaseTogethersHandler);
   }
-
-  Future<void> _profileTabScrollHandler(
-    ProfileTabScroll event,
-    Emitter<ProfileTabState> emit,
-  ) async {
-    emit(state.copyWith(
-      outerScrollPos: event.outerScrollPos,
-      myScrollPos: event.myScrollPos,
-      heartScrollPos: event.heartScrollPos,
-      purchaseScrollPos: event.purchaseScrollPos,
-    ));
-  }
-
   Future<void> _profileTabChangeCategoryHandler(
     ProfileTabChangeCategory event,
     Emitter<ProfileTabState> emit,
