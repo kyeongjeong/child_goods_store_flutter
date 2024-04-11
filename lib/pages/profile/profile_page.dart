@@ -5,16 +5,22 @@ import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_event.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
+import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_card.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_heart.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_myitem.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_purchase.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_review.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final bool popAble;
 
   const ProfilePage({
@@ -22,8 +28,43 @@ class ProfilePage extends StatelessWidget {
     required this.popAble,
   });
 
-  void _onTapRetryGetProfile(BuildContext context) {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+  late final GlobalKey<ExtendedNestedScrollViewState> _nestedScrollKey =
+      GlobalKey<ExtendedNestedScrollViewState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: widget.popAble ? 2 : 4,
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _onTapRetryGetProfile() {
     context.read<ProfileBloc>().add(ProfileGet());
+  }
+
+  void _onTapTab(int index) {
+    if (!_tabController.indexIsChanging) {
+      _nestedScrollKey.currentState?.innerController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
@@ -51,7 +92,7 @@ class ProfilePage extends StatelessWidget {
         )
       ],
       child: Scaffold(
-        appBar: popAble
+        appBar: widget.popAble
             ? AppBar(
                 title: const AppFont('프로필'),
               )
@@ -83,15 +124,80 @@ class ProfilePage extends StatelessWidget {
     BuildContext context, {
     required ProfileState state,
   }) {
-    return CustomScrollView(
-      slivers: [
+    return ExtendedNestedScrollView(
+      key: _nestedScrollKey,
+      physics: const BouncingScrollPhysics(),
+      onlyOneScrollInBody: true,
+      pinnedHeaderSliverHeightBuilder: () => Sizes.size52,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
         SliverToBoxAdapter(
           child: ProfileCard(
             userProfile: state.userProfile!,
-            popAble: popAble,
+            popAble: widget.popAble,
+          ),
+        ),
+        SliverAppBar(
+          pinned: true,
+          automaticallyImplyLeading: false,
+          titleSpacing: 0,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          toolbarHeight: Sizes.size52,
+          title: SizedBox(
+            height: Sizes.size52,
+            child: TabBar(
+              controller: _tabController,
+              onTap: _onTapTab,
+              tabAlignment: TabAlignment.start,
+              isScrollable: true,
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.size20,
+              ),
+              labelPadding: const EdgeInsets.symmetric(
+                horizontal: Sizes.size20,
+              ),
+              tabs: [
+                const Tab(
+                  text: '게시한 글',
+                  height: Sizes.size52,
+                ),
+                if (!widget.popAble)
+                  const Tab(
+                    text: '관심 목록',
+                    height: Sizes.size52,
+                  ),
+                if (!widget.popAble)
+                  const Tab(
+                    text: '구매 내역',
+                    height: Sizes.size52,
+                  ),
+                const Tab(
+                  text: '받은 후기',
+                  height: Sizes.size52,
+                ),
+              ],
+            ),
           ),
         ),
       ],
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          ProfileTabMyItem(
+            nestedScrollKey: _nestedScrollKey,
+          ),
+          if (!widget.popAble)
+            ProfileTabHeart(
+              nestedScrollKey: _nestedScrollKey,
+            ),
+          if (!widget.popAble)
+            ProfileTabPurchase(
+              nestedScrollKey: _nestedScrollKey,
+            ),
+          ProfileTabReview(
+            nestedScrollKey: _nestedScrollKey,
+          ),
+        ],
+      ),
     );
   }
 
@@ -106,7 +212,7 @@ class ProfilePage extends StatelessWidget {
           AppFont(message),
           Gaps.v20,
           AppInkButton(
-            onTap: () => _onTapRetryGetProfile(context),
+            onTap: _onTapRetryGetProfile,
             child: const AppFont(
               '재시도',
               color: Colors.white,

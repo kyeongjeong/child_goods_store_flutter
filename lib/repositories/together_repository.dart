@@ -15,6 +15,8 @@ import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class TogetherRepository {
+  ///
+  /// API 201
   Future<ResModel<List<TogetherPreviewModel>>> getTogetherList({
     required ESearchRange region,
     EMainCategory? mainCategory,
@@ -79,6 +81,8 @@ class TogetherRepository {
     return res;
   }
 
+  ///
+  /// API 205
   Future<ResModel<TogetherModel>> getTogether({
     required int togetherId,
   }) async {
@@ -129,6 +133,8 @@ class TogetherRepository {
     return res;
   }
 
+  ///
+  ///  API 206
   Future<ResModel<void>> postTogetherHeart({
     required int togetherId,
   }) async {
@@ -146,6 +152,8 @@ class TogetherRepository {
     return res;
   }
 
+  ///
+  /// API 207
   Future<ResModel<void>> deleteTogetherHeart({
     required int togetherId,
   }) async {
@@ -163,6 +171,7 @@ class TogetherRepository {
     return res;
   }
 
+  /// API 208
   Future<ResModel<int>> postTogether({
     required TogetherModel together,
   }) async {
@@ -191,6 +200,7 @@ class TogetherRepository {
     return res;
   }
 
+  /// API 209
   Future<ResModel<int>> patchTogether({
     required TogetherModel together,
   }) async {

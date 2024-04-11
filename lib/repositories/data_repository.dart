@@ -25,6 +25,8 @@ class DataRepository {
     return districtData;
   }
 
+  ///
+  /// API 17
   Future<ResModel<List<AddressModel>>> getAddress() async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
@@ -61,6 +63,8 @@ class DataRepository {
     return res;
   }
 
+  ///
+  /// API 18
   Future<ResModel<AddressModel>> postAddress({
     required AddressModel address,
   }) async {
@@ -92,6 +96,8 @@ class DataRepository {
     return res;
   }
 
+  ///
+  /// API 19
   Future<ResModel<AddressModel>> patchAddress({
     required AddressModel address,
   }) async {

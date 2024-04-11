@@ -11,6 +11,7 @@ import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/detail/product_detail_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/product/list/product_list_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/profile/profile_tab_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/signup/signup_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/splash/splash_cubit.dart';
 import 'package:child_goods_store_flutter/blocs/together/detail/together_detail_bloc.dart';
@@ -52,6 +53,7 @@ import 'package:child_goods_store_flutter/repositories/child_repository.dart';
 import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/product_repository.dart';
+import 'package:child_goods_store_flutter/repositories/profile_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/together_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
@@ -326,11 +328,21 @@ class _AppRouterState extends State<AppRouter> {
                 GoRoute(
                   name: Routes.profile,
                   path: Routes.profile,
-                  builder: (context, state) => BlocProvider(
-                    create: (context) => ProfileBloc(
-                      userRepository: context.read<UserRepository>(),
-                      userId: AuthBlocSingleton.bloc.state.user!.userId!,
-                    ),
+                  builder: (context, state) => MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => ProfileBloc(
+                          userRepository: context.read<UserRepository>(),
+                          userId: AuthBlocSingleton.bloc.state.user!.userId!,
+                        ),
+                      ),
+                      BlocProvider(
+                        create: (context) => ProfileTabBloc(
+                          profileRepository: context.read<ProfileRepository>(),
+                          userId: AuthBlocSingleton.bloc.state.user!.userId!,
+                        ),
+                      ),
+                    ],
                     child: const ProfilePage(
                       popAble: false,
                     ),
@@ -384,12 +396,24 @@ class _AppRouterState extends State<AppRouter> {
             arguments: {
               'id': int.parse(state.pathParameters['userId'] as String),
             },
-            child: BlocProvider(
-              create: (context) => ProfileBloc(
-                userRepository: context.read<UserRepository>(),
-                userId: int.parse(state.pathParameters['userId'] as String),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => ProfileBloc(
+                    userRepository: context.read<UserRepository>(),
+                    userId: int.parse(state.pathParameters['userId'] as String),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => ProfileTabBloc(
+                    profileRepository: context.read<ProfileRepository>(),
+                    userId: int.parse(state.pathParameters['userId'] as String),
+                  ),
+                ),
+              ],
+              child: const ProfilePage(
+                popAble: true,
               ),
-              child: const ProfilePage(popAble: true),
             ),
           ),
         ),
@@ -543,6 +567,7 @@ class _AppRouterState extends State<AppRouter> {
         appBarTheme: const AppBarTheme(
           centerTitle: false,
           surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.white,
           shadowColor: Colors.black,
           scrolledUnderElevation: Sizes.size1,
           titleTextStyle: TextStyle(
@@ -565,6 +590,7 @@ class _AppRouterState extends State<AppRouter> {
       locale: const Locale('ko'),
       builder: (context, child) => _flavorBanner(
         child: child ?? const SizedBox(),
+        show: F.appFlavor != Flavor.prod,
       ),
     );
   }
