@@ -47,6 +47,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       () async {
         var res = await profileRepository.getProfileProductList(
           userId: userId,
+          page: state.myProductsPage,
         );
 
         List<ProductPreviewModel> newList = [];
@@ -58,6 +59,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           status: ELoadingStatus.loaded,
           myProductsStatus: ELoadingStatus.loaded,
           myProducts: newList,
+          myProductsPage: state.myProductsPage + 1,
         ));
       },
       state: state,
@@ -89,6 +91,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       () async {
         var res = await profileRepository.getProfileTogetherList(
           userId: userId,
+          page: state.myTogethersPage,
         );
 
         List<TogetherPreviewModel> newList = [];
@@ -100,6 +103,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           status: ELoadingStatus.loaded,
           myTogethersStatus: ELoadingStatus.loaded,
           myTogethers: newList,
+          myTogethersPage: state.myTogethersPage + 1,
         ));
       },
       state: state,
@@ -129,7 +133,9 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     ));
     await handleApiRequest(
       () async {
-        var res = await profileRepository.getProfileProductHeartList();
+        var res = await profileRepository.getProfileProductHeartList(
+          page: state.heartProductsPage,
+        );
 
         List<ProductPreviewModel> newList = [];
         newList
@@ -140,6 +146,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           status: ELoadingStatus.loaded,
           heartProductsStatus: ELoadingStatus.loaded,
           heartProducts: newList,
+          heartProductsPage: state.heartProductsPage + 1,
         ));
       },
       state: state,
@@ -169,7 +176,9 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     ));
     await handleApiRequest(
       () async {
-        var res = await profileRepository.getProfileTogetherHeartList();
+        var res = await profileRepository.getProfileTogetherHeartList(
+          page: state.heartTogethersPage,
+        );
 
         List<TogetherPreviewModel> newList = [];
         newList
@@ -180,6 +189,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           status: ELoadingStatus.loaded,
           heartTogethersStatus: ELoadingStatus.loaded,
           heartTogethers: newList,
+          heartTogethersPage: state.heartTogethersPage + 1,
         ));
       },
       state: state,
@@ -209,7 +219,9 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     ));
     await handleApiRequest(
       () async {
-        var res = await profileRepository.getProfileProductPurchaseList();
+        var res = await profileRepository.getProfileProductPurchaseList(
+          page: state.purchaseProductsPage,
+        );
 
         List<PurchaseModel> newList = [];
         newList
@@ -220,6 +232,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           status: ELoadingStatus.loaded,
           purchaseProductsStatus: ELoadingStatus.loaded,
           purchaseProducts: newList,
+          purchaseProductsPage: state.purchaseProductsPage + 1,
         ));
       },
       state: state,
@@ -249,7 +262,9 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     ));
     await handleApiRequest(
       () async {
-        var res = await profileRepository.getProfileTogetherPurchaseList();
+        var res = await profileRepository.getProfileTogetherPurchaseList(
+          page: state.purchaseTogethersPage,
+        );
 
         List<PurchaseModel> newList = [];
         newList
@@ -260,6 +275,7 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           status: ELoadingStatus.loaded,
           purchaseTogethersStatus: ELoadingStatus.loaded,
           purchaseTogethers: newList,
+          purchaseTogethersPage: state.purchaseTogethersPage + 1,
         ));
       },
       state: state,

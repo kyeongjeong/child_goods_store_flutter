@@ -132,11 +132,15 @@ class ChildRepository {
   /// API 102
   Future<ResModel<List<ProductPreviewModel>>> getChildProductList({
     required int childId,
+    required int page,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
     // dio.get(
     //   '/child/$childId',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
     // );
 
     // TODO: connect api

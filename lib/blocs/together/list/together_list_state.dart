@@ -15,15 +15,17 @@ class TogetherListState extends BlocState {
   final EChildGender? gender;
   final bool applyFilter;
   final List<TogetherPreviewModel> togethers;
+  final int page;
 
   const TogetherListState({
     this.mainCategory,
     this.subCategory,
     required this.region,
-    required this.togethers,
     this.age,
     this.gender,
     required this.applyFilter,
+    required this.togethers,
+    required this.page,
     required super.status,
     super.message,
   });
@@ -36,6 +38,7 @@ class TogetherListState extends BlocState {
         gender = null,
         applyFilter = true,
         togethers = const [],
+        page = 1,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -45,7 +48,6 @@ class TogetherListState extends BlocState {
   TogetherListState copyWith({
     ELoadingStatus? status,
     String? message,
-    List<TogetherPreviewModel>? togethers,
     EMainCategory? mainCategory,
     bool? resetMain,
     ESubCategory? subCategory,
@@ -56,11 +58,12 @@ class TogetherListState extends BlocState {
     EChildGender? gender,
     bool? resetGender,
     bool? applyFilter,
+    List<TogetherPreviewModel>? togethers,
+    int? page,
   }) =>
       TogetherListState(
         status: status ?? this.status,
         message: message ?? this.message,
-        togethers: togethers ?? this.togethers,
         mainCategory:
             resetMain == true ? null : (mainCategory ?? this.mainCategory),
         subCategory:
@@ -69,18 +72,21 @@ class TogetherListState extends BlocState {
         age: resetAge == true ? null : (age ?? this.age),
         gender: resetGender == true ? null : (gender ?? this.gender),
         applyFilter: applyFilter ?? this.applyFilter,
+        togethers: togethers ?? this.togethers,
+        page: page ?? this.page,
       );
 
   @override
   List<Object?> get props => [
         status,
         message,
-        togethers,
         mainCategory,
         subCategory,
         region,
         age,
         gender,
         applyFilter,
+        togethers,
+        page,
       ];
 }
