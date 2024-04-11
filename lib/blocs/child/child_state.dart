@@ -9,6 +9,7 @@ class ChildState extends BlocState {
   final ChildModel? selectedChild;
   final ELoadingStatus productListStatus;
   final List<ProductPreviewModel> productList;
+  final int page;
 
   const ChildState({
     required this.childListStatus,
@@ -16,6 +17,7 @@ class ChildState extends BlocState {
     this.selectedChild,
     required this.productListStatus,
     required this.productList,
+    required this.page,
     required super.status,
     super.message,
   });
@@ -26,6 +28,7 @@ class ChildState extends BlocState {
         selectedChild = null,
         productListStatus = ELoadingStatus.init,
         productList = const [],
+        page = 1,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -39,6 +42,7 @@ class ChildState extends BlocState {
     ELoadingStatus? status,
     ELoadingStatus? productListStatus,
     List<ProductPreviewModel>? productList,
+    int? page,
     String? message,
     bool nullSelectedChild = false,
   }) =>
@@ -49,6 +53,7 @@ class ChildState extends BlocState {
             nullSelectedChild ? null : (selectedChild ?? this.selectedChild),
         productListStatus: productListStatus ?? this.productListStatus,
         productList: productList ?? this.productList,
+        page: page ?? this.page,
         status: status ?? this.status,
         message: message ?? this.message,
       );
@@ -60,6 +65,7 @@ class ChildState extends BlocState {
         selectedChild,
         productListStatus,
         productList,
+        page,
         status,
         message,
       ];

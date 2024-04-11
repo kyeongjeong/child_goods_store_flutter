@@ -23,8 +23,10 @@ class TogetherRepository {
     ESubCategory? subCategory,
     EChildAge? age,
     EChildGender? gender,
+    required int page,
   }) async {
     Map<String, dynamic> queryParams = {};
+    queryParams['page'] = page;
     queryParams['region'] = region.key;
     if (mainCategory != null) {
       queryParams['mainCategory'] = mainCategory.key;

@@ -125,6 +125,7 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
       () async {
         var res = await childRepository.getChildProductList(
           childId: state.selectedChild!.childId!,
+          page: state.page,
         );
 
         List<ProductPreviewModel> newList = [];
@@ -136,6 +137,7 @@ class ChildBloc extends Bloc<ChildEvent, ChildState>
           status: ELoadingStatus.loaded,
           productListStatus: ELoadingStatus.loaded,
           productList: newList,
+          page: state.page + 1,
         ));
       },
       state: state,

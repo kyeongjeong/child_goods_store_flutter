@@ -22,17 +22,19 @@ class ProductListState extends BlocState {
   final int maxPrice;
   final bool applyFilter;
   final List<ProductPreviewModel> products;
+  final int page;
 
   const ProductListState({
     this.mainCategory,
     this.subCategory,
     required this.region,
-    required this.products,
     this.age,
     this.gender,
     required this.minPrice,
     required this.maxPrice,
     required this.applyFilter,
+    required this.products,
+    required this.page,
     required super.status,
     super.message,
   });
@@ -47,6 +49,7 @@ class ProductListState extends BlocState {
         maxPrice = MAX_PRICE,
         applyFilter = true,
         products = const [],
+        page = 1,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -56,7 +59,6 @@ class ProductListState extends BlocState {
   ProductListState copyWith({
     ELoadingStatus? status,
     String? message,
-    List<ProductPreviewModel>? products,
     EMainCategory? mainCategory,
     bool? resetMain,
     ESubCategory? subCategory,
@@ -69,11 +71,12 @@ class ProductListState extends BlocState {
     int? minPrice,
     int? maxPrice,
     bool? applyFilter,
+    List<ProductPreviewModel>? products,
+    int? page,
   }) =>
       ProductListState(
         status: status ?? this.status,
         message: message ?? this.message,
-        products: products ?? this.products,
         mainCategory:
             resetMain == true ? null : (mainCategory ?? this.mainCategory),
         subCategory:
@@ -84,13 +87,14 @@ class ProductListState extends BlocState {
         minPrice: minPrice ?? this.minPrice,
         maxPrice: maxPrice ?? this.maxPrice,
         applyFilter: applyFilter ?? this.applyFilter,
+        products: products ?? this.products,
+        page: page ?? this.page,
       );
 
   @override
   List<Object?> get props => [
         status,
         message,
-        products,
         mainCategory,
         subCategory,
         region,
@@ -99,5 +103,7 @@ class ProductListState extends BlocState {
         minPrice,
         maxPrice,
         applyFilter,
+        products,
+        page,
       ];
 }

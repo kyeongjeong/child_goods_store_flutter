@@ -36,16 +36,23 @@ class FollowBloc extends Bloc<FollowEvent, FollowState>
         ResModel<List<UserModel>>? res;
         switch (mode) {
           case EFollowMode.follower:
-            res = await userRepository.getUserFollower(userId: userId);
+            res = await userRepository.getUserFollower(
+              userId: userId,
+              page: state.page,
+            );
             break;
           case EFollowMode.following:
-            res = await userRepository.getUserFollowing(userId: userId);
+            res = await userRepository.getUserFollowing(
+              userId: userId,
+              page: state.page,
+            );
             break;
         }
 
         emit(state.copyWith(
           status: ELoadingStatus.loaded,
           userList: res.data,
+          page: state.page + 1,
         ));
       },
       state: state,

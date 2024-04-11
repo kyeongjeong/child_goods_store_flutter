@@ -177,10 +177,16 @@ class UserRepository {
   /// API 20
   Future<ResModel<List<UserModel>>> getUserFollower({
     required int userId,
+    required int page,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/user/follower/$userId');
+    // dio.get(
+    //   '/user/follower/$userId',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -222,10 +228,16 @@ class UserRepository {
   /// API 21
   Future<ResModel<List<UserModel>>> getUserFollowing({
     required int userId,
+    required int page,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/user/following/$userId');
+    // dio.get(
+    //   '/user/following/$userId',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));

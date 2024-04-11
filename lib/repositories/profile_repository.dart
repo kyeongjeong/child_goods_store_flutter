@@ -14,10 +14,16 @@ class ProfileRepository {
   /// API 103
   Future<ResModel<List<ProductPreviewModel>>> getProfileProductList({
     required int userId,
+    required int page,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/profile/product/$userId');
+    // dio.get(
+    //   '/profile/product/$userId',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -53,11 +59,17 @@ class ProfileRepository {
 
   ///
   /// API 104
-  Future<ResModel<List<ProductPreviewModel>>>
-      getProfileProductHeartList() async {
+  Future<ResModel<List<ProductPreviewModel>>> getProfileProductHeartList({
+    required int page,
+  }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/profile/product/heart');
+    // dio.get(
+    //   '/profile/product/heart',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -93,10 +105,17 @@ class ProfileRepository {
 
   ///
   /// API 105
-  Future<ResModel<List<PurchaseModel>>> getProfileProductPurchaseList() async {
+  Future<ResModel<List<PurchaseModel>>> getProfileProductPurchaseList({
+    required int page,
+  }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/profile/product/purchase');
+    // dio.get(
+    //   '/profile/product/purchase',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -136,10 +155,16 @@ class ProfileRepository {
   /// API 202
   Future<ResModel<List<TogetherPreviewModel>>> getProfileTogetherList({
     required int userId,
+    required int page,
   }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(UnAuthInterceptor());
-    // dio.get('/profile/together/$userId');
+    // dio.get(
+    //   '/profile/together/$userId',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -178,11 +203,17 @@ class ProfileRepository {
 
   ///
   /// API 203
-  Future<ResModel<List<TogetherPreviewModel>>>
-      getProfileTogetherHeartList() async {
+  Future<ResModel<List<TogetherPreviewModel>>> getProfileTogetherHeartList({
+    required int page,
+  }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/profile/together/heart');
+    // dio.get(
+    //   '/profile/together/heart',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));
@@ -221,10 +252,17 @@ class ProfileRepository {
 
   ///
   /// API 204
-  Future<ResModel<List<PurchaseModel>>> getProfileTogetherPurchaseList() async {
+  Future<ResModel<List<PurchaseModel>>> getProfileTogetherPurchaseList({
+    required int page,
+  }) async {
     // Dio dio = Dio();
     // dio.interceptors.add(AuthInterceptor());
-    // dio.get('/profile/together/purchase');
+    // dio.get(
+    //   '/profile/together/purchase',
+    //   queryParameters: {
+    //     'page': page,
+    //   },
+    // );
 
     // TODO: connect api
     await Future.delayed(const Duration(seconds: 1));

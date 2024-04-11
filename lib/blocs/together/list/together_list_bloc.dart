@@ -44,6 +44,7 @@ class TogetherListBloc extends Bloc<TogetherListEvent, TogetherListState>
           subCategory: state.subCategory,
           age: state.age,
           gender: state.gender,
+          page: state.page,
         );
 
         List<TogetherPreviewModel> newList = [];
@@ -54,6 +55,7 @@ class TogetherListBloc extends Bloc<TogetherListEvent, TogetherListState>
         emit(state.copyWith(
           status: ELoadingStatus.loaded,
           togethers: newList,
+          page: state.page + 1,
         ));
       },
       state: state,

@@ -51,6 +51,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
           maxPrice: state.maxPrice == ProductListState.MAX_PRICE
               ? null
               : state.maxPrice,
+          page: state.page,
         );
 
         List<ProductPreviewModel> newList = [];
@@ -61,6 +62,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
         emit(state.copyWith(
           status: ELoadingStatus.loaded,
           products: newList,
+          page: state.page + 1,
         ));
       },
       state: state,
