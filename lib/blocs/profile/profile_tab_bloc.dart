@@ -63,6 +63,14 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       state: state,
       emit: emit,
       initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            myProductsStatus: ELoadingStatus.error,
+            myProductsMessage: state.message,
+          ));
+        }
+      },
     );
   }
 
@@ -97,6 +105,14 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       state: state,
       emit: emit,
       initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            myTogethersStatus: ELoadingStatus.error,
+            myTogethersMessage: state.message,
+          ));
+        }
+      },
     );
   }
 
@@ -129,6 +145,14 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       state: state,
       emit: emit,
       initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            heartProductsStatus: ELoadingStatus.error,
+            heartProductsMessage: state.message,
+          ));
+        }
+      },
     );
   }
 
@@ -161,6 +185,14 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       state: state,
       emit: emit,
       initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            heartTogethersStatus: ELoadingStatus.error,
+            heartTogethersMessage: state.message,
+          ));
+        }
+      },
     );
   }
 
@@ -193,6 +225,14 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       state: state,
       emit: emit,
       initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            purchaseProductsStatus: ELoadingStatus.error,
+            purchaseProductsMessage: state.message,
+          ));
+        }
+      },
     );
   }
 
@@ -225,6 +265,14 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
       state: state,
       emit: emit,
       initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            purchaseTogethersStatus: ELoadingStatus.error,
+            purchaseTogethersMessage: state.message,
+          ));
+        }
+      },
     );
   }
 }

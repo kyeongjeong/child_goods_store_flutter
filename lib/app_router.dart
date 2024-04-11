@@ -567,6 +567,7 @@ class _AppRouterState extends State<AppRouter> {
         appBarTheme: const AppBarTheme(
           centerTitle: false,
           surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.white,
           shadowColor: Colors.black,
           scrolledUnderElevation: Sizes.size1,
           titleTextStyle: TextStyle(
@@ -589,6 +590,7 @@ class _AppRouterState extends State<AppRouter> {
       locale: const Locale('ko'),
       builder: (context, child) => _flavorBanner(
         child: child ?? const SizedBox(),
+        show: F.appFlavor != Flavor.prod,
       ),
     );
   }

@@ -17,6 +17,7 @@ class PurchaseModel with _$PurchaseModel {
     String? sellerName,
     int? price,
     DateTime? saleCompleteDate,
+    String? image,
     bool? isReview,
   }) = _PurchaseModel;
 

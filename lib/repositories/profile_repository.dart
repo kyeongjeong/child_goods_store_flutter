@@ -6,6 +6,7 @@ import 'package:child_goods_store_flutter/models/product/product_preview_model.d
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
+import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class ProfileRepository {
@@ -111,6 +112,9 @@ class ProfileRepository {
             sellerName: '$productId saller name',
             price: 10000,
             saleCompleteDate: DateTime.now(),
+            image: productId % 4 == 0
+                ? ''
+                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
             isReview: productId % 3 == 0 ? false : true,
           ),
       ],
@@ -236,6 +240,9 @@ class ProfileRepository {
             sellerName: '$togetherId saller name',
             price: 10000,
             saleCompleteDate: DateTime.now(),
+            image: togetherId % 4 == 0
+                ? ''
+                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
             isReview: togetherId % 3 == 0 ? false : true,
           ),
       ],

@@ -6,31 +6,29 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
-import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
-import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
+import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_category_dropdown.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
-import 'package:child_goods_store_flutter/widgets/common/product_listitem.dart';
-import 'package:child_goods_store_flutter/widgets/common/together_listitem.dart';
+import 'package:child_goods_store_flutter/widgets/common/purchase_listitem.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProfileTabMyItem extends StatefulWidget {
+class ProfileTabPurchase extends StatefulWidget {
   final GlobalKey<ExtendedNestedScrollViewState> nestedScrollKey;
 
-  const ProfileTabMyItem({
+  const ProfileTabPurchase({
     super.key,
     required this.nestedScrollKey,
   });
 
   @override
-  State<ProfileTabMyItem> createState() => _ProfileTabMyItemState();
+  State<ProfileTabPurchase> createState() => _ProfileTabPurchaseState();
 }
 
-class _ProfileTabMyItemState extends State<ProfileTabMyItem>
-    with AutomaticKeepAliveClientMixin<ProfileTabMyItem> {
+class _ProfileTabPurchaseState extends State<ProfileTabPurchase>
+    with AutomaticKeepAliveClientMixin<ProfileTabPurchase> {
   @override
   bool get wantKeepAlive => true;
 
@@ -42,11 +40,11 @@ class _ProfileTabMyItemState extends State<ProfileTabMyItem>
 
   void _initLoadData() {
     var bloc = context.read<ProfileTabBloc>();
-    if (bloc.state.myProductsStatus == ELoadingStatus.init &&
+    if (bloc.state.purchaseProductsStatus == ELoadingStatus.init &&
         bloc.state.category == EChatItemType.product) {
       _loadData();
     }
-    if (bloc.state.myTogethersStatus == ELoadingStatus.init &&
+    if (bloc.state.purchaseTogethersStatus == ELoadingStatus.init &&
         bloc.state.category == EChatItemType.together) {
       _loadData();
     }
@@ -55,12 +53,12 @@ class _ProfileTabMyItemState extends State<ProfileTabMyItem>
   void _loadData({bool force = false}) {
     var bloc = context.read<ProfileTabBloc>();
     if (bloc.state.category == EChatItemType.product) {
-      if (bloc.state.myProductsStatus != ELoadingStatus.error || force) {
-        bloc.add(ProfileTabGetProducts());
+      if (bloc.state.purchaseProductsStatus != ELoadingStatus.error || force) {
+        bloc.add(ProfileTabGetPurchaseProducts());
       }
     } else {
-      if (bloc.state.myTogethersStatus != ELoadingStatus.error || force) {
-        bloc.add(ProfileTabGetTogethers());
+      if (bloc.state.purchaseTogethersStatus != ELoadingStatus.error || force) {
+        bloc.add(ProfileTabGetPurchaseTogethers());
       }
     }
   }
@@ -92,9 +90,9 @@ class _ProfileTabMyItemState extends State<ProfileTabMyItem>
               },
               builder: (context, state) {
                 if (state.category == EChatItemType.product) {
-                  return _productList(state.myProducts);
+                  return _itemList(state.purchaseProducts);
                 }
-                return _togetherList(state.myTogethers);
+                return _itemList(state.purchaseTogethers);
               },
             ),
           ),
@@ -112,19 +110,19 @@ class _ProfileTabMyItemState extends State<ProfileTabMyItem>
           child: BlocBuilder<ProfileTabBloc, ProfileTabState>(
             builder: (context, state) {
               if (state.category == EChatItemType.product &&
-                      state.myProductsStatus == ELoadingStatus.error ||
+                      state.purchaseProductsStatus == ELoadingStatus.error ||
                   state.category == EChatItemType.together &&
-                      state.myTogethersStatus == ELoadingStatus.error) {
+                      state.purchaseTogethersStatus == ELoadingStatus.error) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (state.category == EChatItemType.product)
                       AppFont(
-                        state.myProductsMessage ?? Strings.unknownFail,
+                        state.purchaseProductsMessage ?? Strings.unknownFail,
                       ),
                     if (state.category == EChatItemType.together)
                       AppFont(
-                        state.myTogethersMessage ?? Strings.unknownFail,
+                        state.purchaseTogethersMessage ?? Strings.unknownFail,
                       ),
                     Gaps.v20,
                     AppInkButton(
@@ -145,28 +143,13 @@ class _ProfileTabMyItemState extends State<ProfileTabMyItem>
     );
   }
 
-  Widget _productList(List<ProductPreviewModel> products) {
-    return SliverGrid.builder(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 300,
-        childAspectRatio: 2 / 3,
-        crossAxisSpacing: Sizes.size16,
-        mainAxisSpacing: Sizes.size16,
-      ),
-      itemBuilder: (context, index) => ProductListItem(
-        product: products[index],
-      ),
-      itemCount: products.length,
-    );
-  }
-
-  Widget _togetherList(List<TogetherPreviewModel> togethers) {
+  Widget _itemList(List<PurchaseModel> items) {
     return SliverList.separated(
-      itemBuilder: (context, index) => TogetherListItem(
-        together: togethers[index],
+      itemBuilder: (context, index) => PurchaseListItem(
+        purchase: items[index],
       ),
       separatorBuilder: (context, index) => Gaps.v16,
-      itemCount: togethers.length,
+      itemCount: items.length,
     );
   }
 }

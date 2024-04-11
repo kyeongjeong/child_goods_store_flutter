@@ -11,6 +11,8 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_card.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_heart.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_myitem.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_purchase.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_review.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_snackbar.dart';
@@ -188,11 +190,11 @@ class _ProfilePageState extends State<ProfilePage>
               nestedScrollKey: _nestedScrollKey,
             ),
           if (!widget.popAble)
-            const Center(
-              child: AppFont('tab3'),
+            ProfileTabPurchase(
+              nestedScrollKey: _nestedScrollKey,
             ),
-          const Center(
-            child: AppFont('tab4'),
+          ProfileTabReview(
+            nestedScrollKey: _nestedScrollKey,
           ),
         ],
       ),

@@ -27,6 +27,7 @@ mixin _$PurchaseModel {
   String? get sellerName => throw _privateConstructorUsedError;
   int? get price => throw _privateConstructorUsedError;
   DateTime? get saleCompleteDate => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   bool? get isReview => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,6 +50,7 @@ abstract class $PurchaseModelCopyWith<$Res> {
       String? sellerName,
       int? price,
       DateTime? saleCompleteDate,
+      String? image,
       bool? isReview});
 }
 
@@ -71,6 +73,7 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
     Object? sellerName = freezed,
     Object? price = freezed,
     Object? saleCompleteDate = freezed,
+    Object? image = freezed,
     Object? isReview = freezed,
   }) {
     return _then(_value.copyWith(
@@ -98,6 +101,10 @@ class _$PurchaseModelCopyWithImpl<$Res, $Val extends PurchaseModel>
           ? _value.saleCompleteDate
           : saleCompleteDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
       isReview: freezed == isReview
           ? _value.isReview
           : isReview // ignore: cast_nullable_to_non_nullable
@@ -122,6 +129,7 @@ abstract class _$$PurchaseModelImplCopyWith<$Res>
       String? sellerName,
       int? price,
       DateTime? saleCompleteDate,
+      String? image,
       bool? isReview});
 }
 
@@ -142,6 +150,7 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
     Object? sellerName = freezed,
     Object? price = freezed,
     Object? saleCompleteDate = freezed,
+    Object? image = freezed,
     Object? isReview = freezed,
   }) {
     return _then(_$PurchaseModelImpl(
@@ -169,6 +178,10 @@ class __$$PurchaseModelImplCopyWithImpl<$Res>
           ? _value.saleCompleteDate
           : saleCompleteDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
       isReview: freezed == isReview
           ? _value.isReview
           : isReview // ignore: cast_nullable_to_non_nullable
@@ -188,6 +201,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
       this.sellerName,
       this.price,
       this.saleCompleteDate,
+      this.image,
       this.isReview});
 
   factory _$PurchaseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -207,11 +221,13 @@ class _$PurchaseModelImpl implements _PurchaseModel {
   @override
   final DateTime? saleCompleteDate;
   @override
+  final String? image;
+  @override
   final bool? isReview;
 
   @override
   String toString() {
-    return 'PurchaseModel(category: $category, id: $id, name: $name, sellerName: $sellerName, price: $price, saleCompleteDate: $saleCompleteDate, isReview: $isReview)';
+    return 'PurchaseModel(category: $category, id: $id, name: $name, sellerName: $sellerName, price: $price, saleCompleteDate: $saleCompleteDate, image: $image, isReview: $isReview)';
   }
 
   @override
@@ -228,6 +244,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.saleCompleteDate, saleCompleteDate) ||
                 other.saleCompleteDate == saleCompleteDate) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.isReview, isReview) ||
                 other.isReview == isReview));
   }
@@ -235,7 +252,7 @@ class _$PurchaseModelImpl implements _PurchaseModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, category, id, name, sellerName,
-      price, saleCompleteDate, isReview);
+      price, saleCompleteDate, image, isReview);
 
   @JsonKey(ignore: true)
   @override
@@ -260,6 +277,7 @@ abstract class _PurchaseModel implements PurchaseModel {
       final String? sellerName,
       final int? price,
       final DateTime? saleCompleteDate,
+      final String? image,
       final bool? isReview}) = _$PurchaseModelImpl;
 
   factory _PurchaseModel.fromJson(Map<String, dynamic> json) =
@@ -278,6 +296,8 @@ abstract class _PurchaseModel implements PurchaseModel {
   int? get price;
   @override
   DateTime? get saleCompleteDate;
+  @override
+  String? get image;
   @override
   bool? get isReview;
   @override

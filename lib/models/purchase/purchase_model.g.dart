@@ -16,6 +16,7 @@ _$PurchaseModelImpl _$$PurchaseModelImplFromJson(Map<String, dynamic> json) =>
       saleCompleteDate: json['saleCompleteDate'] == null
           ? null
           : DateTime.parse(json['saleCompleteDate'] as String),
+      image: json['image'] as String?,
       isReview: json['isReview'] as bool?,
     );
 
@@ -27,5 +28,6 @@ Map<String, dynamic> _$$PurchaseModelImplToJson(_$PurchaseModelImpl instance) =>
       'sellerName': instance.sellerName,
       'price': instance.price,
       'saleCompleteDate': instance.saleCompleteDate?.toIso8601String(),
+      'image': instance.image,
       'isReview': instance.isReview,
     };

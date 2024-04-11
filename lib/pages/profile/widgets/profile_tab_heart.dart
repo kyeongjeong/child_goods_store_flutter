@@ -54,12 +54,16 @@ class _ProfileTabHeartState extends State<ProfileTabHeart>
     }
   }
 
-  void _loadData() {
+  void _loadData({bool force = false}) {
     var bloc = context.read<ProfileTabBloc>();
     if (bloc.state.category == EChatItemType.product) {
-      bloc.add(ProfileTabGetHeartProducts());
+      if (bloc.state.heartProductsStatus != ELoadingStatus.error || force) {
+        bloc.add(ProfileTabGetHeartProducts());
+      }
     } else {
-      bloc.add(ProfileTabGetHeartTogethers());
+      if (bloc.state.heartTogethersStatus != ELoadingStatus.error || force) {
+        bloc.add(ProfileTabGetHeartTogethers());
+      }
     }
   }
 
@@ -78,86 +82,93 @@ class _ProfileTabHeartState extends State<ProfileTabHeart>
         physics: const BouncingScrollPhysics(),
         slivers: [
           const ProfileTabCategoryDropdown(),
-          BlocConsumer<ProfileTabBloc, ProfileTabState>(
-            listenWhen: (previous, current) =>
-                previous.category != current.category,
-            listener: (context, state) {
-              _initLoadData();
-            },
-            builder: (context, state) {
-              if (state.category == EChatItemType.product) {
-                return _productList(state.heartProducts);
-              }
-              return _togetherList(state.heartTogethers);
-            },
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: Sizes.size20),
-              child: Center(
-                child: BlocBuilder<ProfileTabBloc, ProfileTabState>(
-                  builder: (context, state) {
-                    if (state.status == ELoadingStatus.error &&
-                        state.heartProductsStatus == ELoadingStatus.loading) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          AppFont(state.message ?? Strings.unknownFail),
-                          Gaps.v20,
-                          AppInkButton(
-                            onTap: _loadData,
-                            child: const AppFont(
-                              '재시도',
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-                    return const CircularProgressIndicator();
-                  },
-                ),
-              ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.size20,
+            ),
+            sliver: BlocConsumer<ProfileTabBloc, ProfileTabState>(
+              listenWhen: (previous, current) =>
+                  previous.category != current.category,
+              listener: (context, state) {
+                _initLoadData();
+              },
+              builder: (context, state) {
+                if (state.category == EChatItemType.product) {
+                  return _productList(state.heartProducts);
+                }
+                return _togetherList(state.heartTogethers);
+              },
             ),
           ),
+          _retryWidget(),
         ],
       ),
     );
   }
 
-  Widget _productList(List<ProductPreviewModel> products) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Sizes.size20,
-      ),
-      sliver: SliverGrid.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 300,
-          childAspectRatio: 2 / 3,
-          crossAxisSpacing: Sizes.size16,
-          mainAxisSpacing: Sizes.size16,
+  Widget _retryWidget() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: Sizes.size20),
+        child: Center(
+          child: BlocBuilder<ProfileTabBloc, ProfileTabState>(
+            builder: (context, state) {
+              if (state.category == EChatItemType.product &&
+                      state.heartProductsStatus == ELoadingStatus.error ||
+                  state.category == EChatItemType.together &&
+                      state.heartTogethersStatus == ELoadingStatus.error) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (state.category == EChatItemType.product)
+                      AppFont(
+                        state.heartProductsMessage ?? Strings.unknownFail,
+                      ),
+                    if (state.category == EChatItemType.together)
+                      AppFont(
+                        state.heartTogethersMessage ?? Strings.unknownFail,
+                      ),
+                    Gaps.v20,
+                    AppInkButton(
+                      onTap: () => _loadData(force: true),
+                      child: const AppFont(
+                        '재시도',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return const CircularProgressIndicator();
+            },
+          ),
         ),
-        itemBuilder: (context, index) => ProductListItem(
-          product: products[index],
-        ),
-        itemCount: products.length,
       ),
     );
   }
 
+  Widget _productList(List<ProductPreviewModel> products) {
+    return SliverGrid.builder(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 300,
+        childAspectRatio: 2 / 3,
+        crossAxisSpacing: Sizes.size16,
+        mainAxisSpacing: Sizes.size16,
+      ),
+      itemBuilder: (context, index) => ProductListItem(
+        product: products[index],
+      ),
+      itemCount: products.length,
+    );
+  }
+
   Widget _togetherList(List<TogetherPreviewModel> togethers) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Sizes.size20,
-        vertical: Sizes.size10,
+    return SliverList.separated(
+      itemBuilder: (context, index) => TogetherListItem(
+        together: togethers[index],
       ),
-      sliver: SliverList.separated(
-        itemBuilder: (context, index) => TogetherListItem(
-          together: togethers[index],
-        ),
-        separatorBuilder: (context, index) => Gaps.v16,
-        itemCount: togethers.length,
-      ),
+      separatorBuilder: (context, index) => Gaps.v16,
+      itemCount: togethers.length,
     );
   }
 }
