@@ -18,7 +18,7 @@ class ProductDetailStatusWidget extends StatelessWidget {
         border: Border.all(
           color: Theme.of(context).primaryColor,
         ),
-        borderRadius: BorderRadius.circular(Sizes.size10),
+        borderRadius: BorderRadius.circular(Sizes.size20),
       ),
       clipBehavior: Clip.hardEdge,
       child: Row(

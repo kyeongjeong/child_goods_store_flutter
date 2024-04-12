@@ -7,6 +7,7 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
+import 'package:child_goods_store_flutter/widgets/common/tag_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -75,31 +76,13 @@ class _EditProductTagState extends State<EditProductTag> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  for (var tag in state.product.tag) _tag(context, tag: tag),
+                  for (var tag in state.product.tag) TagContainer(tag: tag),
                 ],
               ),
             ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _tag(
-    BuildContext context, {
-    required String tag,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(right: Sizes.size5),
-      padding: const EdgeInsets.symmetric(
-        vertical: Sizes.size3,
-        horizontal: Sizes.size10,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.circular(Sizes.size10),
-      ),
-      child: AppFont(tag),
     );
   }
 }

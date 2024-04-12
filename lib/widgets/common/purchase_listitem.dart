@@ -88,21 +88,27 @@ class PurchaseListItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Gaps.v5,
-                            AppFont(purchase.name ?? Strings.nullStr),
+                            AppFont(
+                              purchase.name ?? Strings.nullStr,
+                              maxLine: 1,
+                            ),
                             Gaps.v5,
                             const AppFont(
                               '구매가',
                               fontSize: Sizes.size7,
                             ),
                             AppFont(
-                              '${purchase.price?.price()} 원',
+                              '${purchase.price?.price()}원',
                               fontWeight: FontWeight.w700,
                             ),
                             const AppFont(
                               '판매자',
                               fontSize: Sizes.size7,
                             ),
-                            AppFont(purchase.sellerName ?? Strings.nullStr),
+                            AppFont(
+                              purchase.sellerName ?? Strings.nullStr,
+                              maxLine: 1,
+                            ),
                             const AppFont(
                               '거래일',
                               fontSize: Sizes.size7,

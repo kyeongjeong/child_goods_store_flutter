@@ -80,43 +80,111 @@ class TogetherListItem extends StatelessWidget {
             Flexible(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(Sizes.size10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    AppFont(together.togetherName ?? Strings.nullStr),
-                    Gaps.v5,
-                    AppFont(
-                      '총 가격: ${together.totalPrice?.price()} 원',
-                      fontWeight: FontWeight.w700,
-                    ),
-                    AppFont(
-                      '목표 단가: ${together.purchasePrice?.price()} 원',
-                      fontWeight: FontWeight.w700,
-                    ),
-                    Gaps.v3,
-                    LinearPercentIndicator(
-                      padding: EdgeInsets.zero,
-                      percent: (together.purchaseNum ?? 0) /
-                          (together.totalNum ?? 1),
-                      barRadius: const Radius.circular(Sizes.size5),
-                      lineHeight: Sizes.size10,
-                      progressColor: Theme.of(context).primaryColor,
-                      backgroundColor: Colors.black.withOpacity(0.1),
-                    ),
-                    AppFont(
-                        '모집 수량: ${together.purchaseNum?.price()} / ${together.totalNum?.price()}'),
-                    Gaps.v3,
-                    AppFont(
-                        '마감: ${together.deadline?.toString().split(' ').first}'),
-                  ],
+                padding: const EdgeInsets.only(
+                  top: Sizes.size10,
+                  right: Sizes.size10,
+                ),
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: Sizes.size10),
+                        child: AppFont(
+                          together.togetherName ?? Strings.nullStr,
+                          maxLine: 1,
+                        ),
+                      ),
+                      Gaps.v10,
+                      LinearPercentIndicator(
+                        padding: const EdgeInsets.only(left: Sizes.size10),
+                        percent: (together.purchaseNum ?? 0) /
+                            (together.totalNum ?? 1),
+                        barRadius: const Radius.circular(Sizes.size5),
+                        lineHeight: Sizes.size5,
+                        progressColor: Theme.of(context).primaryColor,
+                        backgroundColor: Colors.black.withOpacity(0.05),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: Sizes.size10),
+                        child: AppFont(
+                          '모집 수량: ${together.purchaseNum?.price()} / ${together.totalNum?.price()}',
+                          fontSize: Sizes.size12,
+                        ),
+                      ),
+                      Gaps.v5,
+                      _item(
+                        context,
+                        title: '총 가격',
+                        body: together.totalPrice?.price() ?? '-',
+                      ),
+                      _item(
+                        context,
+                        title: '목표 단가',
+                        body: together.purchasePrice?.price() ?? '-',
+                      ),
+                      _item(
+                        context,
+                        title: '마감일',
+                        body: together.deadline?.toString().split(' ').first ??
+                            Strings.nullStr,
+                        wonUnit: false,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _item(
+    BuildContext context, {
+    required String title,
+    required String body,
+    bool wonUnit = true,
+  }) {
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: const BorderRadius.horizontal(
+              right: Radius.circular(Sizes.size10),
+            ),
+          ),
+          child: AppFont(
+            title,
+            color: Colors.white,
+            fontSize: Sizes.size10,
+          ),
+        ),
+        Gaps.h5,
+        Expanded(
+          child: Row(
+            children: [
+              Expanded(
+                child: AppFont(
+                  body,
+                  fontWeight: FontWeight.w700,
+                  textAlign: TextAlign.right,
+                ),
+              ),
+              if (wonUnit)
+                const AppFont(
+                  '원',
+                  fontWeight: FontWeight.w700,
+                ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
