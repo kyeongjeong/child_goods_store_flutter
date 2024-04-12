@@ -27,10 +27,17 @@ class _EditTogetherDeadlineState extends State<EditTogetherDeadline> {
           initialDateTime:
               context.read<EditTogetherBloc>().state.together.deadline ??
                   DateTime.now(),
-          minimumDate: DateTime.now(),
-          maximumDate: DateTime.now().add(const Duration(days: 365)),
+          minimumDate: DateTime.now().copyWith(
+            hour: 0,
+            minute: 0,
+            second: 0,
+            millisecond: 0,
+            microsecond: 0,
+          ),
           mode: CupertinoDatePickerMode.date,
           onDateTimeChanged: (DateTime value) {
+            // Validate
+            if (value.difference(DateTime.now()).inMilliseconds < 0) return;
             context
                 .read<EditTogetherBloc>()
                 .add(EditTogetherChangeDeadline(value));
