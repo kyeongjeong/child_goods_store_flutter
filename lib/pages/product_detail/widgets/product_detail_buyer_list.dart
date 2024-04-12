@@ -57,7 +57,11 @@ class ProductDetailBuyerList extends StatelessWidget {
                       radius: Sizes.size32,
                     ),
                     Gaps.h10,
-                    AppFont(state.buyers![index].nickName ?? Strings.nullStr),
+                    Expanded(
+                      child: AppFont(
+                        state.buyers![index].nickName ?? Strings.nullStr,
+                      ),
+                    ),
                   ],
                 ),
               );

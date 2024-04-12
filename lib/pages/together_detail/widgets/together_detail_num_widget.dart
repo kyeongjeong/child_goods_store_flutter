@@ -29,7 +29,7 @@ class TogetherDetailNumWidget extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 percent: (state.together?.purchaseNum ?? 0) /
                     (state.together?.totalNum ?? 1),
-                barRadius: const Radius.circular(Sizes.size5),
+                barRadius: const Radius.circular(Sizes.size3),
                 lineHeight: Sizes.size16,
                 progressColor: Theme.of(context).primaryColor,
                 backgroundColor: Colors.black.withOpacity(0.1),

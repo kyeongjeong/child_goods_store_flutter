@@ -57,6 +57,7 @@ class ProfileCard extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppProfileImage(
                 profileImg: userProfile.profileImg,
@@ -68,9 +69,13 @@ class ProfileCard extends StatelessWidget {
                   children: [
                     AppFont(
                       userProfile.nickName ?? Strings.nullStr,
-                      fontSize: Sizes.size20,
+                      fontSize: Sizes.size16,
+                      fontWeight: FontWeight.w700,
                     ),
-                    AppFont(userProfile.introduce ?? Strings.nullStr),
+                    AppFont(
+                      userProfile.introduce ?? Strings.nullStr,
+                      fontSize: Sizes.size12,
+                    ),
                   ],
                 ),
               ),

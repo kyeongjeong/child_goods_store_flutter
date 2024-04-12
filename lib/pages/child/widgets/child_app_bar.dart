@@ -1,10 +1,12 @@
 import 'package:child_goods_store_flutter/blocs/child/child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/child/child_event.dart';
+import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
+import 'package:child_goods_store_flutter/widgets/common/tag_container.dart';
 import 'package:child_goods_store_flutter/widgets/common/v_icon_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_h_spliter.dart';
@@ -120,11 +122,9 @@ class ChildAppBar extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
+                      Gaps.h10,
                       for (var tag in selectedChild?.tag ?? [])
-                        Padding(
-                          padding: const EdgeInsets.only(left: Sizes.size10),
-                          child: _tag(context, tag: tag),
-                        ),
+                        TagContainer(tag: tag),
                     ],
                   ),
                 ),
@@ -133,23 +133,6 @@ class ChildAppBar extends StatelessWidget {
           const AppHSpliter(),
         ],
       ),
-    );
-  }
-
-  Widget _tag(
-    BuildContext context, {
-    required String tag,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: Sizes.size3,
-        horizontal: Sizes.size10,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor),
-        borderRadius: BorderRadius.circular(Sizes.size10),
-      ),
-      child: AppFont(tag),
     );
   }
 }

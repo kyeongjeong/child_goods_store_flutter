@@ -1,6 +1,7 @@
 import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
+import 'package:child_goods_store_flutter/widgets/common/tag_container.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailTagWidget extends StatelessWidget {
@@ -26,36 +27,16 @@ class ProductDetailTagWidget extends StatelessWidget {
         ),
         Gaps.v5,
         SizedBox(
-          height: Sizes.size32,
-          child: ListView.separated(
+          height: Sizes.size28,
+          child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size20),
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) => _tag(context, tag: tags[index]),
-            separatorBuilder: (context, index) => Gaps.h5,
+            itemBuilder: (context, index) => TagContainer(tag: tags[index]),
             itemCount: tags.length,
           ),
         ),
       ],
-    );
-  }
-
-  Widget _tag(
-    BuildContext context, {
-    required String tag,
-  }) {
-    return Container(
-      height: Sizes.size32,
-      padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Theme.of(context).primaryColor,
-        ),
-        borderRadius: BorderRadius.circular(Sizes.size20),
-      ),
-      child: Center(
-        child: AppFont(tag),
-      ),
     );
   }
 }

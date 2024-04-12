@@ -7,6 +7,7 @@ class AppFont extends StatelessWidget {
   final Color? color;
   final TextAlign? textAlign;
   final List<Shadow>? shadows;
+  final int? maxLine;
 
   const AppFont(
     this.text, {
@@ -16,6 +17,7 @@ class AppFont extends StatelessWidget {
     this.color,
     this.textAlign,
     this.shadows,
+    this.maxLine,
   });
 
   @override
@@ -29,6 +31,8 @@ class AppFont extends StatelessWidget {
         shadows: shadows,
       ),
       textAlign: textAlign,
+      maxLines: maxLine,
+      overflow: maxLine == null ? null : TextOverflow.ellipsis,
     );
   }
 }

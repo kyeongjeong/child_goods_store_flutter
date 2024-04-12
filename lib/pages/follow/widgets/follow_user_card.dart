@@ -35,7 +35,12 @@ class FollowUserCard extends StatelessWidget {
             radius: Sizes.size32,
           ),
           Gaps.h10,
-          AppFont(user.nickName ?? Strings.nullStr),
+          Expanded(
+            child: AppFont(
+              user.nickName ?? Strings.nullStr,
+              maxLine: 2,
+            ),
+          ),
         ],
       ),
     );
