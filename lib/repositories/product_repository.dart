@@ -110,7 +110,7 @@ class ProductRepository {
         price: 12000,
         content: '$productId th product contents',
         mainCategory: EMainCategory.clothing,
-        subCategory: ESubCategory.top,
+        subCategory: ESubCategory.manTop,
         productState: EProductState.littleUsage,
         state: EProductSaleState.sale,
         age: EChildAge.age24,

@@ -104,7 +104,7 @@ class TogetherRepository {
         totalPrice: 100000,
         purchasePrice: 1000,
         mainCategory: EMainCategory.clothing,
-        subCategory: ESubCategory.bottom,
+        subCategory: ESubCategory.womanBottom,
         state: EProductSaleState.sale,
         age: EChildAge.age24,
         details: '$togetherId th together details',
