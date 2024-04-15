@@ -19,6 +19,7 @@ _$TogetherModelImpl _$$TogetherModelImplFromJson(Map<String, dynamic> json) =>
       mainCategory: EMainCategory.fromJson(json['mainCategory'] as String?),
       subCategory: ESubCategory.fromJson(json['subCategory'] as String?),
       state: EProductSaleState.fromJson(json['state'] as String?),
+      age: EChildAge.fromJson(json['age'] as String?),
       link: json['link'] as String?,
       deadline: json['deadline'] == null
           ? null
@@ -47,6 +48,7 @@ Map<String, dynamic> _$$TogetherModelImplToJson(_$TogetherModelImpl instance) =>
       'mainCategory': EMainCategory.toJson(instance.mainCategory),
       'subCategory': ESubCategory.toJson(instance.subCategory),
       'state': EProductSaleState.toJson(instance.state),
+      'age': EChildAge.toJson(instance.age),
       'link': instance.link,
       'deadline': instance.deadline?.toIso8601String(),
       'address': instance.address,

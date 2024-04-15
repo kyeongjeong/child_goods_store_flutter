@@ -19,7 +19,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
     on<ProductListChangeSubCat>(_productListChangeSubCatHandler);
     on<ProductListChangeRegion>(_productListChangeRegionHandler);
     on<ProductListChangeAgeFilter>(_productListChangeAgeFilterHandler);
-    on<ProductListChangeGenderFilter>(_productListChangeGenderFilterHandler);
     on<ProductListChangePriceFilter>(_productListChangePriceFilterHandler);
     on<ProductListApplyFilter>(_productListApplyFilterHandler);
 
@@ -44,7 +43,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
           mainCategory: state.mainCategory,
           subCategory: state.subCategory,
           age: state.age,
-          gender: state.gender,
           minPrice: state.minPrice == ProductListState.MIN_PRICE
               ? null
               : state.minPrice,
@@ -142,19 +140,6 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState>
     emit(state.copyWith(
       age: event.age,
       resetAge: event.reset,
-      applyFilter: false,
-    ));
-  }
-
-  Future<void> _productListChangeGenderFilterHandler(
-    ProductListChangeGenderFilter event,
-    Emitter<ProductListState> emit,
-  ) async {
-    if (state.gender == event.gender) return;
-
-    emit(state.copyWith(
-      gender: event.gender,
-      resetGender: event.reset,
       applyFilter: false,
     ));
   }

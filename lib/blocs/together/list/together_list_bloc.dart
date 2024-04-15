@@ -19,7 +19,6 @@ class TogetherListBloc extends Bloc<TogetherListEvent, TogetherListState>
     on<TogetherListChangeSubCat>(_togetherListChangeSubCatHandler);
     on<TogetherListChangeRegion>(_togetherListChangeRegionHandler);
     on<TogetherListChangeAgeFilter>(_togetherListChangeAgeFilterHandler);
-    on<TogetherListChangeGenderFilter>(_togetherListChangeGenderFilterHandler);
     on<TogetherListApplyFilter>(_togetherListApplyFilterHandler);
 
     add(TogetherListGet());
@@ -43,7 +42,6 @@ class TogetherListBloc extends Bloc<TogetherListEvent, TogetherListState>
           mainCategory: state.mainCategory,
           subCategory: state.subCategory,
           age: state.age,
-          gender: state.gender,
           page: state.page,
         );
 
@@ -135,19 +133,6 @@ class TogetherListBloc extends Bloc<TogetherListEvent, TogetherListState>
     emit(state.copyWith(
       age: event.age,
       resetAge: event.reset,
-      applyFilter: false,
-    ));
-  }
-
-  Future<void> _togetherListChangeGenderFilterHandler(
-    TogetherListChangeGenderFilter event,
-    Emitter<TogetherListState> emit,
-  ) async {
-    if (state.gender == event.gender) return;
-
-    emit(state.copyWith(
-      gender: event.gender,
-      resetGender: event.reset,
       applyFilter: false,
     ));
   }

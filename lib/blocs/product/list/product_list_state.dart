@@ -1,6 +1,5 @@
 import 'package:child_goods_store_flutter/blocs/abs_bloc_state.dart';
 import 'package:child_goods_store_flutter/enums/child_age.dart';
-import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
@@ -17,7 +16,6 @@ class ProductListState extends BlocState {
   final ESubCategory? subCategory;
   final ESearchRange region;
   final EChildAge? age;
-  final EChildGender? gender;
   final int minPrice;
   final int maxPrice;
   final bool applyFilter;
@@ -29,7 +27,6 @@ class ProductListState extends BlocState {
     this.subCategory,
     required this.region,
     this.age,
-    this.gender,
     required this.minPrice,
     required this.maxPrice,
     required this.applyFilter,
@@ -44,7 +41,6 @@ class ProductListState extends BlocState {
         subCategory = null,
         region = ESearchRange.myRegion,
         age = null,
-        gender = null,
         minPrice = MIN_PRICE,
         maxPrice = MAX_PRICE,
         applyFilter = true,
@@ -66,8 +62,6 @@ class ProductListState extends BlocState {
     ESearchRange? region,
     EChildAge? age,
     bool? resetAge,
-    EChildGender? gender,
-    bool? resetGender,
     int? minPrice,
     int? maxPrice,
     bool? applyFilter,
@@ -83,7 +77,6 @@ class ProductListState extends BlocState {
             resetSub == true ? null : (subCategory ?? this.subCategory),
         region: region ?? this.region,
         age: resetAge == true ? null : (age ?? this.age),
-        gender: resetGender == true ? null : (gender ?? this.gender),
         minPrice: minPrice ?? this.minPrice,
         maxPrice: maxPrice ?? this.maxPrice,
         applyFilter: applyFilter ?? this.applyFilter,
@@ -99,7 +92,6 @@ class ProductListState extends BlocState {
         subCategory,
         region,
         age,
-        gender,
         minPrice,
         maxPrice,
         applyFilter,

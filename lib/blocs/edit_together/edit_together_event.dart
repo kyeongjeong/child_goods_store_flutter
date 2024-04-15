@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
 import 'package:image_picker/image_picker.dart';
@@ -44,6 +45,12 @@ class EditTogetherChangeSubCat extends EditTogetherEvent {
   final ESubCategory subCategory;
 
   EditTogetherChangeSubCat(this.subCategory);
+}
+
+class EditTogetherChangeAge extends EditTogetherEvent {
+  final EChildAge? age;
+
+  EditTogetherChangeAge(this.age);
 }
 
 class EditTogetherChangeTags extends EditTogetherEvent {

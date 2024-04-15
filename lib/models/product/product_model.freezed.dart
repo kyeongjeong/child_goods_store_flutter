@@ -34,6 +34,8 @@ mixin _$ProductModel {
   @JsonKey(
       fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
   EProductSaleState? get state => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+  EChildAge? get age => throw _privateConstructorUsedError;
   DateTime? get createAt => throw _privateConstructorUsedError;
   DateTime? get updateAt => throw _privateConstructorUsedError;
   List<String> get tag => throw _privateConstructorUsedError;
@@ -68,6 +70,8 @@ abstract class $ProductModelCopyWith<$Res> {
           fromJson: EProductSaleState.fromJson,
           toJson: EProductSaleState.toJson)
       EProductSaleState? state,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+      EChildAge? age,
       DateTime? createAt,
       DateTime? updateAt,
       List<String> tag,
@@ -99,6 +103,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? subCategory = freezed,
     Object? productState = freezed,
     Object? state = freezed,
+    Object? age = freezed,
     Object? createAt = freezed,
     Object? updateAt = freezed,
     Object? tag = null,
@@ -142,6 +147,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as EProductSaleState?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as EChildAge?,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -202,6 +211,8 @@ abstract class _$$ProductModelImplCopyWith<$Res>
           fromJson: EProductSaleState.fromJson,
           toJson: EProductSaleState.toJson)
       EProductSaleState? state,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+      EChildAge? age,
       DateTime? createAt,
       DateTime? updateAt,
       List<String> tag,
@@ -232,6 +243,7 @@ class __$$ProductModelImplCopyWithImpl<$Res>
     Object? subCategory = freezed,
     Object? productState = freezed,
     Object? state = freezed,
+    Object? age = freezed,
     Object? createAt = freezed,
     Object? updateAt = freezed,
     Object? tag = null,
@@ -275,6 +287,10 @@ class __$$ProductModelImplCopyWithImpl<$Res>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as EProductSaleState?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
+              as EChildAge?,
       createAt: freezed == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
@@ -318,6 +334,7 @@ class _$ProductModelImpl implements _ProductModel {
           fromJson: EProductSaleState.fromJson,
           toJson: EProductSaleState.toJson)
       this.state,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson) this.age,
       this.createAt,
       this.updateAt,
       final List<String> tag = const [],
@@ -353,6 +370,9 @@ class _$ProductModelImpl implements _ProductModel {
       fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
   final EProductSaleState? state;
   @override
+  @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+  final EChildAge? age;
+  @override
   final DateTime? createAt;
   @override
   final DateTime? updateAt;
@@ -379,7 +399,7 @@ class _$ProductModelImpl implements _ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productState: $productState, state: $state, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
+    return 'ProductModel(productId: $productId, user: $user, productName: $productName, price: $price, content: $content, mainCategory: $mainCategory, subCategory: $subCategory, productState: $productState, state: $state, age: $age, createAt: $createAt, updateAt: $updateAt, tag: $tag, productImage: $productImage, productHeart: $productHeart)';
   }
 
   @override
@@ -401,6 +421,7 @@ class _$ProductModelImpl implements _ProductModel {
             (identical(other.productState, productState) ||
                 other.productState == productState) &&
             (identical(other.state, state) || other.state == state) &&
+            (identical(other.age, age) || other.age == age) &&
             (identical(other.createAt, createAt) ||
                 other.createAt == createAt) &&
             (identical(other.updateAt, updateAt) ||
@@ -425,6 +446,7 @@ class _$ProductModelImpl implements _ProductModel {
       subCategory,
       productState,
       state,
+      age,
       createAt,
       updateAt,
       const DeepCollectionEquality().hash(_tag),
@@ -462,6 +484,8 @@ abstract class _ProductModel implements ProductModel {
           fromJson: EProductSaleState.fromJson,
           toJson: EProductSaleState.toJson)
       final EProductSaleState? state,
+      @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+      final EChildAge? age,
       final DateTime? createAt,
       final DateTime? updateAt,
       final List<String> tag,
@@ -494,6 +518,9 @@ abstract class _ProductModel implements ProductModel {
   @JsonKey(
       fromJson: EProductSaleState.fromJson, toJson: EProductSaleState.toJson)
   EProductSaleState? get state;
+  @override
+  @JsonKey(fromJson: EChildAge.fromJson, toJson: EChildAge.toJson)
+  EChildAge? get age;
   @override
   DateTime? get createAt;
   @override

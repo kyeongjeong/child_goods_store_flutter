@@ -23,7 +23,6 @@ class ProductRepository {
     EMainCategory? mainCategory,
     ESubCategory? subCategory,
     EChildAge? age,
-    EChildGender? gender,
     int? minPrice,
     int? maxPrice,
     required int page,
@@ -39,9 +38,6 @@ class ProductRepository {
     }
     if (age != null) {
       queryParams['age'] = age.key;
-    }
-    if (gender != null) {
-      queryParams['gender'] = gender.key;
     }
     if (minPrice != null) {
       queryParams['minPrice'] = minPrice;
@@ -95,7 +91,7 @@ class ProductRepository {
     required int productId,
   }) async {
     // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.interceptors.add(AuthInterceptor());
     // dio.get('/product/$productId');
 
     // TODO: connect api
@@ -117,6 +113,7 @@ class ProductRepository {
         subCategory: ESubCategory.top,
         productState: EProductState.littleUsage,
         state: EProductSaleState.sale,
+        age: EChildAge.age24,
         createAt: DateTime.now(),
         updateAt: DateTime.now(),
         tag: List.generate(3, (index) => '$productId-$index tag'),

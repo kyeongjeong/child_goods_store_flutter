@@ -10,6 +10,8 @@ enum EChildAge {
 
   const EChildAge(this.text);
 
+  static const String allAge = '전 연령';
+
   static String? toJson(EChildAge? en) {
     switch (en) {
       case EChildAge.age6:
@@ -24,6 +26,8 @@ enum EChildAge {
         return 'AGE_96';
       case EChildAge.age108:
         return 'AGE_108';
+      case null:
+        return 'ALL';
       default:
         return null;
     }

@@ -19,6 +19,7 @@ _$ProductModelImpl _$$ProductModelImplFromJson(Map<String, dynamic> json) =>
       subCategory: ESubCategory.fromJson(json['subCategory'] as String?),
       productState: EProductState.fromJson(json['productState'] as String?),
       state: EProductSaleState.fromJson(json['state'] as String?),
+      age: EChildAge.fromJson(json['age'] as String?),
       createAt: json['createAt'] == null
           ? null
           : DateTime.parse(json['createAt'] as String),
@@ -45,6 +46,7 @@ Map<String, dynamic> _$$ProductModelImplToJson(_$ProductModelImpl instance) =>
       'subCategory': ESubCategory.toJson(instance.subCategory),
       'productState': EProductState.toJson(instance.productState),
       'state': EProductSaleState.toJson(instance.state),
+      'age': EChildAge.toJson(instance.age),
       'createAt': instance.createAt?.toIso8601String(),
       'updateAt': instance.updateAt?.toIso8601String(),
       'tag': instance.tag,

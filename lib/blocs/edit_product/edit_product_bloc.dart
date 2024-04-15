@@ -30,6 +30,7 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     on<EditProductChangeContent>(_editProductChangeContentHandler);
     on<EditProductChangeMainCat>(_editProductChangeMainCatHandler);
     on<EditProductChangeSubCat>(_editProductChangeSubCatHandler);
+    on<EditProductChangeAge>(_editProductChangeAgeHandler);
     on<EditProductChangeTags>(_editProductChangeTagsHandler);
     on<EditProductChangePrice>(_editProductChangePriceHandler);
     on<EditProductChangeState>(_editProductChangeStateHandler);
@@ -122,6 +123,17 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     emit(state.copyWith(
       product: state.product.copyWith(
         subCategory: event.subCategory,
+      ),
+    ));
+  }
+
+  Future<void> _editProductChangeAgeHandler(
+    EditProductChangeAge event,
+    Emitter<EditProductState> emit,
+  ) async {
+    emit(state.copyWith(
+      product: state.product.copyWith(
+        age: event.age,
       ),
     ));
   }

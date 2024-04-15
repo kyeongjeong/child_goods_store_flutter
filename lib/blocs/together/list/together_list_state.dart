@@ -1,6 +1,5 @@
 import 'package:child_goods_store_flutter/blocs/abs_bloc_state.dart';
 import 'package:child_goods_store_flutter/enums/child_age.dart';
-import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
@@ -12,7 +11,6 @@ class TogetherListState extends BlocState {
   final ESubCategory? subCategory;
   final ESearchRange region;
   final EChildAge? age;
-  final EChildGender? gender;
   final bool applyFilter;
   final List<TogetherPreviewModel> togethers;
   final int page;
@@ -22,7 +20,6 @@ class TogetherListState extends BlocState {
     this.subCategory,
     required this.region,
     this.age,
-    this.gender,
     required this.applyFilter,
     required this.togethers,
     required this.page,
@@ -35,7 +32,6 @@ class TogetherListState extends BlocState {
         subCategory = null,
         region = ESearchRange.myRegion,
         age = null,
-        gender = null,
         applyFilter = true,
         togethers = const [],
         page = 1,
@@ -55,8 +51,6 @@ class TogetherListState extends BlocState {
     ESearchRange? region,
     EChildAge? age,
     bool? resetAge,
-    EChildGender? gender,
-    bool? resetGender,
     bool? applyFilter,
     List<TogetherPreviewModel>? togethers,
     int? page,
@@ -70,7 +64,6 @@ class TogetherListState extends BlocState {
             resetSub == true ? null : (subCategory ?? this.subCategory),
         region: region ?? this.region,
         age: resetAge == true ? null : (age ?? this.age),
-        gender: resetGender == true ? null : (gender ?? this.gender),
         applyFilter: applyFilter ?? this.applyFilter,
         togethers: togethers ?? this.togethers,
         page: page ?? this.page,
@@ -84,7 +77,6 @@ class TogetherListState extends BlocState {
         subCategory,
         region,
         age,
-        gender,
         applyFilter,
         togethers,
         page,
