@@ -5,6 +5,7 @@ import 'package:child_goods_store_flutter/blocs/edit_address/edit_address_bloc.d
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_product/edit_product_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/edit_review/edit_review_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_tag/edit_tag_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/edit_together/edit_together_bloc.dart';
 import 'package:child_goods_store_flutter/blocs/follow/follow_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:child_goods_store_flutter/models/address/address_model.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
+import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_model.dart';
 import 'package:child_goods_store_flutter/pages/chat/chat_page.dart';
 import 'package:child_goods_store_flutter/pages/child/child_page.dart';
@@ -34,6 +36,7 @@ import 'package:child_goods_store_flutter/pages/edit_address/edit_address_page.d
 import 'package:child_goods_store_flutter/pages/edit_child/edit_child_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_product/edit_product_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_profile/edit_profile_page.dart';
+import 'package:child_goods_store_flutter/pages/edit_review/edit_review_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_tag/edit_tag_page.dart';
 import 'package:child_goods_store_flutter/pages/edit_together/edit_together_page.dart';
 import 'package:child_goods_store_flutter/pages/follow/follow_page.dart';
@@ -54,6 +57,7 @@ import 'package:child_goods_store_flutter/repositories/data_repository.dart';
 import 'package:child_goods_store_flutter/repositories/image_repository.dart';
 import 'package:child_goods_store_flutter/repositories/product_repository.dart';
 import 'package:child_goods_store_flutter/repositories/profile_repository.dart';
+import 'package:child_goods_store_flutter/repositories/review_repository.dart';
 import 'package:child_goods_store_flutter/repositories/search_repository.dart';
 import 'package:child_goods_store_flutter/repositories/together_repository.dart';
 import 'package:child_goods_store_flutter/repositories/user_repository.dart';
@@ -514,6 +518,35 @@ class _AppRouterState extends State<AppRouter> {
                 child: (state.extra as GoRouterExtraModel<ChildModel>?)?.data,
               ),
               child: const EditChildPage(),
+            ),
+          ),
+        ),
+        GoRoute(
+          path: Routes.editReview,
+          pageBuilder: (context, state) => PageTransition.cupertino(
+            key: state.pageKey,
+            name: state.fullPath,
+            arguments: {
+              'id': (state.extra as GoRouterExtraModel<ReviewModel>?)
+                      ?.data
+                      ?.reviewId ??
+                  -1
+            },
+            child: BlocProvider(
+              create: (context) => EditReviewBloc(
+                reviewRepository: context.read<ReviewRepository>(),
+                productRepository: context.read<ProductRepository>(),
+                togetherRepository: context.read<TogetherRepository>(),
+                httpMethod:
+                    (state.extra as GoRouterExtraModel<ReviewModel>?)?.data ==
+                            null
+                        ? EHttpMethod.post
+                        : EHttpMethod.patch,
+                type:
+                    (state.extra as GoRouterExtraModel<ReviewModel>).itemType!,
+                id: (state.extra as GoRouterExtraModel<ReviewModel>).itemId!,
+              ),
+              child: const EditReviewPage(),
             ),
           ),
         ),

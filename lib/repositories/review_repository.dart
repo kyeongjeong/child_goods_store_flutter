@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/interceptors/un_auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/models/review/review_model.dart';
+import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class ReviewRepository {

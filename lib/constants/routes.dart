@@ -13,6 +13,7 @@ class Routes {
   static const String editProduct = '/edit_product';
   static const String editTogether = '/edit_together';
   static const String editChild = '/edit_child';
+  static const String editReview = '/edit_review';
 
   static const String home = '/home';
   static const String together = '/together';

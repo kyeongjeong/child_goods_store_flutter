@@ -19,3 +19,15 @@ class ProfileTabGetHeartTogethers extends ProfileTabEvent {}
 class ProfileTabGetPurchaseProducts extends ProfileTabEvent {}
 
 class ProfileTabGetPurchaseTogethers extends ProfileTabEvent {}
+
+class ProfileTabProductReviewed extends ProfileTabEvent {
+  final int productId;
+
+  ProfileTabProductReviewed(this.productId);
+}
+
+class ProfileTabTogetherReviewed extends ProfileTabEvent {
+  final int togetherId;
+
+  ProfileTabTogetherReviewed(this.togetherId);
+}

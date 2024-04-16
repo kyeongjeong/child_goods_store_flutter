@@ -125,7 +125,10 @@ class EditReviewBloc extends Bloc<EditReviewEvent, EditReviewState>
         reviewStatus: ELoadingStatus.error,
         message: '평점을 입력해주세요.',
       ));
-      emit(state.copyWith(status: ELoadingStatus.init));
+      emit(state.copyWith(
+        status: ELoadingStatus.init,
+        reviewStatus: ELoadingStatus.init,
+      ));
       return;
     }
     if (state.review.content == null ||
@@ -133,9 +136,12 @@ class EditReviewBloc extends Bloc<EditReviewEvent, EditReviewState>
       emit(state.copyWith(
         status: ELoadingStatus.error,
         reviewStatus: ELoadingStatus.error,
-        message: '리뷰를 입력해주세요.',
+        message: '후기를 입력해주세요.',
       ));
-      emit(state.copyWith(status: ELoadingStatus.init));
+      emit(state.copyWith(
+        status: ELoadingStatus.init,
+        reviewStatus: ELoadingStatus.init,
+      ));
       return;
     }
 

@@ -24,6 +24,8 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     on<ProfileTabGetHeartTogethers>(_profileTabGetHeartTogethersHandler);
     on<ProfileTabGetPurchaseProducts>(_profileTabGetPurchaseProductsHandler);
     on<ProfileTabGetPurchaseTogethers>(_profileTabGetPurchaseTogethersHandler);
+    on<ProfileTabProductReviewed>(_profileTabProductReviewedHandler);
+    on<ProfileTabTogetherReviewed>(_profileTabTogetherReviewedHandler);
   }
   Future<void> _profileTabChangeCategoryHandler(
     ProfileTabChangeCategory event,
@@ -290,5 +292,35 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
         }
       },
     );
+  }
+
+  Future<void> _profileTabProductReviewedHandler(
+    ProfileTabProductReviewed event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    List<PurchaseModel> newList = [];
+    for (var purchase in state.purchaseProducts) {
+      if (purchase.id == event.productId) {
+        newList.add(purchase.copyWith(isReview: true));
+      } else {
+        newList.add(purchase);
+      }
+    }
+    emit(state.copyWith(purchaseProducts: newList));
+  }
+
+  Future<void> _profileTabTogetherReviewedHandler(
+    ProfileTabTogetherReviewed event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    List<PurchaseModel> newList = [];
+    for (var purchase in state.purchaseTogethers) {
+      if (purchase.id == event.togetherId) {
+        newList.add(purchase.copyWith(isReview: true));
+      } else {
+        newList.add(purchase);
+      }
+    }
+    emit(state.copyWith(purchaseTogethers: newList));
   }
 }
