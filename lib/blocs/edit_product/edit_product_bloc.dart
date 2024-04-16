@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/blocs/edit_product/edit_product_event.
 import 'package:child_goods_store_flutter/blocs/edit_product/edit_product_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
+import 'package:child_goods_store_flutter/enums/image_category.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/product/product_model.dart';
@@ -30,6 +31,7 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     on<EditProductChangeContent>(_editProductChangeContentHandler);
     on<EditProductChangeMainCat>(_editProductChangeMainCatHandler);
     on<EditProductChangeSubCat>(_editProductChangeSubCatHandler);
+    on<EditProductChangeAge>(_editProductChangeAgeHandler);
     on<EditProductChangeTags>(_editProductChangeTagsHandler);
     on<EditProductChangePrice>(_editProductChangePriceHandler);
     on<EditProductChangeState>(_editProductChangeStateHandler);
@@ -122,6 +124,17 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
     emit(state.copyWith(
       product: state.product.copyWith(
         subCategory: event.subCategory,
+      ),
+    ));
+  }
+
+  Future<void> _editProductChangeAgeHandler(
+    EditProductChangeAge event,
+    Emitter<EditProductState> emit,
+  ) async {
+    emit(state.copyWith(
+      product: state.product.copyWith(
+        age: event.age,
       ),
     ));
   }
@@ -222,7 +235,10 @@ class EditProductBloc extends Bloc<EditProductEvent, EditProductState>
         emit(state.copyWith(status: ELoadingStatus.loading));
 
         if (state.newImage.isNotEmpty) {
-          var res = await imageRepository.postImageList(images: state.newImage);
+          var res = await imageRepository.postImageList(
+            category: EImageCategory.product,
+            images: state.newImage,
+          );
           List<String> newImages = [];
           newImages
             ..addAll(state.product.productImage)

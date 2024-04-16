@@ -18,6 +18,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
     required this.userId,
   }) : super(const ProfileState.init()) {
     on<ProfileGet>(_profileGetHandler);
+    on<ProfileChangeFollow>(_profileChangeFollowHandler);
 
     add(ProfileGet());
   }
@@ -51,6 +52,64 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>
       state: state,
       emit: emit,
       initAfterError: false,
+    );
+  }
+
+  Future<void> _profileChangeFollowHandler(
+    ProfileChangeFollow event,
+    Emitter<ProfileState> emit,
+  ) async {
+    if (state.status == ELoadingStatus.loading &&
+        state.followStatus == ELoadingStatus.loading) return;
+
+    bool prevState = state.userProfile?.isFollowed ?? false;
+
+    // on event -> change
+    emit(state.copyWith(
+      userProfile: state.userProfile?.copyWith(
+        isFollowed: !prevState,
+      ),
+      status: ELoadingStatus.loading,
+      followStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        if (prevState) {
+          await userRepository.deleteUserFollow(
+            followId: userId,
+          );
+        } else {
+          await userRepository.postUserFollow(
+            followId: userId,
+          );
+        }
+        // on success -> keep state
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          followStatus: ELoadingStatus.loaded,
+        ));
+      },
+      state: state,
+      emit: emit,
+      initAfterError: false,
+      finallyCall: () async {
+        // on error -> rollback
+        if (state.status == ELoadingStatus.error &&
+            state.followStatus == ELoadingStatus.loading) {
+          emit(state.copyWith(
+            status: ELoadingStatus.init,
+            followStatus: ELoadingStatus.init,
+            userProfile: state.userProfile?.copyWith(
+              isFollowed: prevState,
+            ),
+          ));
+        } else {
+          emit(state.copyWith(
+            status: ELoadingStatus.init,
+            followStatus: ELoadingStatus.init,
+          ));
+        }
+      },
     );
   }
 }

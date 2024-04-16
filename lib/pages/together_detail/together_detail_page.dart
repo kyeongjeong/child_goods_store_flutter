@@ -7,6 +7,7 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/models/user/user_profile_model.dart';
+import 'package:child_goods_store_flutter/pages/together_detail/widgets/together_age_widget.dart';
 import 'package:child_goods_store_flutter/pages/together_detail/widgets/together_detail_bottom_bar.dart';
 import 'package:child_goods_store_flutter/pages/together_detail/widgets/together_detail_heart_widget.dart';
 import 'package:child_goods_store_flutter/pages/together_detail/widgets/together_detail_num_widget.dart';
@@ -112,6 +113,10 @@ class TogetherDetailPage extends StatelessWidget {
                       ),
                       Gaps.v5,
                       AppFont(state.together?.details ?? Strings.nullStr),
+                      Gaps.v10,
+                      TogetherDetailAgeWidget(
+                        age: state.together?.age,
+                      ),
                       Gaps.v20,
                       const AppFont(
                         '판매 링크',

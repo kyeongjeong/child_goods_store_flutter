@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:child_goods_store_flutter/enums/image_category.dart';
 import 'package:child_goods_store_flutter/interceptors/auth_interceptor.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
 import 'package:child_goods_store_flutter/utils/mock_dio_exception.dart';
@@ -7,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageRepository {
+  @deprecated
   Future<ResModel<String>> postImage({
     required XFile image,
     String? name,
@@ -49,6 +51,7 @@ class ImageRepository {
 
   Future<ResModel<List<String>>> postImageList({
     required List<XFile> images,
+    required EImageCategory category,
     String? name,
   }) async {
     // Dio dio = Dio();
@@ -65,11 +68,12 @@ class ImageRepository {
     // }
     // // Create formdata
     // FormData formData = FormData.fromMap({
-    //   'files': mulImages,
+    //   'category': category.key,
+    //   'images': mulImages,
     // });
     // // Post
     // dio.post(
-    //   '/images',
+    //   '/image',
     //   data: formData,
     // );
 

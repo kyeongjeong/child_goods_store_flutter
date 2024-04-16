@@ -26,6 +26,7 @@ mixin _$UserProfileModel {
   String? get profileImg => throw _privateConstructorUsedError;
   int? get followNum => throw _privateConstructorUsedError;
   int? get followingNum => throw _privateConstructorUsedError;
+  bool? get isFollowed => throw _privateConstructorUsedError;
   double? get averageStars => throw _privateConstructorUsedError;
   DateTime? get createAt => throw _privateConstructorUsedError;
 
@@ -48,6 +49,7 @@ abstract class $UserProfileModelCopyWith<$Res> {
       String? profileImg,
       int? followNum,
       int? followingNum,
+      bool? isFollowed,
       double? averageStars,
       DateTime? createAt});
 }
@@ -71,6 +73,7 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
     Object? profileImg = freezed,
     Object? followNum = freezed,
     Object? followingNum = freezed,
+    Object? isFollowed = freezed,
     Object? averageStars = freezed,
     Object? createAt = freezed,
   }) {
@@ -99,6 +102,10 @@ class _$UserProfileModelCopyWithImpl<$Res, $Val extends UserProfileModel>
           ? _value.followingNum
           : followingNum // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFollowed: freezed == isFollowed
+          ? _value.isFollowed
+          : isFollowed // ignore: cast_nullable_to_non_nullable
+              as bool?,
       averageStars: freezed == averageStars
           ? _value.averageStars
           : averageStars // ignore: cast_nullable_to_non_nullable
@@ -126,6 +133,7 @@ abstract class _$$UserProfileModelImplCopyWith<$Res>
       String? profileImg,
       int? followNum,
       int? followingNum,
+      bool? isFollowed,
       double? averageStars,
       DateTime? createAt});
 }
@@ -147,6 +155,7 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
     Object? profileImg = freezed,
     Object? followNum = freezed,
     Object? followingNum = freezed,
+    Object? isFollowed = freezed,
     Object? averageStars = freezed,
     Object? createAt = freezed,
   }) {
@@ -175,6 +184,10 @@ class __$$UserProfileModelImplCopyWithImpl<$Res>
           ? _value.followingNum
           : followingNum // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFollowed: freezed == isFollowed
+          ? _value.isFollowed
+          : isFollowed // ignore: cast_nullable_to_non_nullable
+              as bool?,
       averageStars: freezed == averageStars
           ? _value.averageStars
           : averageStars // ignore: cast_nullable_to_non_nullable
@@ -197,6 +210,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
       this.profileImg,
       this.followNum,
       this.followingNum,
+      this.isFollowed,
       this.averageStars,
       this.createAt});
 
@@ -216,13 +230,15 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @override
   final int? followingNum;
   @override
+  final bool? isFollowed;
+  @override
   final double? averageStars;
   @override
   final DateTime? createAt;
 
   @override
   String toString() {
-    return 'UserProfileModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, followNum: $followNum, followingNum: $followingNum, averageStars: $averageStars, createAt: $createAt)';
+    return 'UserProfileModel(userId: $userId, nickName: $nickName, introduce: $introduce, profileImg: $profileImg, followNum: $followNum, followingNum: $followingNum, isFollowed: $isFollowed, averageStars: $averageStars, createAt: $createAt)';
   }
 
   @override
@@ -241,6 +257,8 @@ class _$UserProfileModelImpl implements _UserProfileModel {
                 other.followNum == followNum) &&
             (identical(other.followingNum, followingNum) ||
                 other.followingNum == followingNum) &&
+            (identical(other.isFollowed, isFollowed) ||
+                other.isFollowed == isFollowed) &&
             (identical(other.averageStars, averageStars) ||
                 other.averageStars == averageStars) &&
             (identical(other.createAt, createAt) ||
@@ -250,7 +268,7 @@ class _$UserProfileModelImpl implements _UserProfileModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, userId, nickName, introduce,
-      profileImg, followNum, followingNum, averageStars, createAt);
+      profileImg, followNum, followingNum, isFollowed, averageStars, createAt);
 
   @JsonKey(ignore: true)
   @override
@@ -275,6 +293,7 @@ abstract class _UserProfileModel implements UserProfileModel {
       final String? profileImg,
       final int? followNum,
       final int? followingNum,
+      final bool? isFollowed,
       final double? averageStars,
       final DateTime? createAt}) = _$UserProfileModelImpl;
 
@@ -293,6 +312,8 @@ abstract class _UserProfileModel implements UserProfileModel {
   int? get followNum;
   @override
   int? get followingNum;
+  @override
+  bool? get isFollowed;
   @override
   double? get averageStars;
   @override

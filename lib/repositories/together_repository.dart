@@ -22,7 +22,6 @@ class TogetherRepository {
     EMainCategory? mainCategory,
     ESubCategory? subCategory,
     EChildAge? age,
-    EChildGender? gender,
     required int page,
   }) async {
     Map<String, dynamic> queryParams = {};
@@ -36,9 +35,6 @@ class TogetherRepository {
     }
     if (age != null) {
       queryParams['age'] = age.key;
-    }
-    if (gender != null) {
-      queryParams['gender'] = gender.key;
     }
 
     // Dio dio = Dio();
@@ -89,7 +85,7 @@ class TogetherRepository {
     required int togetherId,
   }) async {
     // Dio dio = Dio();
-    // dio.interceptors.add(UnAuthInterceptor());
+    // dio.interceptors.add(AuthInterceptor());
     // dio.get('/together/$togetherId');
 
     // TODO: connect api
@@ -100,7 +96,7 @@ class TogetherRepository {
       data: TogetherModel(
         togetherId: togetherId,
         user: UserProfileModel(
-          userId: 10, // 분기
+          userId: 1, // 분기
           nickName: 'together $togetherId opener',
           averageStars: 4.5,
         ),
@@ -108,8 +104,9 @@ class TogetherRepository {
         totalPrice: 100000,
         purchasePrice: 1000,
         mainCategory: EMainCategory.clothing,
-        subCategory: ESubCategory.bottom,
+        subCategory: ESubCategory.womanBottom,
         state: EProductSaleState.sale,
+        age: EChildAge.age24,
         details: '$togetherId th together details',
         link: 'https://www.google.com',
         deadline: DateTime.now(),

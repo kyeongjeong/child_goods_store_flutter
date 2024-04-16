@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 enum ESubCategory {
-  top('상의', EMainCategory.clothing, FontAwesomeIcons.shirt),
-  bottom('하의', EMainCategory.clothing, FontAwesomeIcons.tent),
+  manTop('남아 상의', EMainCategory.clothing, FontAwesomeIcons.shirt),
+  womanTop('여아 상의', EMainCategory.clothing, FontAwesomeIcons.shirt),
+  manBottom('남아 하의', EMainCategory.clothing, FontAwesomeIcons.tent),
+  womanBottom('여아 하의', EMainCategory.clothing, FontAwesomeIcons.tent),
   socks('양말', EMainCategory.clothing, FontAwesomeIcons.socks),
   otherClothing(
       '기타 의류', EMainCategory.clothing, FontAwesomeIcons.barsStaggered),
 
+  manShoes('남아 신발', EMainCategory.accessories, FontAwesomeIcons.shoePrints),
+  womanShoes('여아 신발', EMainCategory.accessories, FontAwesomeIcons.shoePrints),
   bag('가방', EMainCategory.accessories, FontAwesomeIcons.briefcase),
   hat('모자', EMainCategory.accessories, FontAwesomeIcons.hatWizard),
   accessory('악세서리', EMainCategory.accessories, FontAwesomeIcons.splotch),
@@ -75,15 +79,23 @@ enum ESubCategory {
 
   static String? toJson(ESubCategory? en) {
     switch (en) {
-      case ESubCategory.top:
-        return 'TOP';
-      case ESubCategory.bottom:
-        return 'BOTTOM';
+      case ESubCategory.manTop:
+        return 'MAN_TOP';
+      case ESubCategory.womanTop:
+        return 'WOMAN_TOP';
+      case ESubCategory.manBottom:
+        return 'MAN_BOTTOM';
+      case ESubCategory.womanBottom:
+        return 'WOMAN_BOTTOM';
       case ESubCategory.socks:
         return 'SOCKS';
       case ESubCategory.otherClothing:
         return 'OTHER_CLOTHING';
 
+      case ESubCategory.manShoes:
+        return 'MAN_SHOES';
+      case ESubCategory.womanShoes:
+        return 'WOMAN_SHOES';
       case ESubCategory.bag:
         return 'BAG';
       case ESubCategory.hat:
@@ -164,15 +176,23 @@ enum ESubCategory {
 
   static ESubCategory? fromJson(String? str) {
     switch (str?.toUpperCase()) {
-      case 'TOP':
-        return ESubCategory.top;
-      case 'BOTTOM':
-        return ESubCategory.bottom;
+      case 'MAN_TOP':
+        return ESubCategory.manTop;
+      case 'WOMAN_TOP':
+        return ESubCategory.womanTop;
+      case 'MAN_BOTTOM':
+        return ESubCategory.manBottom;
+      case 'WOMAN_BOTTOM':
+        return ESubCategory.womanBottom;
       case 'SOCKS':
         return ESubCategory.socks;
       case 'OTHER_CLOTHING':
         return ESubCategory.otherClothing;
 
+      case 'MAN_SHOES':
+        return ESubCategory.manShoes;
+      case 'WOMAN_SHOES':
+        return ESubCategory.womanShoes;
       case 'BAG':
         return ESubCategory.bag;
       case 'HAT':
@@ -255,15 +275,23 @@ enum ESubCategory {
 extension SSubCategoryExtension on String {
   ESubCategory get subCategoryEnum {
     switch (this) {
-      case '상의':
-        return ESubCategory.top;
-      case '하의':
-        return ESubCategory.bottom;
+      case '남아 상의':
+        return ESubCategory.manTop;
+      case '여아 상의':
+        return ESubCategory.womanTop;
+      case '남아 하의':
+        return ESubCategory.manBottom;
+      case '여아 하의':
+        return ESubCategory.womanBottom;
       case '양말':
         return ESubCategory.socks;
       case '기타 의류':
         return ESubCategory.otherClothing;
 
+      case '남아 신발':
+        return ESubCategory.manShoes;
+      case '여야 신발':
+        return ESubCategory.womanShoes;
       case '가방':
         return ESubCategory.bag;
       case '모자':
@@ -347,15 +375,23 @@ extension SSubCategoryExtension on String {
 extension ESubCategoryExtension on ESubCategory {
   String get key {
     switch (this) {
-      case ESubCategory.top:
-        return 'TOP';
-      case ESubCategory.bottom:
-        return 'BOTTOM';
+      case ESubCategory.manTop:
+        return 'MAN_TOP';
+      case ESubCategory.womanTop:
+        return 'WOMAN_TOP';
+      case ESubCategory.manBottom:
+        return 'MAN_BOTTOM';
+      case ESubCategory.womanBottom:
+        return 'WOMAN_BOTTOM';
       case ESubCategory.socks:
         return 'SOCKS';
       case ESubCategory.otherClothing:
         return 'OTHER_CLOTHING';
 
+      case ESubCategory.manShoes:
+        return 'MAN_SHOES';
+      case ESubCategory.womanShoes:
+        return 'WOMAN_SHOES';
       case ESubCategory.bag:
         return 'BAG';
       case ESubCategory.hat:

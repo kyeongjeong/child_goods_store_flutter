@@ -10,7 +10,7 @@ import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
 import 'package:child_goods_store_flutter/pages/profile/widgets/profile_tab_category_dropdown.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
-import 'package:child_goods_store_flutter/widgets/common/purchase_listitem.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/purchase_listitem.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

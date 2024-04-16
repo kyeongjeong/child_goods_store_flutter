@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/product_sale_state.dart';
 import 'package:child_goods_store_flutter/enums/product_state.dart';
@@ -36,6 +37,11 @@ class ProductModel with _$ProductModel {
       toJson: EProductSaleState.toJson,
     )
     EProductSaleState? state,
+    @JsonKey(
+      fromJson: EChildAge.fromJson,
+      toJson: EChildAge.toJson,
+    )
+    EChildAge? age,
     DateTime? createAt,
     DateTime? updateAt,
     @Default([]) List<String> tag,

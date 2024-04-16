@@ -1,5 +1,4 @@
 import 'package:child_goods_store_flutter/enums/child_age.dart';
-import 'package:child_goods_store_flutter/enums/child_gender.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/search_range.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
@@ -36,16 +35,6 @@ class ProductListChangeAgeFilter extends ProductListEvent {
 
   ProductListChangeAgeFilter({
     this.age,
-    this.reset,
-  });
-}
-
-class ProductListChangeGenderFilter extends ProductListEvent {
-  final EChildGender? gender;
-  final bool? reset;
-
-  ProductListChangeGenderFilter({
-    this.gender,
     this.reset,
   });
 }

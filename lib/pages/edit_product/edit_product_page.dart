@@ -6,6 +6,7 @@ import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
+import 'package:child_goods_store_flutter/pages/edit_product/widgets/edit_product_age.dart';
 import 'package:child_goods_store_flutter/pages/edit_product/widgets/edit_product_status.dart';
 import 'package:child_goods_store_flutter/pages/edit_product/widgets/edit_product_category.dart';
 import 'package:child_goods_store_flutter/pages/edit_product/widgets/edit_product_image.dart';
@@ -130,6 +131,8 @@ class _EditProductPageState extends State<EditProductPage> {
                       keyboardType: TextInputType.number,
                       onChange: _onChangePrice,
                     ),
+                    Gaps.v20,
+                    const EditProductAge(),
                     Gaps.v20,
                     const EditProductStatus(),
                     Gaps.v20,

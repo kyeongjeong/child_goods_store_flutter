@@ -1,3 +1,6 @@
+import 'package:child_goods_store_flutter/blocs/profile/profile_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/profile/profile_event.dart';
+import 'package:child_goods_store_flutter/blocs/profile/profile_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/routes.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
@@ -8,6 +11,7 @@ import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
 import 'package:child_goods_store_flutter/widgets/app_profile_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -24,7 +28,9 @@ class ProfileCard extends StatelessWidget {
     context.push(Routes.settings);
   }
 
-  void _onTapFollowButton() {}
+  void _onTapFollowButton(BuildContext context) {
+    context.read<ProfileBloc>().add(ProfileChangeFollow());
+  }
 
   void _onTapFollow(BuildContext context) {
     if (popAble) {
@@ -61,6 +67,7 @@ class ProfileCard extends StatelessWidget {
             children: [
               AppProfileImage(
                 profileImg: userProfile.profileImg,
+                radius: Sizes.size36,
               ),
               Gaps.h20,
               Expanded(
@@ -93,11 +100,26 @@ class ProfileCard extends StatelessWidget {
                   ),
                 ),
               if (popAble)
-                AppInkButton(
-                  onTap: _onTapFollowButton,
-                  child: const AppFont(
-                    '팔로우',
-                    color: Colors.white,
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, state) => AppInkButton(
+                    onTap: () => _onTapFollowButton(context),
+                    padding: const EdgeInsets.all(Sizes.size10),
+                    color: state.userProfile?.isFollowed == true
+                        ? null
+                        : Theme.of(context).scaffoldBackgroundColor,
+                    child: SizedBox(
+                      height: Sizes.size24,
+                      child: Center(
+                        child: AppFont(
+                          state.userProfile?.isFollowed == true
+                              ? '팔로우 중'
+                              : '팔로우',
+                          color: state.userProfile?.isFollowed == true
+                              ? Colors.white
+                              : Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
             ],

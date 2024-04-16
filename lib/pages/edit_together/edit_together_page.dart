@@ -7,6 +7,7 @@ import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/models/go_router_extra_model.dart';
 import 'package:child_goods_store_flutter/pages/edit_together/widgets/edit_together_address.dart';
+import 'package:child_goods_store_flutter/pages/edit_together/widgets/edit_together_age.dart';
 import 'package:child_goods_store_flutter/pages/edit_together/widgets/edit_together_category.dart';
 import 'package:child_goods_store_flutter/pages/edit_together/widgets/edit_together_deadline.dart';
 import 'package:child_goods_store_flutter/pages/edit_together/widgets/edit_together_image.dart';
@@ -151,6 +152,8 @@ class _EditTogetherPageState extends State<EditTogetherPage> {
                       controller: _detailsController,
                       onChange: _onChangeDetails,
                     ),
+                    Gaps.v20,
+                    const EditTogetherAge(),
                     Gaps.v20,
                     const EditTogetherCategory(),
                     Gaps.v20,

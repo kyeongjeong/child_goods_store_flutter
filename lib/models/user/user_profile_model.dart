@@ -12,6 +12,7 @@ class UserProfileModel with _$UserProfileModel {
     String? profileImg,
     int? followNum,
     int? followingNum,
+    bool? isFollowed,
     double? averageStars,
     DateTime? createAt,
   }) = _UserProfileModel;

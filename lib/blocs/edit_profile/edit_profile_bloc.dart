@@ -4,6 +4,7 @@ import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_event.
 import 'package:child_goods_store_flutter/blocs/edit_profile/edit_profile_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
+import 'package:child_goods_store_flutter/enums/image_category.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
@@ -140,10 +141,13 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState>
         emit(state.copyWith(status: ELoadingStatus.loading));
 
         if (!state.removeImage && state.image != null) {
-          var res = await imageRepository.postImage(image: state.image!);
+          var res = await imageRepository.postImageList(
+            category: EImageCategory.profile,
+            images: [state.image!],
+          );
           emit(state.copyWith(
             user: state.user.copyWith(
-              profileImg: res.data,
+              profileImg: res.data?.first,
             ),
           ));
         }

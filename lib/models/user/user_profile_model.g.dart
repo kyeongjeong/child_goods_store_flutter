@@ -15,6 +15,7 @@ _$UserProfileModelImpl _$$UserProfileModelImplFromJson(
       profileImg: json['profileImg'] as String?,
       followNum: json['followNum'] as int?,
       followingNum: json['followingNum'] as int?,
+      isFollowed: json['isFollowed'] as bool?,
       averageStars: (json['averageStars'] as num?)?.toDouble(),
       createAt: json['createAt'] == null
           ? null
@@ -30,6 +31,7 @@ Map<String, dynamic> _$$UserProfileModelImplToJson(
       'profileImg': instance.profileImg,
       'followNum': instance.followNum,
       'followingNum': instance.followingNum,
+      'isFollowed': instance.isFollowed,
       'averageStars': instance.averageStars,
       'createAt': instance.createAt?.toIso8601String(),
     };

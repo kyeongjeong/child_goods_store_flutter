@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/blocs/edit_together/edit_together_even
 import 'package:child_goods_store_flutter/blocs/edit_together/edit_together_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
+import 'package:child_goods_store_flutter/enums/image_category.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/res/res_model.dart';
@@ -30,6 +31,7 @@ class EditTogetherBloc extends Bloc<EditTogetherEvent, EditTogetherState>
     on<EditTogetherChangeDetails>(_editTogetherChangeDetailsHandler);
     on<EditTogetherChangeMainCat>(_editTogetherChangeMainCatHandler);
     on<EditTogetherChangeSubCat>(_editTogetherChangeSubCatHandler);
+    on<EditTogetherChangeAge>(_editTogetherChangeAgeHandler);
     on<EditTogetherChangeTags>(_editTogetherChangeTagsHandler);
     on<EditTogetherChangeLink>(_editTogetherChangeLinkHandler);
     on<EditTogetherChangeTotalPrice>(_editTogetherChangeTotalPriceHandler);
@@ -127,6 +129,17 @@ class EditTogetherBloc extends Bloc<EditTogetherEvent, EditTogetherState>
     emit(state.copyWith(
       together: state.together.copyWith(
         subCategory: event.subCategory,
+      ),
+    ));
+  }
+
+  Future<void> _editTogetherChangeAgeHandler(
+    EditTogetherChangeAge event,
+    Emitter<EditTogetherState> emit,
+  ) async {
+    emit(state.copyWith(
+      together: state.together.copyWith(
+        age: event.age,
       ),
     ));
   }
@@ -298,7 +311,10 @@ class EditTogetherBloc extends Bloc<EditTogetherEvent, EditTogetherState>
         emit(state.copyWith(status: ELoadingStatus.loading));
 
         if (state.newImage.isNotEmpty) {
-          var res = await imageRepository.postImageList(images: state.newImage);
+          var res = await imageRepository.postImageList(
+            category: EImageCategory.together,
+            images: state.newImage,
+          );
           List<String> newImages = [];
           newImages
             ..addAll(state.together.togetherImage)

@@ -1,3 +1,4 @@
+import 'package:child_goods_store_flutter/enums/child_age.dart';
 import 'package:child_goods_store_flutter/enums/main_category.dart';
 import 'package:child_goods_store_flutter/enums/product_state.dart';
 import 'package:child_goods_store_flutter/enums/sub_category.dart';
@@ -45,6 +46,12 @@ class EditProductChangeSubCat extends EditProductEvent {
   final ESubCategory subCategory;
 
   EditProductChangeSubCat(this.subCategory);
+}
+
+class EditProductChangeAge extends EditProductEvent {
+  final EChildAge? age;
+
+  EditProductChangeAge(this.age);
 }
 
 class EditProductChangeTags extends EditProductEvent {

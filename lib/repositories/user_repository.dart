@@ -274,4 +274,42 @@ class UserRepository {
 
     return res;
   }
+
+  ///
+  /// API 25
+  Future<ResModel<void>> postUserFollow({
+    required int followId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.post('/user/follow/$followId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
+
+  ///
+  /// API 26
+  Future<ResModel<void>> deleteUserFollow({
+    required int followId,
+  }) async {
+    // Dio dio = Dio();
+    // dio.interceptors.add(AuthInterceptor());
+    // dio.delete('/user/follow/$followId');
+
+    // TODO: connect api
+    await Future.delayed(const Duration(seconds: 1));
+
+    var resTmp = ResModel(code: 1000).toJson((p0) => null);
+
+    var res = ResModel.fromJson(resTmp, (json) => null);
+
+    return res;
+  }
 }

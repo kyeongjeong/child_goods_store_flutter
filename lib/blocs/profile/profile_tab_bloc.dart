@@ -4,17 +4,21 @@ import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
+import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
 import 'package:child_goods_store_flutter/repositories/profile_repository.dart';
+import 'package:child_goods_store_flutter/repositories/review_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     with DioExceptionHandlerMixin {
   final ProfileRepository profileRepository;
+  final ReviewRepository reviewRepository;
   final int userId;
 
   ProfileTabBloc({
     required this.profileRepository,
+    required this.reviewRepository,
     required this.userId,
   }) : super(const ProfileTabState.init()) {
     on<ProfileTabChangeCategory>(_profileTabChangeCategoryHandler);
@@ -24,6 +28,11 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
     on<ProfileTabGetHeartTogethers>(_profileTabGetHeartTogethersHandler);
     on<ProfileTabGetPurchaseProducts>(_profileTabGetPurchaseProductsHandler);
     on<ProfileTabGetPurchaseTogethers>(_profileTabGetPurchaseTogethersHandler);
+    on<ProfileTabGetReceivedReviews>(_profileTabGetReceivedReviewsHandler);
+    on<ProfileTabProductReviewed>(_profileTabProductReviewedHandler);
+    on<ProfileTabTogetherReviewed>(_profileTabTogetherReviewedHandler);
+    on<ProfileTabReviewUpdate>(_profileTabReviewUpdateHandler);
+    on<ProfileTabReviewDelete>(_profileTabReviewDeleteHandler);
   }
   Future<void> _profileTabChangeCategoryHandler(
     ProfileTabChangeCategory event,
@@ -289,6 +298,137 @@ class ProfileTabBloc extends Bloc<ProfileTabEvent, ProfileTabState>
           ));
         }
       },
+    );
+  }
+
+  Future<void> _profileTabGetReceivedReviewsHandler(
+    ProfileTabGetReceivedReviews event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    if (state.status == ELoadingStatus.loading &&
+        state.receivedReviewsStatus == ELoadingStatus.loading) return;
+
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      receivedReviewsStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        var res = await reviewRepository.getReviewList(
+          userId: userId,
+          page: state.receivedReviewsPage,
+        );
+
+        List<ReviewModel> newList = [];
+        newList
+          ..addAll(state.receivedReviews)
+          ..addAll(res.data ?? []);
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          receivedReviewsStatus: ELoadingStatus.loaded,
+          receivedReviews: newList,
+          receivedReviewsPage: state.receivedReviewsPage + 1,
+        ));
+      },
+      state: state,
+      emit: emit,
+      initAfterError: false,
+      finallyCall: () async {
+        if (state.status == ELoadingStatus.error) {
+          emit(state.copyWith(
+            receivedReviewsStatus: ELoadingStatus.error,
+            receivedReviewsMessage: state.message,
+          ));
+        }
+      },
+    );
+  }
+
+  Future<void> _profileTabProductReviewedHandler(
+    ProfileTabProductReviewed event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    List<PurchaseModel> newList = [];
+    for (var purchase in state.purchaseProducts) {
+      if (purchase.id == event.productId) {
+        newList.add(purchase.copyWith(isReview: true));
+      } else {
+        newList.add(purchase);
+      }
+    }
+    emit(state.copyWith(purchaseProducts: newList));
+  }
+
+  Future<void> _profileTabTogetherReviewedHandler(
+    ProfileTabTogetherReviewed event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    List<PurchaseModel> newList = [];
+    for (var purchase in state.purchaseTogethers) {
+      if (purchase.id == event.togetherId) {
+        newList.add(purchase.copyWith(isReview: true));
+      } else {
+        newList.add(purchase);
+      }
+    }
+    emit(state.copyWith(purchaseTogethers: newList));
+  }
+
+  Future<void> _profileTabReviewUpdateHandler(
+    ProfileTabReviewUpdate event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    List<ReviewModel> newList = [];
+    for (var review in state.receivedReviews) {
+      if (review.reviewId == event.review.reviewId) {
+        newList.add(review.copyWith(
+          content: event.review.content,
+          score: event.review.score,
+        ));
+      } else {
+        newList.add(review);
+      }
+    }
+    emit(state.copyWith(receivedReviews: newList));
+  }
+
+  Future<void> _profileTabReviewDeleteHandler(
+    ProfileTabReviewDelete event,
+    Emitter<ProfileTabState> emit,
+  ) async {
+    if (state.status == ELoadingStatus.loading &&
+        state.receivedReviewsStatus == ELoadingStatus.loading) return;
+
+    if (event.review.reviewId == null) return;
+
+    emit(state.copyWith(
+      status: ELoadingStatus.loading,
+      receivedReviewsStatus: ELoadingStatus.loading,
+    ));
+    await handleApiRequest(
+      () async {
+        await reviewRepository.deleteReview(
+          reviewId: event.review.reviewId!,
+        );
+
+        List<ReviewModel> newList = [];
+        for (var review in state.receivedReviews) {
+          if (review.reviewId == event.review.reviewId) {
+            continue;
+          } else {
+            newList.add(review);
+          }
+        }
+
+        emit(state.copyWith(
+          status: ELoadingStatus.loaded,
+          receivedReviewsStatus: ELoadingStatus.loaded,
+          receivedReviews: newList,
+        ));
+      },
+      state: state,
+      emit: emit,
     );
   }
 }
