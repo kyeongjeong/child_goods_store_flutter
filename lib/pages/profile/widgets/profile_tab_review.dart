@@ -1,12 +1,13 @@
 import 'package:child_goods_store_flutter/blocs/profile/profile_tab_bloc.dart';
+import 'package:child_goods_store_flutter/blocs/profile/profile_tab_event.dart';
 import 'package:child_goods_store_flutter/blocs/profile/profile_tab_state.dart';
 import 'package:child_goods_store_flutter/constants/gaps.dart';
 import 'package:child_goods_store_flutter/constants/sizes.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
-import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/widgets/app_font.dart';
 import 'package:child_goods_store_flutter/widgets/app_ink_button.dart';
+import 'package:child_goods_store_flutter/pages/profile/widgets/review_listitem.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,31 +30,51 @@ class _ProfileTabReviewState extends State<ProfileTabReview>
   bool get wantKeepAlive => true;
 
   @override
+  void initState() {
+    super.initState();
+    _initLoadData();
+  }
+
+  void _initLoadData() {
+    var bloc = context.read<ProfileTabBloc>();
+    if (bloc.state.receivedReviewsStatus == ELoadingStatus.init) {
+      _loadData();
+    }
+  }
+
+  void _loadData({bool force = false}) {
+    var bloc = context.read<ProfileTabBloc>();
+    if (bloc.state.receivedReviewsStatus != ELoadingStatus.error || force) {
+      bloc.add(ProfileTabGetReceivedReviews());
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) {
         if (notification.metrics.pixels >=
             notification.metrics.maxScrollExtent) {
-          // _loadData();
+          _loadData();
         }
         return false;
       },
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
+          const SliverToBoxAdapter(child: Gaps.v20),
           SliverPadding(
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size20,
             ),
             sliver: BlocBuilder<ProfileTabBloc, ProfileTabState>(
               builder: (context, state) => SliverList.separated(
-                itemBuilder: (context, index) => Container(
-                  color: Colors.amber,
-                  child: AppFont('Review $index'),
+                itemBuilder: (context, index) => ReviewListItem(
+                  review: state.receivedReviews[index],
                 ),
                 separatorBuilder: (context, index) => Gaps.v16,
-                itemCount: 20,
+                itemCount: state.receivedReviews.length,
               ),
             ),
           ),
@@ -70,25 +91,17 @@ class _ProfileTabReviewState extends State<ProfileTabReview>
         child: Center(
           child: BlocBuilder<ProfileTabBloc, ProfileTabState>(
             builder: (context, state) {
-              if (state.category == EChatItemType.product &&
-                      state.myProductsStatus == ELoadingStatus.error ||
-                  state.category == EChatItemType.together &&
-                      state.myTogethersStatus == ELoadingStatus.error) {
+              if (state.receivedReviewsStatus == ELoadingStatus.error) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (state.category == EChatItemType.product)
-                      AppFont(
-                        state.myProductsMessage ?? Strings.unknownFail,
-                      ),
-                    if (state.category == EChatItemType.together)
-                      AppFont(
-                        state.myTogethersMessage ?? Strings.unknownFail,
-                      ),
+                    AppFont(
+                      state.receivedReviewsMessage ?? Strings.unknownFail,
+                    ),
                     Gaps.v20,
-                    const AppInkButton(
-                      // onTap: () => _loadData(force: true),
-                      child: AppFont(
+                    AppInkButton(
+                      onTap: () => _loadData(force: true),
+                      child: const AppFont(
                         '재시도',
                         color: Colors.white,
                       ),

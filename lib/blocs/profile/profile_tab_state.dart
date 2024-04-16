@@ -3,6 +3,7 @@ import 'package:child_goods_store_flutter/enums/chat_item_type.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/models/product/product_preview_model.dart';
 import 'package:child_goods_store_flutter/models/purchase/purchase_model.dart';
+import 'package:child_goods_store_flutter/models/review/review_model.dart';
 import 'package:child_goods_store_flutter/models/together/together_preview_model.dart';
 
 class ProfileTabState extends BlocState {
@@ -38,7 +39,10 @@ class ProfileTabState extends BlocState {
   final List<PurchaseModel> purchaseTogethers;
   final int purchaseTogethersPage;
 
-  // TODO: review list
+  final ELoadingStatus receivedReviewsStatus;
+  final String? receivedReviewsMessage;
+  final List<ReviewModel> receivedReviews;
+  final int receivedReviewsPage;
 
   const ProfileTabState({
     required this.category,
@@ -72,6 +76,11 @@ class ProfileTabState extends BlocState {
     this.purchaseTogethersMessage,
     required this.purchaseTogethers,
     required this.purchaseTogethersPage,
+    //
+    required this.receivedReviewsStatus,
+    this.receivedReviewsMessage,
+    required this.receivedReviews,
+    required this.receivedReviewsPage,
     //
     required super.status,
     super.message,
@@ -109,6 +118,11 @@ class ProfileTabState extends BlocState {
         purchaseTogethersMessage = null,
         purchaseTogethers = const [],
         purchaseTogethersPage = 1,
+        //
+        receivedReviewsStatus = ELoadingStatus.init,
+        receivedReviewsMessage = null,
+        receivedReviews = const [],
+        receivedReviewsPage = 1,
         super(
           status: ELoadingStatus.init,
           message: null,
@@ -149,6 +163,11 @@ class ProfileTabState extends BlocState {
     String? purchaseTogethersMessage,
     List<PurchaseModel>? purchaseTogethers,
     int? purchaseTogethersPage,
+    //
+    ELoadingStatus? receivedReviewsStatus,
+    String? receivedReviewsMessage,
+    List<ReviewModel>? receivedReviews,
+    int? receivedReviewsPage,
   }) =>
       ProfileTabState(
         status: status ?? this.status,
@@ -190,6 +209,13 @@ class ProfileTabState extends BlocState {
         purchaseTogethers: purchaseTogethers ?? this.purchaseTogethers,
         purchaseTogethersPage:
             purchaseTogethersPage ?? this.purchaseTogethersPage,
+        //
+        receivedReviewsStatus:
+            receivedReviewsStatus ?? this.receivedReviewsStatus,
+        receivedReviewsMessage:
+            receivedReviewsMessage ?? this.receivedReviewsMessage,
+        receivedReviews: receivedReviews ?? this.receivedReviews,
+        receivedReviewsPage: receivedReviewsPage ?? this.receivedReviewsPage,
       );
 
   @override
@@ -227,5 +253,10 @@ class ProfileTabState extends BlocState {
         purchaseTogethersMessage,
         purchaseTogethers,
         purchaseTogethersPage,
+        //
+        receivedReviewsStatus,
+        receivedReviewsMessage,
+        receivedReviews,
+        receivedReviewsPage,
       ];
 }

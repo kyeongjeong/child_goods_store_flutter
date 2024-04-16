@@ -15,6 +15,7 @@ class ReviewModel with _$ReviewModel {
     EChatItemType? type,
     int? id,
     int? userId,
+    String? userImage,
     String? userName,
     double? averageStars,
     int? totalReview,

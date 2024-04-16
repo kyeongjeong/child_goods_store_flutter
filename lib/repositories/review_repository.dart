@@ -36,12 +36,16 @@ class ReviewRepository {
                 ? EChatItemType.product
                 : EChatItemType.together,
             userId: reviewId,
+            userImage: reviewId % 2 == 0
+                ? ''
+                : 'https://lh4.googleusercontent.com/on7Yj1rShJRRBy88rTmptLVzMI4gEBDBabmSMv-GGsPIo5umfS5dpSJp3b4EoqKtnxdOYXeHSyct6m2fLYKckaikrUJn91PNWkIYXtkrCljcvdEnGdf_nQM5Qw6bQY4q6jvbWiBcC3WPTIcDS_lizv3R25oVAF_H0PNzvRo7JivPSiZR',
             name: '$reviewId th item',
             userName: '$reviewId reviewer',
             averageStars: 4.3,
             totalReview: 10,
-            score: reviewId % 5,
-            content: '$reviewId th item\'s review',
+            score: (reviewId % 5) + 1,
+            content:
+                '$reviewId th item\'s review super duper long review super duper long review super duper long review super duper long review super duper long review',
             createdAt: DateTime.now(),
           ),
       ],

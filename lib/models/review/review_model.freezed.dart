@@ -25,6 +25,7 @@ mixin _$ReviewModel {
   EChatItemType? get type => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   int? get userId => throw _privateConstructorUsedError;
+  String? get userImage => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
   double? get averageStars => throw _privateConstructorUsedError;
   int? get totalReview => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $ReviewModelCopyWith<$Res> {
       EChatItemType? type,
       int? id,
       int? userId,
+      String? userImage,
       String? userName,
       double? averageStars,
       int? totalReview,
@@ -77,6 +79,7 @@ class _$ReviewModelCopyWithImpl<$Res, $Val extends ReviewModel>
     Object? type = freezed,
     Object? id = freezed,
     Object? userId = freezed,
+    Object? userImage = freezed,
     Object? userName = freezed,
     Object? averageStars = freezed,
     Object? totalReview = freezed,
@@ -102,6 +105,10 @@ class _$ReviewModelCopyWithImpl<$Res, $Val extends ReviewModel>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int?,
+      userImage: freezed == userImage
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -148,6 +155,7 @@ abstract class _$$ReviewModelImplCopyWith<$Res>
       EChatItemType? type,
       int? id,
       int? userId,
+      String? userImage,
       String? userName,
       double? averageStars,
       int? totalReview,
@@ -172,6 +180,7 @@ class __$$ReviewModelImplCopyWithImpl<$Res>
     Object? type = freezed,
     Object? id = freezed,
     Object? userId = freezed,
+    Object? userImage = freezed,
     Object? userName = freezed,
     Object? averageStars = freezed,
     Object? totalReview = freezed,
@@ -197,6 +206,10 @@ class __$$ReviewModelImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as int?,
+      userImage: freezed == userImage
+          ? _value.userImage
+          : userImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       userName: freezed == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
@@ -238,6 +251,7 @@ class _$ReviewModelImpl implements _ReviewModel {
       this.type,
       this.id,
       this.userId,
+      this.userImage,
       this.userName,
       this.averageStars,
       this.totalReview,
@@ -259,6 +273,8 @@ class _$ReviewModelImpl implements _ReviewModel {
   @override
   final int? userId;
   @override
+  final String? userImage;
+  @override
   final String? userName;
   @override
   final double? averageStars;
@@ -275,7 +291,7 @@ class _$ReviewModelImpl implements _ReviewModel {
 
   @override
   String toString() {
-    return 'ReviewModel(reviewId: $reviewId, type: $type, id: $id, userId: $userId, userName: $userName, averageStars: $averageStars, totalReview: $totalReview, score: $score, content: $content, createdAt: $createdAt, name: $name)';
+    return 'ReviewModel(reviewId: $reviewId, type: $type, id: $id, userId: $userId, userImage: $userImage, userName: $userName, averageStars: $averageStars, totalReview: $totalReview, score: $score, content: $content, createdAt: $createdAt, name: $name)';
   }
 
   @override
@@ -288,6 +304,8 @@ class _$ReviewModelImpl implements _ReviewModel {
             (identical(other.type, type) || other.type == type) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.userImage, userImage) ||
+                other.userImage == userImage) &&
             (identical(other.userName, userName) ||
                 other.userName == userName) &&
             (identical(other.averageStars, averageStars) ||
@@ -303,8 +321,20 @@ class _$ReviewModelImpl implements _ReviewModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, reviewId, type, id, userId,
-      userName, averageStars, totalReview, score, content, createdAt, name);
+  int get hashCode => Object.hash(
+      runtimeType,
+      reviewId,
+      type,
+      id,
+      userId,
+      userImage,
+      userName,
+      averageStars,
+      totalReview,
+      score,
+      content,
+      createdAt,
+      name);
 
   @JsonKey(ignore: true)
   @override
@@ -327,6 +357,7 @@ abstract class _ReviewModel implements ReviewModel {
       final EChatItemType? type,
       final int? id,
       final int? userId,
+      final String? userImage,
       final String? userName,
       final double? averageStars,
       final int? totalReview,
@@ -347,6 +378,8 @@ abstract class _ReviewModel implements ReviewModel {
   int? get id;
   @override
   int? get userId;
+  @override
+  String? get userImage;
   @override
   String? get userName;
   @override

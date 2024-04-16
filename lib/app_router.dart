@@ -343,6 +343,7 @@ class _AppRouterState extends State<AppRouter> {
                       BlocProvider(
                         create: (context) => ProfileTabBloc(
                           profileRepository: context.read<ProfileRepository>(),
+                          reviewRepository: context.read<ReviewRepository>(),
                           userId: AuthBlocSingleton.bloc.state.user!.userId!,
                         ),
                       ),
@@ -411,6 +412,7 @@ class _AppRouterState extends State<AppRouter> {
                 BlocProvider(
                   create: (context) => ProfileTabBloc(
                     profileRepository: context.read<ProfileRepository>(),
+                    reviewRepository: context.read<ReviewRepository>(),
                     userId: int.parse(state.pathParameters['userId'] as String),
                   ),
                 ),
@@ -545,6 +547,7 @@ class _AppRouterState extends State<AppRouter> {
                 type:
                     (state.extra as GoRouterExtraModel<ReviewModel>).itemType!,
                 id: (state.extra as GoRouterExtraModel<ReviewModel>).itemId!,
+                review: (state.extra as GoRouterExtraModel<ReviewModel>?)?.data,
               ),
               child: const EditReviewPage(),
             ),
