@@ -2,6 +2,7 @@ import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_event.dart
 import 'package:child_goods_store_flutter/blocs/edit_child/edit_child_state.dart';
 import 'package:child_goods_store_flutter/constants/strings.dart';
 import 'package:child_goods_store_flutter/enums/http_method.dart';
+import 'package:child_goods_store_flutter/enums/image_category.dart';
 import 'package:child_goods_store_flutter/enums/loading_status.dart';
 import 'package:child_goods_store_flutter/mixins/dio_exception_handler.dart';
 import 'package:child_goods_store_flutter/models/child/child_model.dart';
@@ -125,10 +126,13 @@ class EditChildBloc extends Bloc<EditChildEvent, EditChildState>
         emit(state.copyWith(status: ELoadingStatus.loading));
 
         if (!state.removeImage && state.image != null) {
-          var res = await imageRepository.postImage(image: state.image!);
+          var res = await imageRepository.postImageList(
+            category: EImageCategory.child,
+            images: [state.image!],
+          );
           emit(state.copyWith(
             child: state.child.copyWith(
-              childImg: res.data,
+              childImg: res.data?.first,
             ),
           ));
         }
